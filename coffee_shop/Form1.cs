@@ -10,11 +10,26 @@ using System.Windows.Forms;
 
 namespace coffee_shop
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
-        public Form1()
+        public Main()
         {
             InitializeComponent();
+        }
+
+        private void insertUsersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new new_user().ShowDialog();
+        }
+
+        private void allUsersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new all_users().ShowDialog();
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
