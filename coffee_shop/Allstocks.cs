@@ -10,23 +10,11 @@ using System.Windows.Forms;
 
 namespace coffee_shop
 {
-    public partial class all_users : Form
+    public partial class Allstocks : Form
     {
-        public all_users()
+        public Allstocks()
         {
             InitializeComponent();
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
-            new Main().Show();
-        }
-
-        private void all_users_closing(object sender, FormClosingEventArgs e)
-        {
-            DataConn.Connection.Close();
-            Application.Exit();
         }
 
         private void lvUsers_SelectedIndexChanged(object sender, EventArgs e)
