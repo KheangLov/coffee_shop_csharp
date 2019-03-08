@@ -31,5 +31,11 @@ namespace coffee_shop
         {
 
         }
+
+        private void main_closing(object sender, FormClosingEventArgs e)
+        {
+            DataConn.Connection.Close();
+            Application.Exit();
+        }
     }
 }

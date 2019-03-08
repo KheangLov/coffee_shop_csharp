@@ -34,10 +34,10 @@
             this.lvUsers = new System.Windows.Forms.ListView();
             this.name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.email = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.gender = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.dob = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.role = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnUpdate = new System.Windows.Forms.Button();
-            this.gender = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // btnExit
@@ -49,6 +49,7 @@
             this.btnExit.TabIndex = 1;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnEdit
             // 
@@ -95,6 +96,11 @@
             // 
             this.email.Text = "Email";
             // 
+            // gender
+            // 
+            this.gender.Text = "Gender";
+            this.gender.Width = 101;
+            // 
             // dob
             // 
             this.dob.Text = "Date of birth";
@@ -114,11 +120,6 @@
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
             // 
-            // gender
-            // 
-            this.gender.Text = "Gender";
-            this.gender.Width = 101;
-            // 
             // all_users
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -131,6 +132,7 @@
             this.Controls.Add(this.btnExit);
             this.Name = "all_users";
             this.Text = "All Users";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.all_users_closing);
             this.ResumeLayout(false);
 
         }

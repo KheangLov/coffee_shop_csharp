@@ -277,17 +277,19 @@
             this.btnExit.TabIndex = 4;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // new_user
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(687, 513);
+            this.ClientSize = new System.Drawing.Size(687, 424);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.groupBox1);
             this.Name = "new_user";
             this.Text = "New User";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.new_user_closing);
             this.Load += new System.EventHandler(this.new_user_load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

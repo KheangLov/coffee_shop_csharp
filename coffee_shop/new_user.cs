@@ -27,6 +27,19 @@ namespace coffee_shop
 
         }
 
+        bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         void ClearTextBoxes(Control parent)
         {
             foreach (Control child in parent.Controls)
@@ -67,7 +80,10 @@ namespace coffee_shop
 
         private void txtEmail_leave(object sender, EventArgs e)
         {
-            my_user.Email = txtEmail.Text.Trim();
+            if (IsValidEmail(txtEmail.Text.Trim()))
+                my_user.Email = txtEmail.Text.Trim();
+            else
+                MessageBox.Show("Invalid Email!");
         }
 
         private void txtPassword_leave(object sender, EventArgs e)
@@ -176,6 +192,18 @@ namespace coffee_shop
             {
                 MessageBox.Show("Nothing found!");
             }
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+            new Main().Show();
+        }
+
+        private void new_user_closing(object sender, FormClosingEventArgs e)
+        {
+            DataConn.Connection.Close();
+            Application.Exit();
         }
     }
 }

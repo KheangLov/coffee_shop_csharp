@@ -23,7 +23,7 @@ namespace coffee_shop
         private void btnLogin_Click(object sender, EventArgs e)
         {
             com.Connection = DataConn.Connection;
-            com.CommandText = "SELECT * FROM users;";
+            com.CommandText = "SELECT * FROM users WHERE username = '" + txtUser.Text + "' AND password = '" + hc.PassHash(txtPassword.Text) + "';";
             SqlDataReader dr = com.ExecuteReader();
             if(dr.Read())
             {
@@ -53,6 +53,18 @@ namespace coffee_shop
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnReg_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new new_user().Show();
+        }
+
+        private void login_closing(object sender, FormClosingEventArgs e)
+        {
+            DataConn.Connection.Close();
+            Application.Exit();
         }
     }
 }

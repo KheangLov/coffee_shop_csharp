@@ -16,5 +16,17 @@ namespace coffee_shop
         {
             InitializeComponent();
         }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+            new Main().Show();
+        }
+
+        private void all_users_closing(object sender, FormClosingEventArgs e)
+        {
+            DataConn.Connection.Close();
+            Application.Exit();
+        }
     }
 }
