@@ -16,7 +16,6 @@ namespace coffee_shop
         public new_user()
         {
             InitializeComponent();
-            //fill_role_combo();
         }
         Users my_user = new Users();
         HashCode hc = new HashCode();

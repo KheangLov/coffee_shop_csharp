@@ -37,5 +37,11 @@ namespace coffee_shop
             DataConn.Connection.Close();
             Application.Exit();
         }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+            new Login().Show();
+        }
     }
 }
