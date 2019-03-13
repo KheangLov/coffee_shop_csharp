@@ -29,12 +29,11 @@ namespace coffee_shop
 
         private void Main_Load(object sender, EventArgs e)
         {
-
+            DataConn.Connection.Close();
         }
 
         private void main_closing(object sender, FormClosingEventArgs e)
         {
-            DataConn.Connection.Close();
             Application.Exit();
         }
 
@@ -42,6 +41,25 @@ namespace coffee_shop
         {
             this.Dispose();
             new Login().Show();
+        }
+        private void newCompanyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new new_company().ShowDialog();
+        }
+
+        private void allCompaniesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new all_company().ShowDialog();
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void myUsersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new users_form().ShowDialog();
         }
     }
 }

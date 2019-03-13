@@ -16,5 +16,10 @@ namespace coffee_shop
         {
             InitializeComponent();
         }
+
+        private void all_company_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -11,17 +11,18 @@ using System.Data.SqlClient;
 
 namespace coffee_shop
 {
-    public partial class new_user : Form
+    public partial class users_form : Form
     {
-        public new_user()
+        public users_form()
         {
             InitializeComponent();
         }
+
         Users my_user = new Users();
         HashCode hc = new HashCode();
         MyInter inter;
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void lvUsers_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
@@ -51,6 +52,33 @@ namespace coffee_shop
             }
         }
 
+        private void users_form_load(object sender, EventArgs e)
+        {
+            DataConn.Connection.Open();
+            MyInter user_inter = my_user;
+            inter = user_inter;
+            cbGender.SelectedIndex = 0;
+            cbRole.SelectedIndex = 0;
+            try
+            {
+                string sql = "SELECT * FROM users FULL OUTER JOIN roles ON users.role_id = roles.id;";
+                SqlCommand com = new SqlCommand(sql, DataConn.Connection);
+                SqlDataReader sqlr = com.ExecuteReader();
+                while (sqlr.Read())
+                {
+                    string[] user_info = { sqlr["username"].ToString(), sqlr["email"].ToString(), sqlr["gender"].ToString(), sqlr["name"].ToString(), sqlr["address"].ToString() };
+                    ListViewItem item = new ListViewItem(user_info);
+                    lvUsers.Items.Add(item);
+                }
+                sqlr.Close();
+                com.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             try
@@ -65,108 +93,6 @@ namespace coffee_shop
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void txtFirstname_leave(object sender, EventArgs e)
-        {
-            my_user.Firstname = txtFirstname.Text.Trim();
-        }
-
-        private void txtLastname_leave(object sender, EventArgs e)
-        {
-            my_user.Lastname = txtLastname.Text.Trim();
-        }
-
-        private void txtEmail_leave(object sender, EventArgs e)
-        {
-            if (IsValidEmail(txtEmail.Text.Trim()))
-                my_user.Email = txtEmail.Text.Trim();
-            else
-                MessageBox.Show("Invalid Email!");
-        }
-
-        private void txtPassword_leave(object sender, EventArgs e)
-        {
-
-        }
-
-        private void confirmation_leave(object sender, EventArgs e)
-        {
-            if (txtPassword.Text != "")
-            {
-                string pass = txtPassword.Text.Trim();
-                string pass_con = txtConfirmPass.Text.Trim();
-                if (pass == pass_con)
-                {
-                    my_user.Password = hc.PassHash(pass);
-                }
-                else
-                {
-                    MessageBox.Show("Wrong confirmation password!");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please insert password first!");
-                txtPassword.Focus();
-            }
-        }
-
-        private void cbGender_leave(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtPhone_leave(object sender, EventArgs e)
-        {
-            my_user.Phone = txtPhone.Text.Trim();
-        }
-
-        private void txtAddress_leave(object sender, EventArgs e)
-        {
-            my_user.Address = txtAddress.Text.Trim();
-        }
-
-        private void new_user_load(object sender, EventArgs e)
-        {
-            MyInter user_inter = my_user;
-            inter = user_inter;
-            cbGender.SelectedIndex = 0;
-            cbRole.SelectedIndex = 0;
-        }
-
-        private void txtRole_leave(object sender, EventArgs e)
-        {
-
-            //}
-
-            //void fill_role_combo()
-            //{
-            //    string sql = "SELECT * FROM roles;";
-            //    SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
-            //    SqlDataReader sqlr = sqld.ExecuteReader();
-            //    try
-            //    {
-            //        while (sqlr.Read())
-            //        {
-            //            cbRole.Items.Add(sqlr[1]).ToString();
-            //        }
-            //    }
-            //    catch(Exception ex)
-            //    {
-            //        MessageBox.Show(ex.Message);
-            //    }
-            //}
-        }
-
-        private void cbRole_leave(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cbGender_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            my_user.Gender = cbGender.Text.Trim();
         }
 
         private void cbRole_SelectedIndexChanged(object sender, EventArgs e)
@@ -193,19 +119,83 @@ namespace coffee_shop
             }
         }
 
+        private void cbGender_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            my_user.Gender = cbGender.Text.Trim();
+        }
+
+        private void txtEmail_leave(object sender, EventArgs e)
+        {
+            if (IsValidEmail(txtEmail.Text.Trim()))
+                my_user.Email = txtEmail.Text.Trim();
+            else
+                MessageBox.Show("Invalid Email!");
+        }
+
+        private void users_form_closing(object sender, FormClosingEventArgs e)
+        {
+            DataConn.Connection.Close();
+            this.Dispose();
+        }
+
+        private void txtFirstname_leave(object sender, EventArgs e)
+        {
+            my_user.Firstname = txtFirstname.Text.Trim();
+        }
+
+        private void txtLastname_leave(object sender, EventArgs e)
+        {
+            my_user.Lastname = txtLastname.Text.Trim();
+        }
+
+        private void txtPassword_leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtConfirmPass_leave(object sender, EventArgs e)
+        {
+            if (txtPassword.Text != "")
+            {
+                string pass = txtPassword.Text.Trim();
+                string pass_con = txtConfirmPass.Text.Trim();
+                if (pass == pass_con)
+                {
+                    my_user.Password = hc.PassHash(pass);
+                }
+                else
+                {
+                    MessageBox.Show("Wrong confirmation password!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please insert password first!");
+                txtPassword.Focus();
+            }
+        }
+
+        private void txtPhone_leave(object sender, EventArgs e)
+        {
+            my_user.Phone = txtPhone.Text.Trim();
+        }
+
+        private void txtAddress_leave(object sender, EventArgs e)
+        {
+            my_user.Address = txtAddress.Text.Trim();
+        }
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Dispose();
-            new Login().Show();
         }
 
-        private void new_user_closing(object sender, FormClosingEventArgs e)
+        private void txtPassword_TextChanged(object sender, EventArgs e)
         {
-            DataConn.Connection.Close();
-            Application.Exit();
+
         }
 
-        private void txtFirstname_TextChanged(object sender, EventArgs e)
+        private void txtConfirmPass_TextChanged(object sender, EventArgs e)
         {
 
         }

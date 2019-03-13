@@ -41,13 +41,15 @@
             this.productsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allProductsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newProductToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.myUsersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.usersToolStripMenuItem,
             this.companiesToolStripMenuItem,
@@ -64,7 +66,8 @@
             // 
             this.usersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.allUsersToolStripMenuItem,
-            this.insertUsersToolStripMenuItem});
+            this.insertUsersToolStripMenuItem,
+            this.myUsersToolStripMenuItem});
             this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
             this.usersToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.usersToolStripMenuItem.Text = "Users";
@@ -72,14 +75,14 @@
             // allUsersToolStripMenuItem
             // 
             this.allUsersToolStripMenuItem.Name = "allUsersToolStripMenuItem";
-            this.allUsersToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.allUsersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.allUsersToolStripMenuItem.Text = "All Users";
             this.allUsersToolStripMenuItem.Click += new System.EventHandler(this.allUsersToolStripMenuItem_Click);
             // 
             // insertUsersToolStripMenuItem
             // 
             this.insertUsersToolStripMenuItem.Name = "insertUsersToolStripMenuItem";
-            this.insertUsersToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.insertUsersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.insertUsersToolStripMenuItem.Text = "New User";
             this.insertUsersToolStripMenuItem.Click += new System.EventHandler(this.insertUsersToolStripMenuItem_Click);
             // 
@@ -97,12 +100,14 @@
             this.allCompaniesToolStripMenuItem.Name = "allCompaniesToolStripMenuItem";
             this.allCompaniesToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.allCompaniesToolStripMenuItem.Text = "All Companies";
+            this.allCompaniesToolStripMenuItem.Click += new System.EventHandler(this.allCompaniesToolStripMenuItem_Click);
             // 
             // newCompanyToolStripMenuItem
             // 
             this.newCompanyToolStripMenuItem.Name = "newCompanyToolStripMenuItem";
             this.newCompanyToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.newCompanyToolStripMenuItem.Text = "New Company";
+            this.newCompanyToolStripMenuItem.Click += new System.EventHandler(this.newCompanyToolStripMenuItem_Click);
             // 
             // stocksToolStripMenuItem
             // 
@@ -146,6 +151,13 @@
             this.newProductToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.newProductToolStripMenuItem.Text = "New Product";
             // 
+            // logoutToolStripMenuItem
+            // 
+            this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.logoutToolStripMenuItem.Text = "Logout";
+            this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
+            // 
             // richTextBox1
             // 
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -154,13 +166,14 @@
             this.richTextBox1.Size = new System.Drawing.Size(910, 431);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
+            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
-            // logoutToolStripMenuItem
+            // myUsersToolStripMenuItem
             // 
-            this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
-            this.logoutToolStripMenuItem.Text = "Logout";
-            this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
+            this.myUsersToolStripMenuItem.Name = "myUsersToolStripMenuItem";
+            this.myUsersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.myUsersToolStripMenuItem.Text = "My Users";
+            this.myUsersToolStripMenuItem.Click += new System.EventHandler(this.myUsersToolStripMenuItem_Click);
             // 
             // Main
             // 
@@ -198,6 +211,7 @@
         private System.Windows.Forms.ToolStripMenuItem newProductToolStripMenuItem;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem myUsersToolStripMenuItem;
     }
 }
 

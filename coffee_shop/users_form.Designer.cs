@@ -1,6 +1,6 @@
 ﻿namespace coffee_shop
 {
-    partial class new_user
+    partial class users_form
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbRole = new System.Windows.Forms.ComboBox();
             this.cbGender = new System.Windows.Forms.ComboBox();
@@ -47,10 +49,40 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtFirstname = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.lvUsers = new System.Windows.Forms.ListView();
+            this.name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.email = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.gender = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.role = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.address = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnDel = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.Location = new System.Drawing.Point(12, 408);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(94, 35);
+            this.btnAdd.TabIndex = 8;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnExit
+            // 
+            this.btnExit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.Location = new System.Drawing.Point(412, 409);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(94, 35);
+            this.btnExit.TabIndex = 7;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // groupBox1
             // 
@@ -73,10 +105,10 @@
             this.groupBox1.Controls.Add(this.txtFirstname);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(13, 13);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(546, 390);
-            this.groupBox1.TabIndex = 0;
+            this.groupBox1.Size = new System.Drawing.Size(494, 390);
+            this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "User\'s Informations";
             // 
@@ -90,10 +122,9 @@
             "User"});
             this.cbRole.Location = new System.Drawing.Point(155, 348);
             this.cbRole.Name = "cbRole";
-            this.cbRole.Size = new System.Drawing.Size(181, 30);
+            this.cbRole.Size = new System.Drawing.Size(160, 30);
             this.cbRole.TabIndex = 18;
             this.cbRole.SelectedIndexChanged += new System.EventHandler(this.cbRole_SelectedIndexChanged);
-            this.cbRole.Leave += new System.EventHandler(this.cbRole_leave);
             // 
             // cbGender
             // 
@@ -103,10 +134,9 @@
             "Female"});
             this.cbGender.Location = new System.Drawing.Point(155, 203);
             this.cbGender.Name = "cbGender";
-            this.cbGender.Size = new System.Drawing.Size(181, 30);
+            this.cbGender.Size = new System.Drawing.Size(160, 30);
             this.cbGender.TabIndex = 17;
             this.cbGender.SelectedIndexChanged += new System.EventHandler(this.cbGender_SelectedIndexChanged);
-            this.cbGender.Leave += new System.EventHandler(this.cbGender_leave);
             // 
             // label9
             // 
@@ -133,7 +163,7 @@
             this.txtAddress.Location = new System.Drawing.Point(155, 272);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(363, 70);
+            this.txtAddress.Size = new System.Drawing.Size(325, 70);
             this.txtAddress.TabIndex = 13;
             this.txtAddress.Leave += new System.EventHandler(this.txtAddress_leave);
             // 
@@ -151,7 +181,7 @@
             // 
             this.txtPhone.Location = new System.Drawing.Point(155, 239);
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(363, 27);
+            this.txtPhone.Size = new System.Drawing.Size(325, 27);
             this.txtPhone.TabIndex = 11;
             this.txtPhone.Leave += new System.EventHandler(this.txtPhone_leave);
             // 
@@ -170,9 +200,10 @@
             this.txtConfirmPass.Location = new System.Drawing.Point(155, 170);
             this.txtConfirmPass.Name = "txtConfirmPass";
             this.txtConfirmPass.PasswordChar = '*';
-            this.txtConfirmPass.Size = new System.Drawing.Size(363, 27);
+            this.txtConfirmPass.Size = new System.Drawing.Size(325, 27);
             this.txtConfirmPass.TabIndex = 9;
-            this.txtConfirmPass.Leave += new System.EventHandler(this.confirmation_leave);
+            this.txtConfirmPass.TextChanged += new System.EventHandler(this.txtConfirmPass_TextChanged);
+            this.txtConfirmPass.Leave += new System.EventHandler(this.txtConfirmPass_leave);
             // 
             // label5
             // 
@@ -189,8 +220,9 @@
             this.txtPassword.Location = new System.Drawing.Point(155, 137);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(363, 27);
+            this.txtPassword.Size = new System.Drawing.Size(325, 27);
             this.txtPassword.TabIndex = 7;
+            this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
             this.txtPassword.Leave += new System.EventHandler(this.txtPassword_leave);
             // 
             // label4
@@ -207,7 +239,7 @@
             // 
             this.txtEmail.Location = new System.Drawing.Point(155, 104);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(363, 27);
+            this.txtEmail.Size = new System.Drawing.Size(325, 27);
             this.txtEmail.TabIndex = 5;
             this.txtEmail.Leave += new System.EventHandler(this.txtEmail_leave);
             // 
@@ -225,7 +257,7 @@
             // 
             this.txtLastname.Location = new System.Drawing.Point(155, 71);
             this.txtLastname.Name = "txtLastname";
-            this.txtLastname.Size = new System.Drawing.Size(363, 27);
+            this.txtLastname.Size = new System.Drawing.Size(325, 27);
             this.txtLastname.TabIndex = 3;
             this.txtLastname.Leave += new System.EventHandler(this.txtLastname_leave);
             // 
@@ -243,9 +275,8 @@
             // 
             this.txtFirstname.Location = new System.Drawing.Point(155, 38);
             this.txtFirstname.Name = "txtFirstname";
-            this.txtFirstname.Size = new System.Drawing.Size(363, 27);
+            this.txtFirstname.Size = new System.Drawing.Size(325, 27);
             this.txtFirstname.TabIndex = 1;
-            this.txtFirstname.TextChanged += new System.EventHandler(this.txtFirstname_TextChanged);
             this.txtFirstname.Leave += new System.EventHandler(this.txtFirstname_leave);
             // 
             // label1
@@ -258,49 +289,122 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "First Name:";
             // 
-            // btnAdd
+            // btnUpdate
             // 
-            this.btnAdd.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(581, 327);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(94, 35);
-            this.btnAdd.TabIndex = 5;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate.Location = new System.Drawing.Point(312, 409);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(94, 35);
+            this.btnUpdate.TabIndex = 12;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
             // 
-            // btnExit
+            // lvUsers
             // 
-            this.btnExit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.Location = new System.Drawing.Point(581, 368);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(94, 35);
-            this.btnExit.TabIndex = 4;
-            this.btnExit.Text = "Exit";
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.lvUsers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.name,
+            this.email,
+            this.gender,
+            this.role,
+            this.address});
+            this.lvUsers.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvUsers.Location = new System.Drawing.Point(522, 57);
+            this.lvUsers.Name = "lvUsers";
+            this.lvUsers.Size = new System.Drawing.Size(457, 386);
+            this.lvUsers.TabIndex = 11;
+            this.lvUsers.UseCompatibleStateImageBehavior = false;
+            this.lvUsers.View = System.Windows.Forms.View.Details;
+            this.lvUsers.SelectedIndexChanged += new System.EventHandler(this.lvUsers_SelectedIndexChanged);
             // 
-            // new_user
+            // name
+            // 
+            this.name.Text = "Name";
+            this.name.Width = 119;
+            // 
+            // email
+            // 
+            this.email.Text = "Email";
+            // 
+            // gender
+            // 
+            this.gender.Text = "Gender";
+            // 
+            // role
+            // 
+            this.role.Text = "Role";
+            // 
+            // address
+            // 
+            this.address.Text = "Address";
+            this.address.Width = 99;
+            // 
+            // btnDel
+            // 
+            this.btnDel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDel.Location = new System.Drawing.Point(112, 408);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.Size = new System.Drawing.Size(94, 35);
+            this.btnDel.TabIndex = 10;
+            this.btnDel.Text = "Delete";
+            this.btnDel.UseVisualStyleBackColor = true;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEdit.Location = new System.Drawing.Point(212, 409);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(94, 35);
+            this.btnEdit.TabIndex = 9;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Montserrat", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(516, 12);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(124, 33);
+            this.label10.TabIndex = 19;
+            this.label10.Text = "All Users";
+            // 
+            // users_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(687, 424);
+            this.ClientSize = new System.Drawing.Size(991, 461);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.btnUpdate);
+            this.Controls.Add(this.lvUsers);
+            this.Controls.Add(this.btnDel);
+            this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.groupBox1);
-            this.Name = "new_user";
-            this.Text = "New User";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.new_user_closing);
-            this.Load += new System.EventHandler(this.new_user_load);
+            this.Name = "users_form";
+            this.Text = "Users Form";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.users_form_closing);
+            this.Load += new System.EventHandler(this.users_form_load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ComboBox cbRole;
+        private System.Windows.Forms.ComboBox cbGender;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtAddress;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtPhone;
+        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtConfirmPass;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtPassword;
@@ -311,15 +415,15 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtFirstname;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnExit;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txtAddress;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtPhone;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox cbGender;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox cbRole;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.ListView lvUsers;
+        private System.Windows.Forms.ColumnHeader name;
+        private System.Windows.Forms.ColumnHeader email;
+        private System.Windows.Forms.ColumnHeader gender;
+        private System.Windows.Forms.ColumnHeader role;
+        private System.Windows.Forms.ColumnHeader address;
+        private System.Windows.Forms.Button btnDel;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Label label10;
     }
 }

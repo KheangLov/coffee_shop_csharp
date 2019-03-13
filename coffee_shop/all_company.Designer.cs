@@ -30,6 +30,11 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.listAll_company = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnEdite = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -48,16 +53,46 @@
             // 
             // listAll_company
             // 
+            this.listAll_company.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
             this.listAll_company.Location = new System.Drawing.Point(28, 73);
             this.listAll_company.Name = "listAll_company";
-            this.listAll_company.Size = new System.Drawing.Size(401, 229);
+            this.listAll_company.Size = new System.Drawing.Size(589, 255);
             this.listAll_company.TabIndex = 1;
             this.listAll_company.UseCompatibleStateImageBehavior = false;
             this.listAll_company.View = System.Windows.Forms.View.Details;
             // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Name";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Address";
+            this.columnHeader2.Width = 176;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Email";
+            this.columnHeader3.Width = 205;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Phone";
+            this.columnHeader4.Width = 181;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "User_ID";
+            this.columnHeader5.Width = 128;
+            // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(454, 185);
+            this.btnUpdate.Location = new System.Drawing.Point(650, 232);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(55, 25);
             this.btnUpdate.TabIndex = 2;
@@ -66,7 +101,7 @@
             // 
             // btnEdite
             // 
-            this.btnEdite.Location = new System.Drawing.Point(454, 216);
+            this.btnEdite.Location = new System.Drawing.Point(650, 262);
             this.btnEdite.Name = "btnEdite";
             this.btnEdite.Size = new System.Drawing.Size(55, 25);
             this.btnEdite.TabIndex = 2;
@@ -75,7 +110,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(454, 247);
+            this.btnDelete.Location = new System.Drawing.Point(650, 293);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(55, 25);
             this.btnDelete.TabIndex = 2;
@@ -84,7 +119,7 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(454, 278);
+            this.btnExit.Location = new System.Drawing.Point(650, 324);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(55, 25);
             this.btnExit.TabIndex = 2;
@@ -95,7 +130,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 324);
+            this.ClientSize = new System.Drawing.Size(732, 383);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdite);
@@ -104,6 +139,7 @@
             this.Controls.Add(this.label1);
             this.Name = "all_company";
             this.Text = "all_company";
+            this.Load += new System.EventHandler(this.all_company_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -117,5 +153,10 @@
         private System.Windows.Forms.Button btnEdite;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
     }
 }

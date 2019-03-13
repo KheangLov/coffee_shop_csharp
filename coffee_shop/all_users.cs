@@ -20,6 +20,7 @@ namespace coffee_shop
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            DataConn.Connection.Close();
             this.Dispose();
             new Main().Show();
         }
@@ -29,15 +30,15 @@ namespace coffee_shop
             DataConn.Connection.Close();
             Application.Exit();
         }
-
         private void all_users_load(object sender, EventArgs e)
         {
             try
             {
+                DataConn.Connection.Open();
                 string sql = "SELECT * FROM users FULL OUTER JOIN roles ON users.role_id = roles.id;";
                 SqlCommand com = new SqlCommand(sql, DataConn.Connection);
                 SqlDataReader sqlr = com.ExecuteReader();
-                while(sqlr.Read())
+                while (sqlr.Read())
                 {
                     string[] user_info = { sqlr["username"].ToString(), sqlr["email"].ToString(), sqlr["gender"].ToString(), sqlr["name"].ToString() };
                     ListViewItem item = new ListViewItem(user_info);
@@ -50,6 +51,25 @@ namespace coffee_shop
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lvUsers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

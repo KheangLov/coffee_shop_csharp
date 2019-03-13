@@ -13,7 +13,7 @@ namespace coffee_shop
 {
     public partial class Login : Form
     {
-        SqlCommand com = new SqlCommand();
+
         public Login()
         {
             InitializeComponent();
@@ -22,23 +22,44 @@ namespace coffee_shop
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            com.Connection = DataConn.Connection;
-            com.CommandText = "SELECT * FROM users WHERE username = '" + txtUser.Text + "' AND password = '" + hc.PassHash(txtPassword.Text) + "';";
-            SqlDataReader dr = com.ExecuteReader();
-            if(dr.Read())
+            if (txtUser.Text != "" && txtPassword.Text != "")
             {
-                if(txtUser.Text.Equals(dr["username"].ToString()) && hc.PassHash(txtPassword.Text).Equals(dr["password"].ToString()))
+                string sql = "SELECT * FROM users WHERE username = '" + txtUser.Text + "' AND password = '" + hc.PassHash(txtPassword.Text) + "';";
+                SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+                SqlDataReader sqlr = sqld.ExecuteReader();
+                if (sqlr.Read())
                 {
-                    this.Hide();
-                    new Main().Show();
+                    //string my_un = sqlr["username"].ToString();
+                    //if (txtUser.Text == my_un && hc.PassHash(txtPassword.Text) == hc.PassHash(sqlr["password"].ToString()))
+                    //{
+                    //    this.Hide();
+                    //    new Main().Show();
+                    //}
+                    if(txtUser.Text.Equals(sqlr["username"].ToString()) && hc.PassHash(txtPassword.Text).Equals(sqlr["password"].ToString()))
+                    {
+                        this.Hide();
+                        new Main().Show();
+                    }
+                    else if (txtUser.Text.Equals(sqlr["username"].ToString()))
+                    {
+                        MessageBox.Show("Wrong username!");
+                    }
+                    else if (hc.PassHash(txtPassword.Text).Equals(sqlr["password"].ToString()))
+                    {
+                        MessageBox.Show("Wrong password!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Wrong username & password!");
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("Wrong user or password!");
-                }
+                sqlr.Close();
+                sqld.Dispose();
             }
-            dr.Close();
-            com.Dispose();
+            else
+            {
+                MessageBox.Show("Please input user and password first!");
+            }
         }
 
         private void login_load(object sender, EventArgs e)
