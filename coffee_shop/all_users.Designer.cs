@@ -35,7 +35,6 @@
             this.name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.email = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gender = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.dob = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.role = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnUpdate = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -77,7 +76,6 @@
             this.name,
             this.email,
             this.gender,
-            this.dob,
             this.role});
             this.lvUsers.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvUsers.Location = new System.Drawing.Point(12, 12);
@@ -100,11 +98,6 @@
             // 
             this.gender.Text = "Gender";
             this.gender.Width = 101;
-            // 
-            // dob
-            // 
-            this.dob.Text = "Date of birth";
-            this.dob.Width = 114;
             // 
             // role
             // 
@@ -133,6 +126,7 @@
             this.Name = "all_users";
             this.Text = "All Users";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.all_users_closing);
+            this.Load += new System.EventHandler(this.all_users_load);
             this.ResumeLayout(false);
 
         }
@@ -145,7 +139,6 @@
         private System.Windows.Forms.ColumnHeader name;
         private System.Windows.Forms.ColumnHeader email;
         private System.Windows.Forms.ColumnHeader gender;
-        private System.Windows.Forms.ColumnHeader dob;
         private System.Windows.Forms.ColumnHeader role;
         private System.Windows.Forms.Button btnUpdate;
     }

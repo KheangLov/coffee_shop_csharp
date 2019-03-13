@@ -37,6 +37,8 @@ namespace coffee_shop
                     MessageBox.Show("Wrong user or password!");
                 }
             }
+            dr.Close();
+            com.Dispose();
         }
 
         private void login_load(object sender, EventArgs e)
