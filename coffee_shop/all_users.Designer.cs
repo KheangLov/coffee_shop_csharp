@@ -42,10 +42,11 @@
             // 
             // btnExit
             // 
-            this.btnExit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.Location = new System.Drawing.Point(648, 435);
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.Location = new System.Drawing.Point(864, 535);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(94, 35);
+            this.btnExit.Size = new System.Drawing.Size(125, 43);
             this.btnExit.TabIndex = 1;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -53,20 +54,23 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdit.Location = new System.Drawing.Point(648, 353);
+            this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEdit.Location = new System.Drawing.Point(864, 434);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(94, 35);
+            this.btnEdit.Size = new System.Drawing.Size(125, 43);
             this.btnEdit.TabIndex = 2;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnDel
             // 
-            this.btnDel.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDel.Location = new System.Drawing.Point(648, 394);
+            this.btnDel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDel.Location = new System.Drawing.Point(864, 485);
+            this.btnDel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(94, 35);
+            this.btnDel.Size = new System.Drawing.Size(125, 43);
             this.btnDel.TabIndex = 3;
             this.btnDel.Text = "Delete";
             this.btnDel.UseVisualStyleBackColor = true;
@@ -79,10 +83,11 @@
             this.gender,
             this.dob,
             this.role});
-            this.lvUsers.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lvUsers.Location = new System.Drawing.Point(12, 12);
+            this.lvUsers.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvUsers.Location = new System.Drawing.Point(16, 15);
+            this.lvUsers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lvUsers.Name = "lvUsers";
-            this.lvUsers.Size = new System.Drawing.Size(619, 458);
+            this.lvUsers.Size = new System.Drawing.Size(824, 563);
             this.lvUsers.TabIndex = 4;
             this.lvUsers.UseCompatibleStateImageBehavior = false;
             this.lvUsers.View = System.Windows.Forms.View.Details;
@@ -112,24 +117,27 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(648, 312);
+            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate.Location = new System.Drawing.Point(864, 384);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(94, 35);
+            this.btnUpdate.Size = new System.Drawing.Size(125, 43);
             this.btnUpdate.TabIndex = 5;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // all_users
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(754, 482);
+            this.ClientSize = new System.Drawing.Size(1005, 593);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.lvUsers);
             this.Controls.Add(this.btnDel);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnExit);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "all_users";
             this.Text = "All Users";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.all_users_closing);

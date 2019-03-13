@@ -43,11 +43,12 @@ namespace coffee_shop
         {
             try
             {
-                string ipServer = @"KHEANG-PC";
+                string ipServer = @"DESKTOP-GN789NG";
                 string dbName = "coffee_shop";
                 string user = "coffee";
                 string password = "not4you";
                 DataConn.ConnectionDB(ipServer, dbName, user, password);
+                MessageBox.Show("Connection success!");
             }
             catch (Exception ex)
             {

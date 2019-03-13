@@ -54,7 +54,9 @@ namespace coffee_shop
 
         private void new_company_Load(object sender, EventArgs e)
         {
-
+            DataConn.Connection.Open();
+            MyInter com_inter = new_com;
+            inter = com_inter;
         }
 
         private void txtAddress_Leave(object sender, EventArgs e)

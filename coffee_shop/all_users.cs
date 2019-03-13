@@ -28,5 +28,15 @@ namespace coffee_shop
             DataConn.Connection.Close();
             Application.Exit();
         }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
