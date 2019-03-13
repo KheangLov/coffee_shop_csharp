@@ -49,6 +49,7 @@
             this.btnAdd.TabIndex = 11;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnExit
             // 
@@ -82,6 +83,7 @@
             this.txtBranchID.Name = "txtBranchID";
             this.txtBranchID.Size = new System.Drawing.Size(225, 26);
             this.txtBranchID.TabIndex = 5;
+            this.txtBranchID.Leave += new System.EventHandler(this.txtBranchID_leave);
             // 
             // label3
             // 
@@ -99,6 +101,7 @@
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.Size = new System.Drawing.Size(225, 26);
             this.txtDesc.TabIndex = 3;
+            this.txtDesc.Leave += new System.EventHandler(this.txtDesc_leave);
             // 
             // label2
             // 
@@ -116,6 +119,7 @@
             this.txtname.Name = "txtname";
             this.txtname.Size = new System.Drawing.Size(225, 26);
             this.txtname.TabIndex = 1;
+            this.txtname.Leave += new System.EventHandler(this.txtname_leave);
             // 
             // label1
             // 

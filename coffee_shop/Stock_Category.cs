@@ -30,7 +30,7 @@ namespace coffee_shop
             }
         }
 
-        public string Descripion
+        public string Description
         {
             get
             {
@@ -53,10 +53,11 @@ namespace coffee_shop
                 branch_id = value;
             }
         }
+    
         public override void insert()
         {
-            string query = @"INSERT INTO [coffee_shop].[dbo].[stock_categories](firstname, lastname, username, email, password, created_date, gender, phone, address, role_id) 
-                VALUES('" + name + "', '" + description + "', '" + branch_id + ");";
+            string query = @"INSERT INTO [coffee_shop].[dbo].[stock_categories](name, description, branch_id) 
+                VALUES('" + Name + "', '" + Description + "', " + Branch_ID + ");";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();

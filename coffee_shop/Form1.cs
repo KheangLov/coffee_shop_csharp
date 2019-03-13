@@ -37,5 +37,11 @@ namespace coffee_shop
             DataConn.Connection.Close();
             Application.Exit();
         }
+
+        private void stockCategoriesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new newstockcate().ShowDialog();
+
+        }
     }
 }
