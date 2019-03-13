@@ -61,7 +61,7 @@ namespace coffee_shop
             cbRole.SelectedIndex = 0;
             try
             {
-                string sql = "SELECT * FROM users FULL OUTER JOIN roles ON users.role_id = roles.id;";
+                string sql = "SELECT * FROM users INNER JOIN roles ON users.role_id = roles.id WHERE users.role_id = roles.id;";
                 SqlCommand com = new SqlCommand(sql, DataConn.Connection);
                 SqlDataReader sqlr = com.ExecuteReader();
                 while (sqlr.Read())
@@ -88,6 +88,17 @@ namespace coffee_shop
                 inter.insert();
                 MessageBox.Show("Insert successfull!");
                 ClearTextBoxes(groupBox1);
+                string sql = "SELECT * FROM users INNER JOIN roles ON users.role_id = roles.id WHERE users.role_id = roles.id;";
+                SqlCommand com = new SqlCommand(sql, DataConn.Connection);
+                SqlDataReader sqlr = com.ExecuteReader();
+                while (sqlr.Read())
+                {
+                    string[] user_info = { sqlr["username"].ToString(), sqlr["email"].ToString(), sqlr["gender"].ToString(), sqlr["name"].ToString(), sqlr["address"].ToString() };
+                    ListViewItem item = new ListViewItem(user_info);
+                    lvUsers.Items.Add(item);
+                }
+                sqlr.Close();
+                com.Dispose();
             }
             catch (Exception ex)
             {
@@ -97,26 +108,19 @@ namespace coffee_shop
 
         private void cbRole_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbRole.Text.ToLower() == "superadmin")
+            string sql = "SELECT * FROM roles WHERE name = '" + cbRole.Text.ToLower() + "';";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = sqld.ExecuteReader();
+            if (sqlr.Read())
             {
-                my_user.Role_Id = cbRole.SelectedIndex + 1;
-            }
-            else if (cbRole.Text.ToLower() == "admin")
-            {
-                my_user.Role_Id = cbRole.SelectedIndex + 1;
-            }
-            else if (cbRole.Text.ToLower() == "editor")
-            {
-                my_user.Role_Id = cbRole.SelectedIndex + 1;
-            }
-            else if (cbRole.Text.ToLower() == "user")
-            {
-                my_user.Role_Id = cbRole.SelectedIndex + 1;
+                my_user.Role_Id = int.Parse(sqlr["id"].ToString());
             }
             else
             {
                 MessageBox.Show("Nothing found!");
             }
+            sqlr.Close();
+            sqld.Dispose();
         }
 
         private void cbGender_SelectedIndexChanged(object sender, EventArgs e)
@@ -187,6 +191,7 @@ namespace coffee_shop
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            DataConn.Connection.Close();
             this.Dispose();
         }
 
