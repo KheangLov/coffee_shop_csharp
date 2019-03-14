@@ -89,6 +89,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringCapitalize.cs" />
     <Compile Include="Users.cs" />
     <Compile Include="users_form.cs">
       <SubType>Form</SubType>

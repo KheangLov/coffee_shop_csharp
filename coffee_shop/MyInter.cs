@@ -9,5 +9,7 @@ namespace coffee_shop
     interface MyInter
     {
         void insert();
+
+        void update(int id);
     }
 }

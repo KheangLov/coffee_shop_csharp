@@ -76,8 +76,16 @@ namespace coffee_shop
         }
         public override void insert()
         {
-            string query = @"INSERT INTO [coffee_shop].[dbo].[companies](name, address, email, phone,user_id) 
+            string query = @"INSERT INTO [coffee_shop].[dbo].[companies](name, address, email, phone, user_id) 
                 values('" + Name + "', '" + Address + "', '" + Email + "', '" + Phone + "', " + user_id + ");";
+            sqld = new SqlCommand(query, DataConn.Connection);
+            sqld.ExecuteNonQuery();
+            sqld.Dispose();
+        }
+        public override void update(int id)
+        {
+            string query = @"UPDATE [coffee_shop].[dbo].[companies] 
+                SET name = '" + Name + "', email ='" + Email + "', address = '" + Address + "', phone = '" + Phone + "' WHERE id = " + id + ";";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();

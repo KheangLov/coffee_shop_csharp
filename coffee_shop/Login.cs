@@ -48,7 +48,7 @@ namespace coffee_shop
         {
             try
             {
-                string ipServer = @"DESKTOP-LJF94BH";
+                string ipServer = @"KHEANG-PC";
                 string dbName = "coffee_shop";
                 string user = "coffee";
                 string password = "not4you";
