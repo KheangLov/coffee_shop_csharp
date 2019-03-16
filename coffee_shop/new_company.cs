@@ -81,5 +81,10 @@ namespace coffee_shop
         {
             new_com.UserID = txtUserID.Text.Trim();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
