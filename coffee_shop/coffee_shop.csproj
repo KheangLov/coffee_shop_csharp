@@ -59,6 +59,12 @@
       <DependentUpon>all_users.cs</DependentUpon>
     </Compile>
     <Compile Include="Company.cs" />
+    <Compile Include="company_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="company_form.designer.cs">
+      <DependentUpon>company_form.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataConn.cs" />
     <Compile Include="Db_Insert.cs" />
     <Compile Include="Form1.cs">
@@ -75,12 +81,6 @@
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="MyInter.cs" />
-    <Compile Include="new_company.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="new_company.Designer.cs">
-      <DependentUpon>new_company.cs</DependentUpon>
-    </Compile>
     <Compile Include="new_user.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,14 +103,14 @@
     <EmbeddedResource Include="all_users.resx">
       <DependentUpon>all_users.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="company_form.resx">
+      <DependentUpon>company_form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="new_company.resx">
-      <DependentUpon>new_company.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="new_user.resx">
       <DependentUpon>new_user.cs</DependentUpon>

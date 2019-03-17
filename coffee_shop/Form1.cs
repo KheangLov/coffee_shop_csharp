@@ -61,5 +61,10 @@ namespace coffee_shop
         {
             new users_form().ShowDialog();
         }
+
+        private void myCompanyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new company_form().ShowDialog();
+        }
     }
 }

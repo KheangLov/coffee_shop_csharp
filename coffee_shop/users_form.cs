@@ -85,11 +85,13 @@ namespace coffee_shop
                 }
                 sqlr.Close();
                 com.Dispose();
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            loadComboRole();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -98,7 +100,7 @@ namespace coffee_shop
             {
                 if (txtFirstname.Text != "" && txtLastname.Text != "" && txtEmail.Text != "" && txtPassword.Text != "")
                 {
-
+                    loadComboRole();
                     my_user.Created_Date = DateTime.Now.ToString();
                     my_user.Username = my_user.Firstname + my_user.Lastname;
                     string check_name = "SELECT COUNT(*) FROM users WHERE username = '" + my_user.Username + "';";
@@ -107,6 +109,7 @@ namespace coffee_shop
                     if (find_user != 0)
                     {
                         MessageBox.Show("User already exist!");
+                        txtFirstname.Focus();
                     }
                     else
                     {
@@ -138,7 +141,7 @@ namespace coffee_shop
             }
         }
 
-        private void cbRole_SelectedIndexChanged(object sender, EventArgs e)
+        private void loadComboRole()
         {
             string sql = "SELECT * FROM roles WHERE name = '" + cbRole.Text.ToLower() + "';";
             SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
@@ -153,6 +156,11 @@ namespace coffee_shop
             }
             sqlr.Close();
             sqld.Dispose();
+        }
+
+        private void cbRole_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
 
         private void cbGender_SelectedIndexChanged(object sender, EventArgs e)
@@ -266,37 +274,33 @@ namespace coffee_shop
                             txtPhone.Text = reader["phone"].ToString();
                             txtAddress.Text = reader["address"].ToString();
 
-                            //if(reader["name"].ToString().ToLower() == "admin")
-                            //{
-                            //    cbRole.SelectedIndex = 0;
-                            //    reader.Close();
-                            //}
-                            //else if(reader["name"].ToString().ToLower() == "editor")
-                            //{
-                            //    cbRole.SelectedIndex = 1;
-                            //    reader.Close();
-                            //}
-                            //else if (reader["name"].ToString().ToLower() == "user")
-                            //{
-                            //    cbRole.SelectedIndex = 2;
-                            //    reader.Close();
-                            //}
-                            //else
-                            //{
-                            //    MessageBox.Show("No role found!");
-                            //    reader.Close();
-                            //}
-
-                            btnEdit.Text = "Update";
+                            if (reader["name"].ToString().ToLower() == "admin")
+                            {
+                                cbRole.SelectedIndex = 0;
+                            }
+                            else if (reader["name"].ToString().ToLower() == "editor")
+                            {
+                                cbRole.SelectedIndex = 1;
+                            }
+                            else if (reader["name"].ToString().ToLower() == "user")
+                            {
+                                cbRole.SelectedIndex = 2;
+                            }
+                            else
+                            {
+                                MessageBox.Show("No role found!");
+                            }
                         }
                     }
                     command.Dispose();
                     reader.Close();
+                    btnEdit.Text = "Update";
                 }
                 else if(btnEdit.Text.ToLower() == "update")
                 {
                     try
                     {
+                        loadComboRole();
                         my_user.Username = my_user.Firstname + my_user.Lastname;
                         inter.update(userId);
                         MessageBox.Show("Update Successfully!");

@@ -307,7 +307,7 @@
             this.lvUsers.GridLines = true;
             this.lvUsers.Location = new System.Drawing.Point(506, 57);
             this.lvUsers.Name = "lvUsers";
-            this.lvUsers.Size = new System.Drawing.Size(473, 386);
+            this.lvUsers.Size = new System.Drawing.Size(525, 386);
             this.lvUsers.TabIndex = 11;
             this.lvUsers.UseCompatibleStateImageBehavior = false;
             this.lvUsers.View = System.Windows.Forms.View.Details;
@@ -321,7 +321,7 @@
             // email
             // 
             this.email.Text = "Email";
-            this.email.Width = 105;
+            this.email.Width = 100;
             // 
             // gender
             // 
@@ -377,7 +377,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(991, 461);
+            this.ClientSize = new System.Drawing.Size(1043, 461);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.lvUsers);
             this.Controls.Add(this.btnDel);

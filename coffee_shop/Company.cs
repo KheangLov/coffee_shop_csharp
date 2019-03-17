@@ -14,7 +14,7 @@ namespace coffee_shop
         private string address;
         private string email;
         private string phone;
-        private string user_id;
+        private int user_id;
         public Company()
         {
 
@@ -63,7 +63,7 @@ namespace coffee_shop
                 phone = value;
             }
         }
-        public string UserID
+        public int UserID
         {
             get
             {
@@ -77,7 +77,7 @@ namespace coffee_shop
         public override void insert()
         {
             string query = @"INSERT INTO [coffee_shop].[dbo].[companies](name, address, email, phone, user_id) 
-                values('" + Name + "', '" + Address + "', '" + Email + "', '" + Phone + "', " + user_id + ");";
+                values('" + Name + "', '" + Address + "', '" + Email + "', '" + Phone + "', " + UserID + ");";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();
@@ -85,7 +85,7 @@ namespace coffee_shop
         public override void update(int id)
         {
             string query = @"UPDATE [coffee_shop].[dbo].[companies] 
-                SET name = '" + Name + "', email ='" + Email + "', address = '" + Address + "', phone = '" + Phone + "' WHERE id = " + id + ";";
+                SET name = '" + Name + "', email ='" + Email + "', address = '" + Address + "', phone = '" + Phone + "', user_id = " + UserID +" WHERE id = " + id + ";";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();
