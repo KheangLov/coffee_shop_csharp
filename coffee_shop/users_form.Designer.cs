@@ -59,6 +59,7 @@
             this.btnDel = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -373,11 +374,21 @@
             this.label10.TabIndex = 19;
             this.label10.Text = "All Users";
             // 
+            // txtSearch
+            // 
+            this.txtSearch.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.Location = new System.Drawing.Point(728, 18);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(303, 27);
+            this.txtSearch.TabIndex = 19;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
             // users_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1043, 461);
+            this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.lvUsers);
             this.Controls.Add(this.btnDel);
@@ -429,5 +440,6 @@
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ColumnHeader phone;
+        private System.Windows.Forms.TextBox txtSearch;
     }
 }

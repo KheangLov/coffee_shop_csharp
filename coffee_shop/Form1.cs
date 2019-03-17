@@ -44,7 +44,7 @@ namespace coffee_shop
         }
         private void newCompanyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new new_company().ShowDialog();
+
         }
 
         private void allCompaniesToolStripMenuItem_Click(object sender, EventArgs e)

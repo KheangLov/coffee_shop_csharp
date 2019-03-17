@@ -77,6 +77,21 @@ namespace coffee_shop
             sqlr.Close();
         }
 
+        private void QueryCompanies()
+        {
+            string query = "SELECT * FROM companies INNER JOIN users ON companies.user_id = users.id ORDER BY name;";
+            SqlCommand sqld = new SqlCommand(query, DataConn.Connection);
+            SqlDataReader sqlr = sqld.ExecuteReader();
+            while (sqlr.Read())
+            {
+                string[] company_info = { sc.ToCapitalize(sqlr["name"].ToString()), sqlr["address"].ToString(), sqlr["email"].ToString(), sqlr["phone"].ToString(), sc.ToCapitalize(sqlr["username"].ToString()) };
+                ListViewItem item = new ListViewItem(company_info);
+                lvCompany.Items.Add(item);
+            }
+            sqld.Dispose();
+            sqlr.Close();
+        }
+
         private void company_form_Load(object sender, EventArgs e)
         {
             btnEdit.Enabled = false;
@@ -87,17 +102,7 @@ namespace coffee_shop
             inter = company_inter;
             try
             {
-                string query = "SELECT * FROM companies INNER JOIN users ON companies.user_id = users.id;";
-                SqlCommand sqld = new SqlCommand(query, DataConn.Connection);
-                SqlDataReader sqlr = sqld.ExecuteReader();
-                while (sqlr.Read())
-                {
-                    string[] company_info = { sc.ToCapitalize(sqlr["name"].ToString()), sqlr["address"].ToString(), sqlr["email"].ToString(), sqlr["phone"].ToString(), sc.ToCapitalize(sqlr["username"].ToString()) };
-                    ListViewItem item = new ListViewItem(company_info);
-                    lvCompany.Items.Add(item);
-                }
-                sqld.Dispose();
-                sqlr.Close();
+                QueryCompanies();
             }
             catch(Exception ex)
             {
@@ -166,17 +171,7 @@ namespace coffee_shop
                         MessageBox.Show("Insert successful!");
                         ClearTextBoxes(groupBox1);
                         lvCompany.Items.Clear();
-                        string query = "SELECT * FROM companies INNER JOIN users ON companies.user_id = users.id;";
-                        SqlCommand sqld = new SqlCommand(query, DataConn.Connection);
-                        SqlDataReader sqlr = sqld.ExecuteReader();
-                        while (sqlr.Read())
-                        {
-                            string[] company_info = { sc.ToCapitalize(sqlr["name"].ToString()), sqlr["address"].ToString(), sqlr["email"].ToString(), sqlr["phone"].ToString(), sc.ToCapitalize(sqlr["username"].ToString()) };
-                            ListViewItem item = new ListViewItem(company_info);
-                            lvCompany.Items.Add(item);
-                        }
-                        sqld.Dispose();
-                        sqlr.Close();
+                        QueryCompanies();
                     }
                     cpn_ex.Dispose();
                 }
@@ -195,7 +190,6 @@ namespace coffee_shop
         {
             if(lvCompany.SelectedItems.Count != 0)
             {
-                btnEdit.Enabled = true;
                 if(btnEdit.Text.ToLower() == "edit")
                 {
                     ListViewItem list_item = lvCompany.SelectedItems[0];
@@ -222,17 +216,7 @@ namespace coffee_shop
                     MessageBox.Show("Company has been updated!");
                     ClearTextBoxes(groupBox1);
                     lvCompany.Items.Clear();
-                    string query = "SELECT * FROM companies INNER JOIN users ON companies.user_id = users.id;";
-                    SqlCommand sqld = new SqlCommand(query, DataConn.Connection);
-                    SqlDataReader sqlr = sqld.ExecuteReader();
-                    while (sqlr.Read())
-                    {
-                        string[] company_info = { sc.ToCapitalize(sqlr["name"].ToString()), sqlr["address"].ToString(), sqlr["email"].ToString(), sqlr["phone"].ToString(), sc.ToCapitalize(sqlr["username"].ToString()) };
-                        ListViewItem item = new ListViewItem(company_info);
-                        lvCompany.Items.Add(item);
-                    }
-                    sqld.Dispose();
-                    sqlr.Close();
+                    QueryCompanies();
                 }
             }
         }
@@ -261,9 +245,54 @@ namespace coffee_shop
         {
             if(lvCompany.SelectedItems.Count != 0)
             {
-                btnDelete.Enabled = true;
-
+                if (MessageBox.Show("Are you sure, you want to delete this company?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    ListViewItem del_item = lvCompany.SelectedItems[0];
+                    int val = 0;
+                    string cpn_name = del_item.SubItems[0].Text;
+                    string del_sql = "DELETE FROM companies WHERE name = '" + cpn_name + "';";
+                    SqlCommand del_cmd = new SqlCommand(del_sql, DataConn.Connection);
+                    val = del_cmd.ExecuteNonQuery();
+                    del_cmd.Dispose();
+                    MessageBox.Show("User has been deleted!");
+                    lvCompany.Items.Clear();
+                    QueryCompanies();
+                }
+                else
+                {
+                    MessageBox.Show("No company was deleted!", "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
+        }
+
+        private void lvCompany_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lvCompany.SelectedItems.Count != 0)
+            {
+                btnEdit.Enabled = true;
+                btnDelete.Enabled = true;
+            }
+            else
+            {
+                btnDelete.Enabled = false;
+                btnEdit.Enabled = false;
+            }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            lvCompany.Items.Clear();
+            string query = "SELECT * FROM companies INNER JOIN users ON companies.user_id = users.id AND name LIKE '%" + txtSearch.Text.Trim() + "%' ORDER BY name;";
+            SqlCommand sqld = new SqlCommand(query, DataConn.Connection);
+            SqlDataReader sqlr = sqld.ExecuteReader();
+            while (sqlr.Read())
+            {
+                string[] company_info = { sc.ToCapitalize(sqlr["name"].ToString()), sqlr["address"].ToString(), sqlr["email"].ToString(), sqlr["phone"].ToString(), sc.ToCapitalize(sqlr["username"].ToString()) };
+                ListViewItem item = new ListViewItem(company_info);
+                lvCompany.Items.Add(item);
+            }
+            sqld.Dispose();
+            sqlr.Close();
         }
     }
 }

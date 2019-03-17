@@ -51,6 +51,21 @@ namespace coffee_shop
             }
         }
 
+        private void QueryUsers()
+        {
+            string sql = "SELECT * FROM users INNER JOIN roles ON users.role_id = roles.id WHERE users.role_id = roles.id ORDER BY roles.id;";
+            SqlCommand com = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = com.ExecuteReader();
+            while (sqlr.Read())
+            {
+                string[] user_info = { sc.ToCapitalize(sqlr["username"].ToString()), sqlr["email"].ToString(), sqlr["gender"].ToString(), sc.ToCapitalize(sqlr["name"].ToString()), sqlr["phone"].ToString(), sqlr["address"].ToString() };
+                ListViewItem item = new ListViewItem(user_info);
+                lvUsers.Items.Add(item);
+            }
+            sqlr.Close();
+            com.Dispose();
+        }
+
         void ClearTextBoxes(Control parent)
         {
             foreach (Control child in parent.Controls)
@@ -74,18 +89,7 @@ namespace coffee_shop
             cbRole.SelectedIndex = 0;
             try
             {
-                string sql = "SELECT * FROM users INNER JOIN roles ON users.role_id = roles.id WHERE users.role_id = roles.id;";
-                SqlCommand com = new SqlCommand(sql, DataConn.Connection);
-                SqlDataReader sqlr = com.ExecuteReader();
-                while (sqlr.Read())
-                {
-                    string[] user_info = { sc.ToCapitalize(sqlr["username"].ToString()), sqlr["email"].ToString(), sqlr["gender"].ToString(), sc.ToCapitalize(sqlr["name"].ToString()), sqlr["phone"].ToString(), sqlr["address"].ToString() };
-                    ListViewItem item = new ListViewItem(user_info);
-                    lvUsers.Items.Add(item);
-                }
-                sqlr.Close();
-                com.Dispose();
-
+                QueryUsers();
             }
             catch (Exception ex)
             {
@@ -117,17 +121,7 @@ namespace coffee_shop
                         MessageBox.Show("Insert Successfully!");
                         ClearTextBoxes(groupBox1);
                         lvUsers.Items.Clear();
-                        string sql = "SELECT * FROM users INNER JOIN roles ON users.role_id = roles.id WHERE users.role_id = roles.id;";
-                        SqlCommand com = new SqlCommand(sql, DataConn.Connection);
-                        SqlDataReader sqlr = com.ExecuteReader();
-                        while (sqlr.Read())
-                        {
-                            string[] user_info = { sc.ToCapitalize(sqlr["username"].ToString()), sqlr["email"].ToString(), sqlr["gender"].ToString(), sc.ToCapitalize(sqlr["name"].ToString()), sqlr["phone"].ToString(), sqlr["address"].ToString() };
-                            ListViewItem item = new ListViewItem(user_info);
-                            lvUsers.Items.Add(item);
-                        }
-                        sqlr.Close();
-                        com.Dispose();
+                        QueryUsers();
                     }
                 }
                 else
@@ -306,18 +300,7 @@ namespace coffee_shop
                         MessageBox.Show("Update Successfully!");
                         ClearTextBoxes(groupBox1);
                         lvUsers.Items.Clear();
-                        string sql = "SELECT * FROM users INNER JOIN roles ON users.role_id = roles.id WHERE users.role_id = roles.id;";
-                        SqlCommand com = new SqlCommand(sql, DataConn.Connection);
-                        SqlDataReader sqlr = com.ExecuteReader();
-                        while (sqlr.Read())
-                        {
-                            string[] user_info = { sc.ToCapitalize(sqlr["username"].ToString()), sqlr["email"].ToString(), sqlr["gender"].ToString(), sc.ToCapitalize(sqlr["name"].ToString()), sqlr["phone"].ToString(), sqlr["address"].ToString() };
-                            ListViewItem item = new ListViewItem(user_info);
-                            lvUsers.Items.Add(item);
-                        }
-                        sqlr.Close();
-                        com.Dispose();
-                        btnEdit.Text = "Edit";
+                        QueryUsers();
                         btnEdit.Enabled = false;
                     }
                     catch (Exception ex)
@@ -365,19 +348,10 @@ namespace coffee_shop
                     string del_que = "DELETE FROM users WHERE username = '" + userName + "';";
                     SqlCommand del_com = new SqlCommand(del_que, DataConn.Connection);
                     val = del_com.ExecuteNonQuery();
+                    del_com.Dispose();
                     MessageBox.Show("User has been deleted!");
                     lvUsers.Items.Clear();
-                    string sql = "SELECT * FROM users INNER JOIN roles ON users.role_id = roles.id WHERE users.role_id = roles.id;";
-                    SqlCommand com = new SqlCommand(sql, DataConn.Connection);
-                    SqlDataReader sqlr = com.ExecuteReader();
-                    while (sqlr.Read())
-                    {
-                        string[] user_info = { sc.ToCapitalize(sqlr["username"].ToString()), sqlr["email"].ToString(), sqlr["gender"].ToString(), sc.ToCapitalize(sqlr["name"].ToString()), sqlr["phone"].ToString(), sqlr["address"].ToString() };
-                        ListViewItem item = new ListViewItem(user_info);
-                        lvUsers.Items.Add(item);
-                    }
-                    sqlr.Close();
-                    com.Dispose();
+                    QueryUsers();
                     btnDel.Enabled = false;
                 }
                 else
@@ -385,6 +359,22 @@ namespace coffee_shop
                     MessageBox.Show("No user was deleted!", "Delete", MessageBoxButtons.OK,MessageBoxIcon.Information);
                 }
             }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            lvUsers.Items.Clear();
+            string search_query = "SELECT * FROM users INNER JOIN roles ON users.role_id = roles.id WHERE users.role_id = roles.id AND username LIKE '%" + txtSearch.Text.Trim() + "%' ORDER BY roles.id;";
+            SqlCommand srh_cmd = new SqlCommand(search_query, DataConn.Connection);
+            SqlDataReader srh_rd = srh_cmd.ExecuteReader();
+            while (srh_rd.Read())
+            {
+                string[] user_info = { sc.ToCapitalize(srh_rd["username"].ToString()), srh_rd["email"].ToString(), srh_rd["gender"].ToString(), sc.ToCapitalize(srh_rd["name"].ToString()), srh_rd["phone"].ToString(), srh_rd["address"].ToString() };
+                ListViewItem item = new ListViewItem(user_info);
+                lvUsers.Items.Add(item);
+            }
+            srh_cmd.Dispose();
+            srh_rd.Close();
         }
     }
 }

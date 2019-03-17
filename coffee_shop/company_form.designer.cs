@@ -50,6 +50,7 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label6 = new System.Windows.Forms.Label();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -234,6 +235,7 @@
             this.lvCompany.TabIndex = 5;
             this.lvCompany.UseCompatibleStateImageBehavior = false;
             this.lvCompany.View = System.Windows.Forms.View.Details;
+            this.lvCompany.SelectedIndexChanged += new System.EventHandler(this.lvCompany_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -270,11 +272,21 @@
             this.label6.TabIndex = 4;
             this.label6.Text = "All Company";
             // 
+            // txtSearch
+            // 
+            this.txtSearch.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.Location = new System.Drawing.Point(740, 32);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(280, 27);
+            this.txtSearch.TabIndex = 6;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
             // company_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1032, 397);
+            this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.lvCompany);
@@ -317,5 +329,6 @@
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.ComboBox cbUser;
+        private System.Windows.Forms.TextBox txtSearch;
     }
 }
