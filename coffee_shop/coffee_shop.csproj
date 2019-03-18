@@ -46,12 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="all_company.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="all_company.Designer.cs">
-      <DependentUpon>all_company.cs</DependentUpon>
-    </Compile>
     <Compile Include="change_password.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,9 +85,6 @@
     <Compile Include="users_form.Designer.cs">
       <DependentUpon>users_form.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="all_company.resx">
-      <DependentUpon>all_company.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="change_password.resx">
       <DependentUpon>change_password.cs</DependentUpon>
     </EmbeddedResource>
