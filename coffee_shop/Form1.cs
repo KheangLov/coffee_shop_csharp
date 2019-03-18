@@ -66,5 +66,11 @@ namespace coffee_shop
         {
             new company_form().ShowDialog();
         }
+
+        private void logoutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+            new Login().Show();
+        }
     }
 }
