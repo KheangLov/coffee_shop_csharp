@@ -62,8 +62,6 @@ namespace coffee_shop
 
         private void btnReg_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            new new_user().Show();
         }
 
         private void login_closing(object sender, FormClosingEventArgs e)

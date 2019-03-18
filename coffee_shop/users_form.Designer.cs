@@ -60,15 +60,16 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnPassword = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(12, 408);
+            this.btnAdd.Location = new System.Drawing.Point(12, 406);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(115, 35);
+            this.btnAdd.Size = new System.Drawing.Size(95, 35);
             this.btnAdd.TabIndex = 8;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -77,9 +78,9 @@
             // btnExit
             // 
             this.btnExit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.Location = new System.Drawing.Point(375, 408);
+            this.btnExit.Location = new System.Drawing.Point(416, 408);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(115, 35);
+            this.btnExit.Size = new System.Drawing.Size(95, 35);
             this.btnExit.TabIndex = 7;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -108,7 +109,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(478, 390);
+            this.groupBox1.Size = new System.Drawing.Size(499, 390);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "User\'s Informations";
@@ -122,7 +123,7 @@
             "User"});
             this.cbRole.Location = new System.Drawing.Point(155, 348);
             this.cbRole.Name = "cbRole";
-            this.cbRole.Size = new System.Drawing.Size(138, 30);
+            this.cbRole.Size = new System.Drawing.Size(163, 30);
             this.cbRole.TabIndex = 18;
             this.cbRole.SelectedIndexChanged += new System.EventHandler(this.cbRole_SelectedIndexChanged);
             // 
@@ -134,7 +135,7 @@
             "Female"});
             this.cbGender.Location = new System.Drawing.Point(155, 203);
             this.cbGender.Name = "cbGender";
-            this.cbGender.Size = new System.Drawing.Size(138, 30);
+            this.cbGender.Size = new System.Drawing.Size(163, 30);
             this.cbGender.TabIndex = 17;
             this.cbGender.SelectedIndexChanged += new System.EventHandler(this.cbGender_SelectedIndexChanged);
             // 
@@ -163,7 +164,7 @@
             this.txtAddress.Location = new System.Drawing.Point(155, 272);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(303, 70);
+            this.txtAddress.Size = new System.Drawing.Size(328, 70);
             this.txtAddress.TabIndex = 13;
             this.txtAddress.TextChanged += new System.EventHandler(this.txtAddress_TextChanged);
             this.txtAddress.Leave += new System.EventHandler(this.txtAddress_leave);
@@ -182,7 +183,7 @@
             // 
             this.txtPhone.Location = new System.Drawing.Point(155, 239);
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(303, 27);
+            this.txtPhone.Size = new System.Drawing.Size(328, 27);
             this.txtPhone.TabIndex = 11;
             this.txtPhone.TextChanged += new System.EventHandler(this.txtPhone_TextChanged);
             this.txtPhone.Leave += new System.EventHandler(this.txtPhone_leave);
@@ -202,7 +203,7 @@
             this.txtConfirmPass.Location = new System.Drawing.Point(155, 170);
             this.txtConfirmPass.Name = "txtConfirmPass";
             this.txtConfirmPass.PasswordChar = '*';
-            this.txtConfirmPass.Size = new System.Drawing.Size(303, 27);
+            this.txtConfirmPass.Size = new System.Drawing.Size(328, 27);
             this.txtConfirmPass.TabIndex = 9;
             this.txtConfirmPass.TextChanged += new System.EventHandler(this.txtConfirmPass_TextChanged);
             this.txtConfirmPass.Leave += new System.EventHandler(this.txtConfirmPass_leave);
@@ -222,7 +223,7 @@
             this.txtPassword.Location = new System.Drawing.Point(155, 137);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(303, 27);
+            this.txtPassword.Size = new System.Drawing.Size(328, 27);
             this.txtPassword.TabIndex = 7;
             this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
             this.txtPassword.Leave += new System.EventHandler(this.txtPassword_leave);
@@ -241,7 +242,7 @@
             // 
             this.txtEmail.Location = new System.Drawing.Point(155, 104);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(303, 27);
+            this.txtEmail.Size = new System.Drawing.Size(328, 27);
             this.txtEmail.TabIndex = 5;
             this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             this.txtEmail.Leave += new System.EventHandler(this.txtEmail_leave);
@@ -260,7 +261,7 @@
             // 
             this.txtLastname.Location = new System.Drawing.Point(155, 71);
             this.txtLastname.Name = "txtLastname";
-            this.txtLastname.Size = new System.Drawing.Size(303, 27);
+            this.txtLastname.Size = new System.Drawing.Size(328, 27);
             this.txtLastname.TabIndex = 3;
             this.txtLastname.TextChanged += new System.EventHandler(this.txtLastname_TextChanged);
             this.txtLastname.Leave += new System.EventHandler(this.txtLastname_leave);
@@ -279,7 +280,7 @@
             // 
             this.txtFirstname.Location = new System.Drawing.Point(155, 38);
             this.txtFirstname.Name = "txtFirstname";
-            this.txtFirstname.Size = new System.Drawing.Size(303, 27);
+            this.txtFirstname.Size = new System.Drawing.Size(328, 27);
             this.txtFirstname.TabIndex = 1;
             this.txtFirstname.TextChanged += new System.EventHandler(this.txtFirstname_TextChanged);
             this.txtFirstname.Leave += new System.EventHandler(this.txtFirstname_leave);
@@ -306,9 +307,9 @@
             this.lvUsers.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvUsers.FullRowSelect = true;
             this.lvUsers.GridLines = true;
-            this.lvUsers.Location = new System.Drawing.Point(506, 57);
+            this.lvUsers.Location = new System.Drawing.Point(523, 57);
             this.lvUsers.Name = "lvUsers";
-            this.lvUsers.Size = new System.Drawing.Size(525, 386);
+            this.lvUsers.Size = new System.Drawing.Size(531, 386);
             this.lvUsers.TabIndex = 11;
             this.lvUsers.UseCompatibleStateImageBehavior = false;
             this.lvUsers.View = System.Windows.Forms.View.Details;
@@ -345,9 +346,9 @@
             // btnDel
             // 
             this.btnDel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDel.Location = new System.Drawing.Point(254, 408);
+            this.btnDel.Location = new System.Drawing.Point(315, 408);
             this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(115, 35);
+            this.btnDel.Size = new System.Drawing.Size(95, 35);
             this.btnDel.TabIndex = 10;
             this.btnDel.Text = "Delete";
             this.btnDel.UseVisualStyleBackColor = true;
@@ -356,9 +357,9 @@
             // btnEdit
             // 
             this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdit.Location = new System.Drawing.Point(133, 408);
+            this.btnEdit.Location = new System.Drawing.Point(113, 407);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(115, 35);
+            this.btnEdit.Size = new System.Drawing.Size(95, 35);
             this.btnEdit.TabIndex = 9;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
@@ -368,7 +369,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Montserrat", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(500, 12);
+            this.label10.Location = new System.Drawing.Point(517, 12);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(124, 33);
             this.label10.TabIndex = 19;
@@ -377,17 +378,29 @@
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(728, 18);
+            this.txtSearch.Location = new System.Drawing.Point(751, 18);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(303, 27);
             this.txtSearch.TabIndex = 19;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
+            // btnPassword
+            // 
+            this.btnPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPassword.Location = new System.Drawing.Point(214, 408);
+            this.btnPassword.Name = "btnPassword";
+            this.btnPassword.Size = new System.Drawing.Size(95, 35);
+            this.btnPassword.TabIndex = 20;
+            this.btnPassword.Text = "Password";
+            this.btnPassword.UseVisualStyleBackColor = true;
+            this.btnPassword.Click += new System.EventHandler(this.btnPassword_Click);
+            // 
             // users_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1043, 461);
+            this.ClientSize = new System.Drawing.Size(1066, 461);
+            this.Controls.Add(this.btnPassword);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.lvUsers);
@@ -441,5 +454,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ColumnHeader phone;
         private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Button btnPassword;
     }
 }
