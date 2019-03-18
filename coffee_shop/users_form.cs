@@ -195,7 +195,7 @@ namespace coffee_shop
                 if (txtFirstname.Text != "" && txtLastname.Text != "" && txtEmail.Text != "" && txtPassword.Text != "")
                 {
                     loadComboRole();
-                    my_user.Created_Date = DateTime.Now.ToString();
+                    my_user.Created_Date = DateTime.Now;
                     my_user.Username = my_user.Firstname + my_user.Lastname;
                     string check_name = "SELECT COUNT(*) FROM users WHERE username = '" + my_user.Username + "';";
                     SqlCommand check_com = new SqlCommand(check_name, DataConn.Connection);

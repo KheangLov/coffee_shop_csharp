@@ -19,12 +19,12 @@ namespace coffee_shop
 
         private void insertUsersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new new_user().ShowDialog();
+
         }
 
         private void allUsersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new all_users().ShowDialog();
+
         }
 
         private void Main_Load(object sender, EventArgs e)

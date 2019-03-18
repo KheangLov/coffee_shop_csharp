@@ -49,7 +49,7 @@ namespace coffee_shop
 
         private void loadComboUser()
         {
-            string get_users = "SELECT users.username, roles.name FROM users INNER JOIN roles ON users.role_id = roles.id WHERE roles.name != 'superadmin';";
+            string get_users = "SELECT users.username, roles.name FROM users INNER JOIN roles ON users.role_id = roles.id WHERE roles.name = 'admin';";
             SqlCommand sqld = new SqlCommand(get_users, DataConn.Connection);
             SqlDataReader sqlr = sqld.ExecuteReader();
             while (sqlr.Read())
