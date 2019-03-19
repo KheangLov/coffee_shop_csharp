@@ -46,17 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="add_product_category_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="add_product_category_form.Designer.cs">
+      <DependentUpon>add_product_category_form.cs</DependentUpon>
+    </Compile>
     <Compile Include="all_company.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="all_company.Designer.cs">
       <DependentUpon>all_company.cs</DependentUpon>
-    </Compile>
-    <Compile Include="all_users.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="all_users.Designer.cs">
-      <DependentUpon>all_users.cs</DependentUpon>
     </Compile>
     <Compile Include="change_password.cs">
       <SubType>Form</SubType>
@@ -87,11 +87,12 @@
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="MyInter.cs" />
-    <Compile Include="new_user.cs">
+    <Compile Include="ProductCategory.cs" />
+    <Compile Include="products_form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="new_user.Designer.cs">
-      <DependentUpon>new_user.cs</DependentUpon>
+    <Compile Include="products_form.Designer.cs">
+      <DependentUpon>products_form.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -103,11 +104,11 @@
     <Compile Include="users_form.Designer.cs">
       <DependentUpon>users_form.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="add_product_category_form.resx">
+      <DependentUpon>add_product_category_form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="all_company.resx">
       <DependentUpon>all_company.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="all_users.resx">
-      <DependentUpon>all_users.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="change_password.resx">
       <DependentUpon>change_password.cs</DependentUpon>
@@ -121,8 +122,8 @@
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="new_user.resx">
-      <DependentUpon>new_user.cs</DependentUpon>
+    <EmbeddedResource Include="products_form.resx">
+      <DependentUpon>products_form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

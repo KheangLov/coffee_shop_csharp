@@ -24,9 +24,9 @@ namespace coffee_shop
             }
         }
 
-        public static void ConnectionDB(string ipServer, string dbName, string user, string pass)
+        public static void ConnectionDB()
         {
-            string connectionString = "Server = " + ipServer + ";Database = " + dbName + ";User ID = " + user + ";Password = " + pass + ";";
+            string connectionString = "Server = Zen;Database = coffee_shop;User ID = coffee;Password = not4you;";
             Connection = new SqlConnection(connectionString);
             Connection.Open();
         }

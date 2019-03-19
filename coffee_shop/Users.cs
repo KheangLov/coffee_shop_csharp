@@ -147,8 +147,8 @@ namespace coffee_shop
 
         public override void insert()
         {
-            string query = @"INSERT INTO [coffee_shop].[dbo].[users](firstname, lastname, username, email, password, created_date, gender, phone, address, role_id) 
-                values('" + Firstname + "', '" + Lastname + "', '" + Username + "', '" + Email + "', '" + Password + "', '"+ Created_Date + "', '" + Gender + "', '" + Phone + "', '" + Address + "', " + Role_Id + ");";
+            string query = @"INSERT INTO [coffee_shop].[dbo].[users](firstname, lastname, username, email, password, gender, phone, created_date, address, role_id) 
+                values('" + Firstname + "', '" + Lastname + "', '" + Username + "', '" + Email + "', '" + Password + "', '" + Gender + "', '" + Phone + "', '" + Created_Date + "', '" + Address + "', " + Role_Id + ");";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();

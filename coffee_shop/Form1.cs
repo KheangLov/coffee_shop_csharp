@@ -19,12 +19,12 @@ namespace coffee_shop
 
         private void insertUsersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new new_user().ShowDialog();
+
         }
 
         private void allUsersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new all_users().ShowDialog();
+
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -71,6 +71,16 @@ namespace coffee_shop
         {
             this.Dispose();
             new Login().Show();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void allProductsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new products_form().ShowDialog();
         }
     }
 }
