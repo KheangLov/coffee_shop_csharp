@@ -81,6 +81,7 @@
             this.txtNewPass.PasswordChar = '*';
             this.txtNewPass.Size = new System.Drawing.Size(300, 27);
             this.txtNewPass.TabIndex = 3;
+            this.txtNewPass.TextChanged += new System.EventHandler(this.txtNewPass_TextChanged);
             // 
             // label2
             // 

@@ -110,10 +110,5 @@ namespace coffee_shop
         {
             this.Dispose();
         }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
     }
 }

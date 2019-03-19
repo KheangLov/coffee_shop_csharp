@@ -18,7 +18,7 @@ namespace coffee_shop
         private string gender;
         private string phone;
         private string address;
-        private string created_date;
+        private DateTime created_date;
         private int role_id;
 
         public Users()
@@ -133,7 +133,7 @@ namespace coffee_shop
             }
         }
 
-        public string Created_Date
+        public DateTime Created_Date
         {
             get
             {
