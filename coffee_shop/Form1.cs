@@ -15,6 +15,7 @@ namespace coffee_shop
         public Main()
         {
             InitializeComponent();
+            DataConn.Connection.Close();
         }
 
         private void insertUsersToolStripMenuItem_Click(object sender, EventArgs e)
@@ -49,7 +50,7 @@ namespace coffee_shop
 
         private void allCompaniesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new all_company().ShowDialog();
+
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)

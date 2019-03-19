@@ -102,9 +102,6 @@
     <EmbeddedResource Include="add_product_category_form.resx">
       <DependentUpon>add_product_category_form.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="all_company.resx">
-      <DependentUpon>all_company.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="change_password.resx">
       <DependentUpon>change_password.cs</DependentUpon>
     </EmbeddedResource>
