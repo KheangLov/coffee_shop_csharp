@@ -53,15 +53,12 @@
             this.labelAllProduct = new System.Windows.Forms.Label();
             this.txtAllProducts = new System.Windows.Forms.TextBox();
             this.listViewAllProducts = new System.Windows.Forms.ListView();
-            this.columnHeaderID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderSellingPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderSale = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderStockID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderProcateID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderImages = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBoxProductForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProductImage)).BeginInit();
             this.SuspendLayout();
@@ -126,6 +123,7 @@
             this.txtProductType.Name = "txtProductType";
             this.txtProductType.Size = new System.Drawing.Size(270, 27);
             this.txtProductType.TabIndex = 17;
+            this.txtProductType.TextChanged += new System.EventHandler(this.txtProductType_TextChanged);
             // 
             // comboBoxProductProcateID
             // 
@@ -134,6 +132,7 @@
             this.comboBoxProductProcateID.Name = "comboBoxProductProcateID";
             this.comboBoxProductProcateID.Size = new System.Drawing.Size(270, 30);
             this.comboBoxProductProcateID.TabIndex = 16;
+            this.comboBoxProductProcateID.SelectedIndexChanged += new System.EventHandler(this.comboBoxProductProcateID_SelectedIndexChanged);
             this.comboBoxProductProcateID.Click += new System.EventHandler(this.comboBoxProductProcateID_Click);
             // 
             // comboBoxProductStockID
@@ -143,6 +142,7 @@
             this.comboBoxProductStockID.Name = "comboBoxProductStockID";
             this.comboBoxProductStockID.Size = new System.Drawing.Size(270, 30);
             this.comboBoxProductStockID.TabIndex = 15;
+            this.comboBoxProductStockID.SelectedIndexChanged += new System.EventHandler(this.comboBoxProductStockID_SelectedIndexChanged);
             // 
             // txtProductSale
             // 
@@ -150,6 +150,7 @@
             this.txtProductSale.Name = "txtProductSale";
             this.txtProductSale.Size = new System.Drawing.Size(270, 27);
             this.txtProductSale.TabIndex = 13;
+            this.txtProductSale.TextChanged += new System.EventHandler(this.txtProductSale_TextChanged);
             // 
             // txtProductSellingPrice
             // 
@@ -157,6 +158,7 @@
             this.txtProductSellingPrice.Name = "txtProductSellingPrice";
             this.txtProductSellingPrice.Size = new System.Drawing.Size(270, 27);
             this.txtProductSellingPrice.TabIndex = 12;
+            this.txtProductSellingPrice.TextChanged += new System.EventHandler(this.txtProductSellingPrice_TextChanged);
             // 
             // txtProductPrice
             // 
@@ -164,6 +166,7 @@
             this.txtProductPrice.Name = "txtProductPrice";
             this.txtProductPrice.Size = new System.Drawing.Size(270, 27);
             this.txtProductPrice.TabIndex = 11;
+            this.txtProductPrice.TextChanged += new System.EventHandler(this.txtProductPrice_TextChanged);
             // 
             // txtProductName
             // 
@@ -171,6 +174,8 @@
             this.txtProductName.Name = "txtProductName";
             this.txtProductName.Size = new System.Drawing.Size(270, 27);
             this.txtProductName.TabIndex = 10;
+            this.txtProductName.TextChanged += new System.EventHandler(this.txtProductName_TextChanged);
+            this.txtProductName.Leave += new System.EventHandler(this.txtProductName_Leave);
             // 
             // labelProductProcateID
             // 
@@ -244,6 +249,7 @@
             this.btnProductAdd.TabIndex = 1;
             this.btnProductAdd.Text = "Add";
             this.btnProductAdd.UseVisualStyleBackColor = true;
+            this.btnProductAdd.Click += new System.EventHandler(this.btnProductAdd_Click);
             // 
             // btnProductEdit
             // 
@@ -296,15 +302,12 @@
             // listViewAllProducts
             // 
             this.listViewAllProducts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeaderID,
             this.columnHeaderName,
             this.columnHeaderPrice,
             this.columnHeaderSellingPrice,
             this.columnHeaderSale,
             this.columnHeaderType,
-            this.columnHeaderStockID,
-            this.columnHeaderProcateID,
-            this.columnHeaderImages});
+            this.columnHeaderProcateID});
             this.listViewAllProducts.GridLines = true;
             this.listViewAllProducts.Location = new System.Drawing.Point(480, 74);
             this.listViewAllProducts.Name = "listViewAllProducts";
@@ -312,10 +315,7 @@
             this.listViewAllProducts.TabIndex = 7;
             this.listViewAllProducts.UseCompatibleStateImageBehavior = false;
             this.listViewAllProducts.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeaderID
-            // 
-            this.columnHeaderID.Text = "ID";
+            this.listViewAllProducts.SelectedIndexChanged += new System.EventHandler(this.listViewAllProducts_SelectedIndexChanged);
             // 
             // columnHeaderName
             // 
@@ -338,20 +338,10 @@
             // 
             this.columnHeaderType.Text = "Type";
             // 
-            // columnHeaderStockID
-            // 
-            this.columnHeaderStockID.Text = "Stock";
-            this.columnHeaderStockID.Width = 61;
-            // 
             // columnHeaderProcateID
             // 
             this.columnHeaderProcateID.Text = "Product Category";
             this.columnHeaderProcateID.Width = 111;
-            // 
-            // columnHeaderImages
-            // 
-            this.columnHeaderImages.Text = "Images";
-            this.columnHeaderImages.Width = 124;
             // 
             // products_form
             // 
@@ -404,15 +394,12 @@
         private System.Windows.Forms.Label labelAllProduct;
         private System.Windows.Forms.TextBox txtAllProducts;
         private System.Windows.Forms.ListView listViewAllProducts;
-        private System.Windows.Forms.ColumnHeader columnHeaderID;
         private System.Windows.Forms.ColumnHeader columnHeaderName;
         private System.Windows.Forms.ColumnHeader columnHeaderPrice;
         private System.Windows.Forms.ColumnHeader columnHeaderSellingPrice;
         private System.Windows.Forms.ColumnHeader columnHeaderSale;
         private System.Windows.Forms.ColumnHeader columnHeaderType;
-        private System.Windows.Forms.ColumnHeader columnHeaderStockID;
         private System.Windows.Forms.ColumnHeader columnHeaderProcateID;
-        private System.Windows.Forms.ColumnHeader columnHeaderImages;
         private System.Windows.Forms.Label label1;
     }
 }

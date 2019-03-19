@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.gpAddproductCategory = new System.Windows.Forms.GroupBox();
-            this.labelName = new System.Windows.Forms.Label();
-            this.labelDescriptions = new System.Windows.Forms.Label();
-            this.txtName = new System.Windows.Forms.TextBox();
             this.txtDescriptions = new System.Windows.Forms.TextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.labelDescriptions = new System.Windows.Forms.Label();
+            this.labelName = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.gpAddproductCategory.SuspendLayout();
@@ -52,14 +52,24 @@
             this.gpAddproductCategory.TabStop = false;
             this.gpAddproductCategory.Text = "Add Product Category";
             // 
-            // labelName
+            // txtDescriptions
             // 
-            this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(6, 49);
-            this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(66, 22);
-            this.labelName.TabIndex = 0;
-            this.labelName.Text = "Name :";
+            this.txtDescriptions.Location = new System.Drawing.Point(184, 106);
+            this.txtDescriptions.Multiline = true;
+            this.txtDescriptions.Name = "txtDescriptions";
+            this.txtDescriptions.Size = new System.Drawing.Size(355, 65);
+            this.txtDescriptions.TabIndex = 3;
+            this.txtDescriptions.TextChanged += new System.EventHandler(this.txtDescriptions_TextChanged);
+            this.txtDescriptions.Leave += new System.EventHandler(this.txtDescriptions_Leave);
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(184, 50);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(355, 27);
+            this.txtName.TabIndex = 2;
+            this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
+            this.txtName.Leave += new System.EventHandler(this.txtName_Leave);
             // 
             // labelDescriptions
             // 
@@ -70,23 +80,14 @@
             this.labelDescriptions.TabIndex = 1;
             this.labelDescriptions.Text = "Descriptions :";
             // 
-            // txtName
+            // labelName
             // 
-            this.txtName.Location = new System.Drawing.Point(184, 50);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(355, 27);
-            this.txtName.TabIndex = 2;
-            this.txtName.Leave += new System.EventHandler(this.txtName_Leave);
-            // 
-            // txtDescriptions
-            // 
-            this.txtDescriptions.Location = new System.Drawing.Point(184, 106);
-            this.txtDescriptions.Multiline = true;
-            this.txtDescriptions.Name = "txtDescriptions";
-            this.txtDescriptions.Size = new System.Drawing.Size(355, 65);
-            this.txtDescriptions.TabIndex = 3;
-            this.txtDescriptions.TextChanged += new System.EventHandler(this.txtDescriptions_TextChanged);
-            this.txtDescriptions.Leave += new System.EventHandler(this.txtDescriptions_Leave);
+            this.labelName.AutoSize = true;
+            this.labelName.Location = new System.Drawing.Point(6, 49);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(66, 22);
+            this.labelName.TabIndex = 0;
+            this.labelName.Text = "Name :";
             // 
             // btnAdd
             // 
@@ -116,7 +117,7 @@
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.gpAddproductCategory);
             this.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "add_product_category_form";
             this.Text = "Add Product Category";
             this.Load += new System.EventHandler(this.add_product_category_form_Load);

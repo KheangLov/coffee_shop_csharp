@@ -65,5 +65,10 @@ namespace coffee_shop
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void txtName_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

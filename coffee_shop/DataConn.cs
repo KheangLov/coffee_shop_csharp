@@ -26,7 +26,7 @@ namespace coffee_shop
 
         public static void ConnectionDB()
         {
-            string connectionString = "Server = Zen;Database = coffee_shop;User ID = coffee;Password = not4you;";
+            string connectionString = "Server = localhost;Database = coffee_shop;User ID = coffee;Password = not4you;";
             Connection = new SqlConnection(connectionString);
             Connection.Open();
         }
