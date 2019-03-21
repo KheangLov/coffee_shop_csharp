@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace coffee_shop
 {
@@ -15,8 +16,9 @@ namespace coffee_shop
         private decimal selling_price;
         private int sale;
         private string type;
-        //private int stock_id;
+        private int stock_id;
         private int procate_id;
+        private string image;
 
         public Products()
         {
@@ -82,17 +84,17 @@ namespace coffee_shop
             }
         }
 
-        //public int Stock_id
-        //{
-        //    get
-        //    {
-        //        return stock_id;
-        //    }
-        //    set
-        //    {
-        //        stock_id = value;
-        //    }
-        //}
+        public int Stock_id
+        {
+            get
+            {
+                return stock_id;
+            }
+            set
+            {
+                stock_id = value;
+            }
+        }
 
         public int Procate_id
         {
@@ -106,10 +108,22 @@ namespace coffee_shop
             }
         }
 
+        public string Image
+        {
+            get
+            {
+                return image;
+            }
+            set
+            {
+                image = value;
+            }
+        }
+
         public override void insert()
         {
-            string query = @"INSERT INTO [coffee_shop].[dbo].[products](name, price, selling_price, sale, type, procate_id) 
-                values('" + Name + "', " + Price + ", " + Selling_Price + ", " + Sale + ", '" + Type + "', " + Procate_id + " );";
+            string query = @"INSERT INTO [coffee_shop].[dbo].[products](name, price, selling_price, sale, type, stock_id, procate_id, images) 
+                values('" + Name + "', " + Price + ", " + Selling_Price + ", " + Sale + ", '" + Type + "', " + Stock_id + ", " + Procate_id + ", '" + Image +"');";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();

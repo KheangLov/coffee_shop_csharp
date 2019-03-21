@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace coffee_shop
 {
@@ -21,6 +22,7 @@ namespace coffee_shop
         StringCapitalize sc = new StringCapitalize();
         MyInter inter;
         int productID;
+        string proImg = "";
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -39,14 +41,56 @@ namespace coffee_shop
             }
         }
 
-        private void loadComboUser()
+        private void MoveImage(string source, string path)
         {
-            string get_users = "SELECT users.username, roles.name FROM users INNER JOIN roles ON users.role_id = roles.id WHERE roles.name = 'admin';";
-            SqlCommand sqld = new SqlCommand(get_users, DataConn.Connection);
+            try
+            {
+                File.Copy(source, path);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void loadComboProCate()
+        {
+            string get_products = "SELECT * FROM product_categories;";
+            SqlCommand sqld = new SqlCommand(get_products, DataConn.Connection);
             SqlDataReader sqlr = sqld.ExecuteReader();
             while (sqlr.Read())
             {
-                comboBoxProductProcateID.Items.Add(sc.ToCapitalize(sqlr["username"].ToString()));
+                comboBoxProductProcateID.Items.Add(sc.ToCapitalize(sqlr["name"].ToString()));
+            }
+            sqld.Dispose();
+            sqlr.Close();
+        }
+
+        private void loadStocks()
+        {
+            string get_stocks = "SELECT * FROM stocks;";
+            SqlCommand sqld = new SqlCommand(get_stocks, DataConn.Connection);
+            SqlDataReader sqlr = sqld.ExecuteReader();
+            while (sqlr.Read())
+            {
+                comboBoxProductStockID.Items.Add(sc.ToCapitalize(sqlr["name"].ToString()));
+            }
+            sqld.Dispose();
+            sqlr.Close();
+        }
+
+        private void addStocks()
+        {
+            string sql = "SELECT id, name FROM stocks WHERE name = '" + comboBoxProductStockID.Text.Trim() + "';";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = sqld.ExecuteReader();
+            if (sqlr.Read())
+            {
+                my_products.Stock_id = int.Parse(sqlr["id"].ToString());
+            }
+            else
+            {
+                MessageBox.Show("Nothing found!");
             }
             sqld.Dispose();
             sqlr.Close();
@@ -54,12 +98,11 @@ namespace coffee_shop
 
         private void addProductCategoryID()
         {
-            string products_user = "SELECT id, name FROM product_categories;";
-            SqlCommand sqld = new SqlCommand(products_user, DataConn.Connection);
+            string sql = "SELECT id, name FROM product_categories WHERE name = '" + comboBoxProductProcateID.Text.Trim() + "';";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
             SqlDataReader sqlr = sqld.ExecuteReader();
             if (sqlr.Read())
             {
-                comboBoxProductProcateID.Items.Add(sqlr["name"].ToString());
                 my_products.Procate_id = int.Parse(sqlr["id"].ToString());
             }
             else
@@ -72,12 +115,14 @@ namespace coffee_shop
 
         private void QueryProducts()
         {
-            string query = "SELECT * FROM products;";
+            string query = @"SELECT products.*, product_categories.name AS procate_name , stocks.name AS stocks_name FROM products
+                            INNER JOIN product_categories ON products.procate_id = product_categories.id
+                            INNER JOIN stocks ON products.stock_id = stocks.id;";
             SqlCommand sqld = new SqlCommand(query, DataConn.Connection);
             SqlDataReader sqlr = sqld.ExecuteReader();
             while (sqlr.Read())
             {
-                string[] products_info = { sc.ToCapitalize(sqlr["name"].ToString()), sqlr["price"].ToString(), sqlr["selling_price"].ToString(), sqlr["sale"].ToString(), sqlr["type"].ToString(), sqlr["procate_id"].ToString() };
+                string[] products_info = { sc.ToCapitalize(sqlr["name"].ToString()), sqlr["price"].ToString(), sqlr["selling_price"].ToString(), sqlr["sale"].ToString(), sqlr["type"].ToString(), sqlr["stocks_name"].ToString(), sqlr["procate_name"].ToString() };
                 ListViewItem item = new ListViewItem(products_info);
                 listViewAllProducts.Items.Add(item);
             }
@@ -88,7 +133,10 @@ namespace coffee_shop
         private void products_form_Load(object sender, EventArgs e)
         {
             DataConn.Connection.Open();
-            addProductCategoryID();
+            loadComboProCate();
+            loadStocks();
+            comboBoxProductProcateID.SelectedIndex = 0;
+            comboBoxProductStockID.SelectedIndex = 0;
             MyInter product_inter = my_products;
             inter = product_inter;
             QueryProducts();
@@ -106,7 +154,7 @@ namespace coffee_shop
 
         private void comboBoxProductProcateID_Click(object sender, EventArgs e)
         {
-            //new add_product_category_form().ShowDialog();
+
         }
 
         private void txtProductName_TextChanged(object sender, EventArgs e)
@@ -176,7 +224,48 @@ namespace coffee_shop
 
         private void comboBoxProductStockID_SelectedIndexChanged(object sender, EventArgs e)
         {
+            addStocks();
+        }
 
+        private void btnAddProcate_Click(object sender, EventArgs e)
+        {
+            new add_product_category_form().ShowDialog();
+        }
+
+        private void products_form_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DataConn.Connection.Close();
+            this.Dispose();
+        }
+
+        private void btnProductExit_Click(object sender, EventArgs e)
+        {
+            DataConn.Connection.Close();
+            this.Dispose();
+        }
+
+        private void btnProductImage_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var parent = Directory.GetParent(Directory.GetCurrentDirectory()).Parent;
+                OpenFileDialog dlg = new OpenFileDialog();
+                dlg.Filter = "All Files (*.*)|*.*|JPG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png";
+                dlg.Title = "Select Product Picture.";
+                if(dlg.ShowDialog() == DialogResult.OK)
+                {
+                    string file = Path.GetFileName(dlg.FileName);
+                    string path = parent.FullName + @"\pictures\" + file;
+                    proImg = dlg.FileName.ToString();
+                    MoveImage(proImg, path);
+                    pictureBoxProductImage.ImageLocation = proImg;
+                    my_products.Image = path;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

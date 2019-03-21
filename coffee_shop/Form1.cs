@@ -15,7 +15,6 @@ namespace coffee_shop
         public Main()
         {
             InitializeComponent();
-            DataConn.Connection.Close();
         }
 
         private void insertUsersToolStripMenuItem_Click(object sender, EventArgs e)
