@@ -227,7 +227,7 @@
             this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5});
-            this.lvCompany.Font = new System.Drawing.Font("Montserrat", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvCompany.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvCompany.FullRowSelect = true;
             this.lvCompany.GridLines = true;
             this.lvCompany.Location = new System.Drawing.Point(458, 58);

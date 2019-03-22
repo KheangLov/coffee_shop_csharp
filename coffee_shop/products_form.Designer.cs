@@ -334,7 +334,7 @@
             this.columnHeaderType,
             this.columnHeaderProcateID,
             this.columnHeader1});
-            this.listViewAllProducts.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listViewAllProducts.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listViewAllProducts.FullRowSelect = true;
             this.listViewAllProducts.GridLines = true;
             this.listViewAllProducts.Location = new System.Drawing.Point(526, 56);
@@ -353,7 +353,7 @@
             // columnHeaderPrice
             // 
             this.columnHeaderPrice.Text = "Price";
-            this.columnHeaderPrice.Width = 109;
+            this.columnHeaderPrice.Width = 92;
             // 
             // columnHeaderSellingPrice
             // 

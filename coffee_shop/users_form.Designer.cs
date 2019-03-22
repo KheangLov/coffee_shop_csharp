@@ -305,7 +305,7 @@
             this.role,
             this.phone,
             this.address});
-            this.lvUsers.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvUsers.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvUsers.FullRowSelect = true;
             this.lvUsers.GridLines = true;
             this.lvUsers.Location = new System.Drawing.Point(523, 57);
@@ -324,11 +324,12 @@
             // email
             // 
             this.email.Text = "Email";
-            this.email.Width = 100;
+            this.email.Width = 90;
             // 
             // gender
             // 
             this.gender.Text = "Gender";
+            this.gender.Width = 83;
             // 
             // role
             // 
