@@ -148,7 +148,6 @@ namespace coffee_shop
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
         }
 
         #endregion

@@ -122,15 +122,19 @@ namespace coffee_shop
 
         public override void insert()
         {
-            string query = @"INSERT INTO [coffee_shop].[dbo].[products](name, price, selling_price, sale, type, stock_id, procate_id, images) 
-                values('" + Name + "', " + Price + ", " + Selling_Price + ", " + Sale + ", '" + Type + "', " + Stock_id + ", " + Procate_id + ", '" + Image +"');";
+            string query = @"INSERT INTO [coffee_shop].[dbo].[products](name, price, selling_price, type, sale, stock_id, procate_id, images) 
+                values('" + Name + "', " + Price + ", " + Selling_Price + ", '" + Type + "', " + 0 + ", " + Stock_id + ", " + Procate_id + ", '" + Image +"');";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();
         }
         public override void update(int id)
         {
-
+            string query = @"UPDATE [coffee_shop].[dbo].[products] 
+                SET name = '" + Name + "', price ='" + Price + "', selling_price = '" + Selling_Price + "', type = '" + Type + "', stock_id = " + Stock_id + ", procate_id = " + Procate_id + ", images = '" + Image + "' WHERE id = " + id + ";";
+            sqld = new SqlCommand(query, DataConn.Connection);
+            sqld.ExecuteNonQuery();
+            sqld.Dispose();
         }
     }
 }

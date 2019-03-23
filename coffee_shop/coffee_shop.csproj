@@ -93,6 +93,12 @@
     <Compile Include="products_form.Designer.cs">
       <DependentUpon>products_form.cs</DependentUpon>
     </Compile>
+    <Compile Include="product_selling.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="product_selling.Designer.cs">
+      <DependentUpon>product_selling.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringCapitalize.cs" />
@@ -120,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="products_form.resx">
       <DependentUpon>products_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="product_selling.resx">
+      <DependentUpon>product_selling.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

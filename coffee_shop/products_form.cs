@@ -21,8 +21,9 @@ namespace coffee_shop
         Products my_products = new Products();
         StringCapitalize sc = new StringCapitalize();
         MyInter inter;
-        int productID;
+        int productId;
         string proImg = "";
+        bool deleted = false;
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -38,6 +39,59 @@ namespace coffee_shop
                     ClearTextBoxes(child);
                 else
                     textBox.Text = string.Empty;
+            }
+        }
+
+        private void UpdateDelete(string type = "")
+        {
+            ListViewItem item = listViewAllProducts.SelectedItems[0];
+            string lv_products = item.SubItems[0].Text;
+            string sql = @"SELECT products.*, product_categories.name AS procate_name , stocks.name AS stocks_name FROM products
+                            INNER JOIN product_categories ON products.procate_id = product_categories.id
+                            INNER JOIN stocks ON products.stock_id = stocks.id WHERE products.name = '" + lv_products + "';";
+            SqlCommand command = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                if (type.ToLower() == "delete")
+                {
+                    deleted = true;
+                }
+                else if (type.ToLower() == "edit")
+                {
+                    txtProductName.Text = reader["name"].ToString();
+                    txtProductPrice.Text = reader["price"].ToString();
+                    txtProductSellingPrice.Text = reader["selling_price"].ToString();
+                    txtProductType.Text = reader["type"].ToString();
+                    comboBoxProductStockID.SelectedItem = reader["stocks_name"].ToString();
+                    comboBoxProductProcateID.SelectedItem = reader["procate_id"].ToString();
+                    pictureBoxProductImage.ImageLocation = reader["images"].ToString();
+                    btnProductEdit.Text = "Update";
+                }
+            }
+            command.Dispose();
+            reader.Close();
+            if (deleted == true)
+            {
+                if (MessageBox.Show("Are you sure, you want to delete this product?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    ListViewItem lvi = listViewAllProducts.SelectedItems[0];
+                    int val = 0;
+                    string proName = lvi.SubItems[0].Text;
+                    string del_que = "DELETE FROM products WHERE name = '" + proName + "';";
+                    SqlCommand del_com = new SqlCommand(del_que, DataConn.Connection);
+                    val = del_com.ExecuteNonQuery();
+                    del_com.Dispose();
+                    MessageBox.Show("Product has been deleted!");
+                    listViewAllProducts.Items.Clear();
+                    QueryProducts();
+                    btnProductDelete.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("No product was deleted!", "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                deleted = false;
             }
         }
 
@@ -164,7 +218,7 @@ namespace coffee_shop
 
         private void txtProductName_Leave(object sender, EventArgs e)
         {
-
+            my_products.Name = txtProductName.Text.Trim();
         }
 
         private void listViewAllProducts_SelectedIndexChanged(object sender, EventArgs e)
@@ -209,7 +263,6 @@ namespace coffee_shop
 
         private void txtProductSale_TextChanged(object sender, EventArgs e)
         {
-            my_products.Sale = int.Parse(txtProductSale.Text.Trim());
         }
 
         private void txtProductType_TextChanged(object sender, EventArgs e)
@@ -266,6 +319,43 @@ namespace coffee_shop
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnProductEdit_Click(object sender, EventArgs e)
+        {
+            if(listViewAllProducts.SelectedItems.Count != 0)
+            {
+                if(btnProductEdit.Text.ToLower() == "edit")
+                {
+                    UpdateDelete("edit");
+                }
+                else if (btnProductEdit.Text.ToLower() == "update")
+                {
+                    try
+                    {
+                        addProductCategoryID();
+                        addStocks();
+                        inter.update(productId);
+                        MessageBox.Show("Update Successfully!");
+                        ClearTextBoxes(groupBoxProductForm);
+                        listViewAllProducts.Items.Clear();
+                        QueryProducts();
+                        btnProductEdit.Text = "Edit";
+                        //btnEdit.Enabled = false;
+                        //txtPassword.Enabled = true;
+                        //txtConfirmPass.Enabled = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void btnProductDelete_Click(object sender, EventArgs e)
+        {
+            UpdateDelete("delete");
         }
     }
 }
