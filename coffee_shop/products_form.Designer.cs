@@ -374,6 +374,7 @@
             this.Controls.Add(this.groupBoxProductForm);
             this.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "products_form";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Products Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.products_form_FormClosing);
             this.Load += new System.EventHandler(this.products_form_Load);

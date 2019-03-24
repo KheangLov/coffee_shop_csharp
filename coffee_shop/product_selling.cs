@@ -13,6 +13,7 @@ namespace coffee_shop
 {
     public partial class product_selling : Form
     {
+        string proImage = "";
         public product_selling()
         {
             InitializeComponent();
@@ -25,18 +26,44 @@ namespace coffee_shop
             SqlDataReader sqlr = sqld.ExecuteReader();
             while(sqlr.Read())
             {
-               
+                string[] product_info = { sqlr["name"].ToString(), sqlr["selling_price"].ToString(), sqlr["type"].ToString() };
+                ListViewItem item = new ListViewItem(product_info);
+                lvProducts.Items.Add(item);
+                proImage = sqlr["images"].ToString();
             }
+            sqld.Dispose();
+            sqlr.Close();
         }
 
         private void product_selling_Load(object sender, EventArgs e)
         {
-            DataConn.Connection.Open();
+            try
+            {
+                DataConn.Connection.Open();
+                QueryProducts();
+                cbType.SelectedIndex = 0;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            DataConn.Connection.Close();
+            this.Dispose();
+        }
 
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lvProducts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(lvProducts.SelectedItems.Count != 0)
+                pbProduct.ImageLocation = proImage;
         }
     }
 }

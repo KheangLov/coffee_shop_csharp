@@ -82,5 +82,10 @@ namespace coffee_shop
         {
             new products_form().ShowDialog();
         }
+
+        private void saleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new product_selling().ShowDialog();
+        }
     }
 }
