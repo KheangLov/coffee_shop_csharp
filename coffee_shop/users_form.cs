@@ -195,7 +195,7 @@ namespace coffee_shop
                 if (txtFirstname.Text != "" && txtLastname.Text != "" && txtEmail.Text != "" && txtPassword.Text != "")
                 {
                     loadComboRole();
-                    my_user.Created_Date = DateTime.Now;
+                    my_user.Created_Date = DateTime.Now.ToString("yyyy-MM-dd");
                     my_user.Username = my_user.Firstname + my_user.Lastname;
                     string check_name = "SELECT COUNT(*) FROM users WHERE username = '" + my_user.Username + "';";
                     SqlCommand check_com = new SqlCommand(check_name, DataConn.Connection);
@@ -396,24 +396,6 @@ namespace coffee_shop
         {
             if(lvUsers.SelectedItems.Count != 0)
             {
-                //ListViewItem item = lvUsers.SelectedItems[0];
-                //string lv_username = item.SubItems[0].Text;
-                //string sql = "SELECT * FROM users INNER JOIN roles ON users.role_id = roles.id WHERE username = '" + lv_username + "';";
-                //SqlCommand command = new SqlCommand(sql, DataConn.Connection);
-                //SqlDataReader reader = command.ExecuteReader();
-                //if (reader.Read())
-                //{
-                //    if (reader["name"].ToString().ToLower() == "superadmin")
-                //    {
-                //        MessageBox.Show("You can't delete application owner!");
-                //    }
-                //    else
-                //    {
-                //        command.Dispose();
-                //        reader.Close();
-                //        goto delete;
-                //    }
-                //}
                 CheckUserRole("delete");
             }
         }
@@ -454,6 +436,11 @@ namespace coffee_shop
                 pas_rd.Close();
                 new change_password(userPass, userId).ShowDialog();
             }
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

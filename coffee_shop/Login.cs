@@ -13,7 +13,6 @@ namespace coffee_shop
 {
     public partial class Login : Form
     {
-
         public Login()
         {
             InitializeComponent();
@@ -48,11 +47,7 @@ namespace coffee_shop
         {
             try
             {
-                string ipServer = @"KHEANG-PC";
-                string dbName = "coffee_shop";
-                string user = "coffee";
-                string password = "not4you";
-                DataConn.ConnectionDB(ipServer, dbName, user, password);
+                DataConn.ConnectionDB();
             }
             catch (Exception ex)
             {
@@ -68,6 +63,11 @@ namespace coffee_shop
         {
             DataConn.Connection.Close();
             Application.Exit();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -78,7 +78,7 @@
             // btnExit
             // 
             this.btnExit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.Location = new System.Drawing.Point(416, 408);
+            this.btnExit.Location = new System.Drawing.Point(416, 407);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(95, 35);
             this.btnExit.TabIndex = 7;
@@ -113,6 +113,7 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "User\'s Informations";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // cbRole
             // 
@@ -304,7 +305,7 @@
             this.role,
             this.phone,
             this.address});
-            this.lvUsers.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvUsers.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvUsers.FullRowSelect = true;
             this.lvUsers.GridLines = true;
             this.lvUsers.Location = new System.Drawing.Point(523, 57);
@@ -323,11 +324,12 @@
             // email
             // 
             this.email.Text = "Email";
-            this.email.Width = 100;
+            this.email.Width = 90;
             // 
             // gender
             // 
             this.gender.Text = "Gender";
+            this.gender.Width = 83;
             // 
             // role
             // 
@@ -345,8 +347,8 @@
             // 
             // btnDel
             // 
-            this.btnDel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDel.Location = new System.Drawing.Point(315, 408);
+            this.btnDel.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDel.Location = new System.Drawing.Point(315, 406);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(95, 35);
             this.btnDel.TabIndex = 10;
@@ -356,7 +358,7 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEdit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEdit.Location = new System.Drawing.Point(113, 407);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(95, 35);
@@ -386,8 +388,8 @@
             // 
             // btnPassword
             // 
-            this.btnPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPassword.Location = new System.Drawing.Point(214, 408);
+            this.btnPassword.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPassword.Location = new System.Drawing.Point(214, 406);
             this.btnPassword.Name = "btnPassword";
             this.btnPassword.Size = new System.Drawing.Size(95, 35);
             this.btnPassword.TabIndex = 20;

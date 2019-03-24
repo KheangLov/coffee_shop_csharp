@@ -71,5 +71,20 @@ namespace coffee_shop
             this.Dispose();
             new Login().Show();
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void allProductsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new products_form().ShowDialog();
+        }
+
+        private void saleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new product_selling().ShowDialog();
+        }
     }
 }

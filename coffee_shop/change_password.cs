@@ -110,10 +110,5 @@ namespace coffee_shop
         {
             this.Dispose();
         }
-
-        private void txtNewPass_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

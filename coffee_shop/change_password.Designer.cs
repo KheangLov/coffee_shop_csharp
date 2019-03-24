@@ -1,4 +1,6 @@
-﻿namespace coffee_shop
+﻿using System;
+
+namespace coffee_shop
 {
     partial class change_password
     {
@@ -54,6 +56,7 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Password Changing";
+            groupBox1.Enter += new EventHandler(groupBox1_Enter);
             // 
             // txtConPass
             // 
@@ -80,7 +83,7 @@
             this.txtNewPass.PasswordChar = '*';
             this.txtNewPass.Size = new System.Drawing.Size(300, 27);
             this.txtNewPass.TabIndex = 3;
-            this.txtNewPass.TextChanged += new System.EventHandler(this.txtNewPass_TextChanged);
+            txtNewPass.TextChanged += new EventHandler(txtNewPass_TextChanged);
             // 
             // label2
             // 
@@ -136,6 +139,15 @@
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
+        }
+
+        private void txtNewPass_TextChanged(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
         }
 
         #endregion
