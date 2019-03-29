@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
-using System.Windows.Forms;
 
 namespace coffee_shop
 {
-    class Products : Db_Insert
+    class Supplier : Db_Insert
     {
         SqlCommand sqld;
         private string name;
-        private decimal price;
-        private decimal selling_price;
-        private string type;
+        private string address;
+        private string phone;
+        private string email;
+        private int company_id;
+        private int branch_id;
         private int stock_id;
-        private int procate_id;
-        private string image;
+        
 
-        public Products()
+        public Supplier()
         {
 
         }
@@ -35,43 +35,67 @@ namespace coffee_shop
             }
         }
 
-        public decimal Price
+        public string Address
         {
             get
             {
-                return price;
+                return address;
             }
             set
             {
-                price = value;
+                address = value;
             }
         }
 
-        public decimal Selling_Price
+        public string Phone
         {
             get
             {
-                return selling_price;
+                return phone;
             }
             set
             {
-                selling_price = value;
+                phone = value;
             }
         }
 
-        public string Type
+        public string Email
         {
             get
             {
-                return type;
+                return email;
             }
             set
             {
-                type = value;
+                email = value;
             }
         }
 
-        public int Stock_id
+        public int CompanyId
+        {
+            get
+            {
+                return company_id;
+            }
+            set
+            {
+                company_id = value;
+            }
+        }
+
+        public int BranchId
+        {
+            get
+            {
+                return branch_id;
+            }
+            set
+            {
+                branch_id = value;
+            }
+        }
+
+        public int StockId
         {
             get
             {
@@ -83,42 +107,19 @@ namespace coffee_shop
             }
         }
 
-        public int Procate_id
-        {
-            get
-            {
-                return procate_id;
-            }
-            set
-            {
-                procate_id = value;
-            }
-        }
-
-        public string Image
-        {
-            get
-            {
-                return image;
-            }
-            set
-            {
-                image = value;
-            }
-        }
-
         public override void insert()
         {
-            string query = @"INSERT INTO [coffee_shop].[dbo].[products](name, price, selling_price, type, sale, stock_id, procate_id, images) 
-                values('" + Name + "', " + Price + ", " + Selling_Price + ", '" + Type + "', " + 0 + ", " + Stock_id + ", " + Procate_id + ", '" + Image +"');";
+            string query = @"INSERT INTO [coffee_shop].[dbo].[suppliers](name, address, phone, email, company_id, branch_id, stock_id,) 
+                values('" + Name + "', '" + Address + "', '" + Phone + "', '" + Email + "', " + CompanyId + ", " + BranchId + ", " + StockId + ");";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();
         }
+
         public override void update(int id)
         {
-            string query = @"UPDATE [coffee_shop].[dbo].[products] 
-                SET name = '" + Name + "', price ='" + Price + "', selling_price = '" + Selling_Price + "', type = '" + Type + "', stock_id = " + Stock_id + ", procate_id = " + Procate_id + ", images = '" + Image + "' WHERE id = " + id + ";";
+            string query = @"UPDATE [coffee_shop].[dbo].[suppliers] 
+                SET name = '" + Name + "', address ='" + Address + "', phone = '" + Phone + "', email = '" + Email + "', company_id = " + CompanyId + ", branch_id = " + BranchId + ", stock_id = " + StockId + " WHERE id = " + id + ";";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();

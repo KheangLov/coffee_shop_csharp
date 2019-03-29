@@ -1,6 +1,6 @@
 ﻿namespace coffee_shop
 {
-    partial class add_product_category_form
+    partial class product_category_form
     {
         /// <summary>
         /// Required designer variable.
@@ -111,8 +111,9 @@
             this.btnExit.TabIndex = 2;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // add_product_category_form
+            // product_category_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -122,8 +123,9 @@
             this.Controls.Add(this.gpAddproductCategory);
             this.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "add_product_category_form";
+            this.Name = "product_category_form";
             this.Text = "Add Product Category";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.product_category_form_FormClosing);
             this.Load += new System.EventHandler(this.add_product_category_form_Load);
             this.gpAddproductCategory.ResumeLayout(false);
             this.gpAddproductCategory.PerformLayout();

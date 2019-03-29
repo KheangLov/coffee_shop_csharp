@@ -119,23 +119,7 @@ namespace coffee_shop
                         cbGender.Text = reader["gender"].ToString();
                         txtPhone.Text = reader["phone"].ToString();
                         txtAddress.Text = reader["address"].ToString();
-
-                        if (reader["name"].ToString().ToLower() == "admin")
-                        {
-                            cbRole.SelectedIndex = 0;
-                        }
-                        else if (reader["name"].ToString().ToLower() == "editor")
-                        {
-                            cbRole.SelectedIndex = 1;
-                        }
-                        else if (reader["name"].ToString().ToLower() == "user")
-                        {
-                            cbRole.SelectedIndex = 2;
-                        }
-                        else
-                        {
-                            MessageBox.Show("No role found!");
-                        }
+                        cbRole.Text = sc.ToCapitalize(reader["name"].ToString());
                         btnEdit.Text = "Update";
                     }
                 }

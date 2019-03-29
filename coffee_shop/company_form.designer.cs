@@ -298,6 +298,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "company_form";
             this.Text = "Company Form";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.company_form_FormClosing);
             this.Load += new System.EventHandler(this.company_form_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

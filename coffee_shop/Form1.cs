@@ -86,5 +86,20 @@ namespace coffee_shop
         {
             new product_selling().ShowDialog();
         }
+
+        private void myStockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new stock_form().ShowDialog();
+        }
+
+        private void stockCateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void branchesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new branch_form().ShowDialog();
+        }
     }
 }

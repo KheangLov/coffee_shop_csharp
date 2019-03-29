@@ -282,7 +282,7 @@ namespace coffee_shop
 
         private void btnAddProcate_Click(object sender, EventArgs e)
         {
-            new add_product_category_form().ShowDialog();
+            new product_category_form().ShowDialog();
         }
 
         private void products_form_FormClosing(object sender, FormClosingEventArgs e)

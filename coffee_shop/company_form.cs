@@ -193,8 +193,8 @@ namespace coffee_shop
                 if(btnEdit.Text.ToLower() == "edit")
                 {
                     ListViewItem list_item = lvCompany.SelectedItems[0];
-                    string cpn_name = list_item.SubItems[0].Text;
-                    string sql = "SELECT * FROM companies INNER JOIN users ON companies.user_id = users.id WHERE username = '" + cpn_name + "';";
+                    string name = list_item.SubItems[0].Text;
+                    string sql = "SELECT * FROM companies INNER JOIN users ON companies.user_id = users.id WHERE LOWER(name) = '" + name.ToLower() + "';";
                     SqlCommand upd_cmd = new SqlCommand(sql, DataConn.Connection);
                     SqlDataReader upd_rd = upd_cmd.ExecuteReader();
                     while(upd_rd.Read())
@@ -204,7 +204,7 @@ namespace coffee_shop
                         txtAddress.Text = upd_rd["address"].ToString();
                         txtEmail.Text = upd_rd["email"].ToString();
                         txtPhone.Text = upd_rd["phone"].ToString();
-                        cbUser.SelectedText = upd_rd["username"].ToString();
+                        cbUser.Text = sc.ToCapitalize(upd_rd["username"].ToString());
                     }
                     upd_cmd.Dispose();
                     upd_rd.Close();
@@ -217,6 +217,7 @@ namespace coffee_shop
                     ClearTextBoxes(groupBox1);
                     lvCompany.Items.Clear();
                     QueryCompanies();
+                    btnEdit.Text = "Edit";
                 }
             }
         }
@@ -254,7 +255,7 @@ namespace coffee_shop
                     SqlCommand del_cmd = new SqlCommand(del_sql, DataConn.Connection);
                     val = del_cmd.ExecuteNonQuery();
                     del_cmd.Dispose();
-                    MessageBox.Show("User has been deleted!");
+                    MessageBox.Show("Company has been deleted!");
                     lvCompany.Items.Clear();
                     QueryCompanies();
                 }
@@ -298,6 +299,12 @@ namespace coffee_shop
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void company_form_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DataConn.Connection.Close();
+            this.Dispose();
         }
     }
 }

@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.5\lib\net451\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialSkin.Updated.0.2.2\lib\MaterialSkin.dll</HintPath>
       <Private>True</Private>
@@ -50,11 +54,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="add_product_category_form.cs">
+    <Compile Include="product_category_form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="add_product_category_form.Designer.cs">
-      <DependentUpon>add_product_category_form.cs</DependentUpon>
+    <Compile Include="product_category_form.Designer.cs">
+      <DependentUpon>product_category_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Branch.cs" />
+    <Compile Include="branch_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="branch_form.Designer.cs">
+      <DependentUpon>branch_form.cs</DependentUpon>
     </Compile>
     <Compile Include="change_password.cs">
       <SubType>Form</SubType>
@@ -101,7 +112,28 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Stock.cs" />
+    <Compile Include="StockCategory.cs" />
+    <Compile Include="stock_categories_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="stock_categories_form.Designer.cs">
+      <DependentUpon>stock_categories_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="stock_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="stock_form.designer.cs">
+      <DependentUpon>stock_form.cs</DependentUpon>
+    </Compile>
     <Compile Include="StringCapitalize.cs" />
+    <Compile Include="Supplier.cs" />
+    <Compile Include="supplier_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="supplier_form.designer.cs">
+      <DependentUpon>supplier_form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Users.cs" />
     <Compile Include="users_form.cs">
       <SubType>Form</SubType>
@@ -109,8 +141,11 @@
     <Compile Include="users_form.Designer.cs">
       <DependentUpon>users_form.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="add_product_category_form.resx">
-      <DependentUpon>add_product_category_form.cs</DependentUpon>
+    <EmbeddedResource Include="product_category_form.resx">
+      <DependentUpon>product_category_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="branch_form.resx">
+      <DependentUpon>branch_form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="change_password.resx">
       <DependentUpon>change_password.cs</DependentUpon>
@@ -139,6 +174,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="stock_categories_form.resx">
+      <DependentUpon>stock_categories_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="stock_form.resx">
+      <DependentUpon>stock_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="supplier_form.resx">
+      <DependentUpon>supplier_form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="users_form.resx">
       <DependentUpon>users_form.cs</DependentUpon>
     </EmbeddedResource>

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace coffee_shop
 {
-    public partial class add_product_category_form : Form
+    public partial class product_category_form : Form
     {
-        public add_product_category_form()
+        public product_category_form()
         {
             InitializeComponent();
         }
@@ -69,6 +69,16 @@ namespace coffee_shop
         private void txtName_TextChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
+
+        private void product_category_form_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Dispose();
         }
     }
 }
