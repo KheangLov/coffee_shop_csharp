@@ -61,13 +61,11 @@ namespace coffee_shop
 
         private void stock_categories_form_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DataConn.Connection.Close();
             this.Dispose();
         }
 
         private void stock_categories_form_Load(object sender, EventArgs e)
         {
-            DataConn.Connection.Open();
             MyInter stockcat_inter = my_stockcate;
             inter = stockcat_inter;
             loadComboBranch();

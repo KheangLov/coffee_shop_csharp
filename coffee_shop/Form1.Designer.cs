@@ -44,9 +44,10 @@
             this.newProductToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.btnDrinks = new System.Windows.Forms.Button();
+            this.btnFood = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,7 +65,7 @@
             this.exitToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1040, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(803, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -140,8 +141,8 @@
             // productsToolStripMenuItem
             // 
             this.productsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allProductsToolStripMenuItem,
             this.newProductToolStripMenuItem,
+            this.allProductsToolStripMenuItem,
             this.saleToolStripMenuItem});
             this.productsToolStripMenuItem.Name = "productsToolStripMenuItem";
             this.productsToolStripMenuItem.Size = new System.Drawing.Size(95, 26);
@@ -150,15 +151,15 @@
             // allProductsToolStripMenuItem
             // 
             this.allProductsToolStripMenuItem.Name = "allProductsToolStripMenuItem";
-            this.allProductsToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
-            this.allProductsToolStripMenuItem.Text = "All Products";
+            this.allProductsToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
+            this.allProductsToolStripMenuItem.Text = "Products";
             this.allProductsToolStripMenuItem.Click += new System.EventHandler(this.allProductsToolStripMenuItem_Click);
             // 
             // newProductToolStripMenuItem
             // 
             this.newProductToolStripMenuItem.Name = "newProductToolStripMenuItem";
-            this.newProductToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
-            this.newProductToolStripMenuItem.Text = "New Product";
+            this.newProductToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
+            this.newProductToolStripMenuItem.Text = "Product Categories";
             // 
             // saleToolStripMenuItem
             // 
@@ -173,34 +174,51 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(72, 26);
             this.aboutToolStripMenuItem.Text = "About";
             // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
             // imageList1
             // 
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // exitToolStripMenuItem
+            // btnDrinks
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
-            this.exitToolStripMenuItem.Text = "Exit";
+            this.btnDrinks.Font = new System.Drawing.Font("Montserrat ExtraBold", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDrinks.Location = new System.Drawing.Point(24, 45);
+            this.btnDrinks.Margin = new System.Windows.Forms.Padding(15);
+            this.btnDrinks.Name = "btnDrinks";
+            this.btnDrinks.Size = new System.Drawing.Size(224, 75);
+            this.btnDrinks.TabIndex = 1;
+            this.btnDrinks.Text = "DRINKS";
+            this.btnDrinks.UseVisualStyleBackColor = true;
+            this.btnDrinks.Click += new System.EventHandler(this.btnDrinks_Click);
             // 
-            // button1
+            // btnFood
             // 
-            this.button1.Location = new System.Drawing.Point(12, 44);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnFood.Font = new System.Drawing.Font("Montserrat ExtraBold", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFood.Location = new System.Drawing.Point(278, 45);
+            this.btnFood.Margin = new System.Windows.Forms.Padding(15);
+            this.btnFood.Name = "btnFood";
+            this.btnFood.Size = new System.Drawing.Size(224, 75);
+            this.btnFood.TabIndex = 2;
+            this.btnFood.Text = "FOODS";
+            this.btnFood.UseVisualStyleBackColor = true;
+            this.btnFood.Click += new System.EventHandler(this.btnFood_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(1040, 488);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(803, 446);
+            this.Controls.Add(this.btnFood);
+            this.Controls.Add(this.btnDrinks);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MainMenuStrip = this.menuStrip1;
@@ -235,7 +253,8 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnDrinks;
+        private System.Windows.Forms.Button btnFood;
     }
 }
 

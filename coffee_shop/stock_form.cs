@@ -112,12 +112,12 @@ namespace coffee_shop
 
         private void dtpExp_ValueChanged(object sender, EventArgs e)
         {
-            my_stock.ExpiredDate = DateTime.Parse(dtpExp.Text.Trim());
+            my_stock.ExpiredDate = DateTime.Parse(dtpExp.Text);
         }
 
         private void txtqty_TextChanged(object sender, EventArgs e)
         {
-            my_stock.Quantity = decimal.Parse(txtqty.Text.Trim());
+            my_stock.Quantity = decimal.Parse(txtqty.Text);
 
         }
 
@@ -128,18 +128,17 @@ namespace coffee_shop
 
         private void txtprice_TextChanged(object sender, EventArgs e)
         {
-            my_stock.Price = decimal.Parse(txtprice.Text.Trim());
+            my_stock.Price = decimal.Parse(txtprice.Text);
         }
 
         private void txtsellingprice_TextChanged(object sender, EventArgs e)
         {
-            my_stock.SellingPrice = decimal.Parse(txtsellingprice.Text.Trim());
-
+            my_stock.SellingPrice = decimal.Parse(txtsellingprice.Text);
         }
 
         private void txtaltqty_TextChanged(object sender, EventArgs e)
         {
-            my_stock.AlertedQuantity = decimal.Parse(txtaltqty.Text.Trim());
+            my_stock.AlertedQuantity = decimal.Parse(txtaltqty.Text);
         }
 
         private void cbstkcate_SelectedIndexChanged(object sender, EventArgs e)
@@ -151,13 +150,29 @@ namespace coffee_shop
         {
             try
             {
-                my_stock.ImportedDate = DateTime.Now.ToString("yyyy-MM-dd");
-                inter.insert();
-                MessageBox.Show("Insert successfully!");
-                ClearTextBoxes(groupBox1);
-                txtname.Focus();
-                lvStocks.Clear();
-                Querystocks();
+                if (txtname.Text != "")
+                {
+                    string query_name = "SELECT COUNT(*) FROM stocks WHERE LOWER(name) = '" + txtname.Text.ToLower() + "';";
+                    SqlCommand check_name = new SqlCommand(query_name, DataConn.Connection);
+                    int nName = Convert.ToInt16(check_name.ExecuteScalar());
+                    if (nName != 0)
+                    {
+                        MessageBox.Show("Stock already exist!");
+                        txtname.Text = "";
+                        txtname.Focus();
+                    }
+                    else
+                    {
+                        my_stock.Alerted = 0;
+                        my_stock.ImportedDate = DateTime.Now.ToString("yyyy-MM-dd");
+                        inter.insert();
+                        MessageBox.Show("Insert successfully!");
+                        ClearTextBoxes(groupBox1);
+                        txtname.Focus();
+                        lvStocks.Clear();
+                        Querystocks();
+                    }
+                }
             }
             catch(Exception ex)
             {
@@ -201,6 +216,14 @@ namespace coffee_shop
                 }
                 else if (btnEdit.Text.ToLower() == "update")
                 {
+                    if(my_stock.Quantity <= my_stock.AlertedQuantity)
+                    {
+                        my_stock.Alerted = 1;
+                    }
+                    else
+                    {
+                        my_stock.Alerted = 0;
+                    }
                     inter.update(stockId);
                     MessageBox.Show("Stock has been updated!");
                     ClearTextBoxes(groupBox1);
@@ -251,6 +274,26 @@ namespace coffee_shop
         private void btnstockcat_Click(object sender, EventArgs e)
         {
             new stock_categories_form().ShowDialog();
+        }
+
+        private void txtsellingprice_Leave(object sender, EventArgs e)
+        {
+            my_stock.SellingPrice = decimal.Parse(txtsellingprice.Text);
+        }
+
+        private void txtprice_Leave(object sender, EventArgs e)
+        {
+            my_stock.Price = decimal.Parse(txtprice.Text);
+        }
+
+        private void txtqty_Leave(object sender, EventArgs e)
+        {
+            my_stock.Quantity = decimal.Parse(txtqty.Text);
+        }
+
+        private void txtaltqty_Leave(object sender, EventArgs e)
+        {
+            my_stock.Quantity = decimal.Parse(txtqty.Text);
         }
     }
 }

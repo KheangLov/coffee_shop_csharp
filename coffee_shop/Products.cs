@@ -12,9 +12,10 @@ namespace coffee_shop
     {
         SqlCommand sqld;
         private string name;
-        private decimal price;
-        private decimal selling_price;
+        private double price;
+        private double selling_price;
         private string type;
+        private int sale;
         private int stock_id;
         private int procate_id;
         private string image;
@@ -35,7 +36,7 @@ namespace coffee_shop
             }
         }
 
-        public decimal Price
+        public double Price
         {
             get
             {
@@ -47,7 +48,7 @@ namespace coffee_shop
             }
         }
 
-        public decimal Selling_Price
+        public double Selling_Price
         {
             get
             {
@@ -68,6 +69,18 @@ namespace coffee_shop
             set
             {
                 type = value;
+            }
+        }
+
+        public int Sale
+        {
+            get
+            {
+                return sale;
+            }
+            set
+            {
+                sale = value;
             }
         }
 
@@ -110,7 +123,7 @@ namespace coffee_shop
         public override void insert()
         {
             string query = @"INSERT INTO [coffee_shop].[dbo].[products](name, price, selling_price, type, sale, stock_id, procate_id, images) 
-                values('" + Name + "', " + Price + ", " + Selling_Price + ", '" + Type + "', " + 0 + ", " + Stock_id + ", " + Procate_id + ", '" + Image +"');";
+                values('" + Name + "', " + Price + ", " + Selling_Price + ", '" + Type + "', " + Sale + ", " + Stock_id + ", " + Procate_id + ", '" + Image +"');";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();
@@ -118,7 +131,7 @@ namespace coffee_shop
         public override void update(int id)
         {
             string query = @"UPDATE [coffee_shop].[dbo].[products] 
-                SET name = '" + Name + "', price ='" + Price + "', selling_price = '" + Selling_Price + "', type = '" + Type + "', stock_id = " + Stock_id + ", procate_id = " + Procate_id + ", images = '" + Image + "' WHERE id = " + id + ";";
+                SET name = '" + Name + "', price = " + Price + ", selling_price = " + Selling_Price + ", type = '" + Type + "', sale = " + Sale + ", stock_id = " + Stock_id + ", procate_id = " + Procate_id + ", images = '" + Image + "' WHERE id = " + id + ";";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();

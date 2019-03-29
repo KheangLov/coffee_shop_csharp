@@ -137,6 +137,7 @@
             this.txtProductType.Size = new System.Drawing.Size(310, 27);
             this.txtProductType.TabIndex = 17;
             this.txtProductType.TextChanged += new System.EventHandler(this.txtProductType_TextChanged);
+            this.txtProductType.Leave += new System.EventHandler(this.txtProductType_Leave);
             // 
             // comboBoxProductProcateID
             // 
@@ -159,11 +160,12 @@
             // 
             // txtProductSellingPrice
             // 
-            this.txtProductSellingPrice.Location = new System.Drawing.Point(176, 108);
+            this.txtProductSellingPrice.Location = new System.Drawing.Point(176, 106);
             this.txtProductSellingPrice.Name = "txtProductSellingPrice";
             this.txtProductSellingPrice.Size = new System.Drawing.Size(310, 27);
             this.txtProductSellingPrice.TabIndex = 12;
             this.txtProductSellingPrice.TextChanged += new System.EventHandler(this.txtProductSellingPrice_TextChanged);
+            this.txtProductSellingPrice.Leave += new System.EventHandler(this.txtProductSellingPrice_Leave);
             // 
             // txtProductPrice
             // 
@@ -172,6 +174,7 @@
             this.txtProductPrice.Size = new System.Drawing.Size(310, 27);
             this.txtProductPrice.TabIndex = 11;
             this.txtProductPrice.TextChanged += new System.EventHandler(this.txtProductPrice_TextChanged);
+            this.txtProductPrice.Leave += new System.EventHandler(this.txtProductPrice_Leave);
             // 
             // txtProductName
             // 
@@ -221,6 +224,7 @@
             this.labelProductSellingPrice.Size = new System.Drawing.Size(96, 18);
             this.labelProductSellingPrice.TabIndex = 3;
             this.labelProductSellingPrice.Text = "Selling Price :";
+            this.labelProductSellingPrice.Click += new System.EventHandler(this.labelProductSellingPrice_Click);
             // 
             // labelProductPrice
             // 

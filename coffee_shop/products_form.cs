@@ -21,7 +21,7 @@ namespace coffee_shop
         Products my_products = new Products();
         StringCapitalize sc = new StringCapitalize();
         MyInter inter;
-        int productId;
+        int proId;
         string proImg = "";
         bool deleted = false;
 
@@ -59,6 +59,7 @@ namespace coffee_shop
                 }
                 else if (type.ToLower() == "edit")
                 {
+                    proId = int.Parse(reader["id"].ToString());
                     txtProductName.Text = reader["name"].ToString();
                     txtProductPrice.Text = reader["price"].ToString();
                     txtProductSellingPrice.Text = reader["selling_price"].ToString();
@@ -186,6 +187,8 @@ namespace coffee_shop
 
         private void products_form_Load(object sender, EventArgs e)
         {
+            btnProductDelete.Enabled = false;
+            btnProductEdit.Enabled = false;
             DataConn.Connection.Open();
             loadComboProCate();
             loadStocks();
@@ -239,11 +242,27 @@ namespace coffee_shop
         {
             try
             {
-                inter.insert();
-                MessageBox.Show("Insert successful!");
-                ClearTextBoxes(groupBoxProductForm);
-                listViewAllProducts.Items.Clear();
-                QueryProducts();
+                if(txtProductName.Text != "")
+                {
+                    string query_name = "SELECT COUNT(*) FROM products WHERE LOWER(name) = '" + txtProductName.Text.ToLower() + "';";
+                    SqlCommand check_name = new SqlCommand(query_name, DataConn.Connection);
+                    int nName = Convert.ToInt16(check_name.ExecuteScalar());
+                    if(nName != 0)
+                    {
+                        MessageBox.Show("Product already exist!");
+                        txtProductName.Text = "";
+                        txtProductName.Focus();
+                    }
+                    else
+                    {
+                        my_products.Sale = 0;
+                        inter.insert();
+                        MessageBox.Show("Insert successful!");
+                        ClearTextBoxes(groupBoxProductForm);
+                        listViewAllProducts.Items.Clear();
+                        QueryProducts();
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -253,12 +272,12 @@ namespace coffee_shop
 
         private void txtProductPrice_TextChanged(object sender, EventArgs e)
         {
-            my_products.Price = decimal.Parse(txtProductPrice.Text.Trim());
+            my_products.Price = double.Parse(txtProductPrice.Text);
         }
 
         private void txtProductSellingPrice_TextChanged(object sender, EventArgs e)
         {
-            my_products.Selling_Price = decimal.Parse(txtProductSellingPrice.Text.Trim());
+            my_products.Selling_Price = double.Parse(txtProductSellingPrice.Text.Trim());
         }
 
         private void txtProductSale_TextChanged(object sender, EventArgs e)
@@ -335,15 +354,15 @@ namespace coffee_shop
                     {
                         addProductCategoryID();
                         addStocks();
-                        inter.update(productId);
+                        my_products.Sale = 0;
+                        inter.update(proId);
                         MessageBox.Show("Update Successfully!");
                         ClearTextBoxes(groupBoxProductForm);
                         listViewAllProducts.Items.Clear();
                         QueryProducts();
                         btnProductEdit.Text = "Edit";
-                        //btnEdit.Enabled = false;
-                        //txtPassword.Enabled = true;
-                        //txtConfirmPass.Enabled = true;
+                        btnProductEdit.Enabled = false;
+                        btnProductDelete.Enabled = false;
                     }
                     catch (Exception ex)
                     {
@@ -356,6 +375,26 @@ namespace coffee_shop
         private void btnProductDelete_Click(object sender, EventArgs e)
         {
             UpdateDelete("delete");
+        }
+
+        private void txtProductPrice_Leave(object sender, EventArgs e)
+        {
+            my_products.Price = double.Parse(txtProductPrice.Text);
+        }
+
+        private void txtProductSellingPrice_Leave(object sender, EventArgs e)
+        {
+            my_products.Selling_Price = double.Parse(txtProductSellingPrice.Text);
+        }
+
+        private void txtProductType_Leave(object sender, EventArgs e)
+        {
+            my_products.Type = txtProductType.Text.Trim();
+        }
+
+        private void labelProductSellingPrice_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

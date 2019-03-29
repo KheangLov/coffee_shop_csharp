@@ -101,5 +101,20 @@ namespace coffee_shop
         {
             new branch_form().ShowDialog();
         }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnDrinks_Click(object sender, EventArgs e)
+        {
+            new product_selling().ShowDialog();
+        }
+
+        private void btnFood_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

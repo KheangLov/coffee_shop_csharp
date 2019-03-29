@@ -181,7 +181,7 @@ namespace coffee_shop
                     loadComboRole();
                     my_user.Created_Date = DateTime.Now.ToString("yyyy-MM-dd");
                     my_user.Username = my_user.Firstname + my_user.Lastname;
-                    string check_name = "SELECT COUNT(*) FROM users WHERE username = '" + my_user.Username + "';";
+                    string check_name = "SELECT COUNT(*) FROM users WHERE LOWER(username) = '" + my_user.Username.ToLower() + "';";
                     SqlCommand check_com = new SqlCommand(check_name, DataConn.Connection);
                     int find_user = Convert.ToInt16(check_com.ExecuteScalar());
                     if (find_user != 0)
@@ -197,6 +197,7 @@ namespace coffee_shop
                         lvUsers.Items.Clear();
                         QueryUsers();
                     }
+                    check_com.Dispose();
                 }
                 else
                 {

@@ -224,6 +224,7 @@
             this.txtsellingprice.Size = new System.Drawing.Size(328, 27);
             this.txtsellingprice.TabIndex = 21;
             this.txtsellingprice.TextChanged += new System.EventHandler(this.txtsellingprice_TextChanged);
+            this.txtsellingprice.Leave += new System.EventHandler(this.txtsellingprice_Leave);
             // 
             // dtpExp
             // 
@@ -272,6 +273,7 @@
             this.txtaltqty.Size = new System.Drawing.Size(328, 27);
             this.txtaltqty.TabIndex = 11;
             this.txtaltqty.TextChanged += new System.EventHandler(this.txtaltqty_TextChanged);
+            this.txtaltqty.Leave += new System.EventHandler(this.txtaltqty_Leave);
             // 
             // label6
             // 
@@ -291,6 +293,7 @@
             this.txtprice.Size = new System.Drawing.Size(328, 27);
             this.txtprice.TabIndex = 9;
             this.txtprice.TextChanged += new System.EventHandler(this.txtprice_TextChanged);
+            this.txtprice.Leave += new System.EventHandler(this.txtprice_Leave);
             // 
             // label5
             // 
@@ -310,6 +313,7 @@
             this.txtqty.Size = new System.Drawing.Size(328, 27);
             this.txtqty.TabIndex = 7;
             this.txtqty.TextChanged += new System.EventHandler(this.txtqty_TextChanged);
+            this.txtqty.Leave += new System.EventHandler(this.txtqty_Leave);
             // 
             // label4
             // 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -56,9 +57,25 @@ namespace coffee_shop
         {
             try
             {
-                inter.insert();
-                MessageBox.Show("insert succcessfully");
-                ClearTextBoxes(gpAddproductCategory);
+                if (txtName.Text != "")
+                {
+                    string query_name = "SELECT COUNT(*) FROM product_categories WHERE LOWER(name) = '" + txtName.Text.ToLower() + "';";
+                    SqlCommand check_name = new SqlCommand(query_name, DataConn.Connection);
+                    int nName = Convert.ToInt16(check_name.ExecuteScalar());
+                    if (nName != 0)
+                    {
+                        MessageBox.Show("Product Category already exist!");
+                        txtName.Text = "";
+                        txtName.Focus();
+                    }
+                    else
+                    {
+                        inter.insert();
+                        MessageBox.Show("Insert succcessfully");
+                        ClearTextBoxes(gpAddproductCategory);
+                        txtName.Focus();
+                    }
+                }
             }
             catch(Exception ex)
             {
