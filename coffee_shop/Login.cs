@@ -18,24 +18,39 @@ namespace coffee_shop
             InitializeComponent();
         }
         HashCode hc = new HashCode();
+        string user_role = "";
+        int user_id;
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
             if (txtUser.Text != "" && txtPassword.Text != "")
             {
-                string sql = "SELECT COUNT(*) FROM users WHERE username = '" + txtUser.Text + "' AND password = '" + hc.PassHash(txtPassword.Text) + "';";
+                string sql = @"SELECT users.*, roles.name AS role_name FROM users
+                    INNER JOIN roles ON users.role_id = roles.id
+                    WHERE LOWER(username) = '" + txtUser.Text.ToLower() + "' AND password = '" + hc.PassHash(txtPassword.Text) + "';";
                 SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
-                int count_data = Convert.ToInt16(sqld.ExecuteScalar());
+                SqlDataReader sqlr = sqld.ExecuteReader();
+                while(sqlr.Read())
+                {
+                    user_id = int.Parse(sqlr["id"].ToString());
+                    user_role = sqlr["role_name"].ToString();
+                }
+                sqld.Dispose();
+                sqlr.Close();
+                string count = "SELECT COUNT(*) FROM users WHERE LOWER(username) = '" + txtUser.Text.ToLower() + "' AND password = '" + hc.PassHash(txtPassword.Text) + "';";
+                SqlCommand count_cmd = new SqlCommand(count, DataConn.Connection);
+                int count_data = Convert.ToInt16(count_cmd.ExecuteScalar());
+                count_cmd.Dispose();
                 if (count_data != 0)
                 {
                     this.Hide();
-                    new Main().Show();
+                    DataConn.Connection.Close();
+                    new Main(user_role, user_id).Show();
                 }
                 else
                 {
                     MessageBox.Show("Wrong username or password!");
                 }
-                sqld.Dispose();
             }
             else
             {
@@ -63,11 +78,6 @@ namespace coffee_shop
         {
             DataConn.Connection.Close();
             Application.Exit();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btnExit_Click(object sender, EventArgs e)

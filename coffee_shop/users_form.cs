@@ -13,8 +13,10 @@ namespace coffee_shop
 {
     public partial class users_form : Form
     {
-        public users_form()
+        string uRole;
+        public users_form(string role)
         {
+            uRole = role;
             InitializeComponent();
         }
 
@@ -82,11 +84,24 @@ namespace coffee_shop
             }
         }
 
+        private void loadComboRole()
+        {
+            string sql = "SELECT * FROM roles WHERE LOWER(name) IN ('editor', 'user');";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = sqld.ExecuteReader();
+            while(sqlr.Read())
+            {
+                cbRole.Items.Add(sc.ToCapitalize(sqlr["name"].ToString()));
+            }
+            sqld.Dispose();
+            sqlr.Close();
+        }
+
         private void CheckUserRole(string type = "")
         {
             ListViewItem item = lvUsers.SelectedItems[0];
             string lv_username = item.SubItems[0].Text;
-            string sql = "SELECT * FROM users INNER JOIN roles ON users.role_id = roles.id WHERE username = '" + lv_username + "';";
+            string sql = "SELECT * FROM users INNER JOIN roles ON users.role_id = roles.id WHERE LOWER(username) = '" + lv_username.ToLower() + "';";
             SqlCommand command = new SqlCommand(sql, DataConn.Connection);
             SqlDataReader reader = command.ExecuteReader();
             if (reader.Read())
@@ -141,6 +156,8 @@ namespace coffee_shop
                     lvUsers.Items.Clear();
                     QueryUsers();
                     btnDel.Enabled = false;
+                    btnEdit.Enabled = false;
+                    btnPassword.Enabled = false;
                 }
                 else
                 {
@@ -159,6 +176,7 @@ namespace coffee_shop
             DataConn.Connection.Open();
             MyInter user_inter = my_user;
             inter = user_inter;
+            loadComboRole();
             cbGender.SelectedIndex = 0;
             cbRole.SelectedIndex = 0;
             try
@@ -169,7 +187,6 @@ namespace coffee_shop
             {
                 MessageBox.Show(ex.Message);
             }
-            loadComboRole();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -178,10 +195,8 @@ namespace coffee_shop
             {
                 if (txtFirstname.Text != "" && txtLastname.Text != "" && txtEmail.Text != "" && txtPassword.Text != "")
                 {
-                    loadComboRole();
-                    my_user.Created_Date = DateTime.Now.ToString("yyyy-MM-dd");
-                    my_user.Username = my_user.Firstname + my_user.Lastname;
-                    string check_name = "SELECT COUNT(*) FROM users WHERE LOWER(username) = '" + my_user.Username.ToLower() + "';";
+                    string my_user_name = txtFirstname.Text + txtLastname.Text;
+                    string check_name = "SELECT COUNT(*) FROM users WHERE LOWER(username) = '" + my_user_name.ToLower() + "';";
                     SqlCommand check_com = new SqlCommand(check_name, DataConn.Connection);
                     int find_user = Convert.ToInt16(check_com.ExecuteScalar());
                     if (find_user != 0)
@@ -191,6 +206,16 @@ namespace coffee_shop
                     }
                     else
                     {
+                        my_user.Firstname = txtFirstname.Text.Trim();
+                        my_user.Lastname = txtLastname.Text.Trim();
+                        my_user.Username = my_user.Firstname + my_user.Lastname;
+                        my_user.Email = txtEmail.Text.Trim();
+                        my_user.Gender = cbGender.Text.Trim();
+                        my_user.Password = hc.PassHash(txtPassword.Text.Trim());
+                        my_user.Phone = txtPhone.Text.Trim();
+                        my_user.Address = txtAddress.Text.Trim();
+                        my_user.Created_Date = DateTime.Now.ToString("yyyy-MM-dd");
+                        addComboRole();
                         inter.insert();
                         MessageBox.Show("Insert Successfully!");
                         ClearTextBoxes(groupBox1);
@@ -210,39 +235,34 @@ namespace coffee_shop
             }
         }
 
-        private void loadComboRole()
+        private void addComboRole()
         {
-            string sql = "SELECT * FROM roles WHERE name = '" + cbRole.Text.ToLower() + "';";
-            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
-            SqlDataReader sqlr = sqld.ExecuteReader();
-            if (sqlr.Read())
+            if(cbRole.Text != "")
             {
-                my_user.Role_Id = int.Parse(sqlr["id"].ToString());
+                string sql = "SELECT * FROM roles WHERE name = '" + cbRole.Text.ToLower() + "';";
+                SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+                SqlDataReader sqlr = sqld.ExecuteReader();
+                if (sqlr.Read())
+                {
+                    my_user.Role_Id = int.Parse(sqlr["id"].ToString());
+                }
+                else
+                {
+                    MessageBox.Show("Nothing found!");
+                }
+                sqlr.Close();
+                sqld.Dispose();
             }
-            else
-            {
-                MessageBox.Show("Nothing found!");
-            }
-            sqlr.Close();
-            sqld.Dispose();
-        }
-
-        private void cbRole_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void cbGender_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            my_user.Gender = cbGender.Text.Trim();
         }
 
         private void txtEmail_leave(object sender, EventArgs e)
         {
-            if (IsValidEmail(txtEmail.Text.Trim()))
-                my_user.Email = txtEmail.Text.Trim();
-            else
+            if (!IsValidEmail(txtEmail.Text.Trim()))
+            {
                 MessageBox.Show("Invalid Email!");
+                txtEmail.Text = "";
+                txtEmail.Focus();
+            }
         }
 
         private void users_form_closing(object sender, FormClosingEventArgs e)
@@ -251,36 +271,16 @@ namespace coffee_shop
             this.Dispose();
         }
 
-        private void txtFirstname_leave(object sender, EventArgs e)
-        {
-            if(txtFirstname.Text != "")
-                my_user.Firstname = txtFirstname.Text.Trim();
-        }
-
-        private void txtLastname_leave(object sender, EventArgs e)
-        {
-            if (txtLastname.Text != "")
-                my_user.Lastname = txtLastname.Text.Trim();
-        }
-
-        private void txtPassword_leave(object sender, EventArgs e)
-        {
-
-        }
-
         private void txtConfirmPass_leave(object sender, EventArgs e)
         {
             if (txtPassword.Text != "")
             {
                 string pass = txtPassword.Text.Trim();
                 string pass_con = txtConfirmPass.Text.Trim();
-                if (pass == pass_con)
-                {
-                    my_user.Password = hc.PassHash(pass);
-                }
-                else
+                if (pass != pass_con)
                 {
                     MessageBox.Show("Wrong confirmation password!");
+                    txtConfirmPass.Focus();
                 }
             }
             else
@@ -290,30 +290,10 @@ namespace coffee_shop
             }
         }
 
-        private void txtPhone_leave(object sender, EventArgs e)
-        {
-            my_user.Phone = txtPhone.Text.Trim();
-        }
-
-        private void txtAddress_leave(object sender, EventArgs e)
-        {
-            my_user.Address = txtAddress.Text.Trim();
-        }
-
         private void btnExit_Click(object sender, EventArgs e)
         {
             DataConn.Connection.Close();
             this.Dispose();
-        }
-
-        private void txtPassword_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtConfirmPass_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -332,8 +312,16 @@ namespace coffee_shop
                 {
                     try
                     {
-                        loadComboRole();
+                        my_user.Firstname = txtFirstname.Text.Trim();
+                        my_user.Lastname = txtLastname.Text.Trim();
                         my_user.Username = my_user.Firstname + my_user.Lastname;
+                        my_user.Email = txtEmail.Text.Trim();
+                        my_user.Gender = cbGender.Text.Trim();
+                        my_user.Password = hc.PassHash(txtPassword.Text.Trim());
+                        my_user.Phone = txtPhone.Text.Trim();
+                        my_user.Address = txtAddress.Text.Trim();
+                        my_user.Created_Date = DateTime.Now.ToString("yyyy-MM-dd");
+                        addComboRole();
                         inter.update(userId);
                         MessageBox.Show("Update Successfully!");
                         ClearTextBoxes(groupBox1);
@@ -352,31 +340,6 @@ namespace coffee_shop
             }
         }
 
-        private void txtFirstname_TextChanged(object sender, EventArgs e)
-        {
-            my_user.Firstname = txtFirstname.Text.Trim();
-        }
-
-        private void txtLastname_TextChanged(object sender, EventArgs e)
-        {
-            my_user.Lastname = txtLastname.Text.Trim();
-        }
-
-        private void txtEmail_TextChanged(object sender, EventArgs e)
-        {
-            my_user.Email = txtEmail.Text.Trim();
-        }
-
-        private void txtPhone_TextChanged(object sender, EventArgs e)
-        {
-            my_user.Phone = txtPhone.Text.Trim();
-        }
-
-        private void txtAddress_TextChanged(object sender, EventArgs e)
-        {
-           my_user.Address = txtAddress.Text.Trim();
-        }
-
         private void btnDel_Click(object sender, EventArgs e)
         {
             if(lvUsers.SelectedItems.Count != 0)
@@ -388,7 +351,7 @@ namespace coffee_shop
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             lvUsers.Items.Clear();
-            string search_query = "SELECT * FROM users INNER JOIN roles ON users.role_id = roles.id WHERE users.role_id = roles.id AND username LIKE '%" + txtSearch.Text.Trim() + "%' ORDER BY roles.id;";
+            string search_query = "SELECT * FROM users INNER JOIN roles ON users.role_id = roles.id WHERE users.role_id = roles.id AND LOWER(username) LIKE '%" + txtSearch.Text.Trim().ToLower() + "%' ORDER BY roles.id;";
             SqlCommand srh_cmd = new SqlCommand(search_query, DataConn.Connection);
             SqlDataReader srh_rd = srh_cmd.ExecuteReader();
             while (srh_rd.Read())
@@ -423,9 +386,18 @@ namespace coffee_shop
             }
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void txtPhone_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
 
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

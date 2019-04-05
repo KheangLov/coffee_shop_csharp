@@ -189,5 +189,29 @@ namespace coffee_shop
                 txtDiscount.Enabled = true;
             }
         }
+
+        private void btnPay_Click(object sender, EventArgs e)
+        {
+            if (lvCart.Items.Count != 0)
+            {
+                int sum = 0;
+                string names = "";
+                for (int i = 0; i < lvCart.Items.Count; i++)
+                {
+                    ListViewItem item = lvCart.Items[i];
+                    sum = sum + int.Parse(item.SubItems[2].Text);
+                    if(i == 0)
+                    {
+                        names = "'" + item.SubItems[0].Text.ToLower() + "'";
+                    }
+                    else
+                    {
+                        names = names + ", '" + item.SubItems[0].Text.ToLower() + "'";
+                    }
+                }
+                //txtSearch.Text = names;
+                //string sale_sql = "UPDATE products SET sale = " + sum + "WHERE LOWER(name) IN (" + names + ");";
+            }
+        }
     }
 }

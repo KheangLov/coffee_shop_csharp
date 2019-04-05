@@ -58,6 +58,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtname = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.cbCompany = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cbBranch = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -94,7 +98,7 @@
             this.lvStocks.GridLines = true;
             this.lvStocks.Location = new System.Drawing.Point(518, 47);
             this.lvStocks.Name = "lvStocks";
-            this.lvStocks.Size = new System.Drawing.Size(580, 289);
+            this.lvStocks.Size = new System.Drawing.Size(580, 352);
             this.lvStocks.TabIndex = 26;
             this.lvStocks.UseCompatibleStateImageBehavior = false;
             this.lvStocks.View = System.Windows.Forms.View.Details;
@@ -138,7 +142,7 @@
             // btnDel
             // 
             this.btnDel.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDel.Location = new System.Drawing.Point(214, 301);
+            this.btnDel.Location = new System.Drawing.Point(214, 364);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(95, 35);
             this.btnDel.TabIndex = 25;
@@ -149,7 +153,7 @@
             // btnEdit
             // 
             this.btnEdit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdit.Location = new System.Drawing.Point(113, 301);
+            this.btnEdit.Location = new System.Drawing.Point(113, 364);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(95, 35);
             this.btnEdit.TabIndex = 24;
@@ -160,7 +164,7 @@
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(12, 301);
+            this.btnAdd.Location = new System.Drawing.Point(12, 364);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(95, 35);
             this.btnAdd.TabIndex = 23;
@@ -171,7 +175,7 @@
             // btnExit
             // 
             this.btnExit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.Location = new System.Drawing.Point(315, 301);
+            this.btnExit.Location = new System.Drawing.Point(315, 364);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(95, 35);
             this.btnExit.TabIndex = 22;
@@ -181,6 +185,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbBranch);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.cbCompany);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.btnstockcat);
             this.groupBox1.Controls.Add(this.txtsellingprice);
             this.groupBox1.Controls.Add(this.dtpExp);
@@ -199,11 +207,10 @@
             this.groupBox1.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 15);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(499, 280);
+            this.groupBox1.Size = new System.Drawing.Size(499, 343);
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Stock\'s Informations";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // btnstockcat
             // 
@@ -223,8 +230,6 @@
             this.txtsellingprice.Name = "txtsellingprice";
             this.txtsellingprice.Size = new System.Drawing.Size(328, 27);
             this.txtsellingprice.TabIndex = 21;
-            this.txtsellingprice.TextChanged += new System.EventHandler(this.txtsellingprice_TextChanged);
-            this.txtsellingprice.Leave += new System.EventHandler(this.txtsellingprice_Leave);
             // 
             // dtpExp
             // 
@@ -233,7 +238,6 @@
             this.dtpExp.Name = "dtpExp";
             this.dtpExp.Size = new System.Drawing.Size(328, 27);
             this.dtpExp.TabIndex = 20;
-            this.dtpExp.ValueChanged += new System.EventHandler(this.dtpExp_ValueChanged);
             // 
             // cbstkcate
             // 
@@ -243,7 +247,6 @@
             this.cbstkcate.Name = "cbstkcate";
             this.cbstkcate.Size = new System.Drawing.Size(163, 30);
             this.cbstkcate.TabIndex = 18;
-            this.cbstkcate.SelectedIndexChanged += new System.EventHandler(this.cbstkcate_SelectedIndexChanged);
             // 
             // label9
             // 
@@ -272,8 +275,6 @@
             this.txtaltqty.Name = "txtaltqty";
             this.txtaltqty.Size = new System.Drawing.Size(328, 27);
             this.txtaltqty.TabIndex = 11;
-            this.txtaltqty.TextChanged += new System.EventHandler(this.txtaltqty_TextChanged);
-            this.txtaltqty.Leave += new System.EventHandler(this.txtaltqty_Leave);
             // 
             // label6
             // 
@@ -292,8 +293,6 @@
             this.txtprice.Name = "txtprice";
             this.txtprice.Size = new System.Drawing.Size(328, 27);
             this.txtprice.TabIndex = 9;
-            this.txtprice.TextChanged += new System.EventHandler(this.txtprice_TextChanged);
-            this.txtprice.Leave += new System.EventHandler(this.txtprice_Leave);
             // 
             // label5
             // 
@@ -312,8 +311,6 @@
             this.txtqty.Name = "txtqty";
             this.txtqty.Size = new System.Drawing.Size(328, 27);
             this.txtqty.TabIndex = 7;
-            this.txtqty.TextChanged += new System.EventHandler(this.txtqty_TextChanged);
-            this.txtqty.Leave += new System.EventHandler(this.txtqty_Leave);
             // 
             // label4
             // 
@@ -342,8 +339,6 @@
             this.txtname.Name = "txtname";
             this.txtname.Size = new System.Drawing.Size(328, 27);
             this.txtname.TabIndex = 1;
-            this.txtname.TextChanged += new System.EventHandler(this.txtname_TextChanged);
-            this.txtname.Leave += new System.EventHandler(this.txtname_Leave);
             // 
             // label1
             // 
@@ -355,11 +350,49 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Name:";
             // 
+            // cbCompany
+            // 
+            this.cbCompany.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbCompany.FormattingEnabled = true;
+            this.cbCompany.Location = new System.Drawing.Point(155, 266);
+            this.cbCompany.Name = "cbCompany";
+            this.cbCompany.Size = new System.Drawing.Size(163, 30);
+            this.cbCompany.TabIndex = 31;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(18, 274);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(75, 18);
+            this.label2.TabIndex = 30;
+            this.label2.Text = "Company:";
+            // 
+            // cbBranch
+            // 
+            this.cbBranch.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbBranch.FormattingEnabled = true;
+            this.cbBranch.Location = new System.Drawing.Point(155, 302);
+            this.cbBranch.Name = "cbBranch";
+            this.cbBranch.Size = new System.Drawing.Size(163, 30);
+            this.cbBranch.TabIndex = 33;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(18, 310);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(59, 18);
+            this.label7.TabIndex = 32;
+            this.label7.Text = "Branch:";
+            // 
             // stock_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1110, 357);
+            this.ClientSize = new System.Drawing.Size(1110, 418);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.lvStocks);
@@ -411,5 +444,9 @@
         private System.Windows.Forms.TextBox txtname;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnstockcat;
+        private System.Windows.Forms.ComboBox cbBranch;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cbCompany;
+        private System.Windows.Forms.Label label2;
     }
 }

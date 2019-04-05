@@ -37,14 +37,27 @@ namespace coffee_shop
             sqlr.Close();
         }
 
-        private void loadCombostockcate()
+        private void loadComboBoxes(string tblName)
         {
-            string sql = "SELECT * FROM stock_categories;";
+            string sql = "SELECT * FROM " + tblName.ToLower() + ";";
             SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
             SqlDataReader sqlr = sqld.ExecuteReader();
             while (sqlr.Read())
             {
-                cbstkcate.Items.Add(sqlr["name"].ToString());
+                switch(tblName.ToLower())
+                {
+                    case "stock_categories":
+                        cbstkcate.Items.Add(sqlr["name"].ToString());
+                        break;
+                    case "companies":
+                        cbCompany.Items.Add(sqlr["name"].ToString());
+                        break;
+                    case "branches":
+                        cbBranch.Items.Add(sqlr["name"].ToString());
+                        break;
+                    default:
+                        break;
+                }
             }
             sqlr.Close();
             sqld.Dispose();
@@ -79,9 +92,38 @@ namespace coffee_shop
             sqld.Dispose();
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void addComboCompany()
         {
+            string sql = "SELECT * FROM companies WHERE LOWER(name) = '" + cbCompany.Text.ToLower() + "';";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = sqld.ExecuteReader();
+            if (sqlr.Read())
+            {
+                my_stock.CompanyId = int.Parse(sqlr["id"].ToString());
+            }
+            else
+            {
+                MessageBox.Show("Nothing found!");
+            }
+            sqlr.Close();
+            sqld.Dispose();
+        }
 
+        private void addComboBranch()
+        {
+            string sql = "SELECT * FROM branches WHERE LOWER(name) = '" + cbBranch.Text.ToLower() + "';";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = sqld.ExecuteReader();
+            if (sqlr.Read())
+            {
+                my_stock.BranchId = int.Parse(sqlr["id"].ToString());
+            }
+            else
+            {
+                MessageBox.Show("Nothing found!");
+            }
+            sqlr.Close();
+            sqld.Dispose();
         }
 
         private void stock_form_Load(object sender, EventArgs e)
@@ -91,7 +133,9 @@ namespace coffee_shop
                 btnDel.Enabled = false;
                 btnEdit.Enabled = false;
                 DataConn.Connection.Open();
-                loadCombostockcate();
+                loadComboBoxes("stock_categories");
+                loadComboBoxes("companies");
+                loadComboBoxes("branches");
                 cbstkcate.SelectedIndex = 0;
                 MyInter stock_inter = my_stock;
                 inter = stock_inter;
@@ -101,49 +145,6 @@ namespace coffee_shop
             {
                 MessageBox.Show(ex.Message);
             }
-
-
-        }
-
-        private void txtname_Leave(object sender, EventArgs e)
-        {
-            my_stock.Name = txtname.Text.Trim();
-        }
-
-        private void dtpExp_ValueChanged(object sender, EventArgs e)
-        {
-            my_stock.ExpiredDate = DateTime.Parse(dtpExp.Text);
-        }
-
-        private void txtqty_TextChanged(object sender, EventArgs e)
-        {
-            my_stock.Quantity = decimal.Parse(txtqty.Text);
-
-        }
-
-        private void txtname_TextChanged(object sender, EventArgs e)
-        {
-            my_stock.Name = txtname.Text.Trim();
-        }
-
-        private void txtprice_TextChanged(object sender, EventArgs e)
-        {
-            my_stock.Price = decimal.Parse(txtprice.Text);
-        }
-
-        private void txtsellingprice_TextChanged(object sender, EventArgs e)
-        {
-            my_stock.SellingPrice = decimal.Parse(txtsellingprice.Text);
-        }
-
-        private void txtaltqty_TextChanged(object sender, EventArgs e)
-        {
-            my_stock.AlertedQuantity = decimal.Parse(txtaltqty.Text);
-        }
-
-        private void cbstkcate_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            addCombostockcat();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -163,8 +164,24 @@ namespace coffee_shop
                     }
                     else
                     {
-                        my_stock.Alerted = 0;
+                        my_stock.Name = txtname.Text;
                         my_stock.ImportedDate = DateTime.Now.ToString("yyyy-MM-dd");
+                        my_stock.ExpiredDate = DateTime.Parse(dtpExp.Text).ToString("yyyy-MM-dd");
+                        my_stock.Quantity = decimal.Parse(txtqty.Text);
+                        my_stock.Price = decimal.Parse(txtprice.Text);
+                        my_stock.SellingPrice = decimal.Parse(txtsellingprice.Text);
+                        my_stock.AlertedQuantity = decimal.Parse(txtaltqty.Text);
+                        addCombostockcat();
+                        addComboCompany();
+                        addComboBranch();
+                        if (my_stock.AlertedQuantity >= my_stock.Quantity)
+                        {
+                            my_stock.Alerted = 1;
+                        }
+                        else
+                        {
+                            my_stock.Alerted = 0;
+                        }
                         inter.insert();
                         MessageBox.Show("Insert successfully!");
                         ClearTextBoxes(groupBox1);
@@ -216,7 +233,17 @@ namespace coffee_shop
                 }
                 else if (btnEdit.Text.ToLower() == "update")
                 {
-                    if(my_stock.Quantity <= my_stock.AlertedQuantity)
+                    my_stock.Name = txtname.Text;
+                    my_stock.ImportedDate = DateTime.Now.ToString("yyyy-MM-dd");
+                    my_stock.ExpiredDate = DateTime.Parse(dtpExp.Text).ToString("yyyy-MM-dd");
+                    my_stock.Quantity = decimal.Parse(txtqty.Text);
+                    my_stock.Price = decimal.Parse(txtprice.Text);
+                    my_stock.SellingPrice = decimal.Parse(txtsellingprice.Text);
+                    my_stock.AlertedQuantity = decimal.Parse(txtaltqty.Text);
+                    addCombostockcat();
+                    addComboCompany();
+                    addComboBranch();
+                    if (my_stock.AlertedQuantity >= my_stock.Quantity)
                     {
                         my_stock.Alerted = 1;
                     }
@@ -274,26 +301,6 @@ namespace coffee_shop
         private void btnstockcat_Click(object sender, EventArgs e)
         {
             new stock_categories_form().ShowDialog();
-        }
-
-        private void txtsellingprice_Leave(object sender, EventArgs e)
-        {
-            my_stock.SellingPrice = decimal.Parse(txtsellingprice.Text);
-        }
-
-        private void txtprice_Leave(object sender, EventArgs e)
-        {
-            my_stock.Price = decimal.Parse(txtprice.Text);
-        }
-
-        private void txtqty_Leave(object sender, EventArgs e)
-        {
-            my_stock.Quantity = decimal.Parse(txtqty.Text);
-        }
-
-        private void txtaltqty_Leave(object sender, EventArgs e)
-        {
-            my_stock.Quantity = decimal.Parse(txtqty.Text);
         }
     }
 }

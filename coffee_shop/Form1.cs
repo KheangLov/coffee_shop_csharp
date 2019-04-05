@@ -12,8 +12,12 @@ namespace coffee_shop
 {
     public partial class Main : Form
     {
-        public Main()
+        string uRole;
+        int uId;
+        public Main(string role, int id)
         {
+            uRole = role;
+            uId = id;
             InitializeComponent();
         }
 
@@ -29,7 +33,7 @@ namespace coffee_shop
 
         private void Main_Load(object sender, EventArgs e)
         {
-            DataConn.Connection.Close();
+
         }
 
         private void main_closing(object sender, FormClosingEventArgs e)
@@ -42,39 +46,21 @@ namespace coffee_shop
             this.Dispose();
             new Login().Show();
         }
-        private void newCompanyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void allCompaniesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void myUsersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new users_form().ShowDialog();
+            if (uRole.ToLower() == "superadmin" || uRole.ToLower() == "admin")
+                new users_form(uRole).ShowDialog();
+            else
+                MessageBox.Show("You don't have permission!");
         }
 
         private void myCompanyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new company_form().ShowDialog();
-        }
-
-        private void logoutToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
-            new Login().Show();
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
+            if (uRole.ToLower() == "superadmin" || uRole.ToLower() == "admin")
+                new company_form(uId).ShowDialog();
+            else
+                MessageBox.Show("You don't have permission!");
         }
 
         private void allProductsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -115,6 +101,11 @@ namespace coffee_shop
         private void btnFood_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void myEmloyeesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new employees_form().ShowDialog();
         }
     }
 }

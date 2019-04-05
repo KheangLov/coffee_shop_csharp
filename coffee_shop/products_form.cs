@@ -23,12 +23,7 @@ namespace coffee_shop
         MyInter inter;
         int proId;
         string proImg = "";
-        bool deleted = false;
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
+        string path = "";
 
         void ClearTextBoxes(Control parent)
         {
@@ -42,58 +37,19 @@ namespace coffee_shop
             }
         }
 
-        private void UpdateDelete(string type = "")
+        private bool alreadyExist(string _text, ref char KeyChar)
         {
-            ListViewItem item = listViewAllProducts.SelectedItems[0];
-            string lv_products = item.SubItems[0].Text;
-            string sql = @"SELECT products.*, product_categories.name AS procate_name , stocks.name AS stocks_name FROM products
-                            INNER JOIN product_categories ON products.procate_id = product_categories.id
-                            INNER JOIN stocks ON products.stock_id = stocks.id WHERE products.name = '" + lv_products + "';";
-            SqlCommand command = new SqlCommand(sql, DataConn.Connection);
-            SqlDataReader reader = command.ExecuteReader();
-            if (reader.Read())
+            if (_text.IndexOf('.') > -1)
             {
-                if (type.ToLower() == "delete")
-                {
-                    deleted = true;
-                }
-                else if (type.ToLower() == "edit")
-                {
-                    proId = int.Parse(reader["id"].ToString());
-                    txtProductName.Text = reader["name"].ToString();
-                    txtProductPrice.Text = reader["price"].ToString();
-                    txtProductSellingPrice.Text = reader["selling_price"].ToString();
-                    txtProductType.Text = reader["type"].ToString();
-                    comboBoxProductStockID.SelectedItem = reader["stocks_name"].ToString();
-                    comboBoxProductProcateID.SelectedItem = reader["procate_id"].ToString();
-                    pictureBoxProductImage.ImageLocation = reader["images"].ToString();
-                    btnProductEdit.Text = "Update";
-                }
+                KeyChar = '.';
+                return true;
             }
-            command.Dispose();
-            reader.Close();
-            if (deleted == true)
+            if (_text.IndexOf(',') > -1)
             {
-                if (MessageBox.Show("Are you sure, you want to delete this product?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    ListViewItem lvi = listViewAllProducts.SelectedItems[0];
-                    int val = 0;
-                    string proName = lvi.SubItems[0].Text;
-                    string del_que = "DELETE FROM products WHERE name = '" + proName + "';";
-                    SqlCommand del_com = new SqlCommand(del_que, DataConn.Connection);
-                    val = del_com.ExecuteNonQuery();
-                    del_com.Dispose();
-                    MessageBox.Show("Product has been deleted!");
-                    listViewAllProducts.Items.Clear();
-                    QueryProducts();
-                    btnProductDelete.Enabled = false;
-                }
-                else
-                {
-                    MessageBox.Show("No product was deleted!", "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                deleted = false;
+                KeyChar = ',';
+                return true;
             }
+            return false;
         }
 
         private void MoveImage(string source, string path)
@@ -124,48 +80,48 @@ namespace coffee_shop
         private void loadStocks()
         {
             string get_stocks = "SELECT * FROM stocks;";
-            SqlCommand sqld = new SqlCommand(get_stocks, DataConn.Connection);
-            SqlDataReader sqlr = sqld.ExecuteReader();
-            while (sqlr.Read())
+            SqlCommand stock_cmd = new SqlCommand(get_stocks, DataConn.Connection);
+            SqlDataReader stock_reader = stock_cmd.ExecuteReader();
+            while (stock_reader.Read())
             {
-                comboBoxProductStockID.Items.Add(sc.ToCapitalize(sqlr["name"].ToString()));
+                comboBoxProductStockID.Items.Add(sc.ToCapitalize(stock_reader["name"].ToString()));
             }
-            sqld.Dispose();
-            sqlr.Close();
+            stock_cmd.Dispose();
+            stock_reader.Close();
         }
 
         private void addStocks()
         {
-            string sql = "SELECT id, name FROM stocks WHERE name = '" + comboBoxProductStockID.Text.Trim() + "';";
-            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
-            SqlDataReader sqlr = sqld.ExecuteReader();
-            if (sqlr.Read())
+            string get_stock = "SELECT id, name FROM stocks WHERE LOWER(name) = '" + comboBoxProductStockID.Text.Trim().ToLower() + "';";
+            SqlCommand stocks_cmd = new SqlCommand(get_stock, DataConn.Connection);
+            SqlDataReader stocks_reader = stocks_cmd.ExecuteReader();
+            if (stocks_reader.Read())
             {
-                my_products.Stock_id = int.Parse(sqlr["id"].ToString());
+                my_products.Stock_id = int.Parse(stocks_reader["id"].ToString());
             }
             else
             {
                 MessageBox.Show("Nothing found!");
             }
-            sqld.Dispose();
-            sqlr.Close();
+            stocks_cmd.Dispose();
+            stocks_reader.Close();
         }
 
         private void addProductCategoryID()
         {
-            string sql = "SELECT id, name FROM product_categories WHERE name = '" + comboBoxProductProcateID.Text.Trim() + "';";
-            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
-            SqlDataReader sqlr = sqld.ExecuteReader();
-            if (sqlr.Read())
+            string get_procate = "SELECT id, name FROM product_categories WHERE LOWER(name) = '" + comboBoxProductProcateID.Text.Trim().ToLower() + "';";
+            SqlCommand procate_cmd = new SqlCommand(get_procate, DataConn.Connection);
+            SqlDataReader procate_reader = procate_cmd.ExecuteReader();
+            if (procate_reader.Read())
             {
-                my_products.Procate_id = int.Parse(sqlr["id"].ToString());
+                my_products.Procate_id = int.Parse(procate_reader["id"].ToString());
             }
             else
             {
                 MessageBox.Show("Nothing found!");
             }
-            sqld.Dispose();
-            sqlr.Close();
+            procate_cmd.Dispose();
+            procate_reader.Close();
         }
 
         private void QueryProducts()
@@ -199,31 +155,6 @@ namespace coffee_shop
             QueryProducts();
         }
 
-        private void labelProductImage_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBoxProductForm_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBoxProductProcateID_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtProductName_TextChanged(object sender, EventArgs e)
-        {
-            my_products.Name = txtProductName.Text.Trim();
-        }
-
-        private void txtProductName_Leave(object sender, EventArgs e)
-        {
-            my_products.Name = txtProductName.Text.Trim();
-        }
-
         private void listViewAllProducts_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listViewAllProducts.SelectedItems.Count != 0)
@@ -247,6 +178,7 @@ namespace coffee_shop
                     string query_name = "SELECT COUNT(*) FROM products WHERE LOWER(name) = '" + txtProductName.Text.ToLower() + "';";
                     SqlCommand check_name = new SqlCommand(query_name, DataConn.Connection);
                     int nName = Convert.ToInt16(check_name.ExecuteScalar());
+                    
                     if(nName != 0)
                     {
                         MessageBox.Show("Product already exist!");
@@ -255,6 +187,13 @@ namespace coffee_shop
                     }
                     else
                     {
+                        my_products.Name = txtProductName.Text.Trim();
+                        my_products.Price = double.Parse(txtProductPrice.Text.Trim());
+                        my_products.Selling_Price = double.Parse(txtProductSellingPrice.Text.Trim());
+                        my_products.Type = txtProductType.Text.Trim();
+                        addStocks();
+                        addProductCategoryID();
+                        my_products.Image = path;
                         my_products.Sale = 0;
                         inter.insert();
                         MessageBox.Show("Insert successful!");
@@ -262,41 +201,13 @@ namespace coffee_shop
                         listViewAllProducts.Items.Clear();
                         QueryProducts();
                     }
+                    check_name.Dispose();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message + "");
             }
-        }
-
-        private void txtProductPrice_TextChanged(object sender, EventArgs e)
-        {
-            my_products.Price = double.Parse(txtProductPrice.Text);
-        }
-
-        private void txtProductSellingPrice_TextChanged(object sender, EventArgs e)
-        {
-            my_products.Selling_Price = double.Parse(txtProductSellingPrice.Text.Trim());
-        }
-
-        private void txtProductSale_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void txtProductType_TextChanged(object sender, EventArgs e)
-        {
-            my_products.Type = txtProductType.Text.Trim();
-        }
-
-        private void comboBoxProductProcateID_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            addProductCategoryID();
-        }
-
-        private void comboBoxProductStockID_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            addStocks();
         }
 
         private void btnAddProcate_Click(object sender, EventArgs e)
@@ -327,11 +238,10 @@ namespace coffee_shop
                 if(dlg.ShowDialog() == DialogResult.OK)
                 {
                     string file = Path.GetFileName(dlg.FileName);
-                    string path = parent.FullName + @"\pictures\" + file;
+                    path = parent.FullName + @"\pictures\" + file;
                     proImg = dlg.FileName.ToString();
                     MoveImage(proImg, path);
                     pictureBoxProductImage.ImageLocation = proImg;
-                    my_products.Image = path;
                 }
             }
             catch(Exception ex)
@@ -346,7 +256,34 @@ namespace coffee_shop
             {
                 if(btnProductEdit.Text.ToLower() == "edit")
                 {
-                    UpdateDelete("edit");
+                    try
+                    {
+                        ListViewItem item = listViewAllProducts.SelectedItems[0];
+                        string lv_products = item.SubItems[0].Text;
+                        string sql = @"SELECT products.*, product_categories.name AS procate_name , stocks.name AS stocks_name FROM products
+                            INNER JOIN product_categories ON products.procate_id = product_categories.id
+                            INNER JOIN stocks ON products.stock_id = stocks.id WHERE LOWER(products.name) = '" + lv_products.ToLower() + "';";
+                        SqlCommand command = new SqlCommand(sql, DataConn.Connection);
+                        SqlDataReader reader = command.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            proId = int.Parse(reader["id"].ToString());
+                            txtProductName.Text = reader["name"].ToString();
+                            txtProductPrice.Text = reader["price"].ToString();
+                            txtProductSellingPrice.Text = reader["selling_price"].ToString();
+                            txtProductType.Text = reader["type"].ToString();
+                            comboBoxProductStockID.SelectedItem = reader["stocks_name"].ToString();
+                            comboBoxProductProcateID.SelectedItem = reader["procate_id"].ToString();
+                            pictureBoxProductImage.ImageLocation = reader["images"].ToString();
+                            btnProductEdit.Text = "Update";
+                        }
+                        command.Dispose();
+                        reader.Close();
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
                 else if (btnProductEdit.Text.ToLower() == "update")
                 {
@@ -374,27 +311,141 @@ namespace coffee_shop
 
         private void btnProductDelete_Click(object sender, EventArgs e)
         {
-            UpdateDelete("delete");
+            if(listViewAllProducts.SelectedItems.Count != 0)
+            {
+                if (MessageBox.Show("Are you sure, you want to delete this product?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    ListViewItem lvi = listViewAllProducts.SelectedItems[0];
+                    int val = 0;
+                    string proName = lvi.SubItems[0].Text;
+                    string del_que = "DELETE FROM products WHERE name = '" + proName + "';";
+                    SqlCommand del_com = new SqlCommand(del_que, DataConn.Connection);
+                    val = del_com.ExecuteNonQuery();
+                    del_com.Dispose();
+                    MessageBox.Show("Product has been deleted!");
+                    listViewAllProducts.Items.Clear();
+                    QueryProducts();
+                    btnProductDelete.Enabled = false;
+                    btnProductEdit.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("No product was deleted!", "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
-        private void txtProductPrice_Leave(object sender, EventArgs e)
+        private void txtProductSearch_TextChanged(object sender, EventArgs e)
         {
-            my_products.Price = double.Parse(txtProductPrice.Text);
+            listViewAllProducts.Items.Clear();
+            string search_query = @"SELECT products.*, product_categories.name AS procate_name , stocks.name AS stocks_name FROM products
+                            INNER JOIN product_categories ON products.procate_id = product_categories.id
+                            INNER JOIN stocks ON products.stock_id = stocks.id WHERE LOWER(products.name) LIKE '%" + txtProductSearch.Text.Trim().ToLower() + "%';";
+            SqlCommand srh_cmd = new SqlCommand(search_query, DataConn.Connection);
+            SqlDataReader srh_rd = srh_cmd.ExecuteReader();
+            while (srh_rd.Read())
+            {
+                string[] products_info = { sc.ToCapitalize(srh_rd["name"].ToString()), srh_rd["price"].ToString(), srh_rd["selling_price"].ToString(), srh_rd["sale"].ToString(), srh_rd["type"].ToString(), srh_rd["stocks_name"].ToString(), srh_rd["procate_name"].ToString() };
+                ListViewItem item = new ListViewItem(products_info);
+                listViewAllProducts.Items.Add(item);
+            }
+            srh_cmd.Dispose();
+            srh_rd.Close();
         }
 
-        private void txtProductSellingPrice_Leave(object sender, EventArgs e)
+        private void txtProductSellingPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
-            my_products.Selling_Price = double.Parse(txtProductSellingPrice.Text);
+            if (!char.IsControl(e.KeyChar)
+                    && !char.IsDigit(e.KeyChar)
+                    && e.KeyChar != '.' && e.KeyChar != ',')
+            {
+                e.Handled = true;
+            }
+
+            //check if '.' , ',' pressed
+            char sepratorChar = 's';
+            if (e.KeyChar == '.' || e.KeyChar == ',')
+            {
+                // check if it's in the beginning of text not accept
+                if (txtProductSellingPrice.Text.Length == 0) e.Handled = true;
+                // check if it's in the beginning of text not accept
+                if (txtProductSellingPrice.SelectionStart == 0) e.Handled = true;
+                // check if there is already exist a '.' , ','
+                if (alreadyExist(txtProductSellingPrice.Text, ref sepratorChar)) e.Handled = true;
+                //check if '.' or ',' is in middle of a number and after it is not a number greater than 99
+                if (txtProductSellingPrice.SelectionStart != txtProductSellingPrice.Text.Length && e.Handled == false)
+                {
+                    // '.' or ',' is in the middle
+                    string AfterDotString = txtProductSellingPrice.Text.Substring(txtProductSellingPrice.SelectionStart);
+
+                    if (AfterDotString.Length > 2)
+                    {
+                        e.Handled = true;
+                    }
+                }
+            }
+            //check if a number pressed
+
+            if (Char.IsDigit(e.KeyChar))
+            {
+                //check if a coma or dot exist
+                if (alreadyExist(txtProductSellingPrice.Text, ref sepratorChar))
+                {
+                    int sepratorPosition = txtProductSellingPrice.Text.IndexOf(sepratorChar);
+                    string afterSepratorString = txtProductSellingPrice.Text.Substring(sepratorPosition + 1);
+                    if (txtProductSellingPrice.SelectionStart > sepratorPosition && afterSepratorString.Length > 1)
+                    {
+                        e.Handled = true;
+                    }
+
+                }
+            }
         }
 
-        private void txtProductType_Leave(object sender, EventArgs e)
+        private void txtProductPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
-            my_products.Type = txtProductType.Text.Trim();
-        }
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != ',')
+            {
+                e.Handled = true;
+            }
 
-        private void labelProductSellingPrice_Click(object sender, EventArgs e)
-        {
+            //check if '.' , ',' pressed
+            char sepratorChar = 's';
+            if (e.KeyChar == '.' || e.KeyChar == ',')
+            {
+                // check if it's in the beginning of text not accept
+                if (txtProductPrice.Text.Length == 0) e.Handled = true;
+                // check if it's in the beginning of text not accept
+                if (txtProductPrice.SelectionStart == 0) e.Handled = true;
+                // check if there is already exist a '.' , ','
+                if (alreadyExist(txtProductPrice.Text, ref sepratorChar)) e.Handled = true;
+                //check if '.' or ',' is in middle of a number and after it is not a number greater than 99
+                if (txtProductPrice.SelectionStart != txtProductPrice.Text.Length && e.Handled == false)
+                {
+                    // '.' or ',' is in the middle
+                    string AfterDotString = txtProductPrice.Text.Substring(txtProductPrice.SelectionStart);
 
+                    if (AfterDotString.Length > 2)
+                    {
+                        e.Handled = true;
+                    }
+                }
+            }
+            //check if a number pressed
+
+            if (Char.IsDigit(e.KeyChar))
+            {
+                //check if a coma or dot exist
+                if (alreadyExist(txtProductPrice.Text, ref sepratorChar))
+                {
+                    int sepratorPosition = txtProductPrice.Text.IndexOf(sepratorChar);
+                    string afterSepratorString = txtProductPrice.Text.Substring(sepratorPosition + 1);
+                    if (txtProductPrice.SelectionStart > sepratorPosition && afterSepratorString.Length > 1)
+                    {
+                        e.Handled = true;
+                    }
+                }
+            }
         }
     }
 }

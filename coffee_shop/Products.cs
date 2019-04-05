@@ -119,7 +119,7 @@ namespace coffee_shop
                 image = value;
             }
         }
-
+        
         public override void insert()
         {
             string query = @"INSERT INTO [coffee_shop].[dbo].[products](name, price, selling_price, type, sale, stock_id, procate_id, images) 

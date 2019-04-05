@@ -13,8 +13,10 @@ namespace coffee_shop
 {
     public partial class company_form : Form
     {
-        public company_form()
+        int uId;
+        public company_form(int id)
         {
+            uId = id;
             InitializeComponent();
         }
         Company my_company = new Company();
@@ -49,7 +51,7 @@ namespace coffee_shop
 
         private void loadComboUser()
         {
-            string get_users = "SELECT users.username, roles.name FROM users INNER JOIN roles ON users.role_id = roles.id WHERE roles.name = 'admin';";
+            string get_users = "SELECT users.username, roles.name FROM users INNER JOIN roles ON users.role_id = roles.id WHERE LOWER(roles.name) = 'admin';";
             SqlCommand sqld = new SqlCommand(get_users, DataConn.Connection);
             SqlDataReader sqlr = sqld.ExecuteReader();
             while (sqlr.Read())
@@ -62,7 +64,7 @@ namespace coffee_shop
 
         private void addCompanyUser()
         {
-            string company_user = "SELECT id, username FROM users WHERE username = '" + cbUser.Text.Trim() + "';";
+            string company_user = "SELECT id, username FROM users WHERE LOWER(username) = '" + cbUser.Text.Trim().ToLower() + "';";
             SqlCommand sqld = new SqlCommand(company_user, DataConn.Connection);
             SqlDataReader sqlr = sqld.ExecuteReader();
             if(sqlr.Read())
@@ -79,7 +81,7 @@ namespace coffee_shop
 
         private void QueryCompanies()
         {
-            string query = "SELECT * FROM companies INNER JOIN users ON companies.user_id = users.id ORDER BY name;";
+            string query = "SELECT companies.*, users.username FROM companies INNER JOIN users ON companies.user_id = users.id WHERE companies.user_id = " + uId + " ORDER BY name;";
             SqlCommand sqld = new SqlCommand(query, DataConn.Connection);
             SqlDataReader sqlr = sqld.ExecuteReader();
             while (sqlr.Read())

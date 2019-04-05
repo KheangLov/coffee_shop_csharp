@@ -12,13 +12,15 @@ namespace coffee_shop
         SqlCommand sqld;
         private string name;
         private string imported_date;
-        private DateTime expired_date;
+        private string expired_date;
         private decimal quantity;
         private decimal price;
         private decimal selling_price;
         private decimal alert_quantity;
         private byte alerted;
         private int stockcate_id;
+        private int company_id;
+        private int branch_id;
 
         public Stock()
         {
@@ -48,7 +50,7 @@ namespace coffee_shop
             }
         }
 
-        public DateTime ExpiredDate
+        public string ExpiredDate
         {
             get
             {
@@ -132,10 +134,34 @@ namespace coffee_shop
             }
         }
 
+        public int CompanyId
+        {
+            get
+            {
+                return company_id;
+            }
+            set
+            {
+                company_id = value;
+            }
+        }
+
+        public int BranchId
+        {
+            get
+            {
+                return branch_id;
+            }
+            set
+            {
+                branch_id = value;
+            }
+        }
+
         public override void insert()
         {
-            string query = @"INSERT INTO [coffee_shop].[dbo].[stocks](name, imported_date, expired_date, qty,price, selling_price, alert_qty, alerted, stockcate_id) 
-                values('" + Name + "', '" + ImportedDate + "', '" + ExpiredDate.ToString("yyyy-MM-dd") + "', " + Quantity + ", " + Price + ", " + SellingPrice + ", " + AlertedQuantity + ", " + Alerted + ", " + StockCateId + ");";
+            string query = @"INSERT INTO [coffee_shop].[dbo].[stocks](name, imported_date, expired_date, qty,price, selling_price, alert_qty, alerted, stockcate_id, company_id, branch_id) 
+                values('" + Name + "', '" + ImportedDate + "', '" + ExpiredDate + "', " + Quantity + ", " + Price + ", " + SellingPrice + ", " + AlertedQuantity + ", " + Alerted + ", " + StockCateId + ", " + CompanyId + ", " + BranchId + ");";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();
@@ -144,7 +170,7 @@ namespace coffee_shop
         public override void update(int id)
         {
             string query = @"UPDATE [coffee_shop].[dbo].[stocks] 
-                SET name = '" + Name + "', imported_date ='" + ImportedDate + "', expired_date = '" + ExpiredDate.ToString("yyyy-MM-dd") + "', qty = " + Quantity + ", price = " + Price + ", selling_price = " + SellingPrice + ", alert_qty = " + AlertedQuantity + ", alerted = " + Alerted + ", stockcate_id = " + StockCateId + ";";
+                SET name = '" + Name + "', imported_date ='" + ImportedDate + "', expired_date = '" + ExpiredDate + "', qty = " + Quantity + ", price = " + Price + ", selling_price = " + SellingPrice + ", alert_qty = " + AlertedQuantity + ", alerted = " + Alerted + ", stockcate_id = " + StockCateId + ", company_id = " + CompanyId + ", branch_id = " + BranchId + " WHERE id = " + id + ";";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();

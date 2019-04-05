@@ -113,20 +113,14 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "User\'s Informations";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // cbRole
             // 
             this.cbRole.FormattingEnabled = true;
-            this.cbRole.Items.AddRange(new object[] {
-            "Admin",
-            "Editor",
-            "User"});
             this.cbRole.Location = new System.Drawing.Point(155, 348);
             this.cbRole.Name = "cbRole";
             this.cbRole.Size = new System.Drawing.Size(163, 30);
             this.cbRole.TabIndex = 18;
-            this.cbRole.SelectedIndexChanged += new System.EventHandler(this.cbRole_SelectedIndexChanged);
             // 
             // cbGender
             // 
@@ -138,7 +132,6 @@
             this.cbGender.Name = "cbGender";
             this.cbGender.Size = new System.Drawing.Size(163, 30);
             this.cbGender.TabIndex = 17;
-            this.cbGender.SelectedIndexChanged += new System.EventHandler(this.cbGender_SelectedIndexChanged);
             // 
             // label9
             // 
@@ -167,8 +160,6 @@
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(328, 70);
             this.txtAddress.TabIndex = 13;
-            this.txtAddress.TextChanged += new System.EventHandler(this.txtAddress_TextChanged);
-            this.txtAddress.Leave += new System.EventHandler(this.txtAddress_leave);
             // 
             // label7
             // 
@@ -186,8 +177,7 @@
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(328, 27);
             this.txtPhone.TabIndex = 11;
-            this.txtPhone.TextChanged += new System.EventHandler(this.txtPhone_TextChanged);
-            this.txtPhone.Leave += new System.EventHandler(this.txtPhone_leave);
+            this.txtPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPhone_KeyPress);
             // 
             // label6
             // 
@@ -206,7 +196,6 @@
             this.txtConfirmPass.PasswordChar = '*';
             this.txtConfirmPass.Size = new System.Drawing.Size(328, 27);
             this.txtConfirmPass.TabIndex = 9;
-            this.txtConfirmPass.TextChanged += new System.EventHandler(this.txtConfirmPass_TextChanged);
             this.txtConfirmPass.Leave += new System.EventHandler(this.txtConfirmPass_leave);
             // 
             // label5
@@ -226,8 +215,6 @@
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(328, 27);
             this.txtPassword.TabIndex = 7;
-            this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
-            this.txtPassword.Leave += new System.EventHandler(this.txtPassword_leave);
             // 
             // label4
             // 
@@ -245,7 +232,6 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(328, 27);
             this.txtEmail.TabIndex = 5;
-            this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             this.txtEmail.Leave += new System.EventHandler(this.txtEmail_leave);
             // 
             // label3
@@ -264,8 +250,6 @@
             this.txtLastname.Name = "txtLastname";
             this.txtLastname.Size = new System.Drawing.Size(328, 27);
             this.txtLastname.TabIndex = 3;
-            this.txtLastname.TextChanged += new System.EventHandler(this.txtLastname_TextChanged);
-            this.txtLastname.Leave += new System.EventHandler(this.txtLastname_leave);
             // 
             // label2
             // 
@@ -283,8 +267,6 @@
             this.txtFirstname.Name = "txtFirstname";
             this.txtFirstname.Size = new System.Drawing.Size(328, 27);
             this.txtFirstname.TabIndex = 1;
-            this.txtFirstname.TextChanged += new System.EventHandler(this.txtFirstname_TextChanged);
-            this.txtFirstname.Leave += new System.EventHandler(this.txtFirstname_leave);
             // 
             // label1
             // 
@@ -411,6 +393,7 @@
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "users_form";
             this.Text = "Users Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.users_form_closing);
