@@ -162,6 +162,7 @@ namespace coffee_shop
                 else
                 {
                     MessageBox.Show("No user was deleted!", "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    btnDel.Enabled = false;
                 }
                 deleted = false;
             }
@@ -239,7 +240,7 @@ namespace coffee_shop
         {
             if(cbRole.Text != "")
             {
-                string sql = "SELECT * FROM roles WHERE name = '" + cbRole.Text.ToLower() + "';";
+                string sql = "SELECT * FROM roles WHERE LOWER(name) = '" + cbRole.Text.ToLower() + "';";
                 SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
                 SqlDataReader sqlr = sqld.ExecuteReader();
                 if (sqlr.Read())

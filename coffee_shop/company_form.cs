@@ -114,11 +114,6 @@ namespace coffee_shop
             cbUser.SelectedIndex = 0;
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnExit_Click(object sender, EventArgs e)
         {
             DataConn.Connection.Close();
@@ -260,6 +255,8 @@ namespace coffee_shop
                     MessageBox.Show("Company has been deleted!");
                     lvCompany.Items.Clear();
                     QueryCompanies();
+                    btnDelete.Enabled = false;
+                    btnEdit.Enabled = false;
                 }
                 else
                 {
@@ -296,11 +293,6 @@ namespace coffee_shop
             }
             sqld.Dispose();
             sqlr.Close();
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
         }
 
         private void company_form_FormClosing(object sender, FormClosingEventArgs e)

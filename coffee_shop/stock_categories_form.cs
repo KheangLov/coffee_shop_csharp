@@ -20,6 +20,24 @@ namespace coffee_shop
         StockCategory my_stockcate = new StockCategory();
         MyInter inter;
         StringCapitalize sc = new StringCapitalize();
+        int stockCateId;
+
+        private void QueryStockCate()
+        {
+            DataConn.Connection.Open();
+            string sql = @"SELECT * FROM stock_categories;";
+            SqlCommand com = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = com.ExecuteReader();
+            while (sqlr.Read())
+            {
+                string[] stock_cate_info = { sc.ToCapitalize(sqlr["name"].ToString()), sqlr["descriptions"].ToString() };
+                ListViewItem item = new ListViewItem(stock_cate_info);
+                lvStockCate.Items.Add(item);
+            }
+            com.Dispose();
+            sqlr.Close();
+            DataConn.Connection.Close();
+        }
 
         void ClearTextBoxes(Control parent)
         {
@@ -33,32 +51,6 @@ namespace coffee_shop
             }
         }
 
-        private void loadComboBranch()
-        {
-            string sql = "SELECT id, name FROM branches;";
-            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
-            SqlDataReader sqlr = sqld.ExecuteReader();
-            while(sqlr.Read())
-            {
-                cbBranch.Items.Add(sc.ToCapitalize(sqlr["name"].ToString()));
-            }
-            sqld.Dispose();
-            sqlr.Close();
-        }
-
-        private void addBranch()
-        {
-            string sql = "SELECT id, name FROM branches WHERE LOWER(name) = '" + cbBranch.Text.Trim() +"';";
-            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
-            SqlDataReader sqlr = sqld.ExecuteReader();
-            if (sqlr.Read())
-            {
-                my_stockcate.BranchId = int.Parse(sqlr["id"].ToString());
-            }
-            sqld.Dispose();
-            sqlr.Close();
-        }
-
         private void stock_categories_form_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Dispose();
@@ -66,10 +58,11 @@ namespace coffee_shop
 
         private void stock_categories_form_Load(object sender, EventArgs e)
         {
+            btnEdit.Enabled = false;
+            btnDelete.Enabled = false;
             MyInter stockcat_inter = my_stockcate;
             inter = stockcat_inter;
-            loadComboBranch();
-            cbBranch.SelectedIndex = 0;
+            QueryStockCate();
         }
 
         private void txtName_Leave(object sender, EventArgs e)
@@ -91,9 +84,35 @@ namespace coffee_shop
         {
             try
             {
-                inter.insert();
-                MessageBox.Show("Insert successful!");
-                ClearTextBoxes(groupBox1);
+                if (txtName.Text != "")
+                {
+                    string query_name = "SELECT COUNT(*) FROM stock_categories WHERE LOWER(name) = '" + txtName.Text.ToLower() + "';";
+                    SqlCommand check_name = new SqlCommand(query_name, DataConn.Connection);
+                    int nName = Convert.ToInt16(check_name.ExecuteScalar());
+                    if (nName != 0)
+                    {
+                        MessageBox.Show("Stock category already exist!");
+                        txtName.Text = "";
+                        txtName.Focus();
+                    }
+                    else
+                    {
+                        my_stockcate.Name = txtName.Text.Trim();
+                        my_stockcate.Descriptions = txtDesc.Text.Trim();
+                        DataConn.Connection.Open();
+                        inter.insert();
+                        DataConn.Connection.Close();
+                        MessageBox.Show("Insert successful!");
+                        ClearTextBoxes(groupBox1);
+                        lvStockCate.Clear();
+                        QueryStockCate();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Name can't be blank!");
+                    txtName.Focus();
+                }
             }
             catch (Exception ex)
             {
@@ -101,19 +120,85 @@ namespace coffee_shop
             }
         }
 
-        private void txtDesc_Leave(object sender, EventArgs e)
+        private void lvStockCate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            my_stockcate.Descriptions = txtDesc.Text.Trim();
+            if (lvStockCate.SelectedItems.Count != 0)
+            {
+                btnEdit.Enabled = true;
+                btnDelete.Enabled = true;
+            }
+            else
+            {
+                btnDelete.Enabled = false;
+                btnEdit.Enabled = false;
+            }
         }
 
-        private void txtDesc_TextChanged(object sender, EventArgs e)
+        private void btnEdit_Click(object sender, EventArgs e)
         {
-            my_stockcate.Descriptions = txtDesc.Text.Trim();
+            if (lvStockCate.SelectedItems.Count != 0)
+            {
+                btnDelete.Enabled = false;
+                if (btnEdit.Text.ToLower() == "edit")
+                {
+                    DataConn.Connection.Open();
+                    ListViewItem list_item = lvStockCate.SelectedItems[0];
+                    string name = list_item.SubItems[0].Text;
+                    string sql = @"SELECT * FROM stock_categories;";
+                    SqlCommand upd_cmd = new SqlCommand(sql, DataConn.Connection);
+                    SqlDataReader upd_rd = upd_cmd.ExecuteReader();
+                    while (upd_rd.Read())
+                    {
+                        stockCateId = int.Parse(upd_rd["id"].ToString());
+                        txtName.Text = upd_rd["name"].ToString();
+                        txtDesc.Text = upd_rd["descriptions"].ToString();
+                    }
+                    upd_cmd.Dispose();
+                    upd_rd.Close();
+                    DataConn.Connection.Close();
+                    btnEdit.Text = "Update";
+                }
+                else if (btnEdit.Text.ToLower() == "update")
+                {
+                    my_stockcate.Name = txtName.Text.Trim();
+                    my_stockcate.Descriptions = txtDesc.Text.Trim();
+                    DataConn.Connection.Open();
+                    inter.update(stockCateId);
+                    DataConn.Connection.Close();
+                    MessageBox.Show("Stock Categories has been updated!");
+                    ClearTextBoxes(groupBox1);
+                    lvStockCate.Items.Clear();
+                    QueryStockCate();
+                    btnEdit.Text = "Edit";
+                    btnEdit.Enabled = false;
+                }
+            }
         }
 
-        private void cbBranch_SelectedIndexChanged(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
-            addBranch();
+            if (lvStockCate.SelectedItems.Count != 0)
+            {
+                if (MessageBox.Show("Are you sure, you want to delete this stock category?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    ListViewItem del_item = lvStockCate.SelectedItems[0];
+                    int val = 0;
+                    string name = del_item.SubItems[0].Text;
+                    string del_sql = "DELETE FROM stock_categories WHERE LOWER(name) = '" + name.ToLower() + "';";
+                    SqlCommand del_cmd = new SqlCommand(del_sql, DataConn.Connection);
+                    val = del_cmd.ExecuteNonQuery();
+                    del_cmd.Dispose();
+                    MessageBox.Show("Stock Categories has been deleted!");
+                    lvStockCate.Items.Clear();
+                    QueryStockCate();
+                    btnDelete.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("No stock category was deleted!", "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    btnDelete.Enabled = false;
+                }
+            }
         }
     }
 }

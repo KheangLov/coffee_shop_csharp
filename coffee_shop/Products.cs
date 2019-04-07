@@ -19,6 +19,7 @@ namespace coffee_shop
         private int stock_id;
         private int procate_id;
         private string image;
+        private double cut_from_stock;
 
         public Products()
         {
@@ -119,19 +120,32 @@ namespace coffee_shop
                 image = value;
             }
         }
+
+        public double CutFromStock
+        {
+            get
+            {
+                return cut_from_stock;
+            }
+            set
+            {
+                cut_from_stock = value;
+            }
+        }
         
         public override void insert()
         {
-            string query = @"INSERT INTO [coffee_shop].[dbo].[products](name, price, selling_price, type, sale, stock_id, procate_id, images) 
-                values('" + Name + "', " + Price + ", " + Selling_Price + ", '" + Type + "', " + Sale + ", " + Stock_id + ", " + Procate_id + ", '" + Image +"');";
+            string query = @"INSERT INTO [coffee_shop].[dbo].[products](name, price, selling_price, type, sale, stock_id, procate_id, images, cut_from_stock) 
+                values('" + Name + "', " + Price + ", " + Selling_Price + ", '" + Type + "', " + Sale + ", " + Stock_id + ", " + Procate_id + ", '" + Image +"', " + CutFromStock + ");";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();
         }
+
         public override void update(int id)
         {
             string query = @"UPDATE [coffee_shop].[dbo].[products] 
-                SET name = '" + Name + "', price = " + Price + ", selling_price = " + Selling_Price + ", type = '" + Type + "', sale = " + Sale + ", stock_id = " + Stock_id + ", procate_id = " + Procate_id + ", images = '" + Image + "' WHERE id = " + id + ";";
+                SET name = '" + Name + "', price = " + Price + ", selling_price = " + Selling_Price + ", type = '" + Type + "', sale = " + Sale + ", stock_id = " + Stock_id + ", procate_id = " + Procate_id + ", images = '" + Image + "', cut_from_stock = " + CutFromStock + " WHERE id = " + id + ";";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();

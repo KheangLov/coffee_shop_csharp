@@ -52,7 +52,7 @@ namespace coffee_shop
 
         public override void update(int id)
         {
-            string query = @"UPDATE [coffee_shop].[dbo].[stocks] 
+            string query = @"UPDATE [coffee_shop].[dbo].[stock_categories] 
                 SET name = '" + Name + "', descriptions ='" + Descriptions + "' WHERE id = " + id + ";";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();

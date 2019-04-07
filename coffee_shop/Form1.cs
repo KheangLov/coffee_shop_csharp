@@ -80,7 +80,7 @@ namespace coffee_shop
 
         private void stockCateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            new stock_categories_form().ShowDialog();
         }
 
         private void branchesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -106,6 +106,11 @@ namespace coffee_shop
         private void myEmloyeesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new employees_form().ShowDialog();
+        }
+
+        private void newProductToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new product_category_form().ShowDialog();
         }
     }
 }

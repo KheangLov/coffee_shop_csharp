@@ -195,6 +195,7 @@ namespace coffee_shop
                         addProductCategoryID();
                         my_products.Image = path;
                         my_products.Sale = 0;
+                        my_products.CutFromStock = double.Parse(txtStockCut.Text.Trim());
                         inter.insert();
                         MessageBox.Show("Insert successful!");
                         ClearTextBoxes(groupBoxProductForm);
@@ -208,11 +209,6 @@ namespace coffee_shop
             {
                 MessageBox.Show(ex.Message + "");
             }
-        }
-
-        private void btnAddProcate_Click(object sender, EventArgs e)
-        {
-            new product_category_form().ShowDialog();
         }
 
         private void products_form_FormClosing(object sender, FormClosingEventArgs e)
@@ -275,6 +271,7 @@ namespace coffee_shop
                             comboBoxProductStockID.SelectedItem = reader["stocks_name"].ToString();
                             comboBoxProductProcateID.SelectedItem = reader["procate_id"].ToString();
                             pictureBoxProductImage.ImageLocation = reader["images"].ToString();
+                            txtStockCut.Text = reader["cut_from_stock"].ToString();
                             btnProductEdit.Text = "Update";
                         }
                         command.Dispose();
@@ -289,9 +286,15 @@ namespace coffee_shop
                 {
                     try
                     {
-                        addProductCategoryID();
+                        my_products.Name = txtProductName.Text.Trim();
+                        my_products.Price = double.Parse(txtProductPrice.Text.Trim());
+                        my_products.Selling_Price = double.Parse(txtProductSellingPrice.Text.Trim());
+                        my_products.Type = txtProductType.Text.Trim();
                         addStocks();
+                        addProductCategoryID();
+                        my_products.Image = path;
                         my_products.Sale = 0;
+                        my_products.CutFromStock = double.Parse(txtStockCut.Text.Trim());
                         inter.update(proId);
                         MessageBox.Show("Update Successfully!");
                         ClearTextBoxes(groupBoxProductForm);

@@ -24,7 +24,9 @@ namespace coffee_shop
 
         private void Querystocks()
         {
-            string sql = "SELECT stocks.*, stock_categories.name AS stock_name FROM stocks INNER JOIN stock_categories ON stocks.stockcate_id = stock_categories.id;";
+            string sql = @"SELECT stocks.*, stock_categories.name AS stock_name 
+                        FROM stocks
+                        INNER JOIN stock_categories ON stocks.stockcate_id = stock_categories.id; ";
             SqlCommand com = new SqlCommand(sql, DataConn.Connection);
             SqlDataReader sqlr = com.ExecuteReader();
             while (sqlr.Read())
@@ -126,27 +128,6 @@ namespace coffee_shop
             sqld.Dispose();
         }
 
-        private void stock_form_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                btnDel.Enabled = false;
-                btnEdit.Enabled = false;
-                DataConn.Connection.Open();
-                loadComboBoxes("stock_categories");
-                loadComboBoxes("companies");
-                loadComboBoxes("branches");
-                cbstkcate.SelectedIndex = 0;
-                MyInter stock_inter = my_stock;
-                inter = stock_inter;
-                Querystocks();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
             try
@@ -189,6 +170,11 @@ namespace coffee_shop
                         lvStocks.Clear();
                         Querystocks();
                     }
+                }
+                else
+                {
+                    MessageBox.Show("Name can't be blank!");
+                    txtname.Focus();
                 }
             }
             catch(Exception ex)
@@ -278,29 +264,47 @@ namespace coffee_shop
         {
             if (lvStocks.SelectedItems.Count != 0)
             {
+                btnEdit.Enabled = false;
                 if (MessageBox.Show("Are you sure, you want to delete this stocks?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     ListViewItem del_item = lvStocks.SelectedItems[0];
                     int val = 0;
                     string name = del_item.SubItems[0].Text;
-                    string del_sql = "DELETE FROM stocks WHERE name = '" + name + "';";
+                    string del_sql = "DELETE FROM stocks WHERE LOWER(name) = '" + name.ToLower() + "';";
                     SqlCommand del_cmd = new SqlCommand(del_sql, DataConn.Connection);
                     val = del_cmd.ExecuteNonQuery();
                     del_cmd.Dispose();
                     MessageBox.Show("Stock has been deleted!");
                     lvStocks.Items.Clear();
                     Querystocks();
+                    btnDel.Enabled = false;
                 }
                 else
                 {
                     MessageBox.Show("No stock was deleted!", "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    btnDel.Enabled = false;
                 }
             }
         }
 
-        private void btnstockcat_Click(object sender, EventArgs e)
+        private void stockform_load(object sender, EventArgs e)
         {
-            new stock_categories_form().ShowDialog();
+            btnEdit.Enabled = false;
+            btnDel.Enabled = false;
+            DataConn.Connection.Open();
+            MyInter stock_inter = my_stock;
+            inter = stock_inter;
+            loadComboBoxes("stock_categories");
+            loadComboBoxes("companies");
+            loadComboBoxes("branches");
+            cbCompany.SelectedIndex = 0;
+            Querystocks();
+        }
+
+        private void stock_form_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DataConn.Connection.Close();
+            this.Dispose();
         }
     }
 }
