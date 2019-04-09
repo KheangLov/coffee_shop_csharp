@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -194,6 +195,9 @@ namespace coffee_shop
         {
             if (lvCart.Items.Count != 0)
             {
+                int stockId = 0;
+                double cutStock = 0;
+                int sale = 0;
                 int sum = 0;
                 string names = "";
                 for (int i = 0; i < lvCart.Items.Count; i++)
@@ -209,8 +213,36 @@ namespace coffee_shop
                         names = names + ", '" + item.SubItems[0].Text.ToLower() + "'";
                     }
                 }
-                //txtSearch.Text = names;
-                //string sale_sql = "UPDATE products SET sale = " + sum + "WHERE LOWER(name) IN (" + names + ");";
+                string sale_sql = "UPDATE products SET sale = " + sum + "WHERE LOWER(name) IN (" + names + ");";
+                SqlCommand sqld = new SqlCommand(sale_sql, DataConn.Connection);
+                int val = sqld.ExecuteNonQuery();
+                sqld.Dispose();
+                if(val > 0)
+                {
+                    MessageBox.Show("Pay success!");
+                }
+                string product_sql = "SELECT * FROM products WHERE LOWER(name) IN (" + names + ") && sale != 0;";
+                SqlCommand prod = new SqlCommand(product_sql, DataConn.Connection);
+                SqlDataReader pror = prod.ExecuteReader();
+                while(pror.Read())
+                {
+                    stockId = int.Parse(pror["stock_id"].ToString());
+                    cutStock = double.Parse(pror["cut_from_stock"].ToString()); 
+                    sale = int.Parse(pror["sale"].ToString());
+                    if(sale != 0)
+                    {
+                        prod.Dispose();
+                        pror.Close();
+                        goto updateStock;
+                    }
+                }
+                prod.Dispose();
+                pror.Close();
+                updateStock:
+                string upd_stock = "UPDATE stocks SET qty = qty - " + cutStock + "WHERE id = " + stockId + ";";
+                SqlCommand upqd = new SqlCommand(upd_stock, DataConn.Connection);
+                upqd.ExecuteNonQuery();
+                upqd.Dispose();
             }
         }
     }

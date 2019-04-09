@@ -119,6 +119,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Receipt.cs" />
     <Compile Include="Stock.cs" />
     <Compile Include="StockCategory.cs" />
     <Compile Include="stock_categories_form.cs">
