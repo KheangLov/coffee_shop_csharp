@@ -14,9 +14,13 @@ namespace coffee_shop
     public partial class company_form : Form
     {
         int uId;
-        public company_form(int id)
+        string uRole;
+        string uName;
+        public company_form(int id, string role, string name)
         {
             uId = id;
+            uRole = role;
+            uName = name;
             InitializeComponent();
         }
         Company my_company = new Company();
@@ -81,7 +85,11 @@ namespace coffee_shop
 
         private void QueryCompanies()
         {
-            string query = "SELECT companies.*, users.username FROM companies INNER JOIN users ON companies.user_id = users.id WHERE companies.user_id = " + uId + " ORDER BY name;";
+            string query = "";
+            if (uRole.ToLower() == "superadmin")
+                query = "SELECT companies.*, users.username FROM companies INNER JOIN users ON companies.user_id = users.id ORDER BY name;";
+            else
+                query = "SELECT companies.*, users.username FROM companies INNER JOIN users ON companies.user_id = users.id WHERE companies.user_id = " + uId + " ORDER BY name;";
             SqlCommand sqld = new SqlCommand(query, DataConn.Connection);
             SqlDataReader sqlr = sqld.ExecuteReader();
             while (sqlr.Read())
@@ -111,7 +119,7 @@ namespace coffee_shop
                 MessageBox.Show(ex.Message);
             }
             loadComboUser();
-            cbUser.SelectedIndex = 0;
+            cbUser.SelectedItem = sc.ToCapitalize(uName);
         }
 
         private void btnExit_Click(object sender, EventArgs e)

@@ -182,6 +182,7 @@
             this.cbCompany.Name = "cbCompany";
             this.cbCompany.Size = new System.Drawing.Size(153, 30);
             this.cbCompany.TabIndex = 18;
+            this.cbCompany.SelectedIndexChanged += new System.EventHandler(this.cbCompany_SelectedIndexChanged);
             // 
             // label9
             // 
@@ -465,6 +466,7 @@
             this.btnExit.TabIndex = 18;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // employees_form
             // 
@@ -479,7 +481,9 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.lvEmployees);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "employees_form";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Employee Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.employees_form_FormClosing);
             this.Load += new System.EventHandler(this.employees_form_Load);

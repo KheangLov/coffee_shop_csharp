@@ -19,6 +19,7 @@ namespace coffee_shop
         }
         HashCode hc = new HashCode();
         string user_role = "";
+        string user_name = "";
         int user_id;
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -33,6 +34,7 @@ namespace coffee_shop
                 while(sqlr.Read())
                 {
                     user_id = int.Parse(sqlr["id"].ToString());
+                    user_name = sqlr["username"].ToString();
                     user_role = sqlr["role_name"].ToString();
                 }
                 sqld.Dispose();
@@ -45,7 +47,10 @@ namespace coffee_shop
                 {
                     this.Hide();
                     DataConn.Connection.Close();
-                    new Main(user_role, user_id).Show();
+                    if (user_role.ToLower() == "superadmin")
+                        new Mainsa_Form(user_role, user_id, user_name).Show();
+                    else
+                        new Main(user_role, user_id, user_name).Show();
                 }
                 else
                 {

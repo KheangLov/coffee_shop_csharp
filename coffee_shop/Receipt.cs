@@ -20,6 +20,7 @@ namespace coffee_shop
         private int employee_id;
         private int company_id;
         private int branch_id;
+        private string type;
 
         public Receipt()
         {
@@ -146,10 +147,22 @@ namespace coffee_shop
             }
         }
 
+        public string Type
+        {
+            get
+            {
+                return type;
+            }
+            set
+            {
+                type = value;
+            }
+        }
+
         public override void insert()
         {
-            string query = @"INSERT INTO [coffee_shop].[dbo].[receipts](number, address, product_id, qty, price, total, discount, employee_id, company_id, branch_id) 
-                values(" + Number + ", '" + Address + "', " + ProductId + ", " + Qty + ", " + Price + ", " + Total + ", " + Discount + ", " + EmployeeId + ", " + CompanyId + ", " + BranchId + ");";
+            string query = @"INSERT INTO [coffee_shop].[dbo].[receipts](number, address, product_id, qty, price, total, discount, employee_id, company_id, branch_id, type) 
+                values(" + Number + ", '" + Address + "', " + ProductId + ", " + Qty + ", " + Price + ", " + Total + ", " + Discount + ", " + EmployeeId + ", " + CompanyId + ", " + BranchId + ", '" + Type + "');";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();
@@ -158,7 +171,7 @@ namespace coffee_shop
         public override void update(int id)
         {
             string query = @"UPDATE [coffee_shop].[dbo].[receipts] 
-                SET number = " + Number + ", address = '" + Address + "', product_id = " + ProductId + ", qty = " + Qty + ", price = " + Price + ", total = " + Total + ", discount = " + Discount + ", employee_id = " + EmployeeId + ", company_id = " + CompanyId + ", branch_id = " + BranchId + " WHERE id = " + id + ";";
+                SET number = " + Number + ", address = '" + Address + "', product_id = " + ProductId + ", qty = " + Qty + ", price = " + Price + ", total = " + Total + ", discount = " + Discount + ", employee_id = " + EmployeeId + ", company_id = " + CompanyId + ", branch_id = " + BranchId + ", type = '" + Type + "' WHERE id = " + id + ";";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();

@@ -13,8 +13,10 @@ namespace coffee_shop
 {
     public partial class product_category_form : Form
     {
-        public product_category_form()
+        string uRole;
+        public product_category_form(string role)
         {
+            uRole = role;
             InitializeComponent();
         }
         ProductCategory procate = new ProductCategory();
@@ -53,6 +55,10 @@ namespace coffee_shop
 
         private void add_product_category_form_Load(object sender, EventArgs e)
         {
+            if (uRole.ToLower() == "user")
+                btnAdd.Enabled = false;
+            else
+                btnAdd.Enabled = true;
             btnEdit.Enabled = false;
             btnDelete.Enabled = false;
             MyInter procate_inter = procate;
@@ -64,12 +70,14 @@ namespace coffee_shop
         {
             try
             {
-                DataConn.Connection.Open();
                 if (txtName.Text != "")
                 {
+                    DataConn.Connection.Open();
                     string query_name = "SELECT COUNT(*) FROM product_categories WHERE LOWER(name) = '" + txtName.Text.ToLower() + "';";
                     SqlCommand check_name = new SqlCommand(query_name, DataConn.Connection);
                     int nName = Convert.ToInt16(check_name.ExecuteScalar());
+                    check_name.Dispose();
+                    DataConn.Connection.Close();
                     if (nName != 0)
                     {
                         MessageBox.Show("Product Category already exist!");
@@ -80,13 +88,16 @@ namespace coffee_shop
                     {
                         procate.Name = txtName.Text.Trim();
                         procate.Descriptions = txtDescriptions.Text.Trim();
+                        DataConn.Connection.Open();
                         inter.insert();
+                        DataConn.Connection.Close();
                         MessageBox.Show("Insert succcessfully");
                         ClearTextBoxes(gpAddproductCategory);
                         txtName.Focus();
+                        lvProCate.Items.Clear();
+                        QueryProCate();
                     }
                 }
-                DataConn.Connection.Close();
             }
             catch(Exception ex)
             {
@@ -106,7 +117,7 @@ namespace coffee_shop
 
         private void lvProCate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lvProCate.SelectedItems.Count != 0)
+            if (lvProCate.SelectedItems.Count != 0 && uRole.ToLower() == "user")
             {
                 btnEdit.Enabled = true;
                 btnDelete.Enabled = true;
@@ -125,6 +136,7 @@ namespace coffee_shop
                 btnEdit.Enabled = false;
                 if (MessageBox.Show("Are you sure, you want to delete this product category?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
+                    DataConn.Connection.Open();
                     ListViewItem del_item = lvProCate.SelectedItems[0];
                     int val = 0;
                     string name = del_item.SubItems[0].Text;
@@ -132,6 +144,7 @@ namespace coffee_shop
                     SqlCommand del_cmd = new SqlCommand(del_sql, DataConn.Connection);
                     val = del_cmd.ExecuteNonQuery();
                     del_cmd.Dispose();
+                    DataConn.Connection.Close();
                     MessageBox.Show("Product category has been deleted!");
                     lvProCate.Items.Clear();
                     QueryProCate();

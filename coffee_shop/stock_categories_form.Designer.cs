@@ -124,7 +124,7 @@
             this.lvStockCate.GridLines = true;
             this.lvStockCate.Location = new System.Drawing.Point(452, 15);
             this.lvStockCate.Name = "lvStockCate";
-            this.lvStockCate.Size = new System.Drawing.Size(466, 200);
+            this.lvStockCate.Size = new System.Drawing.Size(406, 196);
             this.lvStockCate.TabIndex = 3;
             this.lvStockCate.UseCompatibleStateImageBehavior = false;
             this.lvStockCate.View = System.Windows.Forms.View.Details;
@@ -133,12 +133,12 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Name";
-            this.columnHeader1.Width = 192;
+            this.columnHeader1.Width = 183;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Descriptions";
-            this.columnHeader2.Width = 265;
+            this.columnHeader2.Width = 216;
             // 
             // btnDelete
             // 
@@ -166,7 +166,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(930, 227);
+            this.ClientSize = new System.Drawing.Size(872, 227);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.lvStockCate);

@@ -13,8 +13,10 @@ namespace coffee_shop
 {
     public partial class stock_categories_form : Form
     {
-        public stock_categories_form()
+        string uRole;
+        public stock_categories_form(string role)
         {
+            uRole = role;
             InitializeComponent();
         }
         StockCategory my_stockcate = new StockCategory();
@@ -25,7 +27,7 @@ namespace coffee_shop
         private void QueryStockCate()
         {
             DataConn.Connection.Open();
-            string sql = @"SELECT * FROM stock_categories;";
+            string sql = "SELECT * FROM stock_categories;";
             SqlCommand com = new SqlCommand(sql, DataConn.Connection);
             SqlDataReader sqlr = com.ExecuteReader();
             while (sqlr.Read())
@@ -58,21 +60,15 @@ namespace coffee_shop
 
         private void stock_categories_form_Load(object sender, EventArgs e)
         {
+            if (uRole.ToLower() == "user")
+                btnAdd.Enabled = false;
+            else
+                btnAdd.Enabled = true;
             btnEdit.Enabled = false;
             btnDelete.Enabled = false;
             MyInter stockcat_inter = my_stockcate;
             inter = stockcat_inter;
             QueryStockCate();
-        }
-
-        private void txtName_Leave(object sender, EventArgs e)
-        {
-            my_stockcate.Name = txtName.Text.Trim();
-        }
-
-        private void txtName_TextChanged(object sender, EventArgs e)
-        {
-            my_stockcate.Name = txtName.Text.Trim();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -86,9 +82,12 @@ namespace coffee_shop
             {
                 if (txtName.Text != "")
                 {
+                    DataConn.Connection.Open();
                     string query_name = "SELECT COUNT(*) FROM stock_categories WHERE LOWER(name) = '" + txtName.Text.ToLower() + "';";
                     SqlCommand check_name = new SqlCommand(query_name, DataConn.Connection);
                     int nName = Convert.ToInt16(check_name.ExecuteScalar());
+                    check_name.Dispose();
+                    DataConn.Connection.Close();
                     if (nName != 0)
                     {
                         MessageBox.Show("Stock category already exist!");
@@ -104,7 +103,7 @@ namespace coffee_shop
                         DataConn.Connection.Close();
                         MessageBox.Show("Insert successful!");
                         ClearTextBoxes(groupBox1);
-                        lvStockCate.Clear();
+                        lvStockCate.Items.Clear();
                         QueryStockCate();
                     }
                 }
@@ -122,7 +121,7 @@ namespace coffee_shop
 
         private void lvStockCate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lvStockCate.SelectedItems.Count != 0)
+            if (lvStockCate.SelectedItems.Count != 0 && uRole.ToLower() != "user")
             {
                 btnEdit.Enabled = true;
                 btnDelete.Enabled = true;
@@ -179,8 +178,10 @@ namespace coffee_shop
         {
             if (lvStockCate.SelectedItems.Count != 0)
             {
+                btnEdit.Enabled = false;
                 if (MessageBox.Show("Are you sure, you want to delete this stock category?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
+                    DataConn.Connection.Open();
                     ListViewItem del_item = lvStockCate.SelectedItems[0];
                     int val = 0;
                     string name = del_item.SubItems[0].Text;
@@ -188,6 +189,7 @@ namespace coffee_shop
                     SqlCommand del_cmd = new SqlCommand(del_sql, DataConn.Connection);
                     val = del_cmd.ExecuteNonQuery();
                     del_cmd.Dispose();
+                    DataConn.Connection.Close();
                     MessageBox.Show("Stock Categories has been deleted!");
                     lvStockCate.Items.Clear();
                     QueryStockCate();

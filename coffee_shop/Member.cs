@@ -7,17 +7,15 @@ using System.Threading.Tasks;
 
 namespace coffee_shop
 {
-    class Supplier : Db_Insert
+    class Member : Db_Insert
     {
         SqlCommand sqld;
         private string name;
-        private string address;
-        private string phone;
-        private string email;
+        private int user_id;
         private int company_id;
-        private int branch_id;        
+        private int branch_id;
 
-        public Supplier()
+        public Member()
         {
 
         }
@@ -34,39 +32,15 @@ namespace coffee_shop
             }
         }
 
-        public string Address
+        public int UserId
         {
             get
             {
-                return address;
+                return user_id;
             }
             set
             {
-                address = value;
-            }
-        }
-
-        public string Phone
-        {
-            get
-            {
-                return phone;
-            }
-            set
-            {
-                phone = value;
-            }
-        }
-
-        public string Email
-        {
-            get
-            {
-                return email;
-            }
-            set
-            {
-                email = value;
+                user_id = value;
             }
         }
 
@@ -96,8 +70,8 @@ namespace coffee_shop
 
         public override void insert()
         {
-            string query = @"INSERT INTO [coffee_shop].[dbo].[suppliers](name, address, phone, email, company_id, branch_id) 
-                values('" + Name + "', '" + Address + "', '" + Phone + "', '" + Email + "', " + CompanyId + ", " + BranchId + ");";
+            string query = @"INSERT INTO [coffee_shop].[dbo].[members](name, user_id, company_id, branch_id) 
+                values('" + Name + "', " + UserId + ", " + CompanyId + ", " + BranchId + ");";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();
@@ -105,8 +79,8 @@ namespace coffee_shop
 
         public override void update(int id)
         {
-            string query = @"UPDATE [coffee_shop].[dbo].[suppliers] 
-                SET name = '" + Name + "', address ='" + Address + "', phone = '" + Phone + "', email = '" + Email + "', company_id = " + CompanyId + ", branch_id = " + BranchId + " WHERE id = " + id + ";";
+            string query = @"UPDATE [coffee_shop].[dbo].[members] 
+                SET name = '" + Name + "', user_id = " + UserId + ", company_id = " + CompanyId + ", branch_id = " + BranchId + " WHERE id = " + id + ";";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();

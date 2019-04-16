@@ -54,12 +54,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutCoffeeShop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutCoffeeShop.Designer.cs">
+      <DependentUpon>AboutCoffeeShop.cs</DependentUpon>
+    </Compile>
     <Compile Include="Employees.cs" />
     <Compile Include="employees_form.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="employees_form.Designer.cs">
       <DependentUpon>employees_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mainsa_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mainsa_Form.Designer.cs">
+      <DependentUpon>Mainsa_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Member.cs" />
+    <Compile Include="member_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="member_form.Designer.cs">
+      <DependentUpon>member_form.cs</DependentUpon>
     </Compile>
     <Compile Include="product_category_form.cs">
       <SubType>Form</SubType>
@@ -149,8 +168,17 @@
     <Compile Include="users_form.Designer.cs">
       <DependentUpon>users_form.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AboutCoffeeShop.resx">
+      <DependentUpon>AboutCoffeeShop.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="employees_form.resx">
       <DependentUpon>employees_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mainsa_Form.resx">
+      <DependentUpon>Mainsa_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="member_form.resx">
+      <DependentUpon>member_form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="product_category_form.resx">
       <DependentUpon>product_category_form.cs</DependentUpon>

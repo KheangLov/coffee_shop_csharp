@@ -177,6 +177,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "product_category_form";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Product Category";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.product_category_form_FormClosing);
             this.Load += new System.EventHandler(this.add_product_category_form_Load);

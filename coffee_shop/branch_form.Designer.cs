@@ -51,6 +51,7 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.txtSearch = new System.Windows.Forms.TextBox();
+            this.cbByCompany = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -242,7 +243,7 @@
             this.lvBranch.GridLines = true;
             this.lvBranch.Location = new System.Drawing.Point(505, 48);
             this.lvBranch.Name = "lvBranch";
-            this.lvBranch.Size = new System.Drawing.Size(522, 266);
+            this.lvBranch.Size = new System.Drawing.Size(600, 266);
             this.lvBranch.TabIndex = 8;
             this.lvBranch.UseCompatibleStateImageBehavior = false;
             this.lvBranch.View = System.Windows.Forms.View.Details;
@@ -266,27 +267,40 @@
             // columnHeader4
             // 
             this.columnHeader4.Text = "Address";
-            this.columnHeader4.Width = 98;
+            this.columnHeader4.Width = 156;
             // 
             // columnHeader5
             // 
             this.columnHeader5.Text = "Company";
-            this.columnHeader5.Width = 99;
+            this.columnHeader5.Width = 117;
             // 
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(731, 12);
+            this.txtSearch.Location = new System.Drawing.Point(874, 12);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(296, 27);
+            this.txtSearch.Size = new System.Drawing.Size(231, 27);
             this.txtSearch.TabIndex = 13;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
+            // cbByCompany
+            // 
+            this.cbByCompany.Font = new System.Drawing.Font("Montserrat", 10F);
+            this.cbByCompany.FormattingEnabled = true;
+            this.cbByCompany.Items.AddRange(new object[] {
+            "All"});
+            this.cbByCompany.Location = new System.Drawing.Point(742, 12);
+            this.cbByCompany.Name = "cbByCompany";
+            this.cbByCompany.Size = new System.Drawing.Size(126, 26);
+            this.cbByCompany.TabIndex = 14;
+            this.cbByCompany.SelectedIndexChanged += new System.EventHandler(this.cbByCompany_SelectedIndexChanged);
             // 
             // branch_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1039, 337);
+            this.ClientSize = new System.Drawing.Size(1117, 329);
+            this.Controls.Add(this.cbByCompany);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.lvBranch);
             this.Controls.Add(this.btnExit);
@@ -298,6 +312,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "branch_form";
             this.Text = "Branch Form";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.branch_form_FormClosing);
             this.Load += new System.EventHandler(this.branch_form_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -331,5 +346,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ComboBox cbByCompany;
     }
 }

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("coffee_shop")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Coffee Shop Management System")]
+[assembly: AssemblyDescription("This program build to manage coffee shops.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("coffee_shop")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyCompany("Coffee Shop")]
+[assembly: AssemblyProduct("Coffee Shop Management System")]
+[assembly: AssemblyCopyright("Copyright © SETEC SO10(SA_GROUP_2) 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -13,25 +13,33 @@ namespace coffee_shop
 {
     public partial class stock_form : Form
     {
-        public stock_form()
+        string comId;
+        string uRole;
+        public stock_form(string com_id, string role)
         {
+            comId = com_id;
+            uRole = role;
             InitializeComponent();
         }
         Stock my_stock = new Stock();
         StringCapitalize sc = new StringCapitalize();
         MyInter inter;
         int stockId;
+        int cId;
 
         private void Querystocks()
         {
-            string sql = @"SELECT stocks.*, stock_categories.name AS stock_name 
+            string sql = @"SELECT stocks.*, stock_categories.name AS stock_name , companies.name AS company_name, branches.name AS branch_name
                         FROM stocks
-                        INNER JOIN stock_categories ON stocks.stockcate_id = stock_categories.id; ";
+                        INNER JOIN stock_categories ON stocks.stockcate_id = stock_categories.id
+                        INNER JOIN companies ON stocks.company_id = companies.id
+                        INNER JOIN branches ON stocks.branch_id = branches.id
+                        WHERE stocks.company_id IN (" + comId + ");";
             SqlCommand com = new SqlCommand(sql, DataConn.Connection);
             SqlDataReader sqlr = com.ExecuteReader();
             while (sqlr.Read())
             {
-                string[] stock_info = { sc.ToCapitalize(sqlr["name"].ToString()), sqlr["expired_date"].ToString(), sqlr["qty"].ToString(), sc.ToCapitalize(sqlr["price"].ToString()), sqlr["selling_price"].ToString(), sqlr["alert_qty"].ToString(), sqlr["stock_name"].ToString() };
+                string[] stock_info = { sc.ToCapitalize(sqlr["name"].ToString()), sqlr["expired_date"].ToString(), sqlr["qty"].ToString(), sc.ToCapitalize(sqlr["price"].ToString()), sqlr["selling_price"].ToString(), sqlr["alert_qty"].ToString(), sqlr["stock_name"].ToString(), sc.ToCapitalize(sqlr["company_name"].ToString()), sc.ToCapitalize(sqlr["branch_name"].ToString()) };
                 ListViewItem item = new ListViewItem(stock_info);
                 lvStocks.Items.Add(item);
             }
@@ -39,27 +47,58 @@ namespace coffee_shop
             sqlr.Close();
         }
 
-        private void loadComboBoxes(string tblName)
+        private void loadComboStockCate()
         {
-            string sql = "SELECT * FROM " + tblName.ToLower() + ";";
+            string sql = "SELECT * FROM stock_categories;";
             SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
             SqlDataReader sqlr = sqld.ExecuteReader();
             while (sqlr.Read())
             {
-                switch(tblName.ToLower())
-                {
-                    case "stock_categories":
-                        cbstkcate.Items.Add(sqlr["name"].ToString());
-                        break;
-                    case "companies":
-                        cbCompany.Items.Add(sqlr["name"].ToString());
-                        break;
-                    case "branches":
-                        cbBranch.Items.Add(sqlr["name"].ToString());
-                        break;
-                    default:
-                        break;
-                }
+                cbstkcate.Items.Add(sc.ToCapitalize(sqlr["name"].ToString()));
+            }
+            sqlr.Close();
+            sqld.Dispose();
+        }
+
+        private void loadComboCompany()
+        {
+            string sql = "SELECT * FROM companies WHERE id IN (" + comId + ");";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = sqld.ExecuteReader();
+            while (sqlr.Read())
+            {
+                cbCompany.Items.Add(sc.ToCapitalize(sqlr["name"].ToString()));
+                cbByCompany.Items.Add(sc.ToCapitalize(sqlr["name"].ToString()));
+            }
+            sqlr.Close();
+            sqld.Dispose();
+        }
+
+        private void loadComboBranch()
+        {
+            string sql = "SELECT * FROM branches WHERE company_id IN (" + comId + ");";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = sqld.ExecuteReader();
+            while (sqlr.Read())
+            {
+                cbBranch.Items.Add(sc.ToCapitalize(sqlr["name"].ToString()));
+            }
+            sqlr.Close();
+            sqld.Dispose();
+        }
+
+        private void loadComboByBranch()
+        {
+            string sql = "";
+            if (cbByCompany.SelectedItem.ToString().ToLower() == "all")
+                sql = "SELECT * FROM branches WHERE company_id IN (" + comId + ");";
+            else
+                sql = "SELECT * FROM branches WHERE company_id = " + cId + ";";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = sqld.ExecuteReader();
+            while (sqlr.Read())
+            {
+                cbByBranch.Items.Add(sc.ToCapitalize(sqlr["name"].ToString()));
             }
             sqlr.Close();
             sqld.Dispose();
@@ -128,6 +167,19 @@ namespace coffee_shop
             sqld.Dispose();
         }
 
+        private void getByCompany()
+        {
+            string sql = "SELECT * FROM companies WHERE LOWER(name) = '" + cbByCompany.Text.ToLower() + "';";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = sqld.ExecuteReader();
+            if (sqlr.Read())
+            {
+                cId = int.Parse(sqlr["id"].ToString());
+            }
+            sqld.Dispose();
+            sqlr.Close();
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             try
@@ -145,7 +197,7 @@ namespace coffee_shop
                     }
                     else
                     {
-                        my_stock.Name = txtname.Text;
+                        my_stock.Name = txtname.Text.Trim();
                         my_stock.ImportedDate = DateTime.Now.ToString("yyyy-MM-dd");
                         my_stock.ExpiredDate = DateTime.Parse(dtpExp.Text).ToString("yyyy-MM-dd");
                         my_stock.Quantity = decimal.Parse(txtqty.Text);
@@ -167,7 +219,7 @@ namespace coffee_shop
                         MessageBox.Show("Insert successfully!");
                         ClearTextBoxes(groupBox1);
                         txtname.Focus();
-                        lvStocks.Clear();
+                        lvStocks.Items.Clear();
                         Querystocks();
                     }
                 }
@@ -197,9 +249,11 @@ namespace coffee_shop
                 {
                     ListViewItem list_item = lvStocks.SelectedItems[0];
                     string name = list_item.SubItems[0].Text;
-                    string sql = @"SELECT stocks.*, stock_categories.name AS stock_name FROM stocks 
+                    string sql = @"SELECT stocks.*, stock_categories.name AS stock_name, companies.name AS company_name, branches.name AS branch_name FROM stocks 
                         INNER JOIN stock_categories ON stocks.stockcate_id = stock_categories.id 
-                        WHERE LOWER(stocks.name) = '" + name.ToLower() + "';";
+                        INNER JOIN companies ON stocks.company_id = companies.id
+                        INNER JOIN branches ON stocks.branch_id = branches.id
+                        WHERE stocks.company_id IN (" + comId + ") AND LOWER(stocks.name) = '" + name.ToLower() + "';";
                     SqlCommand upd_cmd = new SqlCommand(sql, DataConn.Connection);
                     SqlDataReader upd_rd = upd_cmd.ExecuteReader();
                     while (upd_rd.Read())
@@ -211,7 +265,9 @@ namespace coffee_shop
                         txtprice.Text = upd_rd["price"].ToString();
                         txtsellingprice.Text = upd_rd["selling_price"].ToString();
                         txtaltqty.Text = upd_rd["alert_qty"].ToString();
-                        cbstkcate.SelectedText = upd_rd["stock_name"].ToString();
+                        cbstkcate.SelectedItem = upd_rd["stock_name"].ToString();
+                        cbCompany.SelectedItem = upd_rd["company_name"].ToString();
+                        cbBranch.SelectedItem = upd_rd["branch_name"].ToString();
                     }
                     upd_cmd.Dispose();
                     upd_rd.Close();
@@ -248,7 +304,7 @@ namespace coffee_shop
 
         private void lvStocks_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lvStocks.SelectedItems.Count != 0)
+            if (lvStocks.SelectedItems.Count != 0 && uRole.ToLower() != "user")
             {
                 btnEdit.Enabled = true;
                 btnDel.Enabled = true;
@@ -289,15 +345,30 @@ namespace coffee_shop
 
         private void stockform_load(object sender, EventArgs e)
         {
+            if (uRole.ToLower() == "user")
+                btnAdd.Enabled = false;
+            else
+                btnAdd.Enabled = true;
             btnEdit.Enabled = false;
             btnDel.Enabled = false;
             DataConn.Connection.Open();
             MyInter stock_inter = my_stock;
             inter = stock_inter;
-            loadComboBoxes("stock_categories");
-            loadComboBoxes("companies");
-            loadComboBoxes("branches");
+            loadComboStockCate();
+            if(cbstkcate.Items.Count > 0)
+                cbstkcate.SelectedIndex = 0;
+            loadComboCompany();
             cbCompany.SelectedIndex = 0;
+            cbByCompany.SelectedIndex = 0;
+            getByCompany();
+            loadComboBranch();
+            cbBranch.SelectedIndex = 0;
+            cbByBranch.Items.Clear();
+            cbByBranch.Items.Add("All");
+            loadComboByBranch();
+            if (cbByBranch.Items.Count > 0)
+                cbByBranch.SelectedIndex = 0;
+            lvStocks.Items.Clear();
             Querystocks();
         }
 
@@ -305,6 +376,121 @@ namespace coffee_shop
         {
             DataConn.Connection.Close();
             this.Dispose();
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            lvStocks.Items.Clear();
+            string search_query = @"SELECT stocks.*, stock_categories.name AS stock_name , companies.name AS company_name, branches.name AS branch_name
+                            FROM stocks
+                            INNER JOIN stock_categories ON stocks.stockcate_id = stock_categories.id
+                            INNER JOIN companies ON stocks.company_id = companies.id
+                            INNER JOIN branches ON stocks.branch_id = branches.id
+                            WHERE stocks.company_id IN (" + comId + ") AND stocks.name LIKE '%" + txtSearch.Text.Trim().ToLower() + "%';";
+            SqlCommand srh_cmd = new SqlCommand(search_query, DataConn.Connection);
+            SqlDataReader srh_rd = srh_cmd.ExecuteReader();
+            while (srh_rd.Read())
+            {
+                string[] stock_info = { sc.ToCapitalize(srh_rd["name"].ToString()), srh_rd["expired_date"].ToString(), srh_rd["qty"].ToString(), sc.ToCapitalize(srh_rd["price"].ToString()), srh_rd["selling_price"].ToString(), srh_rd["alert_qty"].ToString(), srh_rd["stock_name"].ToString(), sc.ToCapitalize(srh_rd["company_name"].ToString()), sc.ToCapitalize(srh_rd["branch_name"].ToString()) };
+                ListViewItem item = new ListViewItem(stock_info);
+                lvStocks.Items.Add(item);
+            }
+            srh_cmd.Dispose();
+            srh_rd.Close();
+        }
+
+        private void cbByCompany_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            getByCompany();
+            cbByBranch.Items.Clear();
+            cbByBranch.Items.Add("All");
+            loadComboByBranch();
+            if (cbByBranch.Items.Count > 0)
+                cbByBranch.SelectedIndex = 0;
+            else
+                cbByBranch.Text = "";
+            string sql = "";
+            if(cbByCompany.SelectedItem.ToString().ToLower() == "all" && cbByBranch.SelectedItem.ToString().ToLower() == "all")
+            {
+                sql = @"SELECT stocks.*, stock_categories.name AS stock_name , companies.name AS company_name, branches.name AS branch_name
+                        FROM stocks
+                        INNER JOIN stock_categories ON stocks.stockcate_id = stock_categories.id
+                        INNER JOIN companies ON stocks.company_id = companies.id
+                        INNER JOIN branches ON stocks.branch_id = branches.id
+                        WHERE stocks.company_id IN (" + comId + ");";
+            }
+            else if(cbByCompany.SelectedItem.ToString().ToLower() != "all" && cbByBranch.SelectedItem.ToString().ToLower() == "all")
+            {
+                sql = @"SELECT stocks.*, stock_categories.name AS stock_name , companies.name AS company_name, branches.name AS branch_name
+                        FROM stocks
+                        INNER JOIN stock_categories ON stocks.stockcate_id = stock_categories.id
+                        INNER JOIN companies ON stocks.company_id = companies.id
+                        INNER JOIN branches ON stocks.branch_id = branches.id
+                        WHERE LOWER(companies.name) = '" + cbByCompany.Text.ToLower() + "';";
+            }
+            else
+            {
+                sql = @"SELECT stocks.*, stock_categories.name AS stock_name , companies.name AS company_name, branches.name AS branch_name
+                        FROM stocks
+                        INNER JOIN stock_categories ON stocks.stockcate_id = stock_categories.id
+                        INNER JOIN companies ON stocks.company_id = companies.id
+                        INNER JOIN branches ON stocks.branch_id = branches.id
+                        WHERE LOWER(companies.name) = '" + cbByCompany.Text.ToLower() + "' AND LOWER(branches.name) = '" + cbByBranch.Text.ToLower() + "';";
+            }
+            SqlCommand com = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = com.ExecuteReader();
+            lvStocks.Items.Clear();
+            while (sqlr.Read())
+            {
+                string[] stock_info = { sc.ToCapitalize(sqlr["name"].ToString()), sqlr["expired_date"].ToString(), sqlr["qty"].ToString(), sc.ToCapitalize(sqlr["price"].ToString()), sqlr["selling_price"].ToString(), sqlr["alert_qty"].ToString(), sqlr["stock_name"].ToString(), sc.ToCapitalize(sqlr["company_name"].ToString()), sc.ToCapitalize(sqlr["branch_name"].ToString()) };
+                ListViewItem item = new ListViewItem(stock_info);
+                lvStocks.Items.Add(item);
+            }
+            com.Dispose();
+            sqlr.Close();
+        }
+
+        private void cbByBranch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string sql = "";
+            if (cbByCompany.SelectedItem.ToString().ToLower() == "all" && cbByBranch.SelectedItem.ToString().ToLower() == "all")
+            {
+                sql = @"SELECT stocks.*, stock_categories.name AS stock_name , companies.name AS company_name, branches.name AS branch_name
+                        FROM stocks
+                        INNER JOIN stock_categories ON stocks.stockcate_id = stock_categories.id
+                        INNER JOIN companies ON stocks.company_id = companies.id
+                        INNER JOIN branches ON stocks.branch_id = branches.id
+                        WHERE stocks.company_id IN (" + comId + ");";
+            }
+            else if (cbByCompany.SelectedItem.ToString().ToLower() != "all" && cbByBranch.SelectedItem.ToString().ToLower() == "all")
+            {
+                sql = @"SELECT stocks.*, stock_categories.name AS stock_name , companies.name AS company_name, branches.name AS branch_name
+                        FROM stocks
+                        INNER JOIN stock_categories ON stocks.stockcate_id = stock_categories.id
+                        INNER JOIN companies ON stocks.company_id = companies.id
+                        INNER JOIN branches ON stocks.branch_id = branches.id
+                        WHERE LOWER(companies.name) = '" + cbByCompany.Text.ToLower() + "';";
+            }
+            else
+            {
+                sql = @"SELECT stocks.*, stock_categories.name AS stock_name , companies.name AS company_name, branches.name AS branch_name
+                        FROM stocks
+                        INNER JOIN stock_categories ON stocks.stockcate_id = stock_categories.id
+                        INNER JOIN companies ON stocks.company_id = companies.id
+                        INNER JOIN branches ON stocks.branch_id = branches.id
+                        WHERE LOWER(companies.name) = '" + cbByCompany.Text.ToLower() + "' AND LOWER(branches.name) = '" + cbByBranch.Text.ToLower() + "';";
+            }
+            SqlCommand com = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = com.ExecuteReader();
+            lvStocks.Items.Clear();
+            while (sqlr.Read())
+            {
+                string[] stock_info = { sc.ToCapitalize(sqlr["name"].ToString()), sqlr["expired_date"].ToString(), sqlr["qty"].ToString(), sc.ToCapitalize(sqlr["price"].ToString()), sqlr["selling_price"].ToString(), sqlr["alert_qty"].ToString(), sqlr["stock_name"].ToString(), sc.ToCapitalize(sqlr["company_name"].ToString()), sc.ToCapitalize(sqlr["branch_name"].ToString()) };
+                ListViewItem item = new ListViewItem(stock_info);
+                lvStocks.Items.Add(item);
+            }
+            com.Dispose();
+            sqlr.Close();
         }
     }
 }

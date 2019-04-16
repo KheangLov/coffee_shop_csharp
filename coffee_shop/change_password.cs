@@ -36,16 +36,6 @@ namespace coffee_shop
             }
         }
 
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtOldPass_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void txtOldPass_leave(object sender, EventArgs e)
         {
             if(hc.PassHash(txtOldPass.Text.Trim()) != oldPass)

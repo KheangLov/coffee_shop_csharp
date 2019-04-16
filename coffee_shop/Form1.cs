@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,26 +15,106 @@ namespace coffee_shop
     {
         string uRole;
         int uId;
-        public Main(string role, int id)
+        string uName;
+        string com_id = "";
+        public Main(string role, int id, string name)
         {
             uRole = role;
             uId = id;
+            uName = name;
             InitializeComponent();
         }
+        string cid = "";
 
-        private void insertUsersToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CheckStock()
         {
-
+            DataConn.Connection.Open();
+            string sql = "SELECT COUNT(*) FROM stocks WHERE alerted = 1 AND company_id IN(" + com_id + ");";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            int count_alert = Convert.ToInt16(sqld.ExecuteScalar());
+            sqld.Dispose();
+            DataConn.Connection.Close();
+            if(count_alert > 0)
+            {
+                lbAlert.Text = "Please update your stock!";
+            }
         }
 
-        private void allUsersToolStripMenuItem_Click(object sender, EventArgs e)
+        private void GetUserCompany()
         {
+            DataConn.Connection.Open();
+            string sql = "SELECT * FROM companies WHERE user_id = " + uId + ";";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = sqld.ExecuteReader();
+            int i = 0;
+            while (sqlr.Read())
+            {
+                if(i == 0)
+                    com_id += sqlr["id"].ToString();
+                else
+                    com_id += ", " + sqlr["id"].ToString();
+                i++;
+            }
+            sqld.Dispose();
+            sqlr.Close();
+            DataConn.Connection.Close();
+        }
 
+        private int CheckBranch()
+        {
+            DataConn.Connection.Open();
+            string sql = "SELECT COUNT(*) FROM branches WHERE company_id IN (" + com_id + ");";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            int count = Convert.ToInt16(sqld.ExecuteScalar());
+            sqld.Dispose();
+            DataConn.Connection.Close();
+            return count;
+        }
+
+        private int CheckCompany()
+        {
+            DataConn.Connection.Open();
+            string sql = "SELECT COUNT(*) FROM companies WHERE user_id = " + uId + ";";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            int count = Convert.ToInt16(sqld.ExecuteScalar());
+            sqld.Dispose();
+            DataConn.Connection.Close();
+            return count;
+        }
+
+        private int CheckUser()
+        {
+            DataConn.Connection.Open();
+            string sql = @"SELECT COUNT(*) FROM users 
+                        INNER JOIN roles ON users.role_id = roles.id
+                        WHERE roles.name IN ('editor', 'user');";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            int count = Convert.ToInt16(sqld.ExecuteScalar());
+            sqld.Dispose();
+            DataConn.Connection.Close();
+            return count;
+        }
+
+        private void CheckMember()
+        {
+            DataConn.Connection.Open();
+            string sql = "SELECT * FROM members WHERE LOWER(name) = '" + uName.ToLower() + "';";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = sqld.ExecuteReader();
+            if (sqlr.Read())
+            {
+                cid = sqlr["company_id"].ToString();
+            }
+            DataConn.Connection.Close();
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
-
+            if (uRole.ToLower() == "admin")
+            {
+                GetUserCompany();
+                CheckStock();
+            }
         }
 
         private void main_closing(object sender, FormClosingEventArgs e)
@@ -58,34 +139,79 @@ namespace coffee_shop
         private void myCompanyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (uRole.ToLower() == "superadmin" || uRole.ToLower() == "admin")
-                new company_form(uId).ShowDialog();
+                new company_form(uId, uRole, uName).ShowDialog();
             else
                 MessageBox.Show("You don't have permission!");
         }
 
         private void allProductsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new products_form().ShowDialog();
-        }
-
-        private void saleToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new product_selling().ShowDialog();
+            if (uRole.ToLower() == "admin")
+            {
+                if (CheckCompany() > 0 && CheckBranch() > 0)
+                    new products_form(com_id, uRole).ShowDialog();
+                else
+                    MessageBox.Show("Please create Company or Branch first!");
+            }
+            else
+            {
+                CheckMember();
+                if (cid != "")
+                    new products_form(cid, uRole).ShowDialog();
+                else
+                    MessageBox.Show("You're not a member of a company!");
+            }
         }
 
         private void myStockToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new stock_form().ShowDialog();
+            if(uRole.ToLower() == "admin")
+            {
+                if (CheckCompany() > 0 && CheckBranch() > 0)
+                    new stock_form(com_id, uRole).ShowDialog();
+                else
+                    MessageBox.Show("Please create Company or Branch first!");
+            }
+            else
+            {
+                CheckMember();
+                if (cid != "")
+                    new stock_form(cid, uRole).ShowDialog();
+                else
+                    MessageBox.Show("You're not a member of a company!");
+            }
         }
 
         private void stockCateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new stock_categories_form().ShowDialog();
+            if (uRole.ToLower() == "admin")
+            {
+                if (CheckCompany() > 0 && CheckBranch() > 0)
+                    new stock_categories_form(uRole).ShowDialog();
+                else
+                    MessageBox.Show("Please create Company or Branch first!");
+            }
+            else
+            {
+                CheckMember();
+                if (cid != "")
+                    new stock_categories_form(uRole).ShowDialog();
+                else
+                    MessageBox.Show("You're not a member of a company!");
+            }
         }
 
         private void branchesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new branch_form().ShowDialog();
+            if (uRole.ToLower() == "admin")
+            {
+                if (CheckCompany() > 0)
+                    new branch_form(uId, uRole).ShowDialog();
+                else
+                    MessageBox.Show("Please create company first!");
+            }
+            else
+                MessageBox.Show("You don't have permission!");
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -95,22 +221,100 @@ namespace coffee_shop
 
         private void btnDrinks_Click(object sender, EventArgs e)
         {
-            new product_selling().ShowDialog();
+            if(uRole.ToLower() == "admin")
+            {
+                if (CheckCompany() > 0 && CheckBranch() > 0)
+                    new product_selling("drinks", com_id).ShowDialog();
+                else
+                    MessageBox.Show("Please create Company or Branch first!");
+            }
+            else
+            {
+                CheckMember();
+                if (cid != "")
+                    new product_selling("drinks", cid).ShowDialog();
+                else
+                    MessageBox.Show("You're not a member of a company!");
+            }
         }
 
         private void btnFood_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void myEmloyeesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new employees_form().ShowDialog();
+            if (uRole.ToLower() == "admin")
+            {
+                if (CheckCompany() > 0 && CheckBranch() > 0)
+                    new product_selling("foods", com_id).ShowDialog();
+                else
+                    MessageBox.Show("Please create Company or Branch first!");
+            }
+            else
+            {
+                CheckMember();
+                if (cid != "")
+                    new product_selling("foods", cid).ShowDialog();
+                else
+                    MessageBox.Show("You're not a member of a company!");
+            }
         }
 
         private void newProductToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new product_category_form().ShowDialog();
+            if (uRole.ToLower() == "admin")
+            {
+                if (CheckCompany() > 0 && CheckBranch() > 0)
+                    new product_category_form(uRole).ShowDialog();
+                else
+                    MessageBox.Show("Please create Company or Branch first!");
+            }
+            else
+            {
+                CheckMember();
+                if (cid != "")
+                    new product_category_form(uRole).ShowDialog();
+                else
+                    MessageBox.Show("Please create Company or Branch first!");
+            }
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new AboutCoffeeShop().ShowDialog();
+        }
+
+        private void membersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (uRole.ToLower() == "admin" && CheckUser() > 0)
+                new member_form(uId, uName).ShowDialog();
+            else if (CheckUser() <= 0)
+                MessageBox.Show("Please create editor or user first!");
+            else
+                MessageBox.Show("You don't have permission!");
+        }
+
+        private void employeesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (uRole.ToLower() == "admin")
+            {
+                if (CheckCompany() > 0 && CheckBranch() > 0)
+                    new employees_form(com_id).ShowDialog();
+                else
+                    MessageBox.Show("Please create Company or Branch first!");
+            }
+            else
+                MessageBox.Show("You don't have permission!");
+        }
+
+        private void suppliersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (uRole.ToLower() == "admin")
+            {
+                if (CheckCompany() > 0 && CheckBranch() > 0)
+                    new supplier_form(com_id).ShowDialog();
+                else
+                    MessageBox.Show("Please create Company or Branch first!");
+            }
+            else
+                MessageBox.Show("You don't have permission!");
         }
     }
 }

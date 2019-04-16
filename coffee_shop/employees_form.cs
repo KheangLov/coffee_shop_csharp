@@ -13,8 +13,10 @@ namespace coffee_shop
 {
     public partial class employees_form : Form
     {
-        public employees_form()
+        string cId;
+        public employees_form(string com_id)
         {
+            cId = com_id;
             InitializeComponent();
         }
         Employees my_employee = new Employees();
@@ -70,7 +72,8 @@ namespace coffee_shop
                 string sql = @"SELECT employees.*, companies.name AS company_name, branches.name AS branch_name
                         FROM employees
                         INNER JOIN companies ON employees.company_id = companies.id
-                        INNER JOIN branches ON employees.branch_id = branches.id;";
+                        INNER JOIN branches ON employees.branch_id = branches.id
+                        WHERE companies.id IN (" + cId + ");";
                 SqlCommand com = new SqlCommand(sql, DataConn.Connection);
                 SqlDataReader sqlr = com.ExecuteReader();
                 while (sqlr.Read())
@@ -89,20 +92,17 @@ namespace coffee_shop
             }
         }
 
-        private void loadCombo(string tblName)
+        private void loadComboCompany()
         {
             try
             {
                 DataConn.Connection.Open();
-                string sql = "SELECT id, name FROM " + tblName.ToLower() + ";";
+                string sql = "SELECT id, name FROM companies WHERE id IN (" + cId + ");";
                 SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
                 SqlDataReader sqlr = sqld.ExecuteReader();
                 while (sqlr.Read())
                 {
-                    if (tblName.ToLower() == "companies")
-                        cbCompany.Items.Add(sc.ToCapitalize(sqlr["name"].ToString()));
-                    else if (tblName.ToLower() == "branches")
-                        cbBranch.Items.Add(sc.ToCapitalize(sqlr["name"].ToString()));
+                    cbCompany.Items.Add(sc.ToCapitalize(sqlr["name"].ToString()));
                 }
                 sqld.Dispose();
                 sqlr.Close();
@@ -114,8 +114,31 @@ namespace coffee_shop
             }
         }
 
+        private void loadComboBranch()
+        {
+            try
+            {
+                DataConn.Connection.Open();
+                string sql = "SELECT id, name FROM branches WHERE company_id = " + my_employee.CompanyId + ";";
+                SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+                SqlDataReader sqlr = sqld.ExecuteReader();
+                while (sqlr.Read())
+                {
+                    cbBranch.Items.Add(sc.ToCapitalize(sqlr["name"].ToString()));
+                }
+                sqld.Dispose();
+                sqlr.Close();
+                DataConn.Connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void addComboCompany()
         {
+            DataConn.Connection.Open();
             string sql = "SELECT * FROM companies WHERE LOWER(name) = '" + cbCompany.Text.ToLower() + "';";
             SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
             SqlDataReader sqlr = sqld.ExecuteReader();
@@ -129,10 +152,12 @@ namespace coffee_shop
             }
             sqlr.Close();
             sqld.Dispose();
+            DataConn.Connection.Close();
         }
 
         private void addComboBranch()
         {
+            DataConn.Connection.Open();
             string sql = "SELECT * FROM branches WHERE LOWER(name) = '" + cbBranch.Text.ToLower() + "';";
             SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
             SqlDataReader sqlr = sqld.ExecuteReader();
@@ -146,6 +171,7 @@ namespace coffee_shop
             }
             sqlr.Close();
             sqld.Dispose();
+            DataConn.Connection.Close();
         }
 
         private void employees_form_Load(object sender, EventArgs e)
@@ -154,11 +180,15 @@ namespace coffee_shop
             btnDelete.Enabled = false;
             MyInter employee_inter = my_employee;
             inter = employee_inter;
-            loadCombo("companies");
-            loadCombo("branches");
+            QueryEmployees();
+            loadComboCompany();
+            if (cbCompany.Items.Count > 0)
+                cbCompany.SelectedIndex = 0;
+            addComboCompany();
+            loadComboBranch();
+            if (cbBranch.Items.Count > 0)
+                cbBranch.SelectedIndex = 0;
             cbGender.SelectedIndex = 0;
-            cbBranch.SelectedIndex = 0;
-            cbCompany.SelectedIndex = 0;
             cbPosition.SelectedIndex = 0;
             cbWorktime.SelectedIndex = 0;
         }
@@ -256,17 +286,21 @@ namespace coffee_shop
         {
             DataConn.Connection.Open();
             lvEmployees.Items.Clear();
-            string search_query = "SELECT * FROM users INNER JOIN roles ON users.role_id = roles.id WHERE users.role_id = roles.id AND LOWER(username) LIKE '%" + txtSearch.Text.Trim().ToLower() + "%' ORDER BY roles.id;";
+            string search_query = @"SELECT employees.*, companies.name AS company_name, branches.name AS branch_name
+                        FROM employees
+                        INNER JOIN companies ON employees.company_id = companies.id
+                        INNER JOIN branches ON employees.branch_id = branches.id
+                        WHERE companies.id IN (" + cId + ") AND LOWER(employees.fullname) LIKE '%" + txtSearch.Text.Trim().ToLower() + "%' ORDER BY roles.id;";
             SqlCommand srh_cmd = new SqlCommand(search_query, DataConn.Connection);
-            SqlDataReader srh_rd = srh_cmd.ExecuteReader();
-            while (srh_rd.Read())
+            SqlDataReader sqlr = srh_cmd.ExecuteReader();
+            while (sqlr.Read())
             {
-                string[] user_info = { sc.ToCapitalize(srh_rd["username"].ToString()), srh_rd["email"].ToString(), srh_rd["gender"].ToString(), sc.ToCapitalize(srh_rd["name"].ToString()), srh_rd["phone"].ToString(), srh_rd["address"].ToString() };
-                ListViewItem item = new ListViewItem(user_info);
+                string[] employees_info = { sc.ToCapitalize(sqlr["fullname"].ToString()), sqlr["gender"].ToString(), sqlr["dob"].ToString(), sqlr["phone"].ToString(), sqlr["email"].ToString(), sqlr["address"].ToString(), sqlr["salary"].ToString(), sqlr["positions"].ToString(), sqlr["work_times"].ToString(), sc.ToCapitalize(sqlr["company_name"].ToString()), sc.ToCapitalize(sqlr["branch_name"].ToString()) };
+                ListViewItem item = new ListViewItem(employees_info);
                 lvEmployees.Items.Add(item);
             }
             srh_cmd.Dispose();
-            srh_rd.Close();
+            sqlr.Close();
             DataConn.Connection.Close();
         }
 
@@ -274,12 +308,15 @@ namespace coffee_shop
         {
             try
             {
-                if(txtFirstname.Text != "" && txtLastname.Text != "")
+                if (txtFirstname.Text != "" && txtLastname.Text != "")
                 {
+                    DataConn.Connection.Open();
                     string my_emp_name = txtFirstname.Text + txtLastname.Text;
                     string check_name = "SELECT COUNT(*) FROM employees WHERE LOWER(fullname) = '" + my_emp_name.ToLower() + "';";
                     SqlCommand check_com = new SqlCommand(check_name, DataConn.Connection);
                     int find_emp = Convert.ToInt16(check_com.ExecuteScalar());
+                    check_com.Dispose();
+                    DataConn.Connection.Close();
                     if (find_emp != 0)
                     {
                         MessageBox.Show("Employee already exist!");
@@ -400,6 +437,20 @@ namespace coffee_shop
                     QueryEmployees();
                 }
             }
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
+
+        private void cbCompany_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            addComboCompany();
+            cbBranch.Items.Clear();
+            loadComboBranch();
+            if (cbBranch.Items.Count > 0)
+                cbBranch.SelectedIndex = 0;
         }
     }
 }

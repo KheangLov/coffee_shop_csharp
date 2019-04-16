@@ -14,8 +14,12 @@ namespace coffee_shop
 {
     public partial class products_form : Form
     {
-        public products_form()
+        string comId;
+        string uRole;
+        public products_form(string com_id, string role)
         {
+            comId = com_id;
+            uRole = role;
             InitializeComponent();
         }
         Products my_products = new Products();
@@ -24,6 +28,7 @@ namespace coffee_shop
         int proId;
         string proImg = "";
         string path = "";
+        int cId;
 
         void ClearTextBoxes(Control parent)
         {
@@ -79,7 +84,7 @@ namespace coffee_shop
 
         private void loadStocks()
         {
-            string get_stocks = "SELECT * FROM stocks;";
+            string get_stocks = "SELECT * FROM stocks WHERE company_id IN(" + comId + ");";
             SqlCommand stock_cmd = new SqlCommand(get_stocks, DataConn.Connection);
             SqlDataReader stock_reader = stock_cmd.ExecuteReader();
             while (stock_reader.Read())
@@ -88,6 +93,63 @@ namespace coffee_shop
             }
             stock_cmd.Dispose();
             stock_reader.Close();
+        }
+
+        private void loadCompanies()
+        {
+            string sql = "SELECT * FROM companies WHERE id IN(" + comId + ");";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = sqld.ExecuteReader();
+            while (sqlr.Read())
+            {
+                cbCompany.Items.Add(sc.ToCapitalize(sqlr["name"].ToString()));
+                cbByCompany.Items.Add(sc.ToCapitalize(sqlr["name"].ToString()));
+            }
+            sqld.Dispose();
+            sqlr.Close();
+        }
+
+        private void loadBranches()
+        {
+            string sql = "SELECT * FROM branches WHERE company_id IN(" + comId + ");";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = sqld.ExecuteReader();
+            while (sqlr.Read())
+            {
+                cbBranch.Items.Add(sc.ToCapitalize(sqlr["name"].ToString()));
+            }
+            sqld.Dispose();
+            sqlr.Close();
+        }
+
+        private void getByCompany()
+        {
+            string sql = "SELECT * FROM companies WHERE LOWER(name) = '" + cbByCompany.Text.ToLower() + "';";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = sqld.ExecuteReader();
+            if(sqlr.Read())
+            {
+                cId = int.Parse(sqlr["id"].ToString());
+            }
+            sqld.Dispose();
+            sqlr.Close();
+        }
+
+        private void loadByBranch()
+        {
+            string sql = "";
+            if(cbByCompany.SelectedItem.ToString().ToLower() == "all")
+                sql = "SELECT * FROM branches WHERE company_id IN(" + comId + ");";
+            else
+                sql = "SELECT * FROM branches WHERE company_id = " + cId + ";";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = sqld.ExecuteReader();
+            while (sqlr.Read())
+            {
+                cbByBranch.Items.Add(sc.ToCapitalize(sqlr["name"].ToString()));
+            }
+            sqld.Dispose();
+            sqlr.Close();
         }
 
         private void addStocks()
@@ -124,16 +186,47 @@ namespace coffee_shop
             procate_reader.Close();
         }
 
+        private void addCompany()
+        {
+            string sql = "SELECT * FROM companies WHERE LOWER(name) = '" + cbCompany.Text.Trim().ToLower() + "';";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = sqld.ExecuteReader();
+            if(sqlr.Read())
+            {
+                my_products.CompanyId = int.Parse(sqlr["id"].ToString());
+            }
+            sqld.Dispose();
+            sqlr.Close();
+        }
+
+        private void addBranch()
+        {
+            string sql = "SELECT * FROM branches WHERE LOWER(name) = '" + cbBranch.Text.Trim().ToLower() + "';";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = sqld.ExecuteReader();
+            if (sqlr.Read())
+            {
+                my_products.BranchId = int.Parse(sqlr["id"].ToString());
+            }
+            sqld.Dispose();
+            sqlr.Close();
+        }
+
         private void QueryProducts()
         {
-            string query = @"SELECT products.*, product_categories.name AS procate_name , stocks.name AS stocks_name FROM products
+            string query = @"SELECT products.*, product_categories.name AS procate_name , stocks.name AS stocks_name,
+                            companies.name AS company_name, branches.name AS branch_name
+                            FROM products
                             INNER JOIN product_categories ON products.procate_id = product_categories.id
-                            INNER JOIN stocks ON products.stock_id = stocks.id;";
+                            INNER JOIN stocks ON products.stock_id = stocks.id 
+                            INNER JOIN companies ON products.company_id = companies.id
+                            INNER JOIN branches ON products.branch_id = branches.id
+                            WHERE products.company_id IN(" + comId + ");";
             SqlCommand sqld = new SqlCommand(query, DataConn.Connection);
             SqlDataReader sqlr = sqld.ExecuteReader();
             while (sqlr.Read())
             {
-                string[] products_info = { sc.ToCapitalize(sqlr["name"].ToString()), sqlr["price"].ToString(), sqlr["selling_price"].ToString(), sqlr["sale"].ToString(), sqlr["type"].ToString(), sqlr["stocks_name"].ToString(), sqlr["procate_name"].ToString() };
+                string[] products_info = { sc.ToCapitalize(sqlr["name"].ToString()), sqlr["price"].ToString(), sqlr["selling_price"].ToString(), sqlr["sale"].ToString(), sqlr["type"].ToString(), sqlr["stocks_name"].ToString(), sqlr["procate_name"].ToString(), sqlr["company_name"].ToString(), sqlr["branch_name"].ToString() };
                 ListViewItem item = new ListViewItem(products_info);
                 listViewAllProducts.Items.Add(item);
             }
@@ -143,21 +236,40 @@ namespace coffee_shop
 
         private void products_form_Load(object sender, EventArgs e)
         {
+            if (uRole.ToLower() == "user")
+                btnProductAdd.Enabled = false;
+            else
+                btnProductAdd.Enabled = true;
             btnProductDelete.Enabled = false;
             btnProductEdit.Enabled = false;
             DataConn.Connection.Open();
-            loadComboProCate();
-            loadStocks();
-            comboBoxProductProcateID.SelectedIndex = 0;
-            comboBoxProductStockID.SelectedIndex = 0;
             MyInter product_inter = my_products;
             inter = product_inter;
+            loadComboProCate();
+            comboBoxProductProcateID.SelectedIndex = 0;
+            loadStocks();
+            if(comboBoxProductStockID.Items.Count > 0)
+                comboBoxProductStockID.SelectedIndex = 0;
+            loadCompanies();
+            if(cbCompany.Items.Count > 0)
+                cbCompany.SelectedIndex = 0;
+            loadBranches();
+            if (cbBranch.Items.Count > 0)
+                cbBranch.SelectedIndex = 0;
+            cbByCompany.SelectedIndex = 0;
+            getByCompany();
+            cbByBranch.Items.Clear();
+            cbByBranch.Items.Add("All");
+            loadByBranch();
+            if (cbByBranch.Items.Count > 0)
+                cbByBranch.SelectedIndex = 0;
+            listViewAllProducts.Items.Clear();
             QueryProducts();
         }
 
         private void listViewAllProducts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listViewAllProducts.SelectedItems.Count != 0)
+            if (listViewAllProducts.SelectedItems.Count != 0 && uRole != "user")
             {
                 btnProductEdit.Enabled = true;
                 btnProductDelete.Enabled = true;
@@ -175,10 +287,10 @@ namespace coffee_shop
             {
                 if(txtProductName.Text != "")
                 {
-                    string query_name = "SELECT COUNT(*) FROM products WHERE LOWER(name) = '" + txtProductName.Text.ToLower() + "';";
+                    string query_name = "SELECT COUNT(*) FROM products WHERE LOWER(name) = '" + txtProductName.Text.ToLower() + "' AND id IN(" + comId + ");";
                     SqlCommand check_name = new SqlCommand(query_name, DataConn.Connection);
                     int nName = Convert.ToInt16(check_name.ExecuteScalar());
-                    
+                    check_name.Dispose();
                     if(nName != 0)
                     {
                         MessageBox.Show("Product already exist!");
@@ -193,6 +305,8 @@ namespace coffee_shop
                         my_products.Type = txtProductType.Text.Trim();
                         addStocks();
                         addProductCategoryID();
+                        addCompany();
+                        addBranch();
                         my_products.Image = path;
                         my_products.Sale = 0;
                         my_products.CutFromStock = double.Parse(txtStockCut.Text.Trim());
@@ -250,6 +364,7 @@ namespace coffee_shop
         {
             if(listViewAllProducts.SelectedItems.Count != 0)
             {
+                btnProductDelete.Enabled = false;
                 if(btnProductEdit.Text.ToLower() == "edit")
                 {
                     try
@@ -292,6 +407,8 @@ namespace coffee_shop
                         my_products.Type = txtProductType.Text.Trim();
                         addStocks();
                         addProductCategoryID();
+                        addCompany();
+                        addBranch();
                         my_products.Image = path;
                         my_products.Sale = 0;
                         my_products.CutFromStock = double.Parse(txtStockCut.Text.Trim());
@@ -321,7 +438,7 @@ namespace coffee_shop
                     ListViewItem lvi = listViewAllProducts.SelectedItems[0];
                     int val = 0;
                     string proName = lvi.SubItems[0].Text;
-                    string del_que = "DELETE FROM products WHERE name = '" + proName + "';";
+                    string del_que = "DELETE FROM products WHERE LOWER(name) = '" + proName.ToLower() + "';";
                     SqlCommand del_com = new SqlCommand(del_que, DataConn.Connection);
                     val = del_com.ExecuteNonQuery();
                     del_com.Dispose();
@@ -341,14 +458,19 @@ namespace coffee_shop
         private void txtProductSearch_TextChanged(object sender, EventArgs e)
         {
             listViewAllProducts.Items.Clear();
-            string search_query = @"SELECT products.*, product_categories.name AS procate_name , stocks.name AS stocks_name FROM products
+            string search_query = @"SELECT products.*, product_categories.name AS procate_name , stocks.name AS stocks_name,
+                            companies.name AS company_name, branches.name AS branch_name
+                            FROM products
                             INNER JOIN product_categories ON products.procate_id = product_categories.id
-                            INNER JOIN stocks ON products.stock_id = stocks.id WHERE LOWER(products.name) LIKE '%" + txtProductSearch.Text.Trim().ToLower() + "%';";
+                            INNER JOIN stocks ON products.stock_id = stocks.id 
+                            INNER JOIN companies ON products.company_id = companies.id
+                            INNER JOIN branches ON products.branch_id = branches.id 
+                            WHERE products.company_id IN(" + comId + ") AND LOWER(products.name) LIKE '%" + txtProductSearch.Text.Trim().ToLower() + "%';";
             SqlCommand srh_cmd = new SqlCommand(search_query, DataConn.Connection);
             SqlDataReader srh_rd = srh_cmd.ExecuteReader();
             while (srh_rd.Read())
             {
-                string[] products_info = { sc.ToCapitalize(srh_rd["name"].ToString()), srh_rd["price"].ToString(), srh_rd["selling_price"].ToString(), srh_rd["sale"].ToString(), srh_rd["type"].ToString(), srh_rd["stocks_name"].ToString(), srh_rd["procate_name"].ToString() };
+                string[] products_info = { sc.ToCapitalize(srh_rd["name"].ToString()), srh_rd["price"].ToString(), srh_rd["selling_price"].ToString(), srh_rd["sale"].ToString(), srh_rd["type"].ToString(), srh_rd["stocks_name"].ToString(), srh_rd["procate_name"].ToString(), srh_rd["company_name"].ToString(), srh_rd["branch_name"].ToString() };
                 ListViewItem item = new ListViewItem(products_info);
                 listViewAllProducts.Items.Add(item);
             }
@@ -449,6 +571,112 @@ namespace coffee_shop
                     }
                 }
             }
+        }
+
+        private void cbByCompany_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            getByCompany();
+            cbByBranch.Items.Clear();
+            cbByBranch.Items.Add("All");
+            loadByBranch();
+            if (cbByBranch.Items.Count > 0)
+                cbByBranch.SelectedIndex = 0;
+            else
+                cbByBranch.Text = "";
+            string sql = "";
+            if (cbByCompany.SelectedItem.ToString().ToLower() == "all" && cbByBranch.SelectedItem.ToString().ToLower() == "all")
+            {
+                sql = @"SELECT products.*, product_categories.name AS procate_name , stocks.name AS stocks_name,
+                        companies.name AS company_name, branches.name AS branch_name
+                        FROM products
+                        INNER JOIN product_categories ON products.procate_id = product_categories.id
+                        INNER JOIN stocks ON products.stock_id = stocks.id 
+                        INNER JOIN companies ON products.company_id = companies.id
+                        INNER JOIN branches ON products.branch_id = branches.id 
+                        WHERE products.company_id IN(" + comId + ");";
+            }
+            else if (cbByCompany.SelectedItem.ToString().ToLower() != "all" && cbByBranch.SelectedItem.ToString().ToLower() == "all")
+            {
+                sql = @"SELECT products.*, product_categories.name AS procate_name , stocks.name AS stocks_name,
+                        companies.name AS company_name, branches.name AS branch_name
+                        FROM products
+                        INNER JOIN product_categories ON products.procate_id = product_categories.id
+                        INNER JOIN stocks ON products.stock_id = stocks.id
+                        INNER JOIN companies ON products.company_id = companies.id
+                        INNER JOIN branches ON products.branch_id = branches.id
+                        WHERE LOWER(companies.name) = '" + cbByCompany.Text.ToLower() + "';";
+            }
+            else
+            {
+                sql = @"SELECT products.*, product_categories.name AS procate_name , stocks.name AS stocks_name,
+                        companies.name AS company_name, branches.name AS branch_name
+                        FROM products
+                        INNER JOIN product_categories ON products.procate_id = product_categories.id
+                        INNER JOIN stocks ON products.stock_id = stocks.id
+                        INNER JOIN companies ON products.company_id = companies.id
+                        INNER JOIN branches ON products.branch_id = branches.id
+                        WHERE LOWER(companies.name) = '" + cbByCompany.Text.ToLower() + "' AND LOWER(branches.name) = '" + cbByBranch.Text.ToLower() + "';";
+            }
+            SqlCommand com = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = com.ExecuteReader();
+            listViewAllProducts.Items.Clear();
+            while (sqlr.Read())
+            {
+                string[] products_info = { sc.ToCapitalize(sqlr["name"].ToString()), sqlr["price"].ToString(), sqlr["selling_price"].ToString(), sqlr["sale"].ToString(), sqlr["type"].ToString(), sqlr["stocks_name"].ToString(), sqlr["procate_name"].ToString(), sqlr["company_name"].ToString(), sqlr["branch_name"].ToString() };
+                ListViewItem item = new ListViewItem(products_info);
+                listViewAllProducts.Items.Add(item);
+            }
+            com.Dispose();
+            sqlr.Close();
+        }
+
+        private void cbByBranch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string sql = "";
+            if (cbByCompany.SelectedItem.ToString().ToLower() == "all" && cbByBranch.SelectedItem.ToString().ToLower() == "all")
+            {
+                sql = @"SELECT products.*, product_categories.name AS procate_name , stocks.name AS stocks_name,
+                        companies.name AS company_name, branches.name AS branch_name
+                        FROM products
+                        INNER JOIN product_categories ON products.procate_id = product_categories.id
+                        INNER JOIN stocks ON products.stock_id = stocks.id 
+                        INNER JOIN companies ON products.company_id = companies.id
+                        INNER JOIN branches ON products.branch_id = branches.id 
+                        WHERE products.company_id IN(" + comId + ");";
+            }
+            else if (cbByCompany.SelectedItem.ToString().ToLower() != "all" && cbByBranch.SelectedItem.ToString().ToLower() == "all")
+            {
+                sql = @"SELECT products.*, product_categories.name AS procate_name , stocks.name AS stocks_name,
+                        companies.name AS company_name, branches.name AS branch_name
+                        FROM products
+                        INNER JOIN product_categories ON products.procate_id = product_categories.id
+                        INNER JOIN stocks ON products.stock_id = stocks.id
+                        INNER JOIN companies ON products.company_id = companies.id
+                        INNER JOIN branches ON products.branch_id = branches.id
+                        WHERE LOWER(companies.name) = '" + cbByCompany.Text.ToLower() + "';";
+            }
+            else
+            {
+                sql = @"SELECT products.*, product_categories.name AS procate_name , stocks.name AS stocks_name,
+                        companies.name AS company_name, branches.name AS branch_name
+                        FROM products
+                        INNER JOIN product_categories ON products.procate_id = product_categories.id
+                        INNER JOIN stocks ON products.stock_id = stocks.id
+                        INNER JOIN companies ON products.company_id = companies.id
+                        INNER JOIN branches ON products.branch_id = branches.id
+                        WHERE LOWER(companies.name) = '" + cbByCompany.Text.ToLower() + "' AND LOWER(branches.name) = '" + cbByBranch.Text.ToLower() + "';";
+            }
+            SqlCommand com = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = com.ExecuteReader();
+            listViewAllProducts.Items.Clear();
+            while (sqlr.Read())
+            {
+                string[] products_info = { sc.ToCapitalize(sqlr["name"].ToString()), sqlr["price"].ToString(), sqlr["selling_price"].ToString(), sqlr["sale"].ToString(), sqlr["type"].ToString(), sqlr["stocks_name"].ToString(), sqlr["procate_name"].ToString(), sqlr["company_name"].ToString(), sqlr["branch_name"].ToString() };
+                ListViewItem item = new ListViewItem(products_info);
+                listViewAllProducts.Items.Add(item);
+            }
+            com.Dispose();
+            sqlr.Close();
         }
     }
 }

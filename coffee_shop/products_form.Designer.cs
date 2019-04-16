@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBoxProductForm = new System.Windows.Forms.GroupBox();
+            this.cbBranch = new System.Windows.Forms.ComboBox();
+            this.cbCompany = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtStockCut = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnProductImage = new System.Windows.Forms.Button();
             this.pictureBoxProductImage = new System.Windows.Forms.PictureBox();
@@ -58,14 +64,20 @@
             this.columnHeaderType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderProcateID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.txtStockCut = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cbByCompany = new System.Windows.Forms.ComboBox();
+            this.cbByBranch = new System.Windows.Forms.ComboBox();
             this.groupBoxProductForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProductImage)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBoxProductForm
             // 
+            this.groupBoxProductForm.Controls.Add(this.cbBranch);
+            this.groupBoxProductForm.Controls.Add(this.cbCompany);
+            this.groupBoxProductForm.Controls.Add(this.label3);
+            this.groupBoxProductForm.Controls.Add(this.label4);
             this.groupBoxProductForm.Controls.Add(this.txtStockCut);
             this.groupBoxProductForm.Controls.Add(this.label2);
             this.groupBoxProductForm.Controls.Add(this.label1);
@@ -86,16 +98,69 @@
             this.groupBoxProductForm.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxProductForm.Location = new System.Drawing.Point(12, 12);
             this.groupBoxProductForm.Name = "groupBoxProductForm";
-            this.groupBoxProductForm.Size = new System.Drawing.Size(502, 477);
+            this.groupBoxProductForm.Size = new System.Drawing.Size(502, 536);
             this.groupBoxProductForm.TabIndex = 0;
             this.groupBoxProductForm.TabStop = false;
             this.groupBoxProductForm.Text = "Product\'s Informations";
+            // 
+            // cbBranch
+            // 
+            this.cbBranch.FormattingEnabled = true;
+            this.cbBranch.Location = new System.Drawing.Point(176, 304);
+            this.cbBranch.Name = "cbBranch";
+            this.cbBranch.Size = new System.Drawing.Size(155, 30);
+            this.cbBranch.TabIndex = 26;
+            // 
+            // cbCompany
+            // 
+            this.cbCompany.FormattingEnabled = true;
+            this.cbCompany.Location = new System.Drawing.Point(176, 268);
+            this.cbCompany.Name = "cbCompany";
+            this.cbCompany.Size = new System.Drawing.Size(155, 30);
+            this.cbCompany.TabIndex = 25;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(18, 311);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(62, 18);
+            this.label3.TabIndex = 24;
+            this.label3.Text = "Branch :";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(18, 275);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(78, 18);
+            this.label4.TabIndex = 23;
+            this.label4.Text = "Company :";
+            // 
+            // txtStockCut
+            // 
+            this.txtStockCut.Location = new System.Drawing.Point(176, 163);
+            this.txtStockCut.Name = "txtStockCut";
+            this.txtStockCut.Size = new System.Drawing.Size(310, 27);
+            this.txtStockCut.TabIndex = 22;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(17, 170);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(111, 18);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "Cut From Stock:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(18, 279);
+            this.label1.Location = new System.Drawing.Point(18, 349);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 18);
             this.label1.TabIndex = 20;
@@ -104,7 +169,7 @@
             // btnProductImage
             // 
             this.btnProductImage.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProductImage.Location = new System.Drawing.Point(20, 414);
+            this.btnProductImage.Location = new System.Drawing.Point(20, 485);
             this.btnProductImage.Name = "btnProductImage";
             this.btnProductImage.Size = new System.Drawing.Size(96, 31);
             this.btnProductImage.TabIndex = 19;
@@ -114,7 +179,7 @@
             // 
             // pictureBoxProductImage
             // 
-            this.pictureBoxProductImage.Location = new System.Drawing.Point(176, 268);
+            this.pictureBoxProductImage.Location = new System.Drawing.Point(176, 340);
             this.pictureBoxProductImage.Name = "pictureBoxProductImage";
             this.pictureBoxProductImage.Size = new System.Drawing.Size(310, 176);
             this.pictureBoxProductImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -230,7 +295,7 @@
             // btnProductAdd
             // 
             this.btnProductAdd.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProductAdd.Location = new System.Drawing.Point(12, 499);
+            this.btnProductAdd.Location = new System.Drawing.Point(12, 554);
             this.btnProductAdd.Name = "btnProductAdd";
             this.btnProductAdd.Size = new System.Drawing.Size(100, 35);
             this.btnProductAdd.TabIndex = 1;
@@ -241,7 +306,7 @@
             // btnProductEdit
             // 
             this.btnProductEdit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProductEdit.Location = new System.Drawing.Point(118, 499);
+            this.btnProductEdit.Location = new System.Drawing.Point(118, 554);
             this.btnProductEdit.Name = "btnProductEdit";
             this.btnProductEdit.Size = new System.Drawing.Size(100, 35);
             this.btnProductEdit.TabIndex = 2;
@@ -252,7 +317,7 @@
             // btnProductDelete
             // 
             this.btnProductDelete.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProductDelete.Location = new System.Drawing.Point(224, 499);
+            this.btnProductDelete.Location = new System.Drawing.Point(224, 554);
             this.btnProductDelete.Name = "btnProductDelete";
             this.btnProductDelete.Size = new System.Drawing.Size(100, 35);
             this.btnProductDelete.TabIndex = 3;
@@ -263,7 +328,7 @@
             // btnProductExit
             // 
             this.btnProductExit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProductExit.Location = new System.Drawing.Point(330, 499);
+            this.btnProductExit.Location = new System.Drawing.Point(330, 554);
             this.btnProductExit.Name = "btnProductExit";
             this.btnProductExit.Size = new System.Drawing.Size(100, 35);
             this.btnProductExit.TabIndex = 4;
@@ -284,9 +349,9 @@
             // txtProductSearch
             // 
             this.txtProductSearch.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtProductSearch.Location = new System.Drawing.Point(777, 12);
+            this.txtProductSearch.Location = new System.Drawing.Point(1008, 12);
             this.txtProductSearch.Name = "txtProductSearch";
-            this.txtProductSearch.Size = new System.Drawing.Size(382, 27);
+            this.txtProductSearch.Size = new System.Drawing.Size(264, 27);
             this.txtProductSearch.TabIndex = 6;
             this.txtProductSearch.TextChanged += new System.EventHandler(this.txtProductSearch_TextChanged);
             // 
@@ -299,13 +364,16 @@
             this.columnHeaderSale,
             this.columnHeaderType,
             this.columnHeaderProcateID,
-            this.columnHeader1});
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
             this.listViewAllProducts.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listViewAllProducts.FullRowSelect = true;
             this.listViewAllProducts.GridLines = true;
             this.listViewAllProducts.Location = new System.Drawing.Point(526, 56);
             this.listViewAllProducts.Name = "listViewAllProducts";
-            this.listViewAllProducts.Size = new System.Drawing.Size(633, 478);
+            this.listViewAllProducts.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.listViewAllProducts.Size = new System.Drawing.Size(746, 533);
             this.listViewAllProducts.TabIndex = 7;
             this.listViewAllProducts.UseCompatibleStateImageBehavior = false;
             this.listViewAllProducts.View = System.Windows.Forms.View.Details;
@@ -345,28 +413,45 @@
             // 
             this.columnHeader1.Text = "Stock";
             // 
-            // txtStockCut
+            // columnHeader2
             // 
-            this.txtStockCut.Location = new System.Drawing.Point(176, 163);
-            this.txtStockCut.Name = "txtStockCut";
-            this.txtStockCut.Size = new System.Drawing.Size(310, 27);
-            this.txtStockCut.TabIndex = 22;
+            this.columnHeader2.Text = "Company";
             // 
-            // label2
+            // columnHeader3
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(17, 170);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(111, 18);
-            this.label2.TabIndex = 21;
-            this.label2.Text = "Cut From Stock:";
+            this.columnHeader3.Text = "Branch";
+            // 
+            // cbByCompany
+            // 
+            this.cbByCompany.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbByCompany.FormattingEnabled = true;
+            this.cbByCompany.Items.AddRange(new object[] {
+            "All"});
+            this.cbByCompany.Location = new System.Drawing.Point(776, 12);
+            this.cbByCompany.Name = "cbByCompany";
+            this.cbByCompany.Size = new System.Drawing.Size(110, 26);
+            this.cbByCompany.TabIndex = 8;
+            this.cbByCompany.SelectedIndexChanged += new System.EventHandler(this.cbByCompany_SelectedIndexChanged);
+            // 
+            // cbByBranch
+            // 
+            this.cbByBranch.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbByBranch.FormattingEnabled = true;
+            this.cbByBranch.Items.AddRange(new object[] {
+            "All"});
+            this.cbByBranch.Location = new System.Drawing.Point(892, 12);
+            this.cbByBranch.Name = "cbByBranch";
+            this.cbByBranch.Size = new System.Drawing.Size(110, 26);
+            this.cbByBranch.TabIndex = 9;
+            this.cbByBranch.SelectedIndexChanged += new System.EventHandler(this.cbByBranch_SelectedIndexChanged);
             // 
             // products_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1171, 546);
+            this.ClientSize = new System.Drawing.Size(1284, 602);
+            this.Controls.Add(this.cbByBranch);
+            this.Controls.Add(this.cbByCompany);
             this.Controls.Add(this.listViewAllProducts);
             this.Controls.Add(this.txtProductSearch);
             this.Controls.Add(this.labelAllProduct);
@@ -424,5 +509,13 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.TextBox txtStockCut;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cbBranch;
+        private System.Windows.Forms.ComboBox cbCompany;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ComboBox cbByCompany;
+        private System.Windows.Forms.ComboBox cbByBranch;
     }
 }

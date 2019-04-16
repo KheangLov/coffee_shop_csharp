@@ -25,6 +25,7 @@ namespace coffee_shop
         {
 
         }
+
         public string Firstname
         {
             get
@@ -157,7 +158,7 @@ namespace coffee_shop
         public override void update(int id)
         {
             string query = @"UPDATE [coffee_shop].[dbo].[users] 
-                SET firstname = '" + Firstname + "', lastname ='" + Lastname + "', username = '" + Username + "', email = '" + Email + "', gender = '" + Gender + "', phone = '" + Phone + "', address = '" + Address + "', role_id = '" + Role_Id + "' WHERE id = " + id + ";";
+                SET firstname = '" + Firstname + "', lastname ='" + Lastname + "', username = '" + Username + "', email = '" + Email + "', gender = '" + Gender + "', phone = '" + Phone + "', address = '" + Address + "', role_id = " + Role_Id + " WHERE id = " + id + ";";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();

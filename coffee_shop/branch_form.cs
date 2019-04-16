@@ -13,8 +13,12 @@ namespace coffee_shop
 {
     public partial class branch_form : Form
     {
-        public branch_form()
+        int uId;
+        string uRole;
+        public branch_form(int id, string role)
         {
+            uId = id;
+            uRole = role;
             InitializeComponent();
         }
         Branch my_branch = new Branch();
@@ -22,10 +26,40 @@ namespace coffee_shop
         StringCapitalize sc = new StringCapitalize();
         int branchId;
 
-        private void QueryBranches()
+        private void QueryBranches(string byCompany)
         {
-            string query = @"SELECT branches.*, companies.name AS company_name FROM branches
-                            INNER JOIN companies ON branches.company_id = companies.id;";
+            string query = "";
+            if (byCompany == "all")
+            {
+                string company_names = "";
+                string get_ucompany = "";
+                if(uRole.ToLower() == "superadmin")
+                    get_ucompany = "SELECT name FROM companies;";
+                else
+                    get_ucompany = "SELECT name FROM companies WHERE user_id = " + uId + ";";
+                SqlCommand ucomd = new SqlCommand(get_ucompany, DataConn.Connection);
+                SqlDataReader ucomr = ucomd.ExecuteReader();
+                int i = 0;
+                while (ucomr.Read())
+                {
+                    if (i == 0)
+                        company_names += "'" + ucomr["name"].ToString().ToLower() + "'";
+                    else
+                        company_names += ", '" + ucomr["name"].ToString().ToLower() + "'";
+                    i++;
+                }
+                ucomd.Dispose();
+                ucomr.Close();
+                query = @"SELECT branches.*, companies.name AS company_name FROM branches
+                        INNER JOIN companies ON branches.company_id = companies.id
+                        WHERE LOWER(companies.name) IN (" + company_names + ");";
+            }
+            else
+            {
+                query = @"SELECT branches.*, companies.name AS company_name FROM branches
+                        INNER JOIN companies ON branches.company_id = companies.id
+                        WHERE LOWER(companies.name) = '" + byCompany + "';";
+            }
             SqlCommand sqld = new SqlCommand(query, DataConn.Connection);
             SqlDataReader sqlr = sqld.ExecuteReader();
             while (sqlr.Read())
@@ -40,11 +74,16 @@ namespace coffee_shop
 
         private void loadComboCompany()
         {
-            string sql = "SELECT id, name FROM companies;";
+            string sql = "";
+            if (uRole.ToLower() == "superadmin")
+                sql = "SELECT id, name FROM companies;";
+            else
+                sql = "SELECT id, name FROM companies WHERE user_id = " + uId + ";";
             SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
             SqlDataReader sqlr = sqld.ExecuteReader();
             while (sqlr.Read())
             {
+                cbByCompany.Items.Add(sc.ToCapitalize(sqlr["name"].ToString()));
                 cbCompany.Items.Add(sc.ToCapitalize(sqlr["name"].ToString()));
             }
             sqlr.Close();
@@ -89,7 +128,9 @@ namespace coffee_shop
             inter = branch_inter;
             loadComboCompany();
             cbCompany.SelectedIndex = 0;
-            QueryBranches();
+            cbByCompany.SelectedIndex = 0;
+            lvBranch.Items.Clear();
+            QueryBranches(cbByCompany.Text.ToLower());
         }
 
         private void txtName_Leave(object sender, EventArgs e)
@@ -190,7 +231,7 @@ namespace coffee_shop
                     del_cmd.Dispose();
                     MessageBox.Show("Branch has been deleted!");
                     lvBranch.Items.Clear();
-                    QueryBranches();
+                    QueryBranches(cbByCompany.Text.ToLower());
                 }
                 else
                 {
@@ -209,8 +250,8 @@ namespace coffee_shop
                     MessageBox.Show("Insert Successfully!");
                     ClearTextBoxes(groupBox1);
                     txtName.Focus();
-                    lvBranch.Clear();
-                    QueryBranches();
+                    lvBranch.Items.Clear();
+                    QueryBranches(cbByCompany.Text.ToLower());
                 }
                 else
                 {
@@ -254,9 +295,21 @@ namespace coffee_shop
                     MessageBox.Show("Branch has been updated!");
                     ClearTextBoxes(groupBox1);
                     lvBranch.Items.Clear();
-                    QueryBranches();
+                    QueryBranches(cbByCompany.Text.ToLower());
                 }
             }
+        }
+
+        private void cbByCompany_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lvBranch.Items.Clear();
+            QueryBranches(cbByCompany.Text.ToLower());
+        }
+
+        private void branch_form_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DataConn.Connection.Close();
+            this.Dispose();
         }
     }
 }

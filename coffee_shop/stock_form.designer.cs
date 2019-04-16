@@ -38,6 +38,8 @@
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnDel = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -61,16 +63,19 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtname = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.cbByCompany = new System.Windows.Forms.ComboBox();
+            this.cbByBranch = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(795, 9);
+            this.txtSearch.Location = new System.Drawing.Point(1027, 9);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(303, 27);
+            this.txtSearch.Size = new System.Drawing.Size(245, 27);
             this.txtSearch.TabIndex = 27;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // label10
             // 
@@ -91,13 +96,15 @@
             this.columnHeader4,
             this.columnHeader5,
             this.columnHeader6,
-            this.columnHeader7});
+            this.columnHeader7,
+            this.columnHeader8,
+            this.columnHeader9});
             this.lvStocks.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvStocks.FullRowSelect = true;
             this.lvStocks.GridLines = true;
             this.lvStocks.Location = new System.Drawing.Point(518, 47);
             this.lvStocks.Name = "lvStocks";
-            this.lvStocks.Size = new System.Drawing.Size(580, 352);
+            this.lvStocks.Size = new System.Drawing.Size(754, 352);
             this.lvStocks.TabIndex = 26;
             this.lvStocks.UseCompatibleStateImageBehavior = false;
             this.lvStocks.View = System.Windows.Forms.View.Details;
@@ -137,6 +144,14 @@
             // 
             this.columnHeader7.Text = "Stock Category";
             this.columnHeader7.Width = 214;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Company";
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "Branch";
             // 
             // btnDel
             // 
@@ -375,11 +390,37 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Name:";
             // 
+            // cbByCompany
+            // 
+            this.cbByCompany.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbByCompany.FormattingEnabled = true;
+            this.cbByCompany.Items.AddRange(new object[] {
+            "All"});
+            this.cbByCompany.Location = new System.Drawing.Point(773, 9);
+            this.cbByCompany.Name = "cbByCompany";
+            this.cbByCompany.Size = new System.Drawing.Size(120, 26);
+            this.cbByCompany.TabIndex = 29;
+            this.cbByCompany.SelectedIndexChanged += new System.EventHandler(this.cbByCompany_SelectedIndexChanged);
+            // 
+            // cbByBranch
+            // 
+            this.cbByBranch.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbByBranch.FormattingEnabled = true;
+            this.cbByBranch.Items.AddRange(new object[] {
+            "All"});
+            this.cbByBranch.Location = new System.Drawing.Point(901, 9);
+            this.cbByBranch.Name = "cbByBranch";
+            this.cbByBranch.Size = new System.Drawing.Size(120, 26);
+            this.cbByBranch.TabIndex = 30;
+            this.cbByBranch.SelectedIndexChanged += new System.EventHandler(this.cbByBranch_SelectedIndexChanged);
+            // 
             // stock_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1110, 418);
+            this.ClientSize = new System.Drawing.Size(1284, 418);
+            this.Controls.Add(this.cbByBranch);
+            this.Controls.Add(this.cbByCompany);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.lvStocks);
@@ -390,6 +431,7 @@
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "stock_form";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Stock Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.stock_form_FormClosing);
             this.Load += new System.EventHandler(this.stockform_load);
@@ -435,5 +477,9 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cbCompany;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.ColumnHeader columnHeader9;
+        private System.Windows.Forms.ComboBox cbByCompany;
+        private System.Windows.Forms.ComboBox cbByBranch;
     }
 }

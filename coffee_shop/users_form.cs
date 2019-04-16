@@ -86,7 +86,11 @@ namespace coffee_shop
 
         private void loadComboRole()
         {
-            string sql = "SELECT * FROM roles WHERE LOWER(name) IN ('editor', 'user');";
+            string sql = "";
+            if (uRole.ToLower() == "superadmin")
+                sql = "SELECT * FROM roles WHERE LOWER(name) IN ('admin', 'editor', 'user');";
+            else
+                sql = "SELECT * FROM roles WHERE LOWER(name) IN ('editor', 'user');";
             SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
             SqlDataReader sqlr = sqld.ExecuteReader();
             while(sqlr.Read())

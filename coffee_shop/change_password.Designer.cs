@@ -56,7 +56,7 @@ namespace coffee_shop
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Password Changing";
-            groupBox1.Enter += new EventHandler(groupBox1_Enter);
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // txtConPass
             // 
@@ -83,7 +83,6 @@ namespace coffee_shop
             this.txtNewPass.PasswordChar = '*';
             this.txtNewPass.Size = new System.Drawing.Size(300, 27);
             this.txtNewPass.TabIndex = 3;
-            txtNewPass.TextChanged += new EventHandler(txtNewPass_TextChanged);
             // 
             // label2
             // 
@@ -101,7 +100,6 @@ namespace coffee_shop
             this.txtOldPass.PasswordChar = '*';
             this.txtOldPass.Size = new System.Drawing.Size(300, 27);
             this.txtOldPass.TabIndex = 1;
-            this.txtOldPass.TextChanged += new System.EventHandler(this.txtOldPass_TextChanged);
             this.txtOldPass.Leave += new System.EventHandler(this.txtOldPass_leave);
             // 
             // label1
@@ -139,11 +137,6 @@ namespace coffee_shop
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
-        }
-
-        private void txtNewPass_TextChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)

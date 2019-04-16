@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cbStock = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cbBranch = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -52,7 +50,6 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label8 = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -62,8 +59,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.cbStock);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.cbBranch);
             this.groupBox1.Controls.Add(this.label1);
@@ -78,49 +73,29 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(9, 7);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox1.Size = new System.Drawing.Size(413, 296);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Size = new System.Drawing.Size(413, 289);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Supplier\'s Information";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(11, 259);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(47, 18);
-            this.label7.TabIndex = 19;
-            this.label7.Text = "Stock:";
-            // 
-            // cbStock
-            // 
-            this.cbStock.FormattingEnabled = true;
-            this.cbStock.Location = new System.Drawing.Point(102, 252);
-            this.cbStock.Name = "cbStock";
-            this.cbStock.Size = new System.Drawing.Size(160, 30);
-            this.cbStock.TabIndex = 18;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(11, 223);
+            this.label2.Location = new System.Drawing.Point(11, 254);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 18);
             this.label2.TabIndex = 17;
             this.label2.Text = "Branch:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // cbBranch
             // 
             this.cbBranch.FormattingEnabled = true;
-            this.cbBranch.Location = new System.Drawing.Point(102, 216);
+            this.cbBranch.Location = new System.Drawing.Point(102, 247);
             this.cbBranch.Name = "cbBranch";
             this.cbBranch.Size = new System.Drawing.Size(160, 30);
             this.cbBranch.TabIndex = 16;
@@ -129,7 +104,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(11, 187);
+            this.label1.Location = new System.Drawing.Point(11, 218);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 18);
@@ -139,21 +114,22 @@
             // cbCompany
             // 
             this.cbCompany.FormattingEnabled = true;
-            this.cbCompany.Location = new System.Drawing.Point(102, 180);
+            this.cbCompany.Location = new System.Drawing.Point(102, 211);
             this.cbCompany.Name = "cbCompany";
             this.cbCompany.Size = new System.Drawing.Size(160, 30);
             this.cbCompany.TabIndex = 14;
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(102, 147);
+            this.txtEmail.Location = new System.Drawing.Point(102, 178);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(294, 27);
             this.txtEmail.TabIndex = 13;
+            this.txtEmail.Leave += new System.EventHandler(this.txtEmail_Leave);
             // 
             // txtPhone
             // 
-            this.txtPhone.Location = new System.Drawing.Point(102, 114);
+            this.txtPhone.Location = new System.Drawing.Point(102, 145);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(294, 27);
             this.txtPhone.TabIndex = 12;
@@ -163,7 +139,7 @@
             this.txtAddress.Location = new System.Drawing.Point(102, 66);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(294, 42);
+            this.txtAddress.Size = new System.Drawing.Size(294, 73);
             this.txtAddress.TabIndex = 11;
             // 
             // label3
@@ -183,8 +159,6 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(294, 27);
             this.txtName.TabIndex = 10;
-            this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
-            this.txtName.Leave += new System.EventHandler(this.txtName_Leave);
             // 
             // label4
             // 
@@ -201,7 +175,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(11, 121);
+            this.label5.Location = new System.Drawing.Point(11, 152);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(54, 18);
@@ -212,7 +186,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(11, 154);
+            this.label6.Location = new System.Drawing.Point(11, 185);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(50, 18);
@@ -222,19 +196,20 @@
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(9, 307);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAdd.Location = new System.Drawing.Point(9, 300);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(100, 35);
             this.btnAdd.TabIndex = 15;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnExit
             // 
             this.btnExit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.Location = new System.Drawing.Point(322, 307);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnExit.Location = new System.Drawing.Point(322, 300);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(2);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(100, 35);
             this.btnExit.TabIndex = 16;
@@ -250,16 +225,18 @@
             this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5,
-            this.columnHeader6,
-            this.columnHeader7});
+            this.columnHeader6});
             this.lvSupplier.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvSupplier.FullRowSelect = true;
+            this.lvSupplier.GridLines = true;
             this.lvSupplier.Location = new System.Drawing.Point(439, 47);
-            this.lvSupplier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lvSupplier.Margin = new System.Windows.Forms.Padding(2);
             this.lvSupplier.Name = "lvSupplier";
-            this.lvSupplier.Size = new System.Drawing.Size(568, 295);
+            this.lvSupplier.Size = new System.Drawing.Size(568, 288);
             this.lvSupplier.TabIndex = 18;
             this.lvSupplier.UseCompatibleStateImageBehavior = false;
             this.lvSupplier.View = System.Windows.Forms.View.Details;
+            this.lvSupplier.SelectedIndexChanged += new System.EventHandler(this.lvSupplier_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -291,11 +268,6 @@
             this.columnHeader6.Text = "Branch";
             this.columnHeader6.Width = 87;
             // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "Stock";
-            this.columnHeader7.Width = 121;
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -311,38 +283,41 @@
             // 
             this.txtSearch.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearch.Location = new System.Drawing.Point(730, 13);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(2);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(277, 27);
             this.txtSearch.TabIndex = 20;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(217, 307);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDelete.Location = new System.Drawing.Point(217, 300);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(2);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(100, 35);
             this.btnDelete.TabIndex = 21;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
             this.btnEdit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdit.Location = new System.Drawing.Point(113, 307);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnEdit.Location = new System.Drawing.Point(113, 300);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(2);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(100, 35);
             this.btnEdit.TabIndex = 22;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // supplier_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1018, 355);
+            this.ClientSize = new System.Drawing.Size(1018, 349);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.txtSearch);
@@ -351,8 +326,10 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnExit);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "supplier_form";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Supplier Form";
             this.Load += new System.EventHandler(this.supplier_form_Load);
             this.groupBox1.ResumeLayout(false);
@@ -379,8 +356,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnExit;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox cbStock;
         private System.Windows.Forms.ListView lvSupplier;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
@@ -388,7 +363,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnDelete;
