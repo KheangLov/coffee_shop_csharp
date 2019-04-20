@@ -181,10 +181,12 @@ namespace coffee_shop
             MyInter employee_inter = my_employee;
             inter = employee_inter;
             QueryEmployees();
+            cbCompany.Items.Clear();
             loadComboCompany();
             if (cbCompany.Items.Count > 0)
                 cbCompany.SelectedIndex = 0;
             addComboCompany();
+            cbBranch.Items.Clear();
             loadComboBranch();
             if (cbBranch.Items.Count > 0)
                 cbBranch.SelectedIndex = 0;
@@ -195,6 +197,7 @@ namespace coffee_shop
 
         private void employees_form_FormClosing(object sender, FormClosingEventArgs e)
         {
+            DataConn.Connection.Close();
             this.Dispose();
         }
 
@@ -441,6 +444,7 @@ namespace coffee_shop
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            DataConn.Connection.Close();
             this.Dispose();
         }
 

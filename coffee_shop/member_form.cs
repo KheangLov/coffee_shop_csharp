@@ -83,29 +83,12 @@ namespace coffee_shop
             DataConn.Connection.Close();
         }
 
-        private void loadComboUser()
-        {
-            DataConn.Connection.Open();
-            string sql = @"SELECT users.*, roles.name AS role_name FROM users 
-                        INNER JOIN roles ON users.role_id = roles.id
-                        WHERE LOWER(roles.name) = 'admin';";
-            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
-            SqlDataReader sqlr = sqld.ExecuteReader();
-            while (sqlr.Read())
-            {
-                cbUser.Items.Add(sc.ToCapitalize(sqlr["username"].ToString()));
-            }
-            sqld.Dispose();
-            sqlr.Close();
-            DataConn.Connection.Close();
-        }
-
         private void addUser()
         {
-            if (cbUser.Text != "")
+            if (txtUser.Text != "")
             {
                 DataConn.Connection.Open();
-                string sql = "SELECT * FROM users WHERE LOWER(username) = '" + cbUser.Text.ToLower() + "';";
+                string sql = "SELECT * FROM users WHERE LOWER(username) = '" + txtUser.Text.ToLower() + "';";
                 SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
                 SqlDataReader sqlr = sqld.ExecuteReader();
                 if (sqlr.Read())
@@ -191,6 +174,7 @@ namespace coffee_shop
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            DataConn.Connection.Close();
             this.Dispose();
         }
 
@@ -198,18 +182,20 @@ namespace coffee_shop
         {
             btnEdit.Enabled = false;
             btnDelete.Enabled = false;
+            txtUser.Enabled = false;
             MyInter member_inter = my_member;
             inter = member_inter;
             loadComboName();
             if (cbName.Items.Count > 0)
                 cbName.SelectedIndex = 0;
-            loadComboUser();
-            cbUser.SelectedItem = sc.ToCapitalize(uName);
+            txtUser.Text = sc.ToCapitalize(uName);
             addUser();
+            cbCompany.Items.Clear();
             loadComboCompany();
             if (cbCompany.Items.Count > 0)
                 cbCompany.SelectedIndex = 0;
             addCompany();
+            cbBranch.Items.Clear();
             loadComboBranch();
             if (cbBranch.Items.Count > 0)
                 cbBranch.SelectedIndex = 0;
@@ -221,6 +207,10 @@ namespace coffee_shop
         private void cbUser_SelectedIndexChanged(object sender, EventArgs e)
         {
             addUser();
+            cbCompany.Items.Clear();
+            loadComboCompany();
+            if (cbCompany.Items.Count > 0)
+                cbCompany.SelectedIndex = 0;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -312,7 +302,7 @@ namespace coffee_shop
                         {
                             memId = int.Parse(reader["id"].ToString());
                             cbName.SelectedItem = reader["name"].ToString();
-                            cbUser.SelectedItem = reader["user_name"].ToString();
+                            txtUser.Text = reader["user_name"].ToString();
                             cbCompany.SelectedItem = reader["company_name"].ToString();
                             cbBranch.SelectedItem = reader["branch_name"].ToString();
                             btnEdit.Text = "Update";
@@ -352,6 +342,10 @@ namespace coffee_shop
         private void cbCompany_SelectedIndexChanged(object sender, EventArgs e)
         {
             addCompany();
+            cbBranch.Items.Clear();
+            loadComboBranch();
+            if (cbBranch.Items.Count > 0)
+                cbBranch.SelectedIndex = 0;
         }
 
         private void cbBranch_SelectedIndexChanged(object sender, EventArgs e)

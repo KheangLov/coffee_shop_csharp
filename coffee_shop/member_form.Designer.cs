@@ -38,11 +38,11 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtUser = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.cbBranch = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cbCompany = new System.Windows.Forms.ComboBox();
-            this.cbUser = new System.Windows.Forms.ComboBox();
             this.cbName = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -133,11 +133,11 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtUser);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.cbBranch);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.cbCompany);
-            this.groupBox1.Controls.Add(this.cbUser);
             this.groupBox1.Controls.Add(this.cbName);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
@@ -149,11 +149,18 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Member\'s Information";
             // 
+            // txtUser
+            // 
+            this.txtUser.Location = new System.Drawing.Point(166, 77);
+            this.txtUser.Name = "txtUser";
+            this.txtUser.Size = new System.Drawing.Size(226, 27);
+            this.txtUser.TabIndex = 22;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(24, 155);
+            this.label4.Location = new System.Drawing.Point(24, 153);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 18);
             this.label4.TabIndex = 21;
@@ -163,7 +170,7 @@
             // 
             this.cbBranch.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbBranch.FormattingEnabled = true;
-            this.cbBranch.Location = new System.Drawing.Point(166, 148);
+            this.cbBranch.Location = new System.Drawing.Point(166, 146);
             this.cbBranch.Name = "cbBranch";
             this.cbBranch.Size = new System.Drawing.Size(226, 30);
             this.cbBranch.TabIndex = 20;
@@ -173,7 +180,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(24, 119);
+            this.label3.Location = new System.Drawing.Point(24, 117);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 18);
             this.label3.TabIndex = 19;
@@ -183,21 +190,11 @@
             // 
             this.cbCompany.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCompany.FormattingEnabled = true;
-            this.cbCompany.Location = new System.Drawing.Point(166, 112);
+            this.cbCompany.Location = new System.Drawing.Point(166, 110);
             this.cbCompany.Name = "cbCompany";
             this.cbCompany.Size = new System.Drawing.Size(226, 30);
             this.cbCompany.TabIndex = 17;
             this.cbCompany.SelectedIndexChanged += new System.EventHandler(this.cbCompany_SelectedIndexChanged);
-            // 
-            // cbUser
-            // 
-            this.cbUser.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbUser.FormattingEnabled = true;
-            this.cbUser.Location = new System.Drawing.Point(166, 76);
-            this.cbUser.Name = "cbUser";
-            this.cbUser.Size = new System.Drawing.Size(226, 30);
-            this.cbUser.TabIndex = 18;
-            this.cbUser.SelectedIndexChanged += new System.EventHandler(this.cbUser_SelectedIndexChanged);
             // 
             // cbName
             // 
@@ -212,7 +209,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(24, 83);
+            this.label2.Location = new System.Drawing.Point(24, 84);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 18);
             this.label2.TabIndex = 3;
@@ -242,6 +239,7 @@
             this.Font = new System.Drawing.Font("Montserrat", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "member_form";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Member Form";
             this.Load += new System.EventHandler(this.member_form_Load);
             this.groupBox1.ResumeLayout(false);
@@ -265,9 +263,9 @@
         private System.Windows.Forms.ComboBox cbBranch;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbCompany;
-        private System.Windows.Forms.ComboBox cbUser;
         private System.Windows.Forms.ComboBox cbName;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.TextBox txtUser;
     }
 }

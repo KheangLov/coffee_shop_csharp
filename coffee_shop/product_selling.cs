@@ -199,6 +199,7 @@ namespace coffee_shop
                 cbCurrency.Enabled = true;
                 cbCurrency.SelectedIndex = 0;
                 txtReceive.Enabled = true;
+                btnAdd.Enabled = false;
             }
         }
 
@@ -209,7 +210,7 @@ namespace coffee_shop
                 btnPay.Enabled = true;
                 double subTotal = double.Parse(txtSubTotal.Text);
                 double receive = double.Parse(txtReceive.Text);
-                if(receive > subTotal)
+                if(receive >= subTotal)
                 {
                     txtChange.Text = (receive - subTotal).ToString();
                 }
@@ -227,6 +228,18 @@ namespace coffee_shop
             if(txtTotal.Text != "")
             {
                 txtDiscount.Enabled = true;
+            }
+        }
+
+        void ClearTextBoxes(Control parent)
+        {
+            foreach (Control child in parent.Controls)
+            {
+                TextBox textBox = child as TextBox;
+                if (textBox == null)
+                    ClearTextBoxes(child);
+                else
+                    textBox.Text = string.Empty;
             }
         }
 
@@ -261,15 +274,64 @@ namespace coffee_shop
                     qsr.Close();
                     if(cutStock > 0 && stockId > 0)
                     {
-                        string upd_stock = "UPDATE stocks SET qty = qty - " + (cutStock * item.Value) + " WHERE id = " + stockId + ";";
-                        SqlCommand ups = new SqlCommand(upd_stock, DataConn.Connection);
-                        int val = ups.ExecuteNonQuery();
-                        ups.Dispose();
+                        double checkStockQty = 0;
+                        string sqty_sql = "SELECT * FROM stocks WHERE id = " + stockId + ";";
+                        SqlCommand sqd = new SqlCommand(sqty_sql, DataConn.Connection);
+                        SqlDataReader sqr = sqd.ExecuteReader();
+                        if (sqr.Read())
+                        {
+                            checkStockQty = double.Parse(sqr["qty"].ToString());
+                        }
+                        sqd.Dispose();
+                        sqr.Close();
+                        if(checkStockQty - (cutStock * item.Value) < 0)
+                        {
+                            MessageBox.Show("You don't have enough item in your stock!");
+                        }
+                        else
+                        {
+                            string upd_stock = "UPDATE stocks SET qty = qty - " + (cutStock * item.Value) + " WHERE id = " + stockId + ";";
+                            SqlCommand ups = new SqlCommand(upd_stock, DataConn.Connection);
+                            int val = ups.ExecuteNonQuery();
+                            ups.Dispose();
+                            double stockQty = 0;
+                            double stockAlertQty = 0;
+                            string check_stock = "SELECT * FROM stocks WHERE id = " + stockId + ";";
+                            SqlCommand csd = new SqlCommand(check_stock, DataConn.Connection);
+                            SqlDataReader csr = csd.ExecuteReader();
+                            if (csr.Read())
+                            {
+                                stockQty = double.Parse(csr["qty"].ToString());
+                                stockAlertQty = double.Parse(csr["alert_qty"].ToString());
+                            }
+                            csd.Dispose();
+                            csr.Close();
+                            if (stockAlertQty >= stockQty)
+                            {
+                                string upd_alerted = "UPDATE stocks SET alerted = 1 WHERE id = " + stockId + ";";
+                                SqlCommand sad = new SqlCommand(upd_alerted, DataConn.Connection);
+                                int sar = sad.ExecuteNonQuery();
+                                sad.Dispose();
+                            }
+                        }
                     }
                 }
                 MessageBox.Show("Pay Success!");
+                ClearTextBoxes(groupBox1);
+                txtReceive.Enabled = false;
+                cbType.SelectedIndex = 0;
+                if (cbCom.Items.Count > 0)
+                    cbCom.SelectedIndex = 0;
+                if (cbBranch.Items.Count > 0)
+                    cbBranch.SelectedIndex = 0;
+                if (cbEmp.Items.Count > 0)
+                    cbEmp.SelectedIndex = 0;
                 lvCart.Items.Clear();
+                cbCurrency.Items.Clear();
+                cbCurrency.Text = "";
+                cbCurrency.Enabled = false;
                 btnPay.Enabled = false;
+                btnAdd.Enabled = true;
             }
         }
 
@@ -293,7 +355,20 @@ namespace coffee_shop
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-
+            lvProducts.Items.Clear();
+            string sql = @"SELECT * FROM products
+                INNER JOIN product_categories ON products.procate_id = product_categories.id
+                WHERE LOWER(product_categories.name) = '" + type.ToLower() + "' AND products.company_id IN(" + comId + ") AND LOWER(products.name) LIKE '%" + txtSearch.Text.ToLower() + "%';";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = sqld.ExecuteReader();
+            while (sqlr.Read())
+            {
+                string[] product_info = { sqlr["name"].ToString(), sqlr["selling_price"].ToString(), sqlr["type"].ToString() };
+                ListViewItem item = new ListViewItem(product_info);
+                lvProducts.Items.Add(item);
+            }
+            sqld.Dispose();
+            sqlr.Close();
         }
     }
 }

@@ -245,6 +245,7 @@ namespace coffee_shop
         {
             if (lvStocks.SelectedItems.Count != 0)
             {
+                btnDel.Enabled = false;
                 if (btnEdit.Text.ToLower() == "edit")
                 {
                     ListViewItem list_item = lvStocks.SelectedItems[0];
@@ -298,6 +299,8 @@ namespace coffee_shop
                     ClearTextBoxes(groupBox1);
                     lvStocks.Items.Clear();
                     Querystocks();
+                    btnEdit.Text = "Edit";
+                    btnEdit.Enabled = false;
                 }
             }
         }

@@ -457,6 +457,7 @@
             this.Controls.Add(this.lvProducts);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "product_selling";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Product Selling";
             this.Load += new System.EventHandler(this.product_selling_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbProduct)).EndInit();

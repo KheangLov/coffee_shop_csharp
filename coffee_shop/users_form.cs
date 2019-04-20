@@ -377,17 +377,27 @@ namespace coffee_shop
                 btnEdit.Enabled = false;
                 ListViewItem list_item = lvUsers.SelectedItems[0];
                 string name = list_item.SubItems[0].Text;
-                string pass_que = "SELECT id, password FROM users WHERE username = '" + name +"';";
-                SqlCommand pas_cmd = new SqlCommand(pass_que, DataConn.Connection);
-                SqlDataReader pas_rd = pas_cmd.ExecuteReader();
-                if(pas_rd.Read())
+                string role = list_item.SubItems[3].Text;
+                if(role.ToLower() != "superadmin")
                 {
-                    userId = int.Parse(pas_rd["id"].ToString());
-                    userPass = pas_rd["password"].ToString();
+                    string pass_que = "SELECT id, password FROM users WHERE username = '" + name + "';";
+                    SqlCommand pas_cmd = new SqlCommand(pass_que, DataConn.Connection);
+                    SqlDataReader pas_rd = pas_cmd.ExecuteReader();
+                    if (pas_rd.Read())
+                    {
+                        userId = int.Parse(pas_rd["id"].ToString());
+                        userPass = pas_rd["password"].ToString();
+                    }
+                    pas_cmd.Dispose();
+                    pas_rd.Close();
+                    btnPassword.Enabled = false;
+                    new change_password(userPass, userId).ShowDialog();
                 }
-                pas_cmd.Dispose();
-                pas_rd.Close();
-                new change_password(userPass, userId).ShowDialog();
+                else
+                {
+                    MessageBox.Show("You can't change application owner's password!");
+                    btnPassword.Enabled = false;
+                }
             }
         }
 

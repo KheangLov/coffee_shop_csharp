@@ -311,6 +311,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "branch_form";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Branch Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.branch_form_FormClosing);
             this.Load += new System.EventHandler(this.branch_form_Load);

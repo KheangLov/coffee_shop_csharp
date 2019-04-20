@@ -60,6 +60,7 @@ namespace coffee_shop
             else
             {
                 MessageBox.Show("Please input user and password first!");
+                txtUser.Focus();
             }
         }
 
