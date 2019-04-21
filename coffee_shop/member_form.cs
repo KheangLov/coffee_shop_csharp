@@ -48,33 +48,54 @@ namespace coffee_shop
             com.Dispose();
             sqlr.Close();
         }
+        
+        private int CheckMember()
+        {
+            string sql = "SELECT COUNT(*) FROM members;";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            int count = Convert.ToInt16(sqld.ExecuteScalar());
+            sqld.Dispose();
+            return count;
+        }
 
         private void loadComboName()
         {
-            string mName = "";
             DataConn.Connection.Open();
-            string sql_member = "SELECT * FROM members;";
-            SqlCommand com_mem = new SqlCommand(sql_member, DataConn.Connection);
-            SqlDataReader read_mem = com_mem.ExecuteReader();
-            int i = 0;
-            while (read_mem.Read())
+            string mName = "";
+            if (CheckMember() > 0)
             {
-                if (i == 0)
-                    mName += "'" + read_mem["name"].ToString().ToLower() + "'";
-                else
-                    mName += ", '" + read_mem["name"].ToString().ToLower() + "'";
-                i++;
+                string sql_member = "SELECT * FROM members;";
+                SqlCommand com_mem = new SqlCommand(sql_member, DataConn.Connection);
+                SqlDataReader read_mem = com_mem.ExecuteReader();
+                int i = 0;
+                while (read_mem.Read())
+                {
+                    if (i == 0)
+                        mName += "'" + read_mem["name"].ToString().ToLower() + "'";
+                    else
+                        mName += ", '" + read_mem["name"].ToString().ToLower() + "'";
+                    i++;
+                }
+                com_mem.Dispose();
+                read_mem.Close();
             }
-            com_mem.Dispose();
-            read_mem.Close();
-            Console.Write(mName);
-            string sql = @"SELECT users.*, roles.name AS role_name FROM users 
-                        INNER JOIN roles ON users.role_id = roles.id
-                        WHERE LOWER(roles.name) IN('editor', 'user')
-                        AND LOWER(users.username) NOT IN(" + mName + ");";
+            string sql = "";
+            if (mName != "")
+            {
+                sql = @"SELECT users.*, roles.name AS role_name FROM users 
+                    INNER JOIN roles ON users.role_id = roles.id
+                    WHERE LOWER(roles.name) IN('editor', 'user')
+                    AND LOWER(users.username) NOT IN(" + mName + ");";
+            }
+            else
+            {
+                sql = @"SELECT users.*, roles.name AS role_name FROM users 
+                    INNER JOIN roles ON users.role_id = roles.id
+                    WHERE LOWER(roles.name) IN('editor', 'user');";
+            }
             SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
             SqlDataReader sqlr = sqld.ExecuteReader();
-            while(sqlr.Read())
+            while (sqlr.Read())
             {
                 cbName.Items.Add(sc.ToCapitalize(sqlr["username"].ToString()));
             }

@@ -197,7 +197,8 @@ namespace coffee_shop
                 txtDisPrice.Text = (double.Parse(txtTotal.Text) * double.Parse(txtDiscount.Text) / 100).ToString();
                 txtSubTotal.Text = (double.Parse(txtTotal.Text) - double.Parse(txtDisPrice.Text)).ToString();
                 cbCurrency.Enabled = true;
-                cbCurrency.SelectedIndex = 0;
+                if(cbCurrency.Items.Count > 0)
+                    cbCurrency.SelectedIndex = 0;
                 txtReceive.Enabled = true;
                 btnAdd.Enabled = false;
             }

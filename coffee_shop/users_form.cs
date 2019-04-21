@@ -183,7 +183,8 @@ namespace coffee_shop
             inter = user_inter;
             loadComboRole();
             cbGender.SelectedIndex = 0;
-            cbRole.SelectedIndex = 0;
+            if(cbRole.Items.Count > 0)
+                cbRole.SelectedIndex = 0;
             try
             {
                 QueryUsers();

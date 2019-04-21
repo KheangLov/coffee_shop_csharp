@@ -113,7 +113,8 @@ namespace coffee_shop
             if (uRole.ToLower() == "admin")
             {
                 GetUserCompany();
-                CheckStock();
+                if(com_id != "")
+                    CheckStock();
             }
         }
 
