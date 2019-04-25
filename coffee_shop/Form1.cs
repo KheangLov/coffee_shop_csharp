@@ -26,20 +26,6 @@ namespace coffee_shop
         }
         string cid = "";
 
-        private void CheckStock()
-        {
-            DataConn.Connection.Open();
-            string sql = "SELECT COUNT(*) FROM stocks WHERE alerted = 1 AND company_id IN(" + com_id + ");";
-            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
-            int count_alert = Convert.ToInt16(sqld.ExecuteScalar());
-            sqld.Dispose();
-            DataConn.Connection.Close();
-            if(count_alert > 0)
-            {
-                lbAlert.Text = "Please update your stock!";
-            }
-        }
-
         private void GetUserCompany()
         {
             DataConn.Connection.Open();
@@ -58,6 +44,27 @@ namespace coffee_shop
             sqld.Dispose();
             sqlr.Close();
             DataConn.Connection.Close();
+        }
+
+        private void CheckStock()
+        {
+            if(com_id != "")
+            {
+                DataConn.Connection.Open();
+                string sql = "SELECT COUNT(*) FROM stocks WHERE alerted = 1 AND company_id IN(" + com_id + ");";
+                SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+                int count_alert = Convert.ToInt16(sqld.ExecuteScalar());
+                sqld.Dispose();
+                DataConn.Connection.Close();
+                if (count_alert > 0)
+                    lbAlert.Text = "Please update your stock!";
+                else
+                    lbAlert.Text = "";
+            }
+            else
+            {
+                MessageBox.Show("You don't have company yet!");
+            }
         }
 
         private int CheckBranch()
@@ -113,7 +120,7 @@ namespace coffee_shop
             if (uRole.ToLower() == "admin")
             {
                 GetUserCompany();
-                if(com_id != "")
+                if (com_id != "")
                     CheckStock();
             }
         }
@@ -132,7 +139,7 @@ namespace coffee_shop
         private void myUsersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (uRole.ToLower() == "superadmin" || uRole.ToLower() == "admin")
-                new users_form(uRole).ShowDialog();
+                new users_form(uRole).Show();
             else
                 MessageBox.Show("You don't have permission!");
         }
@@ -149,10 +156,13 @@ namespace coffee_shop
         {
             if (uRole.ToLower() == "admin")
             {
-                if (CheckCompany() > 0 && CheckBranch() > 0)
-                    new products_form(com_id, uRole).ShowDialog();
-                else
-                    MessageBox.Show("Please create Company or Branch first!");
+                if(com_id != "")
+                {
+                    if (CheckCompany() > 0 && CheckBranch() > 0)
+                        new products_form(com_id, uRole).ShowDialog();
+                    else
+                        MessageBox.Show("Please create Company or Branch first!");
+                }
             }
             else
             {
@@ -316,6 +326,11 @@ namespace coffee_shop
             }
             else
                 MessageBox.Show("You don't have permission!");
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            CheckStock();
         }
     }
 }

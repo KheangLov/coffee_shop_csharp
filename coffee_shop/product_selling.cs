@@ -328,7 +328,6 @@ namespace coffee_shop
                 if (cbEmp.Items.Count > 0)
                     cbEmp.SelectedIndex = 0;
                 lvCart.Items.Clear();
-                cbCurrency.Items.Clear();
                 cbCurrency.Text = "";
                 cbCurrency.Enabled = false;
                 btnPay.Enabled = false;

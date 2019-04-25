@@ -277,6 +277,7 @@ namespace coffee_shop
         {
             if (lvMember.SelectedItems.Count != 0)
             {
+                DataConn.Connection.Open();
                 btnEdit.Enabled = false;
                 if (MessageBox.Show("Are you sure, you want to delete this member?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
@@ -297,6 +298,7 @@ namespace coffee_shop
                 {
                     MessageBox.Show("No Member was deleted!", "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                DataConn.Connection.Close();
             }
         }
 

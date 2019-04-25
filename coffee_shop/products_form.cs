@@ -246,7 +246,8 @@ namespace coffee_shop
             MyInter product_inter = my_products;
             inter = product_inter;
             loadComboProCate();
-            comboBoxProductProcateID.SelectedIndex = 0;
+            if(comboBoxProductProcateID.Items.Count > 0)
+                comboBoxProductProcateID.SelectedIndex = 0;
             loadStocks();
             if(comboBoxProductStockID.Items.Count > 0)
                 comboBoxProductStockID.SelectedIndex = 0;
