@@ -53,6 +53,7 @@
             this.btnFood = new System.Windows.Forms.Button();
             this.lbAlert = new System.Windows.Forms.Label();
             this.btnCheckStock = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -274,7 +275,7 @@
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.main_closing);
@@ -311,6 +312,7 @@
         private System.Windows.Forms.ToolStripMenuItem employeesToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem suppliersToolStripMenuItem;
         private System.Windows.Forms.Button btnCheckStock;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

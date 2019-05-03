@@ -120,6 +120,7 @@ namespace coffee_shop
             if (uRole.ToLower() == "admin")
             {
                 GetUserCompany();
+                timer1.Start();
                 if (com_id != "")
                     CheckStock();
             }
