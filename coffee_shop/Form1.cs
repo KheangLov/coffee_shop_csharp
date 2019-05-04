@@ -140,7 +140,7 @@ namespace coffee_shop
         private void myUsersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (uRole.ToLower() == "superadmin" || uRole.ToLower() == "admin")
-                new users_form(uRole).Show();
+                new users_form(uRole).ShowDialog();
             else
                 MessageBox.Show("You don't have permission!");
         }
