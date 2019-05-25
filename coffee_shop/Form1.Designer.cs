@@ -214,7 +214,7 @@
             // 
             // btnDrinks
             // 
-            this.btnDrinks.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDrinks.Font = new System.Drawing.Font("Montserrat", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDrinks.Location = new System.Drawing.Point(51, 218);
             this.btnDrinks.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.btnDrinks.Name = "btnDrinks";
@@ -226,7 +226,7 @@
             // 
             // btnFood
             // 
-            this.btnFood.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFood.Font = new System.Drawing.Font("Montserrat", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFood.Location = new System.Drawing.Point(51, 340);
             this.btnFood.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.btnFood.Name = "btnFood";
@@ -250,7 +250,7 @@
             // 
             // btnCheckStock
             // 
-            this.btnCheckStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCheckStock.Font = new System.Drawing.Font("Montserrat", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCheckStock.Location = new System.Drawing.Point(431, 50);
             this.btnCheckStock.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.btnCheckStock.Name = "btnCheckStock";

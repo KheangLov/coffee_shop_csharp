@@ -243,7 +243,7 @@ namespace coffee_shop
 
         private void addComboRole()
         {
-            if(cbRole.Text.ToLower() != "superadmin")
+            if (cbRole.Text.ToLower() != "superadmin")
             {
                 string sql = "SELECT * FROM roles WHERE LOWER(name) = '" + cbRole.Text.ToLower() + "';";
                 SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
