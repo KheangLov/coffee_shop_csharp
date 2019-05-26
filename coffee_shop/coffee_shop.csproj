@@ -63,12 +63,6 @@
     <Compile Include="AboutCoffeeShop.Designer.cs">
       <DependentUpon>AboutCoffeeShop.cs</DependentUpon>
     </Compile>
-    <Compile Include="CrystalReport1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CrystalReport1.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Employees.cs" />
     <Compile Include="employees_form.cs">
       <SubType>Form</SubType>
@@ -179,10 +173,6 @@
     </Compile>
     <EmbeddedResource Include="AboutCoffeeShop.resx">
       <DependentUpon>AboutCoffeeShop.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CrystalReport1.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>CrystalReport1.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="employees_form.resx">
       <DependentUpon>employees_form.cs</DependentUpon>
