@@ -129,6 +129,7 @@ namespace coffee_shop
             this.ClientSize = new System.Drawing.Size(547, 222);
             this.Controls.Add(this.btnChange);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "change_password";
             this.Text = "Password Changing Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.change_password_closing);
