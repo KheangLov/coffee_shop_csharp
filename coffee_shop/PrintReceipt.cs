@@ -8,6 +8,7 @@ namespace coffee_shop
 {
     public class PrintReceipt
     {
+        double disPrice = 0;
         public string ProductName { get; set; }
         public double Qty { get; set; }
         public double Price { get; set; }
@@ -23,7 +24,8 @@ namespace coffee_shop
         {
             get
             {
-                return (TotalPerPro * Discount) / 100;
+                disPrice += (TotalPerPro * Discount) / 100;
+                return disPrice;
             }
         }
     }

@@ -63,6 +63,7 @@ namespace coffee_shop
                     spr.BranchName = sqlr["branch_name"].ToString();
                     spr.EmployeeName = sqlr["employee_name"].ToString();
                     spr.Date = sqlr["date"].ToString();
+                    spr.Discount = double.Parse(sqlr["discount"].ToString());
                     PrintReceipt pr = new PrintReceipt();
                     pr.ProductName = sqlr["product_name"].ToString().ToUpper();
                     pr.Qty = double.Parse(sqlr["qty"].ToString());

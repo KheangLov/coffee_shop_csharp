@@ -14,5 +14,6 @@ namespace coffee_shop
         public string BranchName { get; set; }
         public string EmployeeName { get; set; }
         public string Date { get; set; }
+        public double Discount { get; set; }
     }
 }

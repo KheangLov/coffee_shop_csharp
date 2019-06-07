@@ -27,6 +27,10 @@ namespace coffee_shop
             recipt1.SetDataSource(_list);
             recipt1.SetParameterValue("CompanyName", _spr.CompanyName);
             recipt1.SetParameterValue("CompanyBranch", _spr.BranchName);
+            recipt1.SetParameterValue("WaitingNumber", _spr.WaitingNumber.ToString());
+            recipt1.SetParameterValue("EmpName", _spr.EmployeeName);
+            recipt1.SetParameterValue("Date", _spr.Date);
+            recipt1.SetParameterValue("Discount", _spr.Discount);
             crystalReportViewer1.ReportSource = recipt1;
         }
     }
