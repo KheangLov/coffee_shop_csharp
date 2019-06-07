@@ -54,6 +54,7 @@
             this.lbAlert = new System.Windows.Forms.Label();
             this.btnCheckStock = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,6 +68,7 @@
             this.companiesToolStripMenuItem,
             this.stocksToolStripMenuItem,
             this.productsToolStripMenuItem,
+            this.reportToolStripMenuItem,
             this.aboutToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -260,6 +262,12 @@
             this.btnCheckStock.UseVisualStyleBackColor = true;
             this.btnCheckStock.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
+            // reportToolStripMenuItem
+            // 
+            this.reportToolStripMenuItem.Name = "reportToolStripMenuItem";
+            this.reportToolStripMenuItem.Size = new System.Drawing.Size(93, 31);
+            this.reportToolStripMenuItem.Text = "Report";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -313,6 +321,7 @@
         private System.Windows.Forms.ToolStripMenuItem suppliersToolStripMenuItem;
         private System.Windows.Forms.Button btnCheckStock;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripMenuItem reportToolStripMenuItem;
     }
 }
 

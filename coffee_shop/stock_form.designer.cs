@@ -71,9 +71,10 @@
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(1027, 9);
+            this.txtSearch.Location = new System.Drawing.Point(1369, 11);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(245, 27);
+            this.txtSearch.Size = new System.Drawing.Size(325, 32);
             this.txtSearch.TabIndex = 27;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
@@ -81,9 +82,10 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Montserrat", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(512, 9);
+            this.label10.Location = new System.Drawing.Point(683, 11);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(138, 33);
+            this.label10.Size = new System.Drawing.Size(171, 41);
             this.label10.TabIndex = 28;
             this.label10.Text = "All Stocks";
             // 
@@ -102,9 +104,10 @@
             this.lvStocks.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvStocks.FullRowSelect = true;
             this.lvStocks.GridLines = true;
-            this.lvStocks.Location = new System.Drawing.Point(518, 47);
+            this.lvStocks.Location = new System.Drawing.Point(691, 58);
+            this.lvStocks.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lvStocks.Name = "lvStocks";
-            this.lvStocks.Size = new System.Drawing.Size(754, 352);
+            this.lvStocks.Size = new System.Drawing.Size(1004, 432);
             this.lvStocks.TabIndex = 26;
             this.lvStocks.UseCompatibleStateImageBehavior = false;
             this.lvStocks.View = System.Windows.Forms.View.Details;
@@ -156,9 +159,10 @@
             // btnDel
             // 
             this.btnDel.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDel.Location = new System.Drawing.Point(214, 364);
+            this.btnDel.Location = new System.Drawing.Point(285, 448);
+            this.btnDel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(95, 35);
+            this.btnDel.Size = new System.Drawing.Size(127, 43);
             this.btnDel.TabIndex = 25;
             this.btnDel.Text = "Delete";
             this.btnDel.UseVisualStyleBackColor = true;
@@ -167,9 +171,10 @@
             // btnEdit
             // 
             this.btnEdit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdit.Location = new System.Drawing.Point(113, 364);
+            this.btnEdit.Location = new System.Drawing.Point(151, 448);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(95, 35);
+            this.btnEdit.Size = new System.Drawing.Size(127, 43);
             this.btnEdit.TabIndex = 24;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
@@ -178,9 +183,10 @@
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(12, 364);
+            this.btnAdd.Location = new System.Drawing.Point(16, 448);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(95, 35);
+            this.btnAdd.Size = new System.Drawing.Size(127, 43);
             this.btnAdd.TabIndex = 23;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -189,9 +195,10 @@
             // btnExit
             // 
             this.btnExit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.Location = new System.Drawing.Point(315, 364);
+            this.btnExit.Location = new System.Drawing.Point(420, 448);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(95, 35);
+            this.btnExit.Size = new System.Drawing.Size(127, 43);
             this.btnExit.TabIndex = 22;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -218,9 +225,11 @@
             this.groupBox1.Controls.Add(this.txtname);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 15);
+            this.groupBox1.Location = new System.Drawing.Point(16, 18);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(499, 343);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(665, 422);
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Stock\'s Informations";
@@ -229,18 +238,20 @@
             // 
             this.cbBranch.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbBranch.FormattingEnabled = true;
-            this.cbBranch.Location = new System.Drawing.Point(155, 302);
+            this.cbBranch.Location = new System.Drawing.Point(207, 372);
+            this.cbBranch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbBranch.Name = "cbBranch";
-            this.cbBranch.Size = new System.Drawing.Size(163, 30);
-            this.cbBranch.TabIndex = 33;
+            this.cbBranch.Size = new System.Drawing.Size(216, 35);
+            this.cbBranch.TabIndex = 9;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(18, 310);
+            this.label7.Location = new System.Drawing.Point(24, 382);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(59, 18);
+            this.label7.Size = new System.Drawing.Size(78, 24);
             this.label7.TabIndex = 32;
             this.label7.Text = "Branch:";
             // 
@@ -248,53 +259,60 @@
             // 
             this.cbCompany.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCompany.FormattingEnabled = true;
-            this.cbCompany.Location = new System.Drawing.Point(155, 266);
+            this.cbCompany.Location = new System.Drawing.Point(207, 327);
+            this.cbCompany.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbCompany.Name = "cbCompany";
-            this.cbCompany.Size = new System.Drawing.Size(163, 30);
-            this.cbCompany.TabIndex = 31;
+            this.cbCompany.Size = new System.Drawing.Size(216, 35);
+            this.cbCompany.TabIndex = 8;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(18, 274);
+            this.label2.Location = new System.Drawing.Point(24, 337);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 18);
+            this.label2.Size = new System.Drawing.Size(98, 24);
             this.label2.TabIndex = 30;
             this.label2.Text = "Company:";
             // 
             // txtsellingprice
             // 
             this.txtsellingprice.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtsellingprice.Location = new System.Drawing.Point(155, 164);
+            this.txtsellingprice.Location = new System.Drawing.Point(207, 202);
+            this.txtsellingprice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtsellingprice.Name = "txtsellingprice";
-            this.txtsellingprice.Size = new System.Drawing.Size(328, 27);
-            this.txtsellingprice.TabIndex = 21;
+            this.txtsellingprice.Size = new System.Drawing.Size(436, 32);
+            this.txtsellingprice.TabIndex = 5;
+            this.txtsellingprice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsellingprice_KeyPress);
             // 
             // dtpExp
             // 
             this.dtpExp.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpExp.Location = new System.Drawing.Point(155, 65);
+            this.dtpExp.Location = new System.Drawing.Point(207, 80);
+            this.dtpExp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtpExp.Name = "dtpExp";
-            this.dtpExp.Size = new System.Drawing.Size(328, 27);
-            this.dtpExp.TabIndex = 20;
+            this.dtpExp.Size = new System.Drawing.Size(436, 32);
+            this.dtpExp.TabIndex = 2;
             // 
             // cbstkcate
             // 
             this.cbstkcate.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbstkcate.FormattingEnabled = true;
-            this.cbstkcate.Location = new System.Drawing.Point(155, 230);
+            this.cbstkcate.Location = new System.Drawing.Point(207, 283);
+            this.cbstkcate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbstkcate.Name = "cbstkcate";
-            this.cbstkcate.Size = new System.Drawing.Size(163, 30);
-            this.cbstkcate.TabIndex = 18;
+            this.cbstkcate.Size = new System.Drawing.Size(216, 35);
+            this.cbstkcate.TabIndex = 7;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(18, 171);
+            this.label9.Location = new System.Drawing.Point(24, 210);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(93, 18);
+            this.label9.Size = new System.Drawing.Size(121, 24);
             this.label9.TabIndex = 16;
             this.label9.Text = "Selling Price:";
             // 
@@ -302,63 +320,73 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(18, 238);
+            this.label8.Location = new System.Drawing.Point(24, 293);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(109, 18);
+            this.label8.Size = new System.Drawing.Size(144, 24);
             this.label8.TabIndex = 14;
             this.label8.Text = "Stock Category:";
             // 
             // txtaltqty
             // 
             this.txtaltqty.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtaltqty.Location = new System.Drawing.Point(155, 197);
+            this.txtaltqty.Location = new System.Drawing.Point(207, 242);
+            this.txtaltqty.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtaltqty.Name = "txtaltqty";
-            this.txtaltqty.Size = new System.Drawing.Size(328, 27);
-            this.txtaltqty.TabIndex = 11;
+            this.txtaltqty.Size = new System.Drawing.Size(436, 32);
+            this.txtaltqty.TabIndex = 6;
+            this.txtaltqty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtaltqty_KeyPress);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(18, 204);
+            this.label6.Location = new System.Drawing.Point(24, 251);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(103, 18);
+            this.label6.Size = new System.Drawing.Size(134, 24);
             this.label6.TabIndex = 10;
             this.label6.Text = "Alert Quantity:";
             // 
             // txtprice
             // 
             this.txtprice.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtprice.Location = new System.Drawing.Point(155, 131);
+            this.txtprice.Location = new System.Drawing.Point(207, 161);
+            this.txtprice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtprice.Name = "txtprice";
-            this.txtprice.Size = new System.Drawing.Size(328, 27);
-            this.txtprice.TabIndex = 9;
+            this.txtprice.Size = new System.Drawing.Size(436, 32);
+            this.txtprice.TabIndex = 4;
+            this.txtprice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtprice_KeyPress);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(18, 138);
+            this.label5.Location = new System.Drawing.Point(24, 170);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(44, 18);
+            this.label5.Size = new System.Drawing.Size(58, 24);
             this.label5.TabIndex = 8;
             this.label5.Text = "Price:";
             // 
             // txtqty
             // 
             this.txtqty.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtqty.Location = new System.Drawing.Point(155, 98);
+            this.txtqty.Location = new System.Drawing.Point(207, 121);
+            this.txtqty.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtqty.Name = "txtqty";
-            this.txtqty.Size = new System.Drawing.Size(328, 27);
-            this.txtqty.TabIndex = 7;
+            this.txtqty.Size = new System.Drawing.Size(436, 32);
+            this.txtqty.TabIndex = 3;
+            this.txtqty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtqty_KeyPress);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(18, 105);
+            this.label4.Location = new System.Drawing.Point(24, 129);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 18);
+            this.label4.Size = new System.Drawing.Size(89, 24);
             this.label4.TabIndex = 6;
             this.label4.Text = "Quantity:";
             // 
@@ -366,27 +394,30 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(18, 73);
+            this.label3.Location = new System.Drawing.Point(24, 90);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(97, 18);
+            this.label3.Size = new System.Drawing.Size(125, 24);
             this.label3.TabIndex = 4;
             this.label3.Text = "Expired Date:";
             // 
             // txtname
             // 
             this.txtname.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtname.Location = new System.Drawing.Point(155, 32);
+            this.txtname.Location = new System.Drawing.Point(207, 39);
+            this.txtname.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtname.Name = "txtname";
-            this.txtname.Size = new System.Drawing.Size(328, 27);
+            this.txtname.Size = new System.Drawing.Size(436, 32);
             this.txtname.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(18, 39);
+            this.label1.Location = new System.Drawing.Point(24, 48);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 18);
+            this.label1.Size = new System.Drawing.Size(66, 24);
             this.label1.TabIndex = 0;
             this.label1.Text = "Name:";
             // 
@@ -396,9 +427,10 @@
             this.cbByCompany.FormattingEnabled = true;
             this.cbByCompany.Items.AddRange(new object[] {
             "All"});
-            this.cbByCompany.Location = new System.Drawing.Point(773, 9);
+            this.cbByCompany.Location = new System.Drawing.Point(1031, 11);
+            this.cbByCompany.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbByCompany.Name = "cbByCompany";
-            this.cbByCompany.Size = new System.Drawing.Size(120, 26);
+            this.cbByCompany.Size = new System.Drawing.Size(159, 32);
             this.cbByCompany.TabIndex = 29;
             this.cbByCompany.SelectedIndexChanged += new System.EventHandler(this.cbByCompany_SelectedIndexChanged);
             // 
@@ -408,17 +440,18 @@
             this.cbByBranch.FormattingEnabled = true;
             this.cbByBranch.Items.AddRange(new object[] {
             "All"});
-            this.cbByBranch.Location = new System.Drawing.Point(901, 9);
+            this.cbByBranch.Location = new System.Drawing.Point(1201, 11);
+            this.cbByBranch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbByBranch.Name = "cbByBranch";
-            this.cbByBranch.Size = new System.Drawing.Size(120, 26);
+            this.cbByBranch.Size = new System.Drawing.Size(159, 32);
             this.cbByBranch.TabIndex = 30;
             this.cbByBranch.SelectedIndexChanged += new System.EventHandler(this.cbByBranch_SelectedIndexChanged);
             // 
             // stock_form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1284, 418);
+            this.ClientSize = new System.Drawing.Size(1712, 514);
             this.Controls.Add(this.cbByBranch);
             this.Controls.Add(this.cbByCompany);
             this.Controls.Add(this.txtSearch);
@@ -430,6 +463,7 @@
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "stock_form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Stock Form";

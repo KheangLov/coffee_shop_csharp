@@ -25,6 +25,7 @@ namespace coffee_shop
             InitializeComponent();
         }
         string cid = "";
+        string bId = "";
 
         private void GetUserCompany()
         {
@@ -111,6 +112,7 @@ namespace coffee_shop
             if (sqlr.Read())
             {
                 cid = sqlr["company_id"].ToString();
+                bId = sqlr["branch_id"].ToString();
             }
             DataConn.Connection.Close();
         }
@@ -236,7 +238,7 @@ namespace coffee_shop
             if(uRole.ToLower() == "admin")
             {
                 if (CheckCompany() > 0 && CheckBranch() > 0)
-                    new product_selling("drinks", com_id).ShowDialog();
+                    new product_selling("drinks", com_id, bId, uRole.ToLower()).ShowDialog();
                 else
                     MessageBox.Show("Please create Company or Branch first!");
             }
@@ -244,7 +246,7 @@ namespace coffee_shop
             {
                 CheckMember();
                 if (cid != "")
-                    new product_selling("drinks", cid).ShowDialog();
+                    new product_selling("drinks", cid, bId, uRole.ToLower()).ShowDialog();
                 else
                     MessageBox.Show("You're not a member of a company!");
             }
@@ -255,7 +257,7 @@ namespace coffee_shop
             if (uRole.ToLower() == "admin")
             {
                 if (CheckCompany() > 0 && CheckBranch() > 0)
-                    new product_selling("foods", com_id).ShowDialog();
+                    new product_selling("foods", com_id, bId, com_id).ShowDialog();
                 else
                     MessageBox.Show("Please create Company or Branch first!");
             }
@@ -263,7 +265,7 @@ namespace coffee_shop
             {
                 CheckMember();
                 if (cid != "")
-                    new product_selling("foods", cid).ShowDialog();
+                    new product_selling("foods", com_id, bId, cid).ShowDialog();
                 else
                     MessageBox.Show("You're not a member of a company!");
             }

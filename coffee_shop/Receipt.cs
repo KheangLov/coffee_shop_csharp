@@ -10,24 +10,26 @@ namespace coffee_shop
     class Receipt : Db_Insert
     {
         SqlCommand sqld;
-        private int number;
+        private string number;
         private string address;
-        private int product_id;
+        private string product_name;
         private double qty;
         private double price;
         private double total;
         private double discount;
-        private int employee_id;
-        private int company_id;
-        private int branch_id;
+        private string employee_name;
+        private string company_name;
+        private string branch_name;
         private string type;
+        private int waiting_number;
+        private string date;
 
         public Receipt()
         {
 
         }
 
-        public int Number
+        public string Number
         {
             get
             {
@@ -51,15 +53,15 @@ namespace coffee_shop
             }
         }
 
-        public int ProductId
+        public string ProductName
         {
             get
             {
-                return product_id;
+                return product_name;
             }
             set
             {
-                product_id = value;
+                product_name = value;
             }
         }
 
@@ -111,39 +113,39 @@ namespace coffee_shop
             }
         }
 
-        public int EmployeeId
+        public string EmployeeName
         {
             get
             {
-                return employee_id;
+                return employee_name;
             }
             set
             {
-                employee_id = value;
+                employee_name = value;
             }
         }
 
-        public int CompanyId
+        public string CompanyName
         {
             get
             {
-                return company_id;
+                return company_name;
             }
             set
             {
-                company_id = value;
+                company_name = value;
             }
         }
 
-        public int BranchId
+        public string BranchName
         {
             get
             {
-                return branch_id;
+                return branch_name;
             }
             set
             {
-                branch_id = value;
+                branch_name = value;
             }
         }
 
@@ -159,10 +161,34 @@ namespace coffee_shop
             }
         }
 
+        public int WaitingNumber
+        {
+            get
+            {
+                return waiting_number;
+            }
+            set
+            {
+                waiting_number = value;
+            }
+        }
+
+        public string Date
+        {
+            get
+            {
+                return date;
+            }
+            set
+            {
+                date = value;
+            }
+        }
+
         public override void insert()
         {
-            string query = @"INSERT INTO [coffee_shop].[dbo].[receipts](number, address, product_id, qty, price, total, discount, employee_id, company_id, branch_id, type) 
-                values(" + Number + ", '" + Address + "', " + ProductId + ", " + Qty + ", " + Price + ", " + Total + ", " + Discount + ", " + EmployeeId + ", " + CompanyId + ", " + BranchId + ", '" + Type + "');";
+            string query = @"INSERT INTO [coffee_shop].[dbo].[receipts](number, product_name, qty, price, total, discount, employee_name, company_name, branch_name, waiting_number, date)
+                values('" + Number + "', '" + ProductName + "', " + Qty + ", " + Price + ", " + Total + ", " + Discount + ", '" + EmployeeName + "', '" + CompanyName + "', '" + BranchName + "', " + WaitingNumber + ", '" + Date + "');";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();
@@ -171,7 +197,7 @@ namespace coffee_shop
         public override void update(int id)
         {
             string query = @"UPDATE [coffee_shop].[dbo].[receipts] 
-                SET number = " + Number + ", address = '" + Address + "', product_id = " + ProductId + ", qty = " + Qty + ", price = " + Price + ", total = " + Total + ", discount = " + Discount + ", employee_id = " + EmployeeId + ", company_id = " + CompanyId + ", branch_id = " + BranchId + ", type = '" + Type + "' WHERE id = " + id + ";";
+                SET number = '" + Number + "', product_name = '" + ProductName + "', qty = " + Qty + ", price = " + Price + ", total = " + Total + ", discount = " + Discount + ", employee_name = '" + EmployeeName + "', company_name = '" + CompanyName + "', branch_name = '" + BranchName + "', waiting_number = " + WaitingNumber + ", date = '" + Date + "' WHERE id = " + id + ";";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();

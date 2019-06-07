@@ -340,12 +340,15 @@ namespace coffee_shop
                         my_employee.Gender = cbGender.Text.Trim();
                         addComboBranch();
                         addComboCompany();
+                        DataConn.Connection.Open();
                         inter.insert();
+                        DataConn.Connection.Close();
                         MessageBox.Show("Insert successfully!");
                         ClearTextBoxes(groupBox1);
                         lvEmployees.Clear();
                         QueryEmployees();
                     }
+                    
                 }
                 else
                 {

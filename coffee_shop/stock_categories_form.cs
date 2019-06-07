@@ -143,7 +143,7 @@ namespace coffee_shop
                     DataConn.Connection.Open();
                     ListViewItem list_item = lvStockCate.SelectedItems[0];
                     string name = list_item.SubItems[0].Text;
-                    string sql = @"SELECT * FROM stock_categories;";
+                    string sql = @"SELECT * FROM stock_categories WHERE LOWER(name) = '" + name.ToLower() + "';";
                     SqlCommand upd_cmd = new SqlCommand(sql, DataConn.Connection);
                     SqlDataReader upd_rd = upd_cmd.ExecuteReader();
                     while (upd_rd.Read())

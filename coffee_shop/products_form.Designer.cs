@@ -108,16 +108,16 @@
             this.cbBranch.FormattingEnabled = true;
             this.cbBranch.Location = new System.Drawing.Point(176, 304);
             this.cbBranch.Name = "cbBranch";
-            this.cbBranch.Size = new System.Drawing.Size(155, 30);
-            this.cbBranch.TabIndex = 26;
+            this.cbBranch.Size = new System.Drawing.Size(155, 35);
+            this.cbBranch.TabIndex = 9;
             // 
             // cbCompany
             // 
             this.cbCompany.FormattingEnabled = true;
             this.cbCompany.Location = new System.Drawing.Point(176, 268);
             this.cbCompany.Name = "cbCompany";
-            this.cbCompany.Size = new System.Drawing.Size(155, 30);
-            this.cbCompany.TabIndex = 25;
+            this.cbCompany.Size = new System.Drawing.Size(155, 35);
+            this.cbCompany.TabIndex = 8;
             // 
             // label3
             // 
@@ -125,7 +125,7 @@
             this.label3.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(18, 311);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 18);
+            this.label3.Size = new System.Drawing.Size(82, 24);
             this.label3.TabIndex = 24;
             this.label3.Text = "Branch :";
             // 
@@ -135,7 +135,7 @@
             this.label4.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(18, 275);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 18);
+            this.label4.Size = new System.Drawing.Size(102, 24);
             this.label4.TabIndex = 23;
             this.label4.Text = "Company :";
             // 
@@ -143,8 +143,8 @@
             // 
             this.txtStockCut.Location = new System.Drawing.Point(176, 163);
             this.txtStockCut.Name = "txtStockCut";
-            this.txtStockCut.Size = new System.Drawing.Size(310, 27);
-            this.txtStockCut.TabIndex = 22;
+            this.txtStockCut.Size = new System.Drawing.Size(310, 32);
+            this.txtStockCut.TabIndex = 5;
             // 
             // label2
             // 
@@ -152,7 +152,7 @@
             this.label2.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(17, 170);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(111, 18);
+            this.label2.Size = new System.Drawing.Size(147, 24);
             this.label2.TabIndex = 21;
             this.label2.Text = "Cut From Stock:";
             // 
@@ -162,7 +162,7 @@
             this.label1.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(18, 349);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 18);
+            this.label1.Size = new System.Drawing.Size(73, 24);
             this.label1.TabIndex = 20;
             this.label1.Text = "Image :";
             // 
@@ -172,7 +172,7 @@
             this.btnProductImage.Location = new System.Drawing.Point(20, 485);
             this.btnProductImage.Name = "btnProductImage";
             this.btnProductImage.Size = new System.Drawing.Size(96, 31);
-            this.btnProductImage.TabIndex = 19;
+            this.btnProductImage.TabIndex = 10;
             this.btnProductImage.Text = "Browse";
             this.btnProductImage.UseVisualStyleBackColor = true;
             this.btnProductImage.Click += new System.EventHandler(this.btnProductImage_Click);
@@ -190,47 +190,47 @@
             // 
             this.txtProductType.Location = new System.Drawing.Point(176, 130);
             this.txtProductType.Name = "txtProductType";
-            this.txtProductType.Size = new System.Drawing.Size(310, 27);
-            this.txtProductType.TabIndex = 17;
+            this.txtProductType.Size = new System.Drawing.Size(310, 32);
+            this.txtProductType.TabIndex = 4;
             // 
             // comboBoxProductProcateID
             // 
             this.comboBoxProductProcateID.FormattingEnabled = true;
             this.comboBoxProductProcateID.Location = new System.Drawing.Point(176, 232);
             this.comboBoxProductProcateID.Name = "comboBoxProductProcateID";
-            this.comboBoxProductProcateID.Size = new System.Drawing.Size(155, 30);
-            this.comboBoxProductProcateID.TabIndex = 16;
+            this.comboBoxProductProcateID.Size = new System.Drawing.Size(155, 35);
+            this.comboBoxProductProcateID.TabIndex = 7;
             // 
             // comboBoxProductStockID
             // 
             this.comboBoxProductStockID.FormattingEnabled = true;
             this.comboBoxProductStockID.Location = new System.Drawing.Point(176, 196);
             this.comboBoxProductStockID.Name = "comboBoxProductStockID";
-            this.comboBoxProductStockID.Size = new System.Drawing.Size(155, 30);
-            this.comboBoxProductStockID.TabIndex = 15;
+            this.comboBoxProductStockID.Size = new System.Drawing.Size(155, 35);
+            this.comboBoxProductStockID.TabIndex = 6;
             // 
             // txtProductSellingPrice
             // 
             this.txtProductSellingPrice.Location = new System.Drawing.Point(176, 97);
             this.txtProductSellingPrice.Name = "txtProductSellingPrice";
-            this.txtProductSellingPrice.Size = new System.Drawing.Size(310, 27);
-            this.txtProductSellingPrice.TabIndex = 12;
+            this.txtProductSellingPrice.Size = new System.Drawing.Size(310, 32);
+            this.txtProductSellingPrice.TabIndex = 3;
             this.txtProductSellingPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtProductSellingPrice_KeyPress);
             // 
             // txtProductPrice
             // 
             this.txtProductPrice.Location = new System.Drawing.Point(176, 64);
             this.txtProductPrice.Name = "txtProductPrice";
-            this.txtProductPrice.Size = new System.Drawing.Size(310, 27);
-            this.txtProductPrice.TabIndex = 11;
+            this.txtProductPrice.Size = new System.Drawing.Size(310, 32);
+            this.txtProductPrice.TabIndex = 2;
             this.txtProductPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtProductPrice_KeyPress);
             // 
             // txtProductName
             // 
             this.txtProductName.Location = new System.Drawing.Point(176, 31);
             this.txtProductName.Name = "txtProductName";
-            this.txtProductName.Size = new System.Drawing.Size(310, 27);
-            this.txtProductName.TabIndex = 10;
+            this.txtProductName.Size = new System.Drawing.Size(310, 32);
+            this.txtProductName.TabIndex = 1;
             // 
             // labelProductProcateID
             // 
@@ -238,7 +238,7 @@
             this.labelProductProcateID.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelProductProcateID.Location = new System.Drawing.Point(18, 239);
             this.labelProductProcateID.Name = "labelProductProcateID";
-            this.labelProductProcateID.Size = new System.Drawing.Size(131, 18);
+            this.labelProductProcateID.Size = new System.Drawing.Size(174, 24);
             this.labelProductProcateID.TabIndex = 7;
             this.labelProductProcateID.Text = "Product Category  :";
             // 
@@ -248,7 +248,7 @@
             this.labelProductStockID.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelProductStockID.Location = new System.Drawing.Point(18, 203);
             this.labelProductStockID.Name = "labelProductStockID";
-            this.labelProductStockID.Size = new System.Drawing.Size(50, 18);
+            this.labelProductStockID.Size = new System.Drawing.Size(66, 24);
             this.labelProductStockID.TabIndex = 6;
             this.labelProductStockID.Text = "Stock :";
             // 
@@ -258,7 +258,7 @@
             this.labelProductType.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelProductType.Location = new System.Drawing.Point(17, 137);
             this.labelProductType.Name = "labelProductType";
-            this.labelProductType.Size = new System.Drawing.Size(45, 18);
+            this.labelProductType.Size = new System.Drawing.Size(58, 24);
             this.labelProductType.TabIndex = 5;
             this.labelProductType.Text = "Type :";
             // 
@@ -268,7 +268,7 @@
             this.labelProductSellingPrice.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelProductSellingPrice.Location = new System.Drawing.Point(18, 104);
             this.labelProductSellingPrice.Name = "labelProductSellingPrice";
-            this.labelProductSellingPrice.Size = new System.Drawing.Size(96, 18);
+            this.labelProductSellingPrice.Size = new System.Drawing.Size(125, 24);
             this.labelProductSellingPrice.TabIndex = 3;
             this.labelProductSellingPrice.Text = "Selling Price :";
             // 
@@ -278,7 +278,7 @@
             this.labelProductPrice.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelProductPrice.Location = new System.Drawing.Point(18, 71);
             this.labelProductPrice.Name = "labelProductPrice";
-            this.labelProductPrice.Size = new System.Drawing.Size(47, 18);
+            this.labelProductPrice.Size = new System.Drawing.Size(62, 24);
             this.labelProductPrice.TabIndex = 2;
             this.labelProductPrice.Text = "Price :";
             // 
@@ -288,7 +288,7 @@
             this.labelProductName.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelProductName.Location = new System.Drawing.Point(17, 38);
             this.labelProductName.Name = "labelProductName";
-            this.labelProductName.Size = new System.Drawing.Size(55, 18);
+            this.labelProductName.Size = new System.Drawing.Size(70, 24);
             this.labelProductName.TabIndex = 1;
             this.labelProductName.Text = "Name :";
             // 
@@ -342,7 +342,7 @@
             this.labelAllProduct.Font = new System.Drawing.Font("Montserrat", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelAllProduct.Location = new System.Drawing.Point(520, 6);
             this.labelAllProduct.Name = "labelAllProduct";
-            this.labelAllProduct.Size = new System.Drawing.Size(168, 33);
+            this.labelAllProduct.Size = new System.Drawing.Size(211, 41);
             this.labelAllProduct.TabIndex = 5;
             this.labelAllProduct.Text = "All Products";
             // 
@@ -351,7 +351,7 @@
             this.txtProductSearch.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtProductSearch.Location = new System.Drawing.Point(1008, 12);
             this.txtProductSearch.Name = "txtProductSearch";
-            this.txtProductSearch.Size = new System.Drawing.Size(264, 27);
+            this.txtProductSearch.Size = new System.Drawing.Size(264, 32);
             this.txtProductSearch.TabIndex = 6;
             this.txtProductSearch.TextChanged += new System.EventHandler(this.txtProductSearch_TextChanged);
             // 
@@ -429,7 +429,7 @@
             "All"});
             this.cbByCompany.Location = new System.Drawing.Point(776, 12);
             this.cbByCompany.Name = "cbByCompany";
-            this.cbByCompany.Size = new System.Drawing.Size(110, 26);
+            this.cbByCompany.Size = new System.Drawing.Size(110, 32);
             this.cbByCompany.TabIndex = 8;
             this.cbByCompany.SelectedIndexChanged += new System.EventHandler(this.cbByCompany_SelectedIndexChanged);
             // 
@@ -441,13 +441,13 @@
             "All"});
             this.cbByBranch.Location = new System.Drawing.Point(892, 12);
             this.cbByBranch.Name = "cbByBranch";
-            this.cbByBranch.Size = new System.Drawing.Size(110, 26);
+            this.cbByBranch.Size = new System.Drawing.Size(110, 32);
             this.cbByBranch.TabIndex = 9;
             this.cbByBranch.SelectedIndexChanged += new System.EventHandler(this.cbByBranch_SelectedIndexChanged);
             // 
             // products_form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 602);
             this.Controls.Add(this.cbByBranch);

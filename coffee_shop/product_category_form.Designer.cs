@@ -59,7 +59,7 @@
             // 
             // txtDescriptions
             // 
-            this.txtDescriptions.Location = new System.Drawing.Point(121, 82);
+            this.txtDescriptions.Location = new System.Drawing.Point(121, 87);
             this.txtDescriptions.Multiline = true;
             this.txtDescriptions.Name = "txtDescriptions";
             this.txtDescriptions.Size = new System.Drawing.Size(280, 69);
@@ -69,7 +69,7 @@
             // 
             this.txtName.Location = new System.Drawing.Point(121, 49);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(280, 27);
+            this.txtName.Size = new System.Drawing.Size(280, 32);
             this.txtName.TabIndex = 2;
             // 
             // labelDescriptions
@@ -78,7 +78,7 @@
             this.labelDescriptions.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelDescriptions.Location = new System.Drawing.Point(6, 89);
             this.labelDescriptions.Name = "labelDescriptions";
-            this.labelDescriptions.Size = new System.Drawing.Size(96, 18);
+            this.labelDescriptions.Size = new System.Drawing.Size(127, 24);
             this.labelDescriptions.TabIndex = 1;
             this.labelDescriptions.Text = "Descriptions :";
             // 
@@ -88,7 +88,7 @@
             this.labelName.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelName.Location = new System.Drawing.Point(6, 56);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(55, 18);
+            this.labelName.Size = new System.Drawing.Size(70, 24);
             this.labelName.TabIndex = 0;
             this.labelName.Text = "Name :";
             // 
@@ -164,7 +164,7 @@
             // 
             // product_category_form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(866, 231);
             this.Controls.Add(this.btnEdit);

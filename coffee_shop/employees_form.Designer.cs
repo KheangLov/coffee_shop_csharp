@@ -101,9 +101,11 @@
             this.groupBox1.Controls.Add(this.txtFirstname);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(16, 15);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(461, 543);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(615, 668);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Employee\'s Information";
@@ -112,27 +114,30 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(20, 122);
+            this.label13.Location = new System.Drawing.Point(27, 150);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(63, 20);
+            this.label13.Size = new System.Drawing.Size(78, 24);
             this.label13.TabIndex = 25;
             this.label13.Text = "Gender:";
             // 
             // txtSalary
             // 
-            this.txtSalary.Location = new System.Drawing.Point(153, 353);
+            this.txtSalary.Location = new System.Drawing.Point(204, 434);
+            this.txtSalary.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSalary.Name = "txtSalary";
-            this.txtSalary.Size = new System.Drawing.Size(291, 27);
-            this.txtSalary.TabIndex = 23;
+            this.txtSalary.Size = new System.Drawing.Size(387, 32);
+            this.txtSalary.TabIndex = 8;
             this.txtSalary.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSalary_KeyPress);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(20, 360);
+            this.label10.Location = new System.Drawing.Point(27, 443);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(55, 20);
+            this.label10.Size = new System.Drawing.Size(65, 24);
             this.label10.TabIndex = 22;
             this.label10.Text = "Salary:";
             // 
@@ -142,55 +147,61 @@
             this.cbGender.Items.AddRange(new object[] {
             "Male",
             "Female"});
-            this.cbGender.Location = new System.Drawing.Point(153, 115);
+            this.cbGender.Location = new System.Drawing.Point(204, 142);
+            this.cbGender.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbGender.Name = "cbGender";
-            this.cbGender.Size = new System.Drawing.Size(153, 30);
-            this.cbGender.TabIndex = 24;
+            this.cbGender.Size = new System.Drawing.Size(203, 35);
+            this.cbGender.TabIndex = 3;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(20, 502);
+            this.label12.Location = new System.Drawing.Point(27, 618);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(63, 20);
+            this.label12.Size = new System.Drawing.Size(78, 24);
             this.label12.TabIndex = 21;
             this.label12.Text = "Branch:";
             // 
             // cbBranch
             // 
             this.cbBranch.FormattingEnabled = true;
-            this.cbBranch.Location = new System.Drawing.Point(153, 495);
+            this.cbBranch.Location = new System.Drawing.Point(204, 609);
+            this.cbBranch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbBranch.Name = "cbBranch";
-            this.cbBranch.Size = new System.Drawing.Size(153, 30);
-            this.cbBranch.TabIndex = 20;
+            this.cbBranch.Size = new System.Drawing.Size(203, 35);
+            this.cbBranch.TabIndex = 12;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(20, 466);
+            this.label11.Location = new System.Drawing.Point(27, 574);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(80, 20);
+            this.label11.Size = new System.Drawing.Size(98, 24);
             this.label11.TabIndex = 19;
             this.label11.Text = "Company:";
             // 
             // cbCompany
             // 
             this.cbCompany.FormattingEnabled = true;
-            this.cbCompany.Location = new System.Drawing.Point(153, 459);
+            this.cbCompany.Location = new System.Drawing.Point(204, 565);
+            this.cbCompany.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbCompany.Name = "cbCompany";
-            this.cbCompany.Size = new System.Drawing.Size(153, 30);
-            this.cbCompany.TabIndex = 18;
+            this.cbCompany.Size = new System.Drawing.Size(203, 35);
+            this.cbCompany.TabIndex = 11;
             this.cbCompany.SelectedIndexChanged += new System.EventHandler(this.cbCompany_SelectedIndexChanged);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(20, 430);
+            this.label9.Location = new System.Drawing.Point(27, 529);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(89, 20);
+            this.label9.Size = new System.Drawing.Size(107, 24);
             this.label9.TabIndex = 15;
             this.label9.Text = "Work Time:";
             // 
@@ -200,18 +211,20 @@
             this.cbWorktime.Items.AddRange(new object[] {
             "Fulltime",
             "Parttime"});
-            this.cbWorktime.Location = new System.Drawing.Point(153, 423);
+            this.cbWorktime.Location = new System.Drawing.Point(204, 521);
+            this.cbWorktime.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbWorktime.Name = "cbWorktime";
-            this.cbWorktime.Size = new System.Drawing.Size(153, 30);
-            this.cbWorktime.TabIndex = 14;
+            this.cbWorktime.Size = new System.Drawing.Size(203, 35);
+            this.cbWorktime.TabIndex = 10;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(20, 394);
+            this.label7.Location = new System.Drawing.Point(27, 485);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(70, 20);
+            this.label7.Size = new System.Drawing.Size(85, 24);
             this.label7.TabIndex = 13;
             this.label7.Text = "Position:";
             // 
@@ -221,26 +234,29 @@
             this.cbPosition.Items.AddRange(new object[] {
             "Manager",
             "Barista"});
-            this.cbPosition.Location = new System.Drawing.Point(153, 387);
+            this.cbPosition.Location = new System.Drawing.Point(204, 476);
+            this.cbPosition.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbPosition.Name = "cbPosition";
-            this.cbPosition.Size = new System.Drawing.Size(153, 30);
-            this.cbPosition.TabIndex = 12;
+            this.cbPosition.Size = new System.Drawing.Size(203, 35);
+            this.cbPosition.TabIndex = 9;
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(153, 320);
+            this.txtEmail.Location = new System.Drawing.Point(204, 394);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(291, 27);
-            this.txtEmail.TabIndex = 11;
+            this.txtEmail.Size = new System.Drawing.Size(387, 32);
+            this.txtEmail.TabIndex = 7;
             this.txtEmail.Leave += new System.EventHandler(this.txtEmail_Leave);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(20, 327);
+            this.label6.Location = new System.Drawing.Point(27, 402);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 20);
+            this.label6.Size = new System.Drawing.Size(63, 24);
             this.label6.TabIndex = 10;
             this.label6.Text = "Email:";
             // 
@@ -248,86 +264,96 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(20, 159);
+            this.label5.Location = new System.Drawing.Point(27, 196);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(102, 20);
+            this.label5.Size = new System.Drawing.Size(123, 24);
             this.label5.TabIndex = 9;
             this.label5.Text = "Date of birth:";
             // 
             // dtpDob
             // 
-            this.dtpDob.Location = new System.Drawing.Point(153, 151);
+            this.dtpDob.Location = new System.Drawing.Point(204, 186);
+            this.dtpDob.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtpDob.Name = "dtpDob";
-            this.dtpDob.Size = new System.Drawing.Size(291, 27);
-            this.dtpDob.TabIndex = 8;
+            this.dtpDob.Size = new System.Drawing.Size(387, 32);
+            this.dtpDob.TabIndex = 4;
             // 
             // txtPhone
             // 
-            this.txtPhone.Location = new System.Drawing.Point(153, 287);
+            this.txtPhone.Location = new System.Drawing.Point(204, 353);
+            this.txtPhone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(291, 27);
-            this.txtPhone.TabIndex = 7;
+            this.txtPhone.Size = new System.Drawing.Size(387, 32);
+            this.txtPhone.TabIndex = 6;
             this.txtPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPhone_KeyPress);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(20, 294);
+            this.label3.Location = new System.Drawing.Point(27, 362);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(57, 20);
+            this.label3.Size = new System.Drawing.Size(71, 24);
             this.label3.TabIndex = 6;
             this.label3.Text = "Phone:";
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(153, 184);
+            this.txtAddress.Location = new System.Drawing.Point(204, 226);
+            this.txtAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(291, 97);
+            this.txtAddress.Size = new System.Drawing.Size(387, 118);
             this.txtAddress.TabIndex = 5;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(20, 191);
+            this.label4.Location = new System.Drawing.Point(27, 235);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(68, 20);
+            this.label4.Size = new System.Drawing.Size(83, 24);
             this.label4.TabIndex = 4;
             this.label4.Text = "Address:";
             // 
             // txtLastname
             // 
-            this.txtLastname.Location = new System.Drawing.Point(153, 82);
+            this.txtLastname.Location = new System.Drawing.Point(204, 101);
+            this.txtLastname.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtLastname.Name = "txtLastname";
-            this.txtLastname.Size = new System.Drawing.Size(291, 27);
-            this.txtLastname.TabIndex = 3;
+            this.txtLastname.Size = new System.Drawing.Size(387, 32);
+            this.txtLastname.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(20, 88);
+            this.label2.Location = new System.Drawing.Point(27, 108);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(81, 20);
+            this.label2.Size = new System.Drawing.Size(99, 24);
             this.label2.TabIndex = 2;
             this.label2.Text = "Lastname:";
             // 
             // txtFirstname
             // 
-            this.txtFirstname.Location = new System.Drawing.Point(153, 49);
+            this.txtFirstname.Location = new System.Drawing.Point(204, 60);
+            this.txtFirstname.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtFirstname.Name = "txtFirstname";
-            this.txtFirstname.Size = new System.Drawing.Size(291, 27);
+            this.txtFirstname.Size = new System.Drawing.Size(387, 32);
             this.txtFirstname.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(20, 55);
+            this.label1.Location = new System.Drawing.Point(27, 68);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 20);
+            this.label1.Size = new System.Drawing.Size(102, 24);
             this.label1.TabIndex = 0;
             this.label1.Text = "Firstname:";
             // 
@@ -348,9 +374,10 @@
             this.lvEmployees.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvEmployees.FullRowSelect = true;
             this.lvEmployees.GridLines = true;
-            this.lvEmployees.Location = new System.Drawing.Point(488, 61);
+            this.lvEmployees.Location = new System.Drawing.Point(651, 75);
+            this.lvEmployees.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lvEmployees.Name = "lvEmployees";
-            this.lvEmployees.Size = new System.Drawing.Size(739, 535);
+            this.lvEmployees.Size = new System.Drawing.Size(984, 658);
             this.lvEmployees.TabIndex = 1;
             this.lvEmployees.UseCompatibleStateImageBehavior = false;
             this.lvEmployees.View = System.Windows.Forms.View.Details;
@@ -409,27 +436,30 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Montserrat", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(482, 12);
+            this.label8.Location = new System.Drawing.Point(643, 15);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(198, 33);
+            this.label8.Size = new System.Drawing.Size(248, 41);
             this.label8.TabIndex = 14;
             this.label8.Text = "All Employees:";
             // 
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Montserrat", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(936, 15);
+            this.txtSearch.Location = new System.Drawing.Point(1248, 18);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(291, 30);
+            this.txtSearch.Size = new System.Drawing.Size(387, 36);
             this.txtSearch.TabIndex = 14;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(12, 561);
+            this.btnAdd.Location = new System.Drawing.Point(16, 690);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(100, 35);
+            this.btnAdd.Size = new System.Drawing.Size(133, 43);
             this.btnAdd.TabIndex = 15;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -438,9 +468,10 @@
             // btnEdit
             // 
             this.btnEdit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdit.Location = new System.Drawing.Point(118, 561);
+            this.btnEdit.Location = new System.Drawing.Point(157, 690);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(100, 35);
+            this.btnEdit.Size = new System.Drawing.Size(133, 43);
             this.btnEdit.TabIndex = 16;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
@@ -449,9 +480,10 @@
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(224, 561);
+            this.btnDelete.Location = new System.Drawing.Point(299, 690);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(100, 35);
+            this.btnDelete.Size = new System.Drawing.Size(133, 43);
             this.btnDelete.TabIndex = 17;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -460,9 +492,10 @@
             // btnExit
             // 
             this.btnExit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.Location = new System.Drawing.Point(330, 561);
+            this.btnExit.Location = new System.Drawing.Point(440, 690);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(100, 35);
+            this.btnExit.Size = new System.Drawing.Size(133, 43);
             this.btnExit.TabIndex = 18;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -470,9 +503,9 @@
             // 
             // employees_form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1239, 613);
+            this.ClientSize = new System.Drawing.Size(1652, 754);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
@@ -482,6 +515,7 @@
             this.Controls.Add(this.lvEmployees);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "employees_form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Employee Form";

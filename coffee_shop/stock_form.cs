@@ -27,6 +27,21 @@ namespace coffee_shop
         int stockId;
         int cId;
 
+        private bool alreadyExist(string _text, ref char KeyChar)
+        {
+            if (_text.IndexOf('.') > -1)
+            {
+                KeyChar = '.';
+                return true;
+            }
+            if (_text.IndexOf(',') > -1)
+            {
+                KeyChar = ',';
+                return true;
+            }
+            return false;
+        }
+
         private void Querystocks()
         {
             string sql = @"SELECT stocks.*, stock_categories.name AS stock_name , companies.name AS company_name, branches.name AS branch_name
@@ -494,6 +509,201 @@ namespace coffee_shop
             }
             com.Dispose();
             sqlr.Close();
+        }
+
+        private void txtqty_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar)
+                    && !char.IsDigit(e.KeyChar)
+                    && e.KeyChar != '.' && e.KeyChar != ',')
+            {
+                e.Handled = true;
+            }
+
+            //check if '.' , ',' pressed
+            char sepratorChar = 's';
+            if (e.KeyChar == '.' || e.KeyChar == ',')
+            {
+                // check if it's in the beginning of text not accept
+                if (txtqty.Text.Length == 0) e.Handled = true;
+                // check if it's in the beginning of text not accept
+                if (txtqty.SelectionStart == 0) e.Handled = true;
+                // check if there is already exist a '.' , ','
+                if (alreadyExist(txtqty.Text, ref sepratorChar)) e.Handled = true;
+                //check if '.' or ',' is in middle of a number and after it is not a number greater than 99
+                if (txtqty.SelectionStart != txtqty.Text.Length && e.Handled == false)
+                {
+                    // '.' or ',' is in the middle
+                    string AfterDotString = txtqty.Text.Substring(txtqty.SelectionStart);
+
+                    if (AfterDotString.Length > 2)
+                    {
+                        e.Handled = true;
+                    }
+                }
+            }
+            //check if a number pressed
+
+            if (Char.IsDigit(e.KeyChar))
+            {
+                //check if a coma or dot exist
+                if (alreadyExist(txtqty.Text, ref sepratorChar))
+                {
+                    int sepratorPosition = txtqty.Text.IndexOf(sepratorChar);
+                    string afterSepratorString = txtqty.Text.Substring(sepratorPosition + 1);
+                    if (txtqty.SelectionStart > sepratorPosition && afterSepratorString.Length > 1)
+                    {
+                        e.Handled = true;
+                    }
+
+                }
+            }
+        }
+
+        private void txtprice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar)
+                    && !char.IsDigit(e.KeyChar)
+                    && e.KeyChar != '.' && e.KeyChar != ',')
+            {
+                e.Handled = true;
+            }
+
+            //check if '.' , ',' pressed
+            char sepratorChar = 's';
+            if (e.KeyChar == '.' || e.KeyChar == ',')
+            {
+                // check if it's in the beginning of text not accept
+                if (txtprice.Text.Length == 0) e.Handled = true;
+                // check if it's in the beginning of text not accept
+                if (txtprice.SelectionStart == 0) e.Handled = true;
+                // check if there is already exist a '.' , ','
+                if (alreadyExist(txtprice.Text, ref sepratorChar)) e.Handled = true;
+                //check if '.' or ',' is in middle of a number and after it is not a number greater than 99
+                if (txtprice.SelectionStart != txtprice.Text.Length && e.Handled == false)
+                {
+                    // '.' or ',' is in the middle
+                    string AfterDotString = txtprice.Text.Substring(txtprice.SelectionStart);
+
+                    if (AfterDotString.Length > 2)
+                    {
+                        e.Handled = true;
+                    }
+                }
+            }
+            //check if a number pressed
+
+            if (Char.IsDigit(e.KeyChar))
+            {
+                //check if a coma or dot exist
+                if (alreadyExist(txtprice.Text, ref sepratorChar))
+                {
+                    int sepratorPosition = txtprice.Text.IndexOf(sepratorChar);
+                    string afterSepratorString = txtprice.Text.Substring(sepratorPosition + 1);
+                    if (txtprice.SelectionStart > sepratorPosition && afterSepratorString.Length > 1)
+                    {
+                        e.Handled = true;
+                    }
+
+                }
+            }
+        }
+
+        private void txtsellingprice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar)
+                    && !char.IsDigit(e.KeyChar)
+                    && e.KeyChar != '.' && e.KeyChar != ',')
+            {
+                e.Handled = true;
+            }
+
+            //check if '.' , ',' pressed
+            char sepratorChar = 's';
+            if (e.KeyChar == '.' || e.KeyChar == ',')
+            {
+                // check if it's in the beginning of text not accept
+                if (txtsellingprice.Text.Length == 0) e.Handled = true;
+                // check if it's in the beginning of text not accept
+                if (txtsellingprice.SelectionStart == 0) e.Handled = true;
+                // check if there is already exist a '.' , ','
+                if (alreadyExist(txtsellingprice.Text, ref sepratorChar)) e.Handled = true;
+                //check if '.' or ',' is in middle of a number and after it is not a number greater than 99
+                if (txtsellingprice.SelectionStart != txtsellingprice.Text.Length && e.Handled == false)
+                {
+                    // '.' or ',' is in the middle
+                    string AfterDotString = txtsellingprice.Text.Substring(txtsellingprice.SelectionStart);
+
+                    if (AfterDotString.Length > 2)
+                    {
+                        e.Handled = true;
+                    }
+                }
+            }
+            //check if a number pressed
+
+            if (Char.IsDigit(e.KeyChar))
+            {
+                //check if a coma or dot exist
+                if (alreadyExist(txtsellingprice.Text, ref sepratorChar))
+                {
+                    int sepratorPosition = txtsellingprice.Text.IndexOf(sepratorChar);
+                    string afterSepratorString = txtsellingprice.Text.Substring(sepratorPosition + 1);
+                    if (txtsellingprice.SelectionStart > sepratorPosition && afterSepratorString.Length > 1)
+                    {
+                        e.Handled = true;
+                    }
+
+                }
+            }
+        }
+
+        private void txtaltqty_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar)
+        && !char.IsDigit(e.KeyChar)
+        && e.KeyChar != '.' && e.KeyChar != ',')
+            {
+                e.Handled = true;
+            }
+
+            //check if '.' , ',' pressed
+            char sepratorChar = 's';
+            if (e.KeyChar == '.' || e.KeyChar == ',')
+            {
+                // check if it's in the beginning of text not accept
+                if (txtaltqty.Text.Length == 0) e.Handled = true;
+                // check if it's in the beginning of text not accept
+                if (txtaltqty.SelectionStart == 0) e.Handled = true;
+                // check if there is already exist a '.' , ','
+                if (alreadyExist(txtaltqty.Text, ref sepratorChar)) e.Handled = true;
+                //check if '.' or ',' is in middle of a number and after it is not a number greater than 99
+                if (txtaltqty.SelectionStart != txtaltqty.Text.Length && e.Handled == false)
+                {
+                    // '.' or ',' is in the middle
+                    string AfterDotString = txtaltqty.Text.Substring(txtaltqty.SelectionStart);
+
+                    if (AfterDotString.Length > 2)
+                    {
+                        e.Handled = true;
+                    }
+                }
+            }
+            //check if a number pressed
+
+            if (Char.IsDigit(e.KeyChar))
+            {
+                //check if a coma or dot exist
+                if (alreadyExist(txtaltqty.Text, ref sepratorChar))
+                {
+                    int sepratorPosition = txtaltqty.Text.IndexOf(sepratorChar);
+                    string afterSepratorString = txtaltqty.Text.Substring(sepratorPosition + 1);
+                    if (txtaltqty.SelectionStart > sepratorPosition && afterSepratorString.Length > 1)
+                    {
+                        e.Handled = true;
+                    }
+                }
+            }
         }
     }
 }

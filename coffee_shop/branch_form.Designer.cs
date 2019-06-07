@@ -59,18 +59,20 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Montserrat", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(499, 12);
+            this.label1.Location = new System.Drawing.Point(665, 15);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(173, 33);
+            this.label1.Size = new System.Drawing.Size(217, 41);
             this.label1.TabIndex = 0;
             this.label1.Text = "All Branches";
             // 
             // txtName
             // 
             this.txtName.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtName.Location = new System.Drawing.Point(154, 36);
+            this.txtName.Location = new System.Drawing.Point(205, 44);
+            this.txtName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(310, 27);
+            this.txtName.Size = new System.Drawing.Size(412, 32);
             this.txtName.TabIndex = 1;
             this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             this.txtName.Leave += new System.EventHandler(this.txtName_Leave);
@@ -79,10 +81,11 @@
             // 
             this.cbCompany.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCompany.FormattingEnabled = true;
-            this.cbCompany.Location = new System.Drawing.Point(154, 215);
+            this.cbCompany.Location = new System.Drawing.Point(205, 265);
+            this.cbCompany.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbCompany.Name = "cbCompany";
-            this.cbCompany.Size = new System.Drawing.Size(156, 30);
-            this.cbCompany.TabIndex = 2;
+            this.cbCompany.Size = new System.Drawing.Size(207, 35);
+            this.cbCompany.TabIndex = 5;
             this.cbCompany.SelectedIndexChanged += new System.EventHandler(this.cbCompany_SelectedIndexChanged);
             // 
             // groupBox1
@@ -98,9 +101,11 @@
             this.groupBox1.Controls.Add(this.cbCompany);
             this.groupBox1.Controls.Add(this.txtName);
             this.groupBox1.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(16, 15);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(481, 261);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(641, 321);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Branch\'s Information";
@@ -109,9 +114,10 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(19, 220);
+            this.label7.Location = new System.Drawing.Point(25, 271);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(75, 18);
+            this.label7.Size = new System.Drawing.Size(98, 24);
             this.label7.TabIndex = 12;
             this.label7.Text = "Company:";
             // 
@@ -119,9 +125,10 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(17, 74);
+            this.label6.Location = new System.Drawing.Point(23, 91);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(50, 18);
+            this.label6.Size = new System.Drawing.Size(63, 24);
             this.label6.TabIndex = 11;
             this.label6.Text = "Email:";
             // 
@@ -129,9 +136,10 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(18, 107);
+            this.label5.Location = new System.Drawing.Point(24, 132);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 18);
+            this.label5.Size = new System.Drawing.Size(71, 24);
             this.label5.TabIndex = 10;
             this.label5.Text = "Phone:";
             // 
@@ -139,40 +147,44 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(18, 140);
+            this.label4.Location = new System.Drawing.Point(24, 172);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(63, 18);
+            this.label4.Size = new System.Drawing.Size(83, 24);
             this.label4.TabIndex = 9;
             this.label4.Text = "Address:";
             // 
             // txtAddress
             // 
             this.txtAddress.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAddress.Location = new System.Drawing.Point(154, 135);
+            this.txtAddress.Location = new System.Drawing.Point(205, 166);
+            this.txtAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(310, 74);
-            this.txtAddress.TabIndex = 8;
+            this.txtAddress.Size = new System.Drawing.Size(412, 90);
+            this.txtAddress.TabIndex = 4;
             this.txtAddress.TextChanged += new System.EventHandler(this.txtAddress_TextChanged);
             this.txtAddress.Leave += new System.EventHandler(this.txtAddress_Leave);
             // 
             // txtEmail
             // 
             this.txtEmail.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmail.Location = new System.Drawing.Point(154, 69);
+            this.txtEmail.Location = new System.Drawing.Point(205, 85);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(310, 27);
-            this.txtEmail.TabIndex = 7;
+            this.txtEmail.Size = new System.Drawing.Size(412, 32);
+            this.txtEmail.TabIndex = 2;
             this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             this.txtEmail.Leave += new System.EventHandler(this.txtEmail_Leave);
             // 
             // txtPhone
             // 
             this.txtPhone.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPhone.Location = new System.Drawing.Point(154, 102);
+            this.txtPhone.Location = new System.Drawing.Point(205, 126);
+            this.txtPhone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(310, 27);
-            this.txtPhone.TabIndex = 6;
+            this.txtPhone.Size = new System.Drawing.Size(412, 32);
+            this.txtPhone.TabIndex = 3;
             this.txtPhone.TextChanged += new System.EventHandler(this.txtPhone_TextChanged);
             this.txtPhone.Leave += new System.EventHandler(this.txtPhone_Leave);
             // 
@@ -180,18 +192,20 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(17, 43);
+            this.label2.Location = new System.Drawing.Point(23, 53);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 18);
+            this.label2.Size = new System.Drawing.Size(66, 24);
             this.label2.TabIndex = 4;
             this.label2.Text = "Name:";
             // 
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(12, 279);
+            this.btnAdd.Location = new System.Drawing.Point(16, 343);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(100, 35);
+            this.btnAdd.Size = new System.Drawing.Size(133, 43);
             this.btnAdd.TabIndex = 4;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -200,9 +214,10 @@
             // btnEdit
             // 
             this.btnEdit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdit.Location = new System.Drawing.Point(118, 279);
+            this.btnEdit.Location = new System.Drawing.Point(157, 343);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(100, 35);
+            this.btnEdit.Size = new System.Drawing.Size(133, 43);
             this.btnEdit.TabIndex = 5;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
@@ -211,9 +226,10 @@
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(224, 279);
+            this.btnDelete.Location = new System.Drawing.Point(299, 343);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(100, 35);
+            this.btnDelete.Size = new System.Drawing.Size(133, 43);
             this.btnDelete.TabIndex = 6;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -222,9 +238,10 @@
             // btnExit
             // 
             this.btnExit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.Location = new System.Drawing.Point(330, 279);
+            this.btnExit.Location = new System.Drawing.Point(440, 343);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(100, 35);
+            this.btnExit.Size = new System.Drawing.Size(133, 43);
             this.btnExit.TabIndex = 7;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -241,9 +258,10 @@
             this.lvBranch.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvBranch.FullRowSelect = true;
             this.lvBranch.GridLines = true;
-            this.lvBranch.Location = new System.Drawing.Point(505, 48);
+            this.lvBranch.Location = new System.Drawing.Point(673, 59);
+            this.lvBranch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lvBranch.Name = "lvBranch";
-            this.lvBranch.Size = new System.Drawing.Size(600, 266);
+            this.lvBranch.Size = new System.Drawing.Size(799, 326);
             this.lvBranch.TabIndex = 8;
             this.lvBranch.UseCompatibleStateImageBehavior = false;
             this.lvBranch.View = System.Windows.Forms.View.Details;
@@ -277,9 +295,10 @@
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(874, 12);
+            this.txtSearch.Location = new System.Drawing.Point(1165, 15);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(231, 27);
+            this.txtSearch.Size = new System.Drawing.Size(307, 32);
             this.txtSearch.TabIndex = 13;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
@@ -289,17 +308,18 @@
             this.cbByCompany.FormattingEnabled = true;
             this.cbByCompany.Items.AddRange(new object[] {
             "All"});
-            this.cbByCompany.Location = new System.Drawing.Point(742, 12);
+            this.cbByCompany.Location = new System.Drawing.Point(989, 15);
+            this.cbByCompany.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbByCompany.Name = "cbByCompany";
-            this.cbByCompany.Size = new System.Drawing.Size(126, 26);
+            this.cbByCompany.Size = new System.Drawing.Size(167, 32);
             this.cbByCompany.TabIndex = 14;
             this.cbByCompany.SelectedIndexChanged += new System.EventHandler(this.cbByCompany_SelectedIndexChanged);
             // 
             // branch_form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1117, 329);
+            this.ClientSize = new System.Drawing.Size(1489, 405);
             this.Controls.Add(this.cbByCompany);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.lvBranch);
@@ -310,6 +330,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "branch_form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Branch Form";
