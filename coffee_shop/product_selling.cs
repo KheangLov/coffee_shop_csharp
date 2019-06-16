@@ -33,6 +33,7 @@ namespace coffee_shop
 
         private void QueryProducts()
         {
+            DataConn.Connection.Open();
             string sql = @"SELECT * FROM products
                 INNER JOIN product_categories ON products.procate_id = product_categories.id
                 WHERE LOWER(product_categories.name) = '" + type.ToLower() + "' AND products.company_id IN(" + comId + ");";
@@ -46,10 +47,12 @@ namespace coffee_shop
             }
             sqld.Dispose();
             sqlr.Close();
+            DataConn.Connection.Close();
         }
 
         private void QueryPicture()
         {
+            DataConn.Connection.Open();
             ListViewItem item = lvProducts.SelectedItems[0];
             string itemName = item.SubItems[0].Text;
             string sql = "SELECT images FROM products WHERE LOWER(name) = '" + itemName.ToLower() + "';";
@@ -61,10 +64,12 @@ namespace coffee_shop
             }
             sqld.Dispose();
             sqlr.Close();
+            DataConn.Connection.Close();
         }
 
         private void QueryToCart(string proName = "")
         {
+            DataConn.Connection.Open();
             string sql = "SELECT * FROM products WHERE LOWER(name) = '" + proName.ToLower() + "';";
             SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
             SqlDataReader sqlr = sqld.ExecuteReader();
@@ -76,10 +81,12 @@ namespace coffee_shop
             }
             sqld.Dispose();
             sqlr.Close();
+            DataConn.Connection.Close();
         }
 
         private void QueryCombos(string tblName)
         {
+            DataConn.Connection.Open();
             string query = "";
             if (tblName.ToLower() != "companies")
                 query = "SELECT * FROM " + tblName.ToLower() + " WHERE company_id IN(" + comId + ");";
@@ -106,10 +113,12 @@ namespace coffee_shop
             }
             sqld.Dispose();
             sqlr.Close();
+            DataConn.Connection.Close();
         }
 
         private void QueryCombosForMember(string tblName)
         {
+            DataConn.Connection.Open();
             string sql = "";
             switch(tblName.ToLower())
             {
@@ -146,6 +155,7 @@ namespace coffee_shop
             }
             sqld.Dispose();
             sqlr.Close();
+            DataConn.Connection.Close();
         }
 
         private void product_selling_Load(object sender, EventArgs e)
@@ -159,9 +169,9 @@ namespace coffee_shop
             txtChange.Enabled = false;
             txtDiscount.Enabled = false;
             cbCurrency.Enabled = false;
+            txtExchangeRate.Enabled = false;
             try
             {
-                DataConn.Connection.Open();
                 MyInter receipt_inter = my_receipts;
                 inter = receipt_inter;
                 QueryProducts();
@@ -242,43 +252,58 @@ namespace coffee_shop
             if(cbCurrency.Text.ToLower() == "dollar")
             {
                 txtSubTotal.Text = (double.Parse(txtTotal.Text) - double.Parse(txtDisPrice.Text)).ToString();
+                txtExchangeRate.Enabled = false;
             }
             else
             {
-                txtSubTotal.Text = ((double.Parse(txtTotal.Text) - double.Parse(txtDisPrice.Text)) * 4100).ToString();
+                txtExchangeRate.Enabled = true;
             }
         }
 
         private void txtDiscount_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(e.KeyChar == 13)
+            if (e.KeyChar == 13)
             {
-                txtDisPrice.Text = (double.Parse(txtTotal.Text) * double.Parse(txtDiscount.Text) / 100).ToString();
-                txtSubTotal.Text = (double.Parse(txtTotal.Text) - double.Parse(txtDisPrice.Text)).ToString();
-                cbCurrency.Enabled = true;
-                if(cbCurrency.Items.Count > 0)
-                    cbCurrency.SelectedIndex = 0;
-                txtReceive.Enabled = true;
-                btnAdd.Enabled = false;
+                if (txtDiscount.Text != "")
+                {
+                    txtDisPrice.Text = (double.Parse(txtTotal.Text) * double.Parse(txtDiscount.Text) / 100).ToString();
+                    txtSubTotal.Text = (double.Parse(txtTotal.Text) - double.Parse(txtDisPrice.Text)).ToString();
+                    cbCurrency.Enabled = true;
+                    if (cbCurrency.Items.Count > 0)
+                        cbCurrency.SelectedIndex = 0;
+                    txtReceive.Enabled = true;
+                    btnAdd.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("Please input discount!");
+                }
             }
         }
 
         private void txtReceive_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(e.KeyChar == 13)
+            if (e.KeyChar == 13)
             {
-                btnPay.Enabled = true;
-                double subTotal = double.Parse(txtSubTotal.Text);
-                double receive = double.Parse(txtReceive.Text);
-                if(receive >= subTotal)
+                if (txtReceive.Text != "")
                 {
-                    txtChange.Text = (receive - subTotal).ToString();
+                    btnPay.Enabled = true;
+                    double subTotal = double.Parse(txtSubTotal.Text);
+                    double receive = double.Parse(txtReceive.Text);
+                    if (receive >= subTotal)
+                    {
+                        txtChange.Text = String.Format("{0:0.##}", (receive - subTotal));
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please insert the right recievment!");
+                        txtReceive.Text = "";
+                        txtReceive.Focus();
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Please insert the right recievment!");
-                    txtReceive.Text = "";
-                    txtReceive.Focus();
+                    MessageBox.Show("Please input receive!");
                 }
             }
         }
@@ -316,6 +341,7 @@ namespace coffee_shop
                 int countSell = 0;
                 foreach (KeyValuePair<string, int> item in dict)
                 {
+                    DataConn.Connection.Open();
                     countSell++;
                     double pro_sell_price = 0;
                     double cutStock = 0;
@@ -408,26 +434,37 @@ namespace coffee_shop
                         int recNum = int.Parse(recN);
                         int waitNum = int.Parse(waitN);
                         Console.WriteLine("Int Number: " + recN + ", " + waitN);
-                        if(waitNum == 100)
-                        {
-                            my_receipts.WaitingNumber = 1;
-                        }
-                        else
-                        {
-                            waitNum++;
-                            my_receipts.WaitingNumber = waitNum;
-                        }
                         if(countSell == 1)
                         {
                             recNum++;
                             my_receipts.Number = recNum.ToString().PadLeft(6, zero);
+                            if (waitNum == 100)
+                            {
+                                my_receipts.WaitingNumber = 1;
+                            }
+                            else
+                            {
+                                waitNum++;
+                                my_receipts.WaitingNumber = waitNum;
+                            }
                         }
                         else
                         {
                             my_receipts.Number = recNum.ToString().PadLeft(6, zero);
                         }
                     }
-                    my_receipts.ProductName = item.Key;
+                    int recProId = 0;
+                    string get_pro_sql = "SELECT * FROM products WHERE LOWER(name) = '" + item.Key.ToLower() + "';";
+                    SqlCommand get_pro_sqld = new SqlCommand(get_pro_sql, DataConn.Connection);
+                    SqlDataReader get_pro_sqlr = get_pro_sqld.ExecuteReader();
+                    if(get_pro_sqlr.Read())
+                    {
+                        recProId = int.Parse(get_pro_sqlr["id"].ToString());
+                    }
+                    get_pro_sqld.Dispose();
+                    get_pro_sqlr.Close();
+
+                    my_receipts.ProductId = recProId;
                     my_receipts.Qty = item.Value;
                     my_receipts.Price = pro_sell_price;
                     double total_price = my_receipts.Qty * my_receipts.Price;
@@ -435,13 +472,84 @@ namespace coffee_shop
                     my_receipts.Discount = double.Parse(txtDiscount.Text);
                     double dis_price = (total_price * my_receipts.Discount) / 100;
                     my_receipts.Total = total_price - dis_price;
-                    my_receipts.EmployeeName = cbEmp.Text;
-                    my_receipts.CompanyName = cbCom.Text;
-                    my_receipts.BranchName = cbBranch.Text;
-                    my_receipts.Date = DateTime.Now.ToString("yyyy-MM-dd");
+
+                    int recEmpId = 0;
+                    string get_emp_sql = "SELECT * FROM employees WHERE LOWER(fullname) = '" + cbEmp.Text.ToLower() + "';";
+                    SqlCommand get_emp_sqld = new SqlCommand(get_emp_sql, DataConn.Connection);
+                    SqlDataReader get_emp_sqlr = get_emp_sqld.ExecuteReader();
+                    if (get_emp_sqlr.Read())
+                    {
+                        recEmpId = int.Parse(get_emp_sqlr["id"].ToString());
+                    }
+                    get_emp_sqld.Dispose();
+                    get_emp_sqlr.Close();
+
+                    my_receipts.EmployeeId = recEmpId;
+
+                    int recComId = 0;
+                    string get_com_sql = "SELECT * FROM companies WHERE LOWER(name) = '" + cbCom.Text.ToLower() + "';";
+                    SqlCommand get_com_sqld = new SqlCommand(get_com_sql, DataConn.Connection);
+                    SqlDataReader get_com_sqlr = get_com_sqld.ExecuteReader();
+                    if (get_com_sqlr.Read())
+                    {
+                        recComId = int.Parse(get_com_sqlr["id"].ToString());
+                    }
+                    get_com_sqld.Dispose();
+                    get_com_sqlr.Close();
+
+                    my_receipts.CompanyId = recComId;
+
+                    int recBranId = 0;
+                    string get_bran_sql = "SELECT * FROM branches WHERE LOWER(name) = '" + cbBranch.Text.ToLower() + "';";
+                    SqlCommand get_bran_sqld = new SqlCommand(get_bran_sql, DataConn.Connection);
+                    SqlDataReader get_bran_sqlr = get_bran_sqld.ExecuteReader();
+                    if (get_bran_sqlr.Read())
+                    {
+                        recBranId = int.Parse(get_bran_sqlr["id"].ToString());
+                    }
+                    get_bran_sqld.Dispose();
+                    get_bran_sqlr.Close();
+
+                    my_receipts.BranchId = recBranId;
+                    my_receipts.Date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                     inter.insert();
+                    DataConn.Connection.Close();
                 }
                 MessageBox.Show("Pay Success, for " + countSell + " products!");
+
+                List<PrintReceipt> printRec = new List<PrintReceipt>();
+                StaticPrintReceipt spr = new StaticPrintReceipt();
+                DataConn.Connection.Open();
+                string print_rec_sql = @"SELECT receipts.*, companies.name AS company_name, branches.name AS branch_name, 
+                            products.name AS product_name, employees.fullname AS emp_name
+                            FROM receipts
+                            INNER JOIN companies ON receipts.company_id = companies.id
+                            INNER JOIN branches ON receipts.branch_id = branches.id
+                            INNER JOIN products ON receipts.product_id = products.id
+                            INNER JOIN employees ON receipts.employee_id = employees.id WHERE receipts.number = '" + my_receipts.Number + "';";
+                SqlCommand print_rec_sqld = new SqlCommand(print_rec_sql, DataConn.Connection);
+                SqlDataReader print_rec_sqlr = print_rec_sqld.ExecuteReader();
+                while (print_rec_sqlr.Read())
+                {
+                    spr.Number = print_rec_sqlr["number"].ToString();
+                    spr.WaitingNumber = int.Parse(print_rec_sqlr["waiting_number"].ToString());
+                    spr.CompanyName = print_rec_sqlr["company_name"].ToString();
+                    spr.BranchName = print_rec_sqlr["branch_name"].ToString();
+                    spr.EmployeeName = print_rec_sqlr["emp_name"].ToString();
+                    spr.Date = print_rec_sqlr["date"].ToString();
+                    spr.Discount = double.Parse(print_rec_sqlr["discount"].ToString());
+                    PrintReceipt pr = new PrintReceipt();
+                    pr.ProductName = print_rec_sqlr["product_name"].ToString().ToUpper();
+                    pr.Qty = double.Parse(print_rec_sqlr["qty"].ToString());
+                    pr.Price = double.Parse(print_rec_sqlr["price"].ToString());
+                    pr.Discount = double.Parse(print_rec_sqlr["discount"].ToString());
+                    printRec.Add(pr);
+                }
+                print_rec_sqld.Dispose();
+                print_rec_sqlr.Close();
+                DataConn.Connection.Close();
+                new ReceiptPrint(spr, printRec).ShowDialog();
+
                 ClearTextBoxes(groupBox1);
                 txtReceive.Enabled = false;
                 cbType.SelectedIndex = 0;
@@ -479,6 +587,7 @@ namespace coffee_shop
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
+            DataConn.Connection.Open();
             lvProducts.Items.Clear();
             string sql = @"SELECT * FROM products
                 INNER JOIN product_categories ON products.procate_id = product_categories.id
@@ -493,12 +602,28 @@ namespace coffee_shop
             }
             sqld.Dispose();
             sqlr.Close();
+            DataConn.Connection.Close();
         }
 
         private void btnPrintRec_Click(object sender, EventArgs e)
         {
             DataConn.Connection.Close();
             new receipt_form().ShowDialog();
+        }
+
+        private void txtExchangeRate_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                if (txtExchangeRate.Text != "")
+                {
+                    txtSubTotal.Text = ((double.Parse(txtTotal.Text) - double.Parse(txtDisPrice.Text)) * double.Parse(txtExchangeRate.Text)).ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Please input exchange rate!");
+                }
+            }
         }
     }
 }

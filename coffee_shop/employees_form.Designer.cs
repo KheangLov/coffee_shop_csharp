@@ -102,9 +102,9 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(16, 15);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(615, 668);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
@@ -124,7 +124,7 @@
             // txtSalary
             // 
             this.txtSalary.Location = new System.Drawing.Point(204, 434);
-            this.txtSalary.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSalary.Margin = new System.Windows.Forms.Padding(4);
             this.txtSalary.Name = "txtSalary";
             this.txtSalary.Size = new System.Drawing.Size(387, 32);
             this.txtSalary.TabIndex = 8;
@@ -148,7 +148,7 @@
             "Male",
             "Female"});
             this.cbGender.Location = new System.Drawing.Point(204, 142);
-            this.cbGender.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbGender.Margin = new System.Windows.Forms.Padding(4);
             this.cbGender.Name = "cbGender";
             this.cbGender.Size = new System.Drawing.Size(203, 35);
             this.cbGender.TabIndex = 3;
@@ -168,7 +168,7 @@
             // 
             this.cbBranch.FormattingEnabled = true;
             this.cbBranch.Location = new System.Drawing.Point(204, 609);
-            this.cbBranch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbBranch.Margin = new System.Windows.Forms.Padding(4);
             this.cbBranch.Name = "cbBranch";
             this.cbBranch.Size = new System.Drawing.Size(203, 35);
             this.cbBranch.TabIndex = 12;
@@ -188,7 +188,7 @@
             // 
             this.cbCompany.FormattingEnabled = true;
             this.cbCompany.Location = new System.Drawing.Point(204, 565);
-            this.cbCompany.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbCompany.Margin = new System.Windows.Forms.Padding(4);
             this.cbCompany.Name = "cbCompany";
             this.cbCompany.Size = new System.Drawing.Size(203, 35);
             this.cbCompany.TabIndex = 11;
@@ -212,7 +212,7 @@
             "Fulltime",
             "Parttime"});
             this.cbWorktime.Location = new System.Drawing.Point(204, 521);
-            this.cbWorktime.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbWorktime.Margin = new System.Windows.Forms.Padding(4);
             this.cbWorktime.Name = "cbWorktime";
             this.cbWorktime.Size = new System.Drawing.Size(203, 35);
             this.cbWorktime.TabIndex = 10;
@@ -235,7 +235,7 @@
             "Manager",
             "Barista"});
             this.cbPosition.Location = new System.Drawing.Point(204, 476);
-            this.cbPosition.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbPosition.Margin = new System.Windows.Forms.Padding(4);
             this.cbPosition.Name = "cbPosition";
             this.cbPosition.Size = new System.Drawing.Size(203, 35);
             this.cbPosition.TabIndex = 9;
@@ -243,7 +243,7 @@
             // txtEmail
             // 
             this.txtEmail.Location = new System.Drawing.Point(204, 394);
-            this.txtEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(4);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(387, 32);
             this.txtEmail.TabIndex = 7;
@@ -274,7 +274,7 @@
             // dtpDob
             // 
             this.dtpDob.Location = new System.Drawing.Point(204, 186);
-            this.dtpDob.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpDob.Margin = new System.Windows.Forms.Padding(4);
             this.dtpDob.Name = "dtpDob";
             this.dtpDob.Size = new System.Drawing.Size(387, 32);
             this.dtpDob.TabIndex = 4;
@@ -282,7 +282,7 @@
             // txtPhone
             // 
             this.txtPhone.Location = new System.Drawing.Point(204, 353);
-            this.txtPhone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPhone.Margin = new System.Windows.Forms.Padding(4);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(387, 32);
             this.txtPhone.TabIndex = 6;
@@ -302,7 +302,7 @@
             // txtAddress
             // 
             this.txtAddress.Location = new System.Drawing.Point(204, 226);
-            this.txtAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtAddress.Margin = new System.Windows.Forms.Padding(4);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(387, 118);
@@ -322,7 +322,7 @@
             // txtLastname
             // 
             this.txtLastname.Location = new System.Drawing.Point(204, 101);
-            this.txtLastname.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtLastname.Margin = new System.Windows.Forms.Padding(4);
             this.txtLastname.Name = "txtLastname";
             this.txtLastname.Size = new System.Drawing.Size(387, 32);
             this.txtLastname.TabIndex = 2;
@@ -341,7 +341,7 @@
             // txtFirstname
             // 
             this.txtFirstname.Location = new System.Drawing.Point(204, 60);
-            this.txtFirstname.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtFirstname.Margin = new System.Windows.Forms.Padding(4);
             this.txtFirstname.Name = "txtFirstname";
             this.txtFirstname.Size = new System.Drawing.Size(387, 32);
             this.txtFirstname.TabIndex = 1;
@@ -374,10 +374,10 @@
             this.lvEmployees.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvEmployees.FullRowSelect = true;
             this.lvEmployees.GridLines = true;
-            this.lvEmployees.Location = new System.Drawing.Point(651, 75);
-            this.lvEmployees.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lvEmployees.Location = new System.Drawing.Point(650, 75);
+            this.lvEmployees.Margin = new System.Windows.Forms.Padding(4);
             this.lvEmployees.Name = "lvEmployees";
-            this.lvEmployees.Size = new System.Drawing.Size(984, 658);
+            this.lvEmployees.Size = new System.Drawing.Size(685, 658);
             this.lvEmployees.TabIndex = 1;
             this.lvEmployees.UseCompatibleStateImageBehavior = false;
             this.lvEmployees.View = System.Windows.Forms.View.Details;
@@ -446,10 +446,10 @@
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Montserrat", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(1248, 18);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSearch.Location = new System.Drawing.Point(986, 15);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(4);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(387, 36);
+            this.txtSearch.Size = new System.Drawing.Size(349, 36);
             this.txtSearch.TabIndex = 14;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
@@ -457,7 +457,7 @@
             // 
             this.btnAdd.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.Location = new System.Drawing.Point(16, 690);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(133, 43);
             this.btnAdd.TabIndex = 15;
@@ -469,7 +469,7 @@
             // 
             this.btnEdit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEdit.Location = new System.Drawing.Point(157, 690);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(4);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(133, 43);
             this.btnEdit.TabIndex = 16;
@@ -481,7 +481,7 @@
             // 
             this.btnDelete.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.Location = new System.Drawing.Point(299, 690);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(133, 43);
             this.btnDelete.TabIndex = 17;
@@ -493,7 +493,7 @@
             // 
             this.btnExit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.Location = new System.Drawing.Point(440, 690);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(133, 43);
             this.btnExit.TabIndex = 18;
@@ -505,7 +505,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1652, 754);
+            this.ClientSize = new System.Drawing.Size(1348, 742);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
@@ -515,7 +515,7 @@
             this.Controls.Add(this.lvEmployees);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "employees_form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Employee Form";

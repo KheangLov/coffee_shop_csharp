@@ -72,9 +72,9 @@
             // 
             this.txtSearch.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearch.Location = new System.Drawing.Point(1369, 11);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(4);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(325, 32);
+            this.txtSearch.Size = new System.Drawing.Size(265, 32);
             this.txtSearch.TabIndex = 27;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
@@ -105,9 +105,9 @@
             this.lvStocks.FullRowSelect = true;
             this.lvStocks.GridLines = true;
             this.lvStocks.Location = new System.Drawing.Point(691, 58);
-            this.lvStocks.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lvStocks.Margin = new System.Windows.Forms.Padding(4);
             this.lvStocks.Name = "lvStocks";
-            this.lvStocks.Size = new System.Drawing.Size(1004, 432);
+            this.lvStocks.Size = new System.Drawing.Size(943, 432);
             this.lvStocks.TabIndex = 26;
             this.lvStocks.UseCompatibleStateImageBehavior = false;
             this.lvStocks.View = System.Windows.Forms.View.Details;
@@ -160,7 +160,7 @@
             // 
             this.btnDel.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDel.Location = new System.Drawing.Point(285, 448);
-            this.btnDel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDel.Margin = new System.Windows.Forms.Padding(4);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(127, 43);
             this.btnDel.TabIndex = 25;
@@ -172,7 +172,7 @@
             // 
             this.btnEdit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEdit.Location = new System.Drawing.Point(151, 448);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(4);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(127, 43);
             this.btnEdit.TabIndex = 24;
@@ -184,7 +184,7 @@
             // 
             this.btnAdd.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.Location = new System.Drawing.Point(16, 448);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(127, 43);
             this.btnAdd.TabIndex = 23;
@@ -196,7 +196,7 @@
             // 
             this.btnExit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.Location = new System.Drawing.Point(420, 448);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(127, 43);
             this.btnExit.TabIndex = 22;
@@ -226,9 +226,9 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(16, 18);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(665, 422);
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
@@ -239,7 +239,7 @@
             this.cbBranch.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbBranch.FormattingEnabled = true;
             this.cbBranch.Location = new System.Drawing.Point(207, 372);
-            this.cbBranch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbBranch.Margin = new System.Windows.Forms.Padding(4);
             this.cbBranch.Name = "cbBranch";
             this.cbBranch.Size = new System.Drawing.Size(216, 35);
             this.cbBranch.TabIndex = 9;
@@ -260,7 +260,7 @@
             this.cbCompany.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCompany.FormattingEnabled = true;
             this.cbCompany.Location = new System.Drawing.Point(207, 327);
-            this.cbCompany.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbCompany.Margin = new System.Windows.Forms.Padding(4);
             this.cbCompany.Name = "cbCompany";
             this.cbCompany.Size = new System.Drawing.Size(216, 35);
             this.cbCompany.TabIndex = 8;
@@ -280,7 +280,7 @@
             // 
             this.txtsellingprice.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtsellingprice.Location = new System.Drawing.Point(207, 202);
-            this.txtsellingprice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtsellingprice.Margin = new System.Windows.Forms.Padding(4);
             this.txtsellingprice.Name = "txtsellingprice";
             this.txtsellingprice.Size = new System.Drawing.Size(436, 32);
             this.txtsellingprice.TabIndex = 5;
@@ -290,7 +290,7 @@
             // 
             this.dtpExp.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpExp.Location = new System.Drawing.Point(207, 80);
-            this.dtpExp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpExp.Margin = new System.Windows.Forms.Padding(4);
             this.dtpExp.Name = "dtpExp";
             this.dtpExp.Size = new System.Drawing.Size(436, 32);
             this.dtpExp.TabIndex = 2;
@@ -300,7 +300,7 @@
             this.cbstkcate.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbstkcate.FormattingEnabled = true;
             this.cbstkcate.Location = new System.Drawing.Point(207, 283);
-            this.cbstkcate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbstkcate.Margin = new System.Windows.Forms.Padding(4);
             this.cbstkcate.Name = "cbstkcate";
             this.cbstkcate.Size = new System.Drawing.Size(216, 35);
             this.cbstkcate.TabIndex = 7;
@@ -331,7 +331,7 @@
             // 
             this.txtaltqty.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtaltqty.Location = new System.Drawing.Point(207, 242);
-            this.txtaltqty.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtaltqty.Margin = new System.Windows.Forms.Padding(4);
             this.txtaltqty.Name = "txtaltqty";
             this.txtaltqty.Size = new System.Drawing.Size(436, 32);
             this.txtaltqty.TabIndex = 6;
@@ -352,7 +352,7 @@
             // 
             this.txtprice.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtprice.Location = new System.Drawing.Point(207, 161);
-            this.txtprice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtprice.Margin = new System.Windows.Forms.Padding(4);
             this.txtprice.Name = "txtprice";
             this.txtprice.Size = new System.Drawing.Size(436, 32);
             this.txtprice.TabIndex = 4;
@@ -373,7 +373,7 @@
             // 
             this.txtqty.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtqty.Location = new System.Drawing.Point(207, 121);
-            this.txtqty.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtqty.Margin = new System.Windows.Forms.Padding(4);
             this.txtqty.Name = "txtqty";
             this.txtqty.Size = new System.Drawing.Size(436, 32);
             this.txtqty.TabIndex = 3;
@@ -405,7 +405,7 @@
             // 
             this.txtname.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtname.Location = new System.Drawing.Point(207, 39);
-            this.txtname.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtname.Margin = new System.Windows.Forms.Padding(4);
             this.txtname.Name = "txtname";
             this.txtname.Size = new System.Drawing.Size(436, 32);
             this.txtname.TabIndex = 1;
@@ -428,7 +428,7 @@
             this.cbByCompany.Items.AddRange(new object[] {
             "All"});
             this.cbByCompany.Location = new System.Drawing.Point(1031, 11);
-            this.cbByCompany.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbByCompany.Margin = new System.Windows.Forms.Padding(4);
             this.cbByCompany.Name = "cbByCompany";
             this.cbByCompany.Size = new System.Drawing.Size(159, 32);
             this.cbByCompany.TabIndex = 29;
@@ -441,7 +441,7 @@
             this.cbByBranch.Items.AddRange(new object[] {
             "All"});
             this.cbByBranch.Location = new System.Drawing.Point(1201, 11);
-            this.cbByBranch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbByBranch.Margin = new System.Windows.Forms.Padding(4);
             this.cbByBranch.Name = "cbByBranch";
             this.cbByBranch.Size = new System.Drawing.Size(159, 32);
             this.cbByBranch.TabIndex = 30;
@@ -451,7 +451,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1712, 514);
+            this.ClientSize = new System.Drawing.Size(1648, 514);
             this.Controls.Add(this.cbByBranch);
             this.Controls.Add(this.cbByCompany);
             this.Controls.Add(this.txtSearch);
@@ -463,7 +463,7 @@
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "stock_form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Stock Form";

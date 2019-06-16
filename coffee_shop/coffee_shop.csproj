@@ -45,6 +45,10 @@
       <HintPath>..\packages\MaterialSkin.Updated.0.2.2\lib\MaterialSkin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Metro">
+      <HintPath>C:\Users\KHEANG\Downloads\Compressed\Metro\Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -238,6 +242,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="ReceiptPrint.resx">
       <DependentUpon>ReceiptPrint.cs</DependentUpon>
@@ -280,6 +285,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete_sign_64px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete_sign_filled_50px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
