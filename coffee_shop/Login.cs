@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
@@ -122,6 +121,8 @@ namespace coffee_shop
         string user_role = "";
         string user_name = "";
         int user_id;
+        int login_count;
+        string user_status = "";
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
@@ -137,6 +138,8 @@ namespace coffee_shop
                     user_id = int.Parse(sqlr["id"].ToString());
                     user_name = sqlr["username"].ToString();
                     user_role = sqlr["role_name"].ToString();
+                    login_count = int.Parse(sqlr["login_count"].ToString());
+                    user_status = sqlr["status"].ToString().ToLower();
                 }
                 sqld.Dispose();
                 sqlr.Close();
@@ -146,16 +149,34 @@ namespace coffee_shop
                 count_cmd.Dispose();
                 if (count_data != 0)
                 {
-                    this.Hide();
+                    string log_count_upd = "UPDATE users SET login_count = " + (login_count++) + " WHERE id = " + user_id + ";";
+                    SqlCommand sqld_upd = new SqlCommand(log_count_upd, DataConn.Connection);
+                    sqld_upd.ExecuteNonQuery();
+                    sqld_upd.Dispose();
+
                     DataConn.Connection.Close();
-                    if (user_role.ToLower() == "superadmin")
+                    if (user_role.ToLower() == "superadmin" && user_status == "active")
+                    {
+                        this.Hide();
                         new Mainsa_Form(user_role, user_id, user_name).Show();
-                    else
+                    }
+                    else if ((user_role.ToLower() == "admin" || user_role.ToLower() == "editor" || user_role.ToLower() == "user") && user_status == "active")
+                    {
+                        this.Hide();
                         new Main(user_role, user_id, user_name).Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("You can't login to the system");
+                        txtPassword.Clear();
+                        txtUser.Focus();
+                    }
                 }
                 else
                 {
                     MessageBox.Show("Wrong username or password!");
+                    txtPassword.Clear();
+                    txtUser.Focus();
                 }
             }
             else

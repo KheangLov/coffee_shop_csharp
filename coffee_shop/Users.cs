@@ -20,6 +20,9 @@ namespace coffee_shop
         private string address;
         private string created_date;
         private int role_id;
+        private string updated_date;
+        private string status;
+        private string image;
 
         public Users()
         {
@@ -146,10 +149,46 @@ namespace coffee_shop
             }
         }
 
+        public string Updated_Date
+        {
+            get
+            {
+                return updated_date;
+            }
+            set
+            {
+                updated_date = value;
+            }
+        }
+
+        public string Status
+        {
+            get
+            {
+                return status;
+            }
+            set
+            {
+                status = value;
+            }
+        }
+
+        public string Image
+        {
+            get
+            {
+                return image;
+            }
+            set
+            {
+                image = value;
+            }
+        }
+
         public override void insert()
         {
-            string query = @"INSERT INTO [coffee_shop].[dbo].[users](firstname, lastname, username, email, password, gender, phone, created_date, address, role_id) 
-                values('" + Firstname + "', '" + Lastname + "', '" + Username + "', '" + Email + "', '" + Password + "', '" + Gender + "', '" + Phone + "', '" + Created_Date + "', '" + Address + "', " + Role_Id + ");";
+            string query = @"INSERT INTO [coffee_shop].[dbo].[users](firstname, lastname, username, email, password, gender, phone, status, created_date, updated_date, address, role_id, login_count, image) 
+                values('" + Firstname + "', '" + Lastname + "', '" + Username + "', '" + Email + "', '" + Password + "', '" + Gender + "', '" + Phone + "', '" + Status + "', '" + Created_Date + "', '" + Updated_Date + "', '" + Address + "', " + Role_Id + ", 0, '" + Image + "');";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();
@@ -158,7 +197,7 @@ namespace coffee_shop
         public override void update(int id)
         {
             string query = @"UPDATE [coffee_shop].[dbo].[users] 
-                SET firstname = '" + Firstname + "', lastname ='" + Lastname + "', username = '" + Username + "', email = '" + Email + "', gender = '" + Gender + "', phone = '" + Phone + "', address = '" + Address + "', role_id = " + Role_Id + " WHERE id = " + id + ";";
+                SET firstname = '" + Firstname + "', lastname ='" + Lastname + "', username = '" + Username + "', email = '" + Email + "', gender = '" + Gender + "', phone = '" + Phone + "', address = '" + Address + "', role_id = " + Role_Id + ", status = '" + Status + "', updated_date = '" + Updated_Date + "', image = '" + Image + "' WHERE id = " + id + ";";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();

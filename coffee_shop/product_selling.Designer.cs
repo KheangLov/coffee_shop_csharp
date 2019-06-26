@@ -129,8 +129,8 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.txtExchangeRate);
             this.groupBox1.Controls.Add(this.cbBranch);
+            this.groupBox1.Controls.Add(this.txtExchangeRate);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.cbCom);
             this.groupBox1.Controls.Add(this.label10);

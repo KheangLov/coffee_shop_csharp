@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Net.Mail;
+using System.IO;
 
 namespace coffee_shop
 {
@@ -28,6 +29,8 @@ namespace coffee_shop
         int userId;
         string userPass;
         bool deleted = false;
+        string proImg = "";
+        string path = "";
 
         private void lvUsers_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -36,12 +39,14 @@ namespace coffee_shop
                 btnEdit.Enabled = true;
                 btnDel.Enabled = true;
                 btnPassword.Enabled = true;
+                btnBan.Enabled = true;
             }
             else
             {
                 btnDel.Enabled = false;
                 btnEdit.Enabled = false;
                 btnPassword.Enabled = false;
+                btnBan.Enabled = false;
             }
         }
 
@@ -65,7 +70,7 @@ namespace coffee_shop
             SqlDataReader sqlr = com.ExecuteReader();
             while (sqlr.Read())
             {
-                string[] user_info = { sc.ToCapitalize(sqlr["username"].ToString()), sqlr["email"].ToString(), sqlr["gender"].ToString(), sc.ToCapitalize(sqlr["name"].ToString()), sqlr["phone"].ToString(), sqlr["address"].ToString() };
+                string[] user_info = { sc.ToCapitalize(sqlr["username"].ToString()), sqlr["email"].ToString(), sqlr["gender"].ToString(), sc.ToCapitalize(sqlr["name"].ToString()), sqlr["phone"].ToString(), sqlr["address"].ToString(), sc.ToCapitalize(sqlr["status"].ToString()) };
                 ListViewItem item = new ListViewItem(user_info);
                 lvUsers.Items.Add(item);
             }
@@ -140,6 +145,7 @@ namespace coffee_shop
                         txtPhone.Text = reader["phone"].ToString();
                         txtAddress.Text = reader["address"].ToString();
                         cbRole.Text = sc.ToCapitalize(reader["name"].ToString());
+                        pbProfile.ImageLocation = reader["image"].ToString();
                         btnEdit.Text = "Update";
                     }
                 }
@@ -179,11 +185,13 @@ namespace coffee_shop
             btnEdit.Enabled = false;
             btnDel.Enabled = false;
             btnPassword.Enabled = false;
+            btnBan.Enabled = false;
             DataConn.Connection.Open();
             MyInter user_inter = my_user;
             inter = user_inter;
             loadComboRole();
             cbGender.SelectedIndex = 0;
+            cbStatus.SelectedIndex = 0;
             if(cbRole.Items.Count > 0)
                 cbRole.SelectedIndex = 0;
             try
@@ -221,7 +229,13 @@ namespace coffee_shop
                         my_user.Password = hc.PassHash(txtPassword.Text.Trim());
                         my_user.Phone = txtPhone.Text.Trim();
                         my_user.Address = txtAddress.Text.Trim();
-                        my_user.Created_Date = DateTime.Now.ToString("yyyy-MM-dd");
+                        my_user.Created_Date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        my_user.Updated_Date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        if(cbStatus.Text.ToLower() == "active" || cbStatus.Text.ToLower() == "inactive" || cbStatus.Text.ToLower() == "ban")
+                        {
+                            my_user.Status = cbStatus.Text.ToLower().Trim();
+                        }
+                        my_user.Image = path;
                         addComboRole();
                         inter.insert();
                         MessageBox.Show("Insert Successfully!");
@@ -301,12 +315,6 @@ namespace coffee_shop
             }
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            DataConn.Connection.Close();
-            this.Dispose();
-        }
-
         private void btnEdit_Click(object sender, EventArgs e)
         {
             if(lvUsers.SelectedItems.Count != 0)
@@ -331,7 +339,12 @@ namespace coffee_shop
                         my_user.Password = hc.PassHash(txtPassword.Text.Trim());
                         my_user.Phone = txtPhone.Text.Trim();
                         my_user.Address = txtAddress.Text.Trim();
-                        my_user.Created_Date = DateTime.Now.ToString("yyyy-MM-dd");
+                        my_user.Updated_Date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        if (cbStatus.Text.ToLower() == "active" || cbStatus.Text.ToLower() == "inactive" || cbStatus.Text.ToLower() == "ban")
+                        {
+                            my_user.Status = cbStatus.Text.ToLower().Trim();
+                        }
+                        my_user.Image = path;
                         addComboRole();
                         inter.update(userId);
                         MessageBox.Show("Update Successfully!");
@@ -367,7 +380,7 @@ namespace coffee_shop
             SqlDataReader srh_rd = srh_cmd.ExecuteReader();
             while (srh_rd.Read())
             {
-                string[] user_info = { sc.ToCapitalize(srh_rd["username"].ToString()), srh_rd["email"].ToString(), srh_rd["gender"].ToString(), sc.ToCapitalize(srh_rd["name"].ToString()), srh_rd["phone"].ToString(), srh_rd["address"].ToString() };
+                string[] user_info = { sc.ToCapitalize(srh_rd["username"].ToString()), srh_rd["email"].ToString(), srh_rd["gender"].ToString(), sc.ToCapitalize(srh_rd["name"].ToString()), srh_rd["phone"].ToString(), srh_rd["address"].ToString(), sc.ToCapitalize(srh_rd["status"].ToString()) };
                 ListViewItem item = new ListViewItem(user_info);
                 lvUsers.Items.Add(item);
             }
@@ -435,6 +448,80 @@ namespace coffee_shop
             {
                 e.Handled = true;
             }
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            DataConn.Connection.Close();
+            this.Dispose();
+        }
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var parent = Directory.GetParent(Directory.GetCurrentDirectory()).Parent;
+                OpenFileDialog dlg = new OpenFileDialog();
+                dlg.Filter = "All Files (*.*)|*.*|JPG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png";
+                dlg.Title = "Select Product Picture.";
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    string file = Path.GetFileName(dlg.FileName);
+                    path = parent.FullName + @"\pictures\profiles\" + file;
+                    proImg = dlg.FileName.ToString();
+                    MoveImage(proImg, path);
+                    pbProfile.ImageLocation = proImg;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void MoveImage(string source, string path)
+        {
+            try
+            {
+                File.Copy(source, path);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnBan_Click(object sender, EventArgs e)
+        {
+            if (lvUsers.SelectedItems.Count != 0)
+            {
+                if (MessageBox.Show("Are you sure, you want to ban this user?", "Ban", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    ListViewItem lvi = lvUsers.SelectedItems[0];
+                    int val = 0;
+                    string userName = lvi.SubItems[0].Text;
+                    string del_que = "UPDATE users SET status = 'ban' WHERE LOWER(username) = '" + userName.ToLower() + "';";
+                    SqlCommand del_com = new SqlCommand(del_que, DataConn.Connection);
+                    val = del_com.ExecuteNonQuery();
+                    del_com.Dispose();
+                    MessageBox.Show("User has been banned!");
+                    lvUsers.Items.Clear();
+                    QueryUsers();
+                    btnDel.Enabled = false;
+                    btnBan.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("No user was banned!", "Ban", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void lvUsers_DoubleClick(object sender, EventArgs e)
+        {
+            ListViewItem userDetail = lvUsers.SelectedItems[0];
+            string name = userDetail.SubItems[0].Text;
+            MessageBox.Show("Username: " + name);
         }
     }
 }
