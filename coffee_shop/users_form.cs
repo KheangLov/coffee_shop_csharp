@@ -29,6 +29,7 @@ namespace coffee_shop
         int userId;
         string userPass;
         bool deleted = false;
+        bool banned = false;
         string proImg = "";
         string path = "";
 
@@ -118,7 +119,7 @@ namespace coffee_shop
             {
                 if (reader["name"].ToString().ToLower() == "superadmin")
                 {
-                    if(type.ToLower() == "delete")
+                    if (type.ToLower() == "delete")
                     {
                         MessageBox.Show("You can't delete application owner!");
                         btnDel.Enabled = false;
@@ -128,6 +129,11 @@ namespace coffee_shop
                         MessageBox.Show("You can't edit application owner!");
                         btnEdit.Enabled = false;
                     }
+                    else if (type.ToLower() == "ban")
+                    {
+                        MessageBox.Show("You can't ban application owner!");
+                        btnBan.Enabled = false;
+                    }
                 }
                 else
                 {
@@ -135,7 +141,7 @@ namespace coffee_shop
                     {
                         deleted = true;
                     }
-                    else if(type.ToLower() == "edit")
+                    else if (type.ToLower() == "edit")
                     {
                         userId = int.Parse(reader["id"].ToString());
                         txtFirstname.Text = reader["firstname"].ToString();
@@ -148,11 +154,15 @@ namespace coffee_shop
                         pbProfile.ImageLocation = reader["image"].ToString();
                         btnEdit.Text = "Update";
                     }
+                    else if (type.ToLower() == "ban")
+                    {
+                        banned = true;
+                    }
                 }
             }
             command.Dispose();
             reader.Close();
-            if(deleted == true)
+            if (deleted == true)
             {
                 if (MessageBox.Show("Are you sure, you want to delete this user?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
@@ -177,7 +187,28 @@ namespace coffee_shop
                 }
                 deleted = false;
             }
-
+            else if (banned == true)
+            {
+                if (MessageBox.Show("Are you sure, you want to ban this user?", "Ban", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    ListViewItem lvi = lvUsers.SelectedItems[0];
+                    int val = 0;
+                    string userName = lvi.SubItems[0].Text;
+                    string del_que = "UPDATE users SET status = 'ban' WHERE LOWER(username) = '" + userName.ToLower() + "';";
+                    SqlCommand del_com = new SqlCommand(del_que, DataConn.Connection);
+                    val = del_com.ExecuteNonQuery();
+                    del_com.Dispose();
+                    MessageBox.Show("User has been banned!");
+                    lvUsers.Items.Clear();
+                    QueryUsers();
+                    btnDel.Enabled = false;
+                    btnBan.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("No user was banned!", "Ban", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
         private void users_form_load(object sender, EventArgs e)
@@ -495,25 +526,7 @@ namespace coffee_shop
         {
             if (lvUsers.SelectedItems.Count != 0)
             {
-                if (MessageBox.Show("Are you sure, you want to ban this user?", "Ban", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    ListViewItem lvi = lvUsers.SelectedItems[0];
-                    int val = 0;
-                    string userName = lvi.SubItems[0].Text;
-                    string del_que = "UPDATE users SET status = 'ban' WHERE LOWER(username) = '" + userName.ToLower() + "';";
-                    SqlCommand del_com = new SqlCommand(del_que, DataConn.Connection);
-                    val = del_com.ExecuteNonQuery();
-                    del_com.Dispose();
-                    MessageBox.Show("User has been banned!");
-                    lvUsers.Items.Clear();
-                    QueryUsers();
-                    btnDel.Enabled = false;
-                    btnBan.Enabled = false;
-                }
-                else
-                {
-                    MessageBox.Show("No user was banned!", "Ban", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                CheckUserRole("ban");
             }
         }
 
@@ -521,7 +534,8 @@ namespace coffee_shop
         {
             ListViewItem userDetail = lvUsers.SelectedItems[0];
             string name = userDetail.SubItems[0].Text;
-            MessageBox.Show("Username: " + name);
+            DataConn.Connection.Close();
+            new user_detail(name).ShowDialog();
         }
     }
 }

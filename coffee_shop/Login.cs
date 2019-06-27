@@ -128,6 +128,7 @@ namespace coffee_shop
         {
             if (txtUser.Text != "" && txtPassword.Text != "")
             {
+                DataConn.Connection.Open();
                 string sql = @"SELECT users.*, roles.name AS role_name FROM users
                     INNER JOIN roles ON users.role_id = roles.id
                     WHERE LOWER(username) = '" + txtUser.Text.ToLower() + "' AND password = '" + hc.PassHash(txtPassword.Text) + "';";
@@ -191,6 +192,7 @@ namespace coffee_shop
             try
             {
                 DataConn.ConnectionDB();
+                DataConn.Connection.Close();
             }
             catch (Exception ex)
             {

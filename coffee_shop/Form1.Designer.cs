@@ -59,7 +59,7 @@
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.menuStrip1.BackColor = System.Drawing.Color.White;
             this.menuStrip1.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -89,21 +89,21 @@
             // myUsersToolStripMenuItem
             // 
             this.myUsersToolStripMenuItem.Name = "myUsersToolStripMenuItem";
-            this.myUsersToolStripMenuItem.Size = new System.Drawing.Size(186, 32);
+            this.myUsersToolStripMenuItem.Size = new System.Drawing.Size(216, 32);
             this.myUsersToolStripMenuItem.Text = "My Users";
             this.myUsersToolStripMenuItem.Click += new System.EventHandler(this.myUsersToolStripMenuItem_Click);
             // 
             // membersToolStripMenuItem
             // 
             this.membersToolStripMenuItem.Name = "membersToolStripMenuItem";
-            this.membersToolStripMenuItem.Size = new System.Drawing.Size(186, 32);
+            this.membersToolStripMenuItem.Size = new System.Drawing.Size(216, 32);
             this.membersToolStripMenuItem.Text = "Members";
             this.membersToolStripMenuItem.Click += new System.EventHandler(this.membersToolStripMenuItem_Click);
             // 
             // logoutToolStripMenuItem1
             // 
             this.logoutToolStripMenuItem1.Name = "logoutToolStripMenuItem1";
-            this.logoutToolStripMenuItem1.Size = new System.Drawing.Size(186, 32);
+            this.logoutToolStripMenuItem1.Size = new System.Drawing.Size(216, 32);
             this.logoutToolStripMenuItem1.Text = "Logout";
             this.logoutToolStripMenuItem1.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
             // 
@@ -214,6 +214,9 @@
             // 
             // btnDrinks
             // 
+            this.btnDrinks.BackColor = System.Drawing.Color.White;
+            this.btnDrinks.FlatAppearance.BorderSize = 0;
+            this.btnDrinks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDrinks.Font = new System.Drawing.Font("Montserrat", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDrinks.Location = new System.Drawing.Point(51, 218);
             this.btnDrinks.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
@@ -221,11 +224,14 @@
             this.btnDrinks.Size = new System.Drawing.Size(299, 92);
             this.btnDrinks.TabIndex = 1;
             this.btnDrinks.Text = "DRINKS";
-            this.btnDrinks.UseVisualStyleBackColor = true;
+            this.btnDrinks.UseVisualStyleBackColor = false;
             this.btnDrinks.Click += new System.EventHandler(this.btnDrinks_Click);
             // 
             // btnFood
             // 
+            this.btnFood.BackColor = System.Drawing.Color.White;
+            this.btnFood.FlatAppearance.BorderSize = 0;
+            this.btnFood.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFood.Font = new System.Drawing.Font("Montserrat", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFood.Location = new System.Drawing.Point(51, 340);
             this.btnFood.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
@@ -233,7 +239,7 @@
             this.btnFood.Size = new System.Drawing.Size(299, 92);
             this.btnFood.TabIndex = 2;
             this.btnFood.Text = "FOODS";
-            this.btnFood.UseVisualStyleBackColor = true;
+            this.btnFood.UseVisualStyleBackColor = false;
             this.btnFood.Click += new System.EventHandler(this.btnFood_Click);
             // 
             // lbAlert
@@ -250,6 +256,9 @@
             // 
             // btnCheckStock
             // 
+            this.btnCheckStock.BackColor = System.Drawing.Color.White;
+            this.btnCheckStock.FlatAppearance.BorderSize = 0;
+            this.btnCheckStock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCheckStock.Font = new System.Drawing.Font("Montserrat", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCheckStock.Location = new System.Drawing.Point(431, 50);
             this.btnCheckStock.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
@@ -257,7 +266,7 @@
             this.btnCheckStock.Size = new System.Drawing.Size(269, 48);
             this.btnCheckStock.TabIndex = 4;
             this.btnCheckStock.Text = "Check Stock Alert";
-            this.btnCheckStock.UseVisualStyleBackColor = true;
+            this.btnCheckStock.UseVisualStyleBackColor = false;
             this.btnCheckStock.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // Main

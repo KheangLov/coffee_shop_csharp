@@ -130,30 +130,28 @@ namespace coffee_shop
 
         private void txtName_leave(object sender, EventArgs e)
         {
-            my_company.Name = txtName.Text.Trim();
+            
         }
 
         private void txtEmail_leave(object sender, EventArgs e)
         {
-            if (IsValidEmail(txtEmail.Text.Trim()))
-                my_company.Email = txtEmail.Text.Trim();
-            else
+            if (!IsValidEmail(txtEmail.Text.Trim()))
                 MessageBox.Show("Invalid Email!");
         }
 
         private void txtAddress_leave(object sender, EventArgs e)
         {
-            my_company.Address = txtAddress.Text.Trim();
+            
         }
 
         private void txtPhone_leave(object sender, EventArgs e)
         {
-            my_company.Phone = txtPhone.Text.Trim();
+            
         }
 
         private void cbUser_SelectedIndexChanged(object sender, EventArgs e)
         {
-            addCompanyUser();
+            
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -172,6 +170,11 @@ namespace coffee_shop
                     }
                     else
                     {
+                        my_company.Name = txtName.Text.Trim();
+                        my_company.Address = txtAddress.Text.Trim();
+                        my_company.Phone = txtPhone.Text.Trim();
+                        my_company.Email = txtEmail.Text.Trim();
+                        addCompanyUser();
                         inter.insert();
                         MessageBox.Show("Insert successful!");
                         ClearTextBoxes(groupBox1);
