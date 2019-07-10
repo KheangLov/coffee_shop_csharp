@@ -47,11 +47,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1275, 549);
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ReceiptPrint";
-            this.Text = "ReceiptPrint";
+            this.Text = "Receipt Print";
             this.Load += new System.EventHandler(this.ReceiptPrint_Load);
             this.ResumeLayout(false);
 

@@ -71,7 +71,7 @@
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(1369, 11);
+            this.txtSearch.Location = new System.Drawing.Point(1200, 13);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(4);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(265, 32);
@@ -107,7 +107,7 @@
             this.lvStocks.Location = new System.Drawing.Point(691, 58);
             this.lvStocks.Margin = new System.Windows.Forms.Padding(4);
             this.lvStocks.Name = "lvStocks";
-            this.lvStocks.Size = new System.Drawing.Size(943, 432);
+            this.lvStocks.Size = new System.Drawing.Size(787, 432);
             this.lvStocks.TabIndex = 26;
             this.lvStocks.UseCompatibleStateImageBehavior = false;
             this.lvStocks.View = System.Windows.Forms.View.Details;
@@ -427,7 +427,7 @@
             this.cbByCompany.FormattingEnabled = true;
             this.cbByCompany.Items.AddRange(new object[] {
             "All"});
-            this.cbByCompany.Location = new System.Drawing.Point(1031, 11);
+            this.cbByCompany.Location = new System.Drawing.Point(862, 13);
             this.cbByCompany.Margin = new System.Windows.Forms.Padding(4);
             this.cbByCompany.Name = "cbByCompany";
             this.cbByCompany.Size = new System.Drawing.Size(159, 32);
@@ -440,7 +440,7 @@
             this.cbByBranch.FormattingEnabled = true;
             this.cbByBranch.Items.AddRange(new object[] {
             "All"});
-            this.cbByBranch.Location = new System.Drawing.Point(1201, 11);
+            this.cbByBranch.Location = new System.Drawing.Point(1032, 13);
             this.cbByBranch.Margin = new System.Windows.Forms.Padding(4);
             this.cbByBranch.Name = "cbByBranch";
             this.cbByBranch.Size = new System.Drawing.Size(159, 32);
@@ -451,7 +451,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1648, 514);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(1500, 514);
             this.Controls.Add(this.cbByBranch);
             this.Controls.Add(this.cbByCompany);
             this.Controls.Add(this.txtSearch);

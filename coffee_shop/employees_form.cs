@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,11 +14,107 @@ namespace coffee_shop
 {
     public partial class employees_form : Form
     {
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+            (
+                int nLeftRect, // x-coordinate of upper-left corner
+                int nTopRect, // y-coordinate of upper-left corner
+                int nRightRect, // x-coordinate of lower-right corner
+                int nBottomRect, // y-coordinate of lower-right corner
+                int nWidthEllipse, // height of ellipse
+                int nHeightEllipse // width of ellipse
+             );
+
+        [DllImport("dwmapi.dll")]
+        public static extern int DwmExtendFrameIntoClientArea(IntPtr hWnd, ref MARGINS pMarInset);
+
+        [DllImport("dwmapi.dll")]
+        public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
+
+        [DllImport("dwmapi.dll")]
+        public static extern int DwmIsCompositionEnabled(ref int pfEnabled);
+
+        private bool m_aeroEnabled;                     // variables for box shadow
+        private const int CS_DROPSHADOW = 0x00020000;
+        private const int WM_NCPAINT = 0x0085;
+        private const int WM_ACTIVATEAPP = 0x001C;
+
+        public struct MARGINS                           // struct for box shadow
+        {
+            public int leftWidth;
+            public int rightWidth;
+            public int topHeight;
+            public int bottomHeight;
+        }
+
+        private const int WM_NCHITTEST = 0x84;          // variables for dragging the form
+        private const int HTCLIENT = 0x1;
+        private const int HTCAPTION = 0x2;
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                m_aeroEnabled = CheckAeroEnabled();
+
+                CreateParams cp = base.CreateParams;
+                if (!m_aeroEnabled)
+                    cp.ClassStyle |= CS_DROPSHADOW;
+
+                return cp;
+            }
+        }
+
+        private bool CheckAeroEnabled()
+        {
+            if (Environment.OSVersion.Version.Major >= 6)
+            {
+                int enabled = 0;
+                DwmIsCompositionEnabled(ref enabled);
+                return (enabled == 1) ? true : false;
+            }
+            return false;
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            switch (m.Msg)
+            {
+                case WM_NCPAINT:                        // box shadow
+                    if (m_aeroEnabled)
+                    {
+                        var v = 2;
+                        DwmSetWindowAttribute(this.Handle, 2, ref v, 4);
+                        MARGINS margins = new MARGINS()
+                        {
+                            bottomHeight = 1,
+                            leftWidth = 1,
+                            rightWidth = 1,
+                            topHeight = 1
+                        };
+                        DwmExtendFrameIntoClientArea(this.Handle, ref margins);
+
+                    }
+                    break;
+                default:
+                    break;
+            }
+            base.WndProc(ref m);
+
+            //if (m.Msg == WM_NCHITTEST && (int)m.Result == HTCLIENT)     // drag the form
+            //    m.Result = (IntPtr)HTCAPTION;
+            //m_aeroEnabled = false;
+            //this.FormBorderStyle = FormBorderStyle.None;
+
+        }
+
         string cId;
         public employees_form(string com_id)
         {
             cId = com_id;
             InitializeComponent();
+            m_aeroEnabled = false;
+            this.FormBorderStyle = FormBorderStyle.None;
         }
         Employees my_employee = new Employees();
         StringCapitalize sc = new StringCapitalize();
@@ -197,7 +294,6 @@ namespace coffee_shop
 
         private void employees_form_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DataConn.Connection.Close();
             this.Dispose();
         }
 
@@ -293,7 +389,7 @@ namespace coffee_shop
                         FROM employees
                         INNER JOIN companies ON employees.company_id = companies.id
                         INNER JOIN branches ON employees.branch_id = branches.id
-                        WHERE companies.id IN (" + cId + ") AND LOWER(employees.fullname) LIKE '%" + txtSearch.Text.Trim().ToLower() + "%' ORDER BY roles.id;";
+                        WHERE companies.id IN (" + cId + ") AND LOWER(employees.fullname) LIKE '%" + txtSearch.Text.Trim().ToLower() + "%';";
             SqlCommand srh_cmd = new SqlCommand(search_query, DataConn.Connection);
             SqlDataReader sqlr = srh_cmd.ExecuteReader();
             while (sqlr.Read())
@@ -345,8 +441,13 @@ namespace coffee_shop
                         DataConn.Connection.Close();
                         MessageBox.Show("Insert successfully!");
                         ClearTextBoxes(groupBox1);
-                        lvEmployees.Clear();
+                        lvEmployees.Items.Clear();
                         QueryEmployees();
+                        cbCompany.SelectedIndex = 0;
+                        cbBranch.SelectedIndex = 0;
+                        cbGender.SelectedIndex = 0;
+                        cbPosition.SelectedIndex = 0;
+                        cbWorktime.SelectedIndex = 0;
                     }
                     
                 }
@@ -371,10 +472,12 @@ namespace coffee_shop
                     ListViewItem del_item = lvEmployees.SelectedItems[0];
                     int val = 0;
                     string name = del_item.SubItems[0].Text;
+                    DataConn.Connection.Open();
                     string del_sql = "DELETE FROM employees WHERE fullname = '" + name + "';";
                     SqlCommand del_cmd = new SqlCommand(del_sql, DataConn.Connection);
                     val = del_cmd.ExecuteNonQuery();
                     del_cmd.Dispose();
+                    DataConn.Connection.Close();
                     MessageBox.Show("Employee has been deleted!");
                     lvEmployees.Items.Clear();
                     QueryEmployees();
@@ -441,14 +544,13 @@ namespace coffee_shop
                     ClearTextBoxes(groupBox1);
                     lvEmployees.Items.Clear();
                     QueryEmployees();
+                    cbCompany.SelectedIndex = 0;
+                    cbBranch.SelectedIndex = 0;
+                    cbGender.SelectedIndex = 0;
+                    cbPosition.SelectedIndex = 0;
+                    cbWorktime.SelectedIndex = 0;
                 }
             }
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            DataConn.Connection.Close();
-            this.Dispose();
         }
 
         private void cbCompany_SelectedIndexChanged(object sender, EventArgs e)
@@ -458,6 +560,12 @@ namespace coffee_shop
             loadComboBranch();
             if (cbBranch.Items.Count > 0)
                 cbBranch.SelectedIndex = 0;
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            DataConn.Connection.Close();
+            this.Dispose();
         }
     }
 }

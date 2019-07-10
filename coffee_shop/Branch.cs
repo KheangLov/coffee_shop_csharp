@@ -15,6 +15,7 @@ namespace coffee_shop
         private string phone;
         private string address;
         private int company_id;
+        private string status;
 
         public Branch()
         {
@@ -81,10 +82,22 @@ namespace coffee_shop
             }
         }
 
+        public string Status
+        {
+            get
+            {
+                return status;
+            }
+            set
+            {
+                status = value;
+            }
+        }
+
         public override void insert()
         {
-            string query = @"INSERT INTO [coffee_shop].[dbo].[branches](name, email, phone, address, company_id) 
-                values('" + Name + "', '" + Email + "', '" + Phone + "', '" + Address + "', " + CompanyId + ");";
+            string query = @"INSERT INTO [coffee_shop].[dbo].[branches](name, email, phone, address, company_id, status) 
+                values('" + Name + "', '" + Email + "', '" + Phone + "', '" + Address + "', " + CompanyId + ", '" + Status + "');";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();
@@ -93,7 +106,7 @@ namespace coffee_shop
         public override void update(int id)
         {
             string query = @"UPDATE [coffee_shop].[dbo].[branches] 
-                SET name = '" + Name + "', email ='" + Email + "', phone = '" + Phone + "', address = '" + Address + "', company_id = '" + CompanyId + "' WHERE id = " + id + ";";
+                SET name = '" + Name + "', email ='" + Email + "', phone = '" + Phone + "', address = '" + Address + "', company_id = '" + CompanyId + "', status = '" + Status + "' WHERE id = " + id + ";";
             sqld = new SqlCommand(query, DataConn.Connection);
             sqld.ExecuteNonQuery();
             sqld.Dispose();

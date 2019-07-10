@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,6 +14,98 @@ namespace coffee_shop
 {
     public partial class member_form : Form
     {
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+            (
+                int nLeftRect, // x-coordinate of upper-left corner
+                int nTopRect, // y-coordinate of upper-left corner
+                int nRightRect, // x-coordinate of lower-right corner
+                int nBottomRect, // y-coordinate of lower-right corner
+                int nWidthEllipse, // height of ellipse
+                int nHeightEllipse // width of ellipse
+             );
+
+        [DllImport("dwmapi.dll")]
+        public static extern int DwmExtendFrameIntoClientArea(IntPtr hWnd, ref MARGINS pMarInset);
+
+        [DllImport("dwmapi.dll")]
+        public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
+
+        [DllImport("dwmapi.dll")]
+        public static extern int DwmIsCompositionEnabled(ref int pfEnabled);
+
+        private bool m_aeroEnabled;                     // variables for box shadow
+        private const int CS_DROPSHADOW = 0x00020000;
+        private const int WM_NCPAINT = 0x0085;
+        private const int WM_ACTIVATEAPP = 0x001C;
+
+        public struct MARGINS                           // struct for box shadow
+        {
+            public int leftWidth;
+            public int rightWidth;
+            public int topHeight;
+            public int bottomHeight;
+        }
+
+        private const int WM_NCHITTEST = 0x84;          // variables for dragging the form
+        private const int HTCLIENT = 0x1;
+        private const int HTCAPTION = 0x2;
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                m_aeroEnabled = CheckAeroEnabled();
+
+                CreateParams cp = base.CreateParams;
+                if (!m_aeroEnabled)
+                    cp.ClassStyle |= CS_DROPSHADOW;
+
+                return cp;
+            }
+        }
+
+        private bool CheckAeroEnabled()
+        {
+            if (Environment.OSVersion.Version.Major >= 6)
+            {
+                int enabled = 0;
+                DwmIsCompositionEnabled(ref enabled);
+                return (enabled == 1) ? true : false;
+            }
+            return false;
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            switch (m.Msg)
+            {
+                case WM_NCPAINT:                        // box shadow
+                    if (m_aeroEnabled)
+                    {
+                        var v = 2;
+                        DwmSetWindowAttribute(this.Handle, 2, ref v, 4);
+                        MARGINS margins = new MARGINS()
+                        {
+                            bottomHeight = 1,
+                            leftWidth = 1,
+                            rightWidth = 1,
+                            topHeight = 1
+                        };
+                        DwmExtendFrameIntoClientArea(this.Handle, ref margins);
+
+                    }
+                    break;
+                default:
+                    break;
+            }
+            base.WndProc(ref m);
+
+            //if (m.Msg == WM_NCHITTEST && (int)m.Result == HTCLIENT)     // drag the form
+            //    m.Result = (IntPtr)HTCAPTION;
+
+        }
+
         int uId;
         string uName;
         public member_form(int id, string name)
@@ -20,6 +113,8 @@ namespace coffee_shop
             uId = id;
             uName = name;
             InitializeComponent();
+            m_aeroEnabled = false;
+            this.FormBorderStyle = FormBorderStyle.None;
         }
 
         Member my_member = new Member();
@@ -191,12 +286,6 @@ namespace coffee_shop
             sqld.Dispose();
             sqlr.Close();
             DataConn.Connection.Close();
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            DataConn.Connection.Close();
-            this.Dispose();
         }
 
         private void member_form_Load(object sender, EventArgs e)
@@ -374,6 +463,35 @@ namespace coffee_shop
         private void cbBranch_SelectedIndexChanged(object sender, EventArgs e)
         {
             addBranch();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            DataConn.Connection.Close();
+            this.Dispose();
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            lvMember.Items.Clear();
+            DataConn.Connection.Open();
+            string search_query = @"SELECT members.*, users.username AS user_name, companies.name AS company_name,
+                branches.name AS branch_name FROM members
+                INNER JOIN users ON members.user_id = users.id
+                INNER JOIN companies ON members.company_id = companies.id
+                INNER JOIN branches ON members.branch_id = branches.id
+                WHERE members.user_id = " + uId + " AND LOWER(members.name) LIKE '%" + txtSearch.Text.Trim().ToLower() + "%';";
+            SqlCommand srh_cmd = new SqlCommand(search_query, DataConn.Connection);
+            SqlDataReader srh_rd = srh_cmd.ExecuteReader();
+            while (srh_rd.Read())
+            {
+                string[] member_info = { sc.ToCapitalize(srh_rd["name"].ToString()), sc.ToCapitalize(srh_rd["user_name"].ToString()), sc.ToCapitalize(srh_rd["company_name"].ToString()), sc.ToCapitalize(srh_rd["branch_name"].ToString()) };
+                ListViewItem item = new ListViewItem(member_info);
+                lvMember.Items.Add(item);
+            }
+            srh_cmd.Dispose();
+            srh_rd.Close();
+            DataConn.Connection.Close();
         }
     }
 }

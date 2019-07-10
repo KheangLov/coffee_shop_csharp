@@ -54,7 +54,7 @@
             this.tableLayoutPanel.Controls.Add(this.okButton, 1, 5);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(15, 15);
-            this.tableLayoutPanel.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tableLayoutPanel.Margin = new System.Windows.Forms.Padding(5);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             this.tableLayoutPanel.RowCount = 6;
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
@@ -71,7 +71,7 @@
             this.logoPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.logoPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("logoPictureBox.Image")));
             this.logoPictureBox.Location = new System.Drawing.Point(5, 5);
-            this.logoPictureBox.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.logoPictureBox.Margin = new System.Windows.Forms.Padding(5);
             this.logoPictureBox.Name = "logoPictureBox";
             this.tableLayoutPanel.SetRowSpan(this.logoPictureBox, 6);
             this.logoPictureBox.Size = new System.Drawing.Size(219, 439);
@@ -82,6 +82,7 @@
             // labelProductName
             // 
             this.labelProductName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelProductName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.labelProductName.Location = new System.Drawing.Point(239, 0);
             this.labelProductName.Margin = new System.Windows.Forms.Padding(10, 0, 5, 0);
             this.labelProductName.MaximumSize = new System.Drawing.Size(0, 29);
@@ -94,6 +95,7 @@
             // labelVersion
             // 
             this.labelVersion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelVersion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.labelVersion.Location = new System.Drawing.Point(239, 44);
             this.labelVersion.Margin = new System.Windows.Forms.Padding(10, 0, 5, 0);
             this.labelVersion.MaximumSize = new System.Drawing.Size(0, 29);
@@ -106,6 +108,7 @@
             // labelCopyright
             // 
             this.labelCopyright.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelCopyright.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.labelCopyright.Location = new System.Drawing.Point(239, 88);
             this.labelCopyright.Margin = new System.Windows.Forms.Padding(10, 0, 5, 0);
             this.labelCopyright.MaximumSize = new System.Drawing.Size(0, 29);
@@ -118,6 +121,7 @@
             // labelCompanyName
             // 
             this.labelCompanyName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelCompanyName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.labelCompanyName.Location = new System.Drawing.Point(239, 132);
             this.labelCompanyName.Margin = new System.Windows.Forms.Padding(10, 0, 5, 0);
             this.labelCompanyName.MaximumSize = new System.Drawing.Size(0, 29);
@@ -129,7 +133,9 @@
             // 
             // textBoxDescription
             // 
+            this.textBoxDescription.BackColor = System.Drawing.Color.White;
             this.textBoxDescription.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxDescription.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.textBoxDescription.Location = new System.Drawing.Point(239, 181);
             this.textBoxDescription.Margin = new System.Windows.Forms.Padding(10, 5, 5, 5);
             this.textBoxDescription.Multiline = true;
@@ -144,32 +150,40 @@
             // okButton
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.okButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(179)))), ((int)(((byte)(200)))));
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.okButton.FlatAppearance.BorderSize = 0;
+            this.okButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.okButton.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.okButton.ForeColor = System.Drawing.Color.White;
             this.okButton.Location = new System.Drawing.Point(565, 405);
-            this.okButton.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.okButton.Margin = new System.Windows.Forms.Padding(5);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(125, 39);
             this.okButton.TabIndex = 24;
             this.okButton.Text = "&OK";
+            this.okButton.UseVisualStyleBackColor = false;
             // 
             // AboutCoffeeShop
             // 
             this.AcceptButton = this.okButton;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(725, 479);
             this.Controls.Add(this.tableLayoutPanel);
             this.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AboutCoffeeShop";
-            this.Padding = new System.Windows.Forms.Padding(15, 15, 15, 15);
+            this.Padding = new System.Windows.Forms.Padding(15);
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "About";
+            this.Load += new System.EventHandler(this.AboutCoffeeShop_Load);
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();

@@ -36,8 +36,8 @@
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.txtExchangeRate = new System.Windows.Forms.TextBox();
             this.cbBranch = new System.Windows.Forms.ComboBox();
+            this.txtExchangeRate = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.cbCom = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -79,7 +79,8 @@
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
-            this.lvProducts.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvProducts.Font = new System.Drawing.Font("Montserrat SemiBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvProducts.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.lvProducts.FullRowSelect = true;
             this.lvProducts.GridLines = true;
             this.lvProducts.Location = new System.Drawing.Point(16, 383);
@@ -119,6 +120,7 @@
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Montserrat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.txtSearch.Location = new System.Drawing.Point(16, 333);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(4);
             this.txtSearch.Name = "txtSearch";
@@ -152,7 +154,8 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.txtReceive);
-            this.groupBox1.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Font = new System.Drawing.Font("Montserrat SemiBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.groupBox1.Location = new System.Drawing.Point(16, 16);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
@@ -173,24 +176,27 @@
             this.label12.TabIndex = 38;
             this.label12.Text = "Exchange Rate:";
             // 
-            // txtExchangeRate
-            // 
-            this.txtExchangeRate.Location = new System.Drawing.Point(327, 75);
-            this.txtExchangeRate.Margin = new System.Windows.Forms.Padding(4);
-            this.txtExchangeRate.Name = "txtExchangeRate";
-            this.txtExchangeRate.Size = new System.Drawing.Size(245, 32);
-            this.txtExchangeRate.TabIndex = 37;
-            this.txtExchangeRate.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtExchangeRate_KeyPress);
-            // 
             // cbBranch
             // 
             this.cbBranch.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbBranch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.cbBranch.FormattingEnabled = true;
             this.cbBranch.Location = new System.Drawing.Point(599, 201);
             this.cbBranch.Margin = new System.Windows.Forms.Padding(4);
             this.cbBranch.Name = "cbBranch";
             this.cbBranch.Size = new System.Drawing.Size(245, 30);
             this.cbBranch.TabIndex = 36;
+            // 
+            // txtExchangeRate
+            // 
+            this.txtExchangeRate.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtExchangeRate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.txtExchangeRate.Location = new System.Drawing.Point(327, 75);
+            this.txtExchangeRate.Margin = new System.Windows.Forms.Padding(4);
+            this.txtExchangeRate.Name = "txtExchangeRate";
+            this.txtExchangeRate.Size = new System.Drawing.Size(245, 32);
+            this.txtExchangeRate.TabIndex = 37;
+            this.txtExchangeRate.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtExchangeRate_KeyPress);
             // 
             // label11
             // 
@@ -206,6 +212,7 @@
             // cbCom
             // 
             this.cbCom.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbCom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.cbCom.FormattingEnabled = true;
             this.cbCom.Location = new System.Drawing.Point(599, 138);
             this.cbCom.Margin = new System.Windows.Forms.Padding(4);
@@ -227,6 +234,7 @@
             // cbEmp
             // 
             this.cbEmp.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbEmp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.cbEmp.FormattingEnabled = true;
             this.cbEmp.Location = new System.Drawing.Point(600, 75);
             this.cbEmp.Margin = new System.Windows.Forms.Padding(4);
@@ -258,6 +266,8 @@
             // 
             // txtSubTotal
             // 
+            this.txtSubTotal.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSubTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.txtSubTotal.Location = new System.Drawing.Point(327, 138);
             this.txtSubTotal.Margin = new System.Windows.Forms.Padding(4);
             this.txtSubTotal.Name = "txtSubTotal";
@@ -267,6 +277,7 @@
             // cbCurrency
             // 
             this.cbCurrency.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbCurrency.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.cbCurrency.FormattingEnabled = true;
             this.cbCurrency.Items.AddRange(new object[] {
             "Dollar",
@@ -291,6 +302,8 @@
             // 
             // txtDisPrice
             // 
+            this.txtDisPrice.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDisPrice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.txtDisPrice.Location = new System.Drawing.Point(28, 199);
             this.txtDisPrice.Margin = new System.Windows.Forms.Padding(4);
             this.txtDisPrice.Name = "txtDisPrice";
@@ -343,6 +356,8 @@
             // 
             // txtTotal
             // 
+            this.txtTotal.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.txtTotal.Location = new System.Drawing.Point(27, 74);
             this.txtTotal.Margin = new System.Windows.Forms.Padding(4);
             this.txtTotal.Name = "txtTotal";
@@ -352,6 +367,8 @@
             // 
             // txtChange
             // 
+            this.txtChange.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtChange.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.txtChange.Location = new System.Drawing.Point(327, 262);
             this.txtChange.Margin = new System.Windows.Forms.Padding(4);
             this.txtChange.Name = "txtChange";
@@ -360,6 +377,8 @@
             // 
             // txtDiscount
             // 
+            this.txtDiscount.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDiscount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.txtDiscount.Location = new System.Drawing.Point(28, 136);
             this.txtDiscount.Margin = new System.Windows.Forms.Padding(4);
             this.txtDiscount.Name = "txtDiscount";
@@ -370,6 +389,7 @@
             // cbType
             // 
             this.cbType.Font = new System.Drawing.Font("Montserrat", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.cbType.FormattingEnabled = true;
             this.cbType.Items.AddRange(new object[] {
             "In place",
@@ -404,6 +424,8 @@
             // 
             // txtReceive
             // 
+            this.txtReceive.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtReceive.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.txtReceive.Location = new System.Drawing.Point(327, 199);
             this.txtReceive.Margin = new System.Windows.Forms.Padding(4);
             this.txtReceive.Name = "txtReceive";
@@ -413,45 +435,59 @@
             // 
             // btnPrintRec
             // 
-            this.btnPrintRec.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrintRec.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(97)))), ((int)(((byte)(91)))));
+            this.btnPrintRec.FlatAppearance.BorderSize = 0;
+            this.btnPrintRec.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrintRec.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrintRec.ForeColor = System.Drawing.Color.White;
             this.btnPrintRec.Location = new System.Drawing.Point(900, 16);
             this.btnPrintRec.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintRec.Name = "btnPrintRec";
             this.btnPrintRec.Size = new System.Drawing.Size(168, 43);
             this.btnPrintRec.TabIndex = 9;
             this.btnPrintRec.Text = "Print Receipt";
-            this.btnPrintRec.UseVisualStyleBackColor = true;
+            this.btnPrintRec.UseVisualStyleBackColor = false;
             this.btnPrintRec.Click += new System.EventHandler(this.btnPrintRec_Click);
             // 
             // btnAdd
             // 
-            this.btnAdd.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(157)))), ((int)(((byte)(159)))));
+            this.btnAdd.FlatAppearance.BorderSize = 0;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.ForeColor = System.Drawing.Color.White;
             this.btnAdd.Location = new System.Drawing.Point(476, 332);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(133, 43);
             this.btnAdd.TabIndex = 4;
             this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnPay
             // 
-            this.btnPay.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(179)))), ((int)(((byte)(200)))));
+            this.btnPay.FlatAppearance.BorderSize = 0;
+            this.btnPay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPay.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPay.ForeColor = System.Drawing.Color.White;
             this.btnPay.Location = new System.Drawing.Point(617, 332);
             this.btnPay.Margin = new System.Windows.Forms.Padding(4);
             this.btnPay.Name = "btnPay";
             this.btnPay.Size = new System.Drawing.Size(133, 43);
             this.btnPay.TabIndex = 5;
             this.btnPay.Text = "Pay";
-            this.btnPay.UseVisualStyleBackColor = true;
+            this.btnPay.UseVisualStyleBackColor = false;
             this.btnPay.Click += new System.EventHandler(this.btnPay_Click);
             // 
             // btnExit
             // 
-            this.btnExit.BackColor = System.Drawing.Color.Transparent;
+            this.btnExit.BackColor = System.Drawing.Color.Red;
             this.btnExit.BackgroundImage = global::coffee_shop.Properties.Resources.delete_sign_filled_50px;
             this.btnExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExit.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.Location = new System.Drawing.Point(1267, 13);
             this.btnExit.Margin = new System.Windows.Forms.Padding(4);
@@ -468,7 +504,8 @@
             this.columnHeader5,
             this.columnHeader6,
             this.columnHeader7});
-            this.lvCart.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvCart.Font = new System.Drawing.Font("Montserrat SemiBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvCart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.lvCart.FullRowSelect = true;
             this.lvCart.GridLines = true;
             this.lvCart.Location = new System.Drawing.Point(423, 383);
@@ -502,20 +539,25 @@
             // 
             // btnDel
             // 
-            this.btnDel.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(69)))), ((int)(((byte)(1)))));
+            this.btnDel.FlatAppearance.BorderSize = 0;
+            this.btnDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDel.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDel.ForeColor = System.Drawing.Color.White;
             this.btnDel.Location = new System.Drawing.Point(759, 332);
             this.btnDel.Margin = new System.Windows.Forms.Padding(4);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(133, 43);
             this.btnDel.TabIndex = 8;
             this.btnDel.Text = "Delete";
-            this.btnDel.UseVisualStyleBackColor = true;
+            this.btnDel.UseVisualStyleBackColor = false;
             this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
             // 
             // product_selling
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1335, 706);
             this.Controls.Add(this.btnPrintRec);
             this.Controls.Add(this.btnDel);
