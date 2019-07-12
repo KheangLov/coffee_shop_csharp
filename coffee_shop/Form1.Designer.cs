@@ -44,8 +44,6 @@
             this.stockCateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.myStockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newProductToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allProductsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -89,21 +87,21 @@
             // myUsersToolStripMenuItem
             // 
             this.myUsersToolStripMenuItem.Name = "myUsersToolStripMenuItem";
-            this.myUsersToolStripMenuItem.Size = new System.Drawing.Size(216, 32);
+            this.myUsersToolStripMenuItem.Size = new System.Drawing.Size(186, 32);
             this.myUsersToolStripMenuItem.Text = "My Users";
             this.myUsersToolStripMenuItem.Click += new System.EventHandler(this.myUsersToolStripMenuItem_Click);
             // 
             // membersToolStripMenuItem
             // 
             this.membersToolStripMenuItem.Name = "membersToolStripMenuItem";
-            this.membersToolStripMenuItem.Size = new System.Drawing.Size(216, 32);
+            this.membersToolStripMenuItem.Size = new System.Drawing.Size(186, 32);
             this.membersToolStripMenuItem.Text = "Members";
             this.membersToolStripMenuItem.Click += new System.EventHandler(this.membersToolStripMenuItem_Click);
             // 
             // logoutToolStripMenuItem1
             // 
             this.logoutToolStripMenuItem1.Name = "logoutToolStripMenuItem1";
-            this.logoutToolStripMenuItem1.Size = new System.Drawing.Size(216, 32);
+            this.logoutToolStripMenuItem1.Size = new System.Drawing.Size(186, 32);
             this.logoutToolStripMenuItem1.Text = "Logout";
             this.logoutToolStripMenuItem1.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
             // 
@@ -171,26 +169,10 @@
             // 
             // productsToolStripMenuItem
             // 
-            this.productsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newProductToolStripMenuItem,
-            this.allProductsToolStripMenuItem});
             this.productsToolStripMenuItem.Name = "productsToolStripMenuItem";
             this.productsToolStripMenuItem.Size = new System.Drawing.Size(115, 31);
             this.productsToolStripMenuItem.Text = "Products";
-            // 
-            // newProductToolStripMenuItem
-            // 
-            this.newProductToolStripMenuItem.Name = "newProductToolStripMenuItem";
-            this.newProductToolStripMenuItem.Size = new System.Drawing.Size(284, 32);
-            this.newProductToolStripMenuItem.Text = "Product Categories";
-            this.newProductToolStripMenuItem.Click += new System.EventHandler(this.newProductToolStripMenuItem_Click);
-            // 
-            // allProductsToolStripMenuItem
-            // 
-            this.allProductsToolStripMenuItem.Name = "allProductsToolStripMenuItem";
-            this.allProductsToolStripMenuItem.Size = new System.Drawing.Size(284, 32);
-            this.allProductsToolStripMenuItem.Text = "Products";
-            this.allProductsToolStripMenuItem.Click += new System.EventHandler(this.allProductsToolStripMenuItem_Click);
+            this.productsToolStripMenuItem.Click += new System.EventHandler(this.productsToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -305,8 +287,6 @@
         private System.Windows.Forms.ToolStripMenuItem productsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stockCateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem myStockToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem allProductsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newProductToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem myUsersToolStripMenuItem;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ToolStripMenuItem myCompanyToolStripMenuItem;

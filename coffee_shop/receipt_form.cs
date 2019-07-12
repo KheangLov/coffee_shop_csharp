@@ -187,11 +187,6 @@ namespace coffee_shop
             }
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
-        }
-
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             lvReceipt.Items.Clear();
@@ -212,7 +207,13 @@ namespace coffee_shop
 
         private void btnExit_Click_1(object sender, EventArgs e)
         {
+            DataConn.Connection.Close();
             this.Dispose();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

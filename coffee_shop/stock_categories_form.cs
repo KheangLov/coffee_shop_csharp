@@ -295,6 +295,7 @@ namespace coffee_shop
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            DataConn.Connection.Close();
             this.Dispose();
         }
     }

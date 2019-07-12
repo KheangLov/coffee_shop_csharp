@@ -129,19 +129,29 @@ namespace coffee_shop
         private void QueryProducts()
         {
             DataConn.Connection.Open();
-            string sql = @"SELECT * FROM products
+            string check_sql = @"SELECT COUNT(*) FROM products
+                INNER JOIN product_categories ON products.procate_id = product_categories.id 
+                WHERE LOWER(product_categories.name) = '" + type.ToLower() + "';";
+            SqlCommand check_sqld = new SqlCommand(check_sql, DataConn.Connection);
+            int rows_num = Convert.ToInt16(check_sqld.ExecuteScalar());
+            check_sqld.Dispose();
+            Console.Write("Check = " + rows_num);
+            if (rows_num > 0)
+            {
+                string sql = @"SELECT * FROM products
                 INNER JOIN product_categories ON products.procate_id = product_categories.id
                 WHERE LOWER(product_categories.name) = '" + type.ToLower() + "' AND products.company_id IN(" + comId + ");";
-            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
-            SqlDataReader sqlr = sqld.ExecuteReader();
-            while(sqlr.Read())
-            {
-                string[] product_info = { sqlr["name"].ToString(), sqlr["selling_price"].ToString(), sqlr["type"].ToString() };
-                ListViewItem item = new ListViewItem(product_info);
-                lvProducts.Items.Add(item);
+                SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+                SqlDataReader sqlr = sqld.ExecuteReader();
+                while (sqlr.Read())
+                {
+                    string[] product_info = { sqlr["name"].ToString(), sqlr["selling_price"].ToString(), sqlr["type"].ToString() };
+                    ListViewItem item = new ListViewItem(product_info);
+                    lvProducts.Items.Add(item);
+                }
+                sqld.Dispose();
+                sqlr.Close();
             }
-            sqld.Dispose();
-            sqlr.Close();
             DataConn.Connection.Close();
         }
 

@@ -256,26 +256,7 @@ namespace coffee_shop
 
         private void allProductsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (uRole.ToLower() == "admin")
-            {
-                if(com_id != "")
-                {
-                    if (CheckCompany() > 0 && CheckBranch() > 0)
-                        new products_form(com_id, uRole).ShowDialog();
-                    else
-                        MessageBox.Show("Please create Company or Branch first!");
-                }
-            }
-            else
-            {
-                DataConn.Connection.Open();
-                CheckMember();
-                DataConn.Connection.Close();
-                if (cid != "")
-                    new products_form(cid, uRole).ShowDialog();
-                else
-                    MessageBox.Show("You're not a member of a company!");
-            }
+
         }
 
         private void myStockToolStripMenuItem_Click(object sender, EventArgs e)
@@ -441,6 +422,30 @@ namespace coffee_shop
             DataConn.Connection.Open();
             CheckStock();
             DataConn.Connection.Close();
+        }
+
+        private void productsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (uRole.ToLower() == "admin")
+            {
+                if (com_id != "")
+                {
+                    if (CheckCompany() > 0 && CheckBranch() > 0)
+                        new products_form(com_id, uRole).ShowDialog();
+                    else
+                        MessageBox.Show("Please create Company or Branch first!");
+                }
+            }
+            else
+            {
+                DataConn.Connection.Open();
+                CheckMember();
+                DataConn.Connection.Close();
+                if (cid != "")
+                    new products_form(cid, uRole).ShowDialog();
+                else
+                    MessageBox.Show("You're not a member of a company!");
+            }
         }
     }
 }

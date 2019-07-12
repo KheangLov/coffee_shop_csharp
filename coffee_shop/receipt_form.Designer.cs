@@ -114,7 +114,7 @@
             this.btnExit.Size = new System.Drawing.Size(31, 31);
             this.btnExit.TabIndex = 24;
             this.btnExit.UseVisualStyleBackColor = false;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click_1);
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // receipt_form
             // 
