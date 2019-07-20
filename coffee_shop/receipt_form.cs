@@ -205,15 +205,10 @@ namespace coffee_shop
             DataConn.Connection.Close();
         }
 
-        private void btnExit_Click_1(object sender, EventArgs e)
+        private void btnExit_Click(object sender, EventArgs e)
         {
             DataConn.Connection.Close();
             this.Dispose();
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

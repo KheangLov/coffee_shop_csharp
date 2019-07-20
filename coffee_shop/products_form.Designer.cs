@@ -59,7 +59,6 @@
             this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderSellingPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderSale = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderProcateID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -121,6 +120,7 @@
             this.cbCompany.Name = "cbCompany";
             this.cbCompany.Size = new System.Drawing.Size(155, 35);
             this.cbCompany.TabIndex = 8;
+            this.cbCompany.SelectedIndexChanged += new System.EventHandler(this.cbCompany_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -378,7 +378,6 @@
             this.columnHeaderName,
             this.columnHeaderPrice,
             this.columnHeaderSellingPrice,
-            this.columnHeaderSale,
             this.columnHeaderType,
             this.columnHeaderProcateID,
             this.columnHeader1,
@@ -411,11 +410,6 @@
             // 
             this.columnHeaderSellingPrice.Text = "SellingPrice";
             this.columnHeaderSellingPrice.Width = 119;
-            // 
-            // columnHeaderSale
-            // 
-            this.columnHeaderSale.Text = "Sale";
-            this.columnHeaderSale.Width = 82;
             // 
             // columnHeaderType
             // 
@@ -539,7 +533,6 @@
         private System.Windows.Forms.ColumnHeader columnHeaderName;
         private System.Windows.Forms.ColumnHeader columnHeaderPrice;
         private System.Windows.Forms.ColumnHeader columnHeaderSellingPrice;
-        private System.Windows.Forms.ColumnHeader columnHeaderSale;
         private System.Windows.Forms.ColumnHeader columnHeaderType;
         private System.Windows.Forms.ColumnHeader columnHeaderProcateID;
         private System.Windows.Forms.Label label1;

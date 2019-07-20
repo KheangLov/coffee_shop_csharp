@@ -197,6 +197,7 @@ namespace coffee_shop
 
         private void CheckMember()
         {
+            DataConn.Connection.Open();
             string sql = "SELECT * FROM members WHERE LOWER(name) = '" + uName.ToLower() + "';";
             SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
             SqlDataReader sqlr = sqld.ExecuteReader();
@@ -207,6 +208,7 @@ namespace coffee_shop
             }
             sqld.Dispose();
             sqlr.Close();
+            DataConn.Connection.Close();
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -339,17 +341,15 @@ namespace coffee_shop
             if (uRole.ToLower() == "admin")
             {
                 if (CheckCompany() > 0 && CheckBranch() > 0)
-                    new product_selling("foods", com_id, bId, com_id).ShowDialog();
+                    new product_selling("foods", com_id, bId, uRole.ToLower()).ShowDialog();
                 else
                     MessageBox.Show("Please create Company or Branch first!");
             }
             else
             {
-                DataConn.Connection.Open();
                 CheckMember();
-                DataConn.Connection.Close();
                 if (cid != "")
-                    new product_selling("foods", com_id, bId, cid).ShowDialog();
+                    new product_selling("foods", cid, bId, uRole.ToLower()).ShowDialog();
                 else
                     MessageBox.Show("You're not a member of a company!");
             }

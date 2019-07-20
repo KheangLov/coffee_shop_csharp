@@ -321,12 +321,13 @@ int nHeightEllipse // width of ellipse
                     if (nName != 0)
                     {
                         MessageBox.Show("Stock already exist!");
+                        DataConn.Connection.Close();
                         txtname.Text = "";
                         txtname.Focus();
-                        DataConn.Connection.Close();
                     }
                     else
                     {
+                        DataConn.Connection.Close();
                         my_stock.Name = txtname.Text.Trim();
                         my_stock.ImportedDate = DateTime.Now.ToString("yyyy-MM-dd");
                         my_stock.ExpiredDate = DateTime.Parse(dtpExp.Text).ToString("yyyy-MM-dd");
@@ -345,13 +346,14 @@ int nHeightEllipse // width of ellipse
                         {
                             my_stock.Alerted = 0;
                         }
+                        DataConn.Connection.Open();
                         inter.insert();
+                        DataConn.Connection.Close();
                         MessageBox.Show("Insert successfully!");
                         ClearTextBoxes(groupBox1);
                         txtname.Focus();
                         lvStocks.Items.Clear();
                         Querystocks();
-                        DataConn.Connection.Close();
                     }
                     DataConn.Connection.Close();
                 }

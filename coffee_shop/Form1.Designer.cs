@@ -52,6 +52,7 @@
             this.lbAlert = new System.Windows.Forms.Label();
             this.btnCheckStock = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,7 +71,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1072, 35);
+            this.menuStrip1.Size = new System.Drawing.Size(1114, 35);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -190,17 +191,21 @@
             // 
             // imageList1
             // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "coffee-coffee-machine-coffee-maker-cup-wallpaper-ea114aeb4ad68a4485a91afaffff1624" +
+        ".png");
             // 
             // btnDrinks
             // 
             this.btnDrinks.BackColor = System.Drawing.Color.White;
+            this.btnDrinks.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnDrinks.FlatAppearance.BorderSize = 0;
             this.btnDrinks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDrinks.Font = new System.Drawing.Font("Montserrat", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDrinks.Location = new System.Drawing.Point(51, 218);
+            this.btnDrinks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.btnDrinks.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDrinks.Location = new System.Drawing.Point(61, 303);
             this.btnDrinks.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.btnDrinks.Name = "btnDrinks";
             this.btnDrinks.Size = new System.Drawing.Size(299, 92);
@@ -215,7 +220,8 @@
             this.btnFood.FlatAppearance.BorderSize = 0;
             this.btnFood.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFood.Font = new System.Drawing.Font("Montserrat", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFood.Location = new System.Drawing.Point(51, 340);
+            this.btnFood.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.btnFood.Location = new System.Drawing.Point(61, 425);
             this.btnFood.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.btnFood.Name = "btnFood";
             this.btnFood.Size = new System.Drawing.Size(299, 92);
@@ -230,7 +236,7 @@
             this.lbAlert.BackColor = System.Drawing.Color.Transparent;
             this.lbAlert.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbAlert.ForeColor = System.Drawing.Color.Red;
-            this.lbAlert.Location = new System.Drawing.Point(59, 176);
+            this.lbAlert.Location = new System.Drawing.Point(69, 262);
             this.lbAlert.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbAlert.Name = "lbAlert";
             this.lbAlert.Size = new System.Drawing.Size(0, 27);
@@ -238,18 +244,31 @@
             // 
             // btnCheckStock
             // 
-            this.btnCheckStock.BackColor = System.Drawing.Color.White;
+            this.btnCheckStock.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(69)))), ((int)(((byte)(1)))));
             this.btnCheckStock.FlatAppearance.BorderSize = 0;
             this.btnCheckStock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCheckStock.Font = new System.Drawing.Font("Montserrat", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCheckStock.Location = new System.Drawing.Point(431, 50);
+            this.btnCheckStock.ForeColor = System.Drawing.Color.White;
+            this.btnCheckStock.Location = new System.Drawing.Point(61, 154);
             this.btnCheckStock.Margin = new System.Windows.Forms.Padding(16, 15, 16, 15);
             this.btnCheckStock.Name = "btnCheckStock";
-            this.btnCheckStock.Size = new System.Drawing.Size(269, 48);
+            this.btnCheckStock.Size = new System.Drawing.Size(299, 48);
             this.btnCheckStock.TabIndex = 4;
-            this.btnCheckStock.Text = "Check Stock Alert";
+            this.btnCheckStock.Text = "Check Stock";
             this.btnCheckStock.UseVisualStyleBackColor = false;
             this.btnCheckStock.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Montserrat", 28.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(50, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(333, 66);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Coffee Shop";
             // 
             // Main
             // 
@@ -258,12 +277,14 @@
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1072, 549);
+            this.ClientSize = new System.Drawing.Size(1114, 618);
+            this.Controls.Add(this.btnDrinks);
+            this.Controls.Add(this.btnFood);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCheckStock);
             this.Controls.Add(this.lbAlert);
-            this.Controls.Add(this.btnFood);
-            this.Controls.Add(this.btnDrinks);
             this.Controls.Add(this.menuStrip1);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -302,6 +323,7 @@
         private System.Windows.Forms.ToolStripMenuItem suppliersToolStripMenuItem;
         private System.Windows.Forms.Button btnCheckStock;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label label1;
     }
 }
 

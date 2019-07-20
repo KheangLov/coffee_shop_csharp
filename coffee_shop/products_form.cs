@@ -204,17 +204,20 @@ int nHeightEllipse // width of ellipse
             sqlr.Close();
         }
 
-        private void loadBranches()
+        private void loadBranches(int com = 0)
         {
-            string sql = "SELECT * FROM branches WHERE company_id IN(" + comId + ");";
-            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
-            SqlDataReader sqlr = sqld.ExecuteReader();
-            while (sqlr.Read())
+            if(com > 0)
             {
-                cbBranch.Items.Add(sc.ToCapitalize(sqlr["name"].ToString()));
+                string sql = "SELECT * FROM branches WHERE company_id = " + com + ";";
+                SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+                SqlDataReader sqlr = sqld.ExecuteReader();
+                while (sqlr.Read())
+                {
+                    cbBranch.Items.Add(sc.ToCapitalize(sqlr["name"].ToString()));
+                }
+                sqld.Dispose();
+                sqlr.Close();
             }
-            sqld.Dispose();
-            sqlr.Close();
         }
 
         private void getByCompany()
@@ -321,7 +324,7 @@ int nHeightEllipse // width of ellipse
             SqlDataReader sqlr = sqld.ExecuteReader();
             while (sqlr.Read())
             {
-                string[] products_info = { sc.ToCapitalize(sqlr["name"].ToString()), sqlr["price"].ToString(), sqlr["selling_price"].ToString(), sqlr["sale"].ToString(), sqlr["type"].ToString(), sqlr["stocks_name"].ToString(), sqlr["procate_name"].ToString(), sqlr["company_name"].ToString(), sqlr["branch_name"].ToString() };
+                string[] products_info = { sc.ToCapitalize(sqlr["name"].ToString()), sqlr["price"].ToString(), sqlr["selling_price"].ToString(), sqlr["type"].ToString(), sqlr["stocks_name"].ToString(), sqlr["procate_name"].ToString(), sqlr["company_name"].ToString(), sqlr["branch_name"].ToString() };
                 ListViewItem item = new ListViewItem(products_info);
                 listViewAllProducts.Items.Add(item);
             }
@@ -337,9 +340,10 @@ int nHeightEllipse // width of ellipse
                 btnProductAdd.Enabled = true;
             btnProductDelete.Enabled = false;
             btnProductEdit.Enabled = false;
-            DataConn.Connection.Open();
+            cbBranch.Enabled = false;
             MyInter product_inter = my_products;
             inter = product_inter;
+            DataConn.Connection.Open();
             loadComboProCate();
             if(comboBoxProductProcateID.Items.Count > 0)
                 comboBoxProductProcateID.SelectedIndex = 0;
@@ -347,20 +351,42 @@ int nHeightEllipse // width of ellipse
             if(comboBoxProductStockID.Items.Count > 0)
                 comboBoxProductStockID.SelectedIndex = 0;
             loadCompanies();
+            DataConn.Connection.Close();
             if(cbCompany.Items.Count > 0)
                 cbCompany.SelectedIndex = 0;
-            loadBranches();
-            if (cbBranch.Items.Count > 0)
-                cbBranch.SelectedIndex = 0;
+            if(cbCompany.Text != "")
+            {
+                int com = 0;
+                DataConn.Connection.Open();
+                string sql = "SELECT * FROM companies WHERE LOWER(name) = '" + cbCompany.Text.Trim().ToLower() + "';";
+                SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+                SqlDataReader sqlr = sqld.ExecuteReader();
+                if (sqlr.Read())
+                {
+                    com = int.Parse(sqlr["id"].ToString());
+                }
+                sqld.Dispose();
+                sqlr.Close();
+                cbBranch.Items.Clear();
+                loadBranches(com);
+                DataConn.Connection.Close();
+                if (cbBranch.Items.Count > 0)
+                    cbBranch.SelectedIndex = 0;
+                cbBranch.Enabled = true;
+            }
             cbByCompany.SelectedIndex = 0;
+            DataConn.Connection.Open();
             getByCompany();
             cbByBranch.Items.Clear();
             cbByBranch.Items.Add("All");
             loadByBranch();
+            DataConn.Connection.Close();
             if (cbByBranch.Items.Count > 0)
                 cbByBranch.SelectedIndex = 0;
             listViewAllProducts.Items.Clear();
+            DataConn.Connection.Open();
             QueryProducts();
+            DataConn.Connection.Close();
         }
 
         private void listViewAllProducts_SelectedIndexChanged(object sender, EventArgs e)
@@ -383,13 +409,15 @@ int nHeightEllipse // width of ellipse
             {
                 if(txtProductName.Text != "")
                 {
+                    DataConn.Connection.Open();
                     string query_name = "SELECT COUNT(*) FROM products WHERE LOWER(name) = '" + txtProductName.Text.ToLower() + "' AND id IN(" + comId + ");";
                     SqlCommand check_name = new SqlCommand(query_name, DataConn.Connection);
                     int nName = Convert.ToInt16(check_name.ExecuteScalar());
                     check_name.Dispose();
-                    if(nName != 0)
+                    if (nName != 0)
                     {
                         MessageBox.Show("Product already exist!");
+                        DataConn.Connection.Close();
                         txtProductName.Text = "";
                         txtProductName.Focus();
                     }
@@ -411,8 +439,9 @@ int nHeightEllipse // width of ellipse
                         ClearTextBoxes(groupBoxProductForm);
                         listViewAllProducts.Items.Clear();
                         QueryProducts();
+                        DataConn.Connection.Close();
                     }
-                    check_name.Dispose();
+                    DataConn.Connection.Close();
                 }
             }
             catch (Exception ex)
@@ -465,6 +494,7 @@ int nHeightEllipse // width of ellipse
                 {
                     try
                     {
+                        DataConn.Connection.Open();
                         ListViewItem item = listViewAllProducts.SelectedItems[0];
                         string lv_products = item.SubItems[0].Text;
                         string sql = @"SELECT products.*, product_categories.name AS procate_name , stocks.name AS stocks_name FROM products
@@ -487,6 +517,7 @@ int nHeightEllipse // width of ellipse
                         }
                         command.Dispose();
                         reader.Close();
+                        DataConn.Connection.Close();
                     }
                     catch(Exception ex)
                     {
@@ -497,6 +528,7 @@ int nHeightEllipse // width of ellipse
                 {
                     try
                     {
+                        DataConn.Connection.Open();
                         my_products.Name = txtProductName.Text.Trim();
                         my_products.Price = double.Parse(txtProductPrice.Text.Trim());
                         my_products.Selling_Price = double.Parse(txtProductSellingPrice.Text.Trim());
@@ -513,6 +545,7 @@ int nHeightEllipse // width of ellipse
                         ClearTextBoxes(groupBoxProductForm);
                         listViewAllProducts.Items.Clear();
                         QueryProducts();
+                        DataConn.Connection.Close();
                         btnProductEdit.Text = "Edit";
                         btnProductEdit.Enabled = false;
                         btnProductDelete.Enabled = false;
@@ -531,6 +564,7 @@ int nHeightEllipse // width of ellipse
             {
                 if (MessageBox.Show("Are you sure, you want to delete this product?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
+                    DataConn.Connection.Open();
                     ListViewItem lvi = listViewAllProducts.SelectedItems[0];
                     int val = 0;
                     string proName = lvi.SubItems[0].Text;
@@ -541,6 +575,7 @@ int nHeightEllipse // width of ellipse
                     MessageBox.Show("Product has been deleted!");
                     listViewAllProducts.Items.Clear();
                     QueryProducts();
+                    DataConn.Connection.Close();
                     btnProductDelete.Enabled = false;
                     btnProductEdit.Enabled = false;
                 }
@@ -553,6 +588,7 @@ int nHeightEllipse // width of ellipse
 
         private void txtProductSearch_TextChanged(object sender, EventArgs e)
         {
+            DataConn.Connection.Open();
             listViewAllProducts.Items.Clear();
             string search_query = @"SELECT products.*, product_categories.name AS procate_name , stocks.name AS stocks_name,
                             companies.name AS company_name, branches.name AS branch_name
@@ -566,12 +602,13 @@ int nHeightEllipse // width of ellipse
             SqlDataReader srh_rd = srh_cmd.ExecuteReader();
             while (srh_rd.Read())
             {
-                string[] products_info = { sc.ToCapitalize(srh_rd["name"].ToString()), srh_rd["price"].ToString(), srh_rd["selling_price"].ToString(), srh_rd["sale"].ToString(), srh_rd["type"].ToString(), srh_rd["stocks_name"].ToString(), srh_rd["procate_name"].ToString(), srh_rd["company_name"].ToString(), srh_rd["branch_name"].ToString() };
+                string[] products_info = { sc.ToCapitalize(srh_rd["name"].ToString()), srh_rd["price"].ToString(), srh_rd["selling_price"].ToString(), srh_rd["type"].ToString(), srh_rd["stocks_name"].ToString(), srh_rd["procate_name"].ToString(), srh_rd["company_name"].ToString(), srh_rd["branch_name"].ToString() };
                 ListViewItem item = new ListViewItem(products_info);
                 listViewAllProducts.Items.Add(item);
             }
             srh_cmd.Dispose();
             srh_rd.Close();
+            DataConn.Connection.Close();
         }
 
         private void txtProductSellingPrice_KeyPress(object sender, KeyPressEventArgs e)
@@ -671,10 +708,14 @@ int nHeightEllipse // width of ellipse
 
         private void cbByCompany_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DataConn.Connection.Open();
             getByCompany();
+            DataConn.Connection.Close();
             cbByBranch.Items.Clear();
             cbByBranch.Items.Add("All");
+            DataConn.Connection.Open();
             loadByBranch();
+            DataConn.Connection.Close();
             if (cbByBranch.Items.Count > 0)
                 cbByBranch.SelectedIndex = 0;
             else
@@ -713,17 +754,19 @@ int nHeightEllipse // width of ellipse
                         INNER JOIN branches ON products.branch_id = branches.id
                         WHERE LOWER(companies.name) = '" + cbByCompany.Text.ToLower() + "' AND LOWER(branches.name) = '" + cbByBranch.Text.ToLower() + "';";
             }
+            DataConn.Connection.Open();
             SqlCommand com = new SqlCommand(sql, DataConn.Connection);
             SqlDataReader sqlr = com.ExecuteReader();
             listViewAllProducts.Items.Clear();
             while (sqlr.Read())
             {
-                string[] products_info = { sc.ToCapitalize(sqlr["name"].ToString()), sqlr["price"].ToString(), sqlr["selling_price"].ToString(), sqlr["sale"].ToString(), sqlr["type"].ToString(), sqlr["stocks_name"].ToString(), sqlr["procate_name"].ToString(), sqlr["company_name"].ToString(), sqlr["branch_name"].ToString() };
+                string[] products_info = { sc.ToCapitalize(sqlr["name"].ToString()), sqlr["price"].ToString(), sqlr["selling_price"].ToString(), sqlr["type"].ToString(), sqlr["stocks_name"].ToString(), sqlr["procate_name"].ToString(), sqlr["company_name"].ToString(), sqlr["branch_name"].ToString() };
                 ListViewItem item = new ListViewItem(products_info);
                 listViewAllProducts.Items.Add(item);
             }
             com.Dispose();
             sqlr.Close();
+            DataConn.Connection.Close();
         }
 
         private void cbByBranch_SelectedIndexChanged(object sender, EventArgs e)
@@ -762,6 +805,7 @@ int nHeightEllipse // width of ellipse
                         INNER JOIN branches ON products.branch_id = branches.id
                         WHERE LOWER(companies.name) = '" + cbByCompany.Text.ToLower() + "' AND LOWER(branches.name) = '" + cbByBranch.Text.ToLower() + "';";
             }
+            DataConn.Connection.Open();
             SqlCommand com = new SqlCommand(sql, DataConn.Connection);
             SqlDataReader sqlr = com.ExecuteReader();
             listViewAllProducts.Items.Clear();
@@ -773,12 +817,36 @@ int nHeightEllipse // width of ellipse
             }
             com.Dispose();
             sqlr.Close();
+            DataConn.Connection.Close();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             DataConn.Connection.Close();
             this.Dispose();
+        }
+
+        private void cbCompany_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbBranch.Items.Clear();
+            DataConn.Connection.Open();
+            int com = 0;
+            string sql = "SELECT * FROM companies WHERE LOWER(name) = '" + cbCompany.Text.Trim().ToLower() + "';";
+            SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+            SqlDataReader sqlr = sqld.ExecuteReader();
+            if (sqlr.Read())
+            {
+                com = int.Parse(sqlr["id"].ToString());
+            }
+            sqld.Dispose();
+            sqlr.Close();
+            loadBranches(com);
+            if(cbBranch.Items.Count > 0)
+            {
+                cbBranch.SelectedIndex = 0;
+            }
+            DataConn.Connection.Close();
+            cbBranch.Enabled = true;
         }
     }
 }
