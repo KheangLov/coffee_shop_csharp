@@ -669,6 +669,8 @@ namespace coffee_shop
                 cbCurrency.Enabled = false;
                 btnPay.Enabled = false;
                 btnAdd.Enabled = true;
+                txtDiscount.Enabled = false;
+                txtExchangeRate.Enabled = false;
             }
         }
 
