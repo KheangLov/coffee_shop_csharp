@@ -17,14 +17,14 @@ namespace coffee_shop
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
-            (
-                int nLeftRect, // x-coordinate of upper-left corner
-                int nTopRect, // y-coordinate of upper-left corner
-                int nRightRect, // x-coordinate of lower-right corner
-                int nBottomRect, // y-coordinate of lower-right corner
-                int nWidthEllipse, // height of ellipse
-                int nHeightEllipse // width of ellipse
-             );
+        (
+            int nLeftRect, // x-coordinate of upper-left corner
+            int nTopRect, // y-coordinate of upper-left corner
+            int nRightRect, // x-coordinate of lower-right corner
+            int nBottomRect, // y-coordinate of lower-right corner
+            int nWidthEllipse, // height of ellipse
+            int nHeightEllipse // width of ellipse
+        );
 
         [DllImport("dwmapi.dll")]
         public static extern int DwmExtendFrameIntoClientArea(IntPtr hWnd, ref MARGINS pMarInset);
@@ -197,7 +197,6 @@ namespace coffee_shop
 
         private void CheckMember()
         {
-            DataConn.Connection.Open();
             string sql = "SELECT * FROM members WHERE LOWER(name) = '" + uName.ToLower() + "';";
             SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
             SqlDataReader sqlr = sqld.ExecuteReader();
@@ -208,7 +207,6 @@ namespace coffee_shop
             }
             sqld.Dispose();
             sqlr.Close();
-            DataConn.Connection.Close();
         }
 
         private void Main_Load(object sender, EventArgs e)
