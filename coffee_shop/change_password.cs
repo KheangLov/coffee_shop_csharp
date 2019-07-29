@@ -135,12 +135,13 @@ namespace coffee_shop
         {
             if(hc.PassHash(txtOldPass.Text.Trim()) != oldPass)
             {
-                MessageBox.Show("Wrong old password!");
+                lblMessage.Text = "Wrong old password!";
                 ClearTextBoxes(groupBox1);
                 txtOldPass.Focus();
             }
             else
             {
+                lblMessage.Text = "";
                 txtNewPass.Enabled = true;
                 txtConPass.Enabled = true;
             }

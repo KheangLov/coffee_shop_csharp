@@ -39,11 +39,13 @@ namespace coffee_shop
             this.label1 = new System.Windows.Forms.Label();
             this.btnChange = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
+            this.lblMessage = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblMessage);
             this.groupBox1.Controls.Add(this.txtConPass);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.txtNewPass);
@@ -159,6 +161,16 @@ namespace coffee_shop
             this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // lblMessage
+            // 
+            this.lblMessage.AutoSize = true;
+            this.lblMessage.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(69)))), ((int)(((byte)(1)))));
+            this.lblMessage.Location = new System.Drawing.Point(268, 27);
+            this.lblMessage.Name = "lblMessage";
+            this.lblMessage.Size = new System.Drawing.Size(0, 27);
+            this.lblMessage.TabIndex = 6;
+            // 
             // change_password
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -194,5 +206,6 @@ namespace coffee_shop
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnChange;
         private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Label lblMessage;
     }
 }

@@ -234,9 +234,9 @@
             // 
             this.lbAlert.AutoSize = true;
             this.lbAlert.BackColor = System.Drawing.Color.Transparent;
-            this.lbAlert.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbAlert.ForeColor = System.Drawing.Color.Red;
-            this.lbAlert.Location = new System.Drawing.Point(69, 262);
+            this.lbAlert.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbAlert.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(69)))), ((int)(((byte)(1)))));
+            this.lbAlert.Location = new System.Drawing.Point(56, 217);
             this.lbAlert.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbAlert.Name = "lbAlert";
             this.lbAlert.Size = new System.Drawing.Size(0, 27);

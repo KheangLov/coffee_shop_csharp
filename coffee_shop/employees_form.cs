@@ -170,7 +170,8 @@ namespace coffee_shop
                         FROM employees
                         INNER JOIN companies ON employees.company_id = companies.id
                         INNER JOIN branches ON employees.branch_id = branches.id
-                        WHERE companies.id IN (" + cId + ");";
+                        WHERE companies.id IN (" + cId + ")" +
+                        "AND LOWER(companies.status) = 'active' AND LOWER(branches.status) = 'active';";
                 SqlCommand com = new SqlCommand(sql, DataConn.Connection);
                 SqlDataReader sqlr = com.ExecuteReader();
                 while (sqlr.Read())

@@ -145,7 +145,8 @@ int nHeightEllipse // width of ellipse
                         INNER JOIN stock_categories ON stocks.stockcate_id = stock_categories.id
                         INNER JOIN companies ON stocks.company_id = companies.id
                         INNER JOIN branches ON stocks.branch_id = branches.id
-                        WHERE stocks.company_id IN (" + comId + ");";
+                        WHERE stocks.company_id IN (" + comId + ")" +
+                        "AND LOWER(companies.status) = 'active' AND LOWER(branches.status) = 'active';";
             SqlCommand com = new SqlCommand(sql, DataConn.Connection);
             SqlDataReader sqlr = com.ExecuteReader();
             while (sqlr.Read())
@@ -412,7 +413,6 @@ int nHeightEllipse // width of ellipse
                 }
                 else if (btnEdit.Text.ToLower() == "update")
                 {
-                    DataConn.Connection.Open();
                     my_stock.Name = txtname.Text;
                     my_stock.ImportedDate = DateTime.Now.ToString("yyyy-MM-dd");
                     my_stock.ExpiredDate = DateTime.Parse(dtpExp.Text).ToString("yyyy-MM-dd");
@@ -431,12 +431,13 @@ int nHeightEllipse // width of ellipse
                     {
                         my_stock.Alerted = 0;
                     }
+                    DataConn.Connection.Open();
                     inter.update(stockId);
+                    DataConn.Connection.Close();
                     MessageBox.Show("Stock has been updated!");
                     ClearTextBoxes(groupBox1);
                     lvStocks.Items.Clear();
                     Querystocks();
-                    DataConn.Connection.Close();
                     btnEdit.Text = "Edit";
                     btnEdit.Enabled = false;
                 }

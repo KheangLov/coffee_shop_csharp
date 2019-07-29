@@ -150,7 +150,8 @@ int nHeightEllipse // width of ellipse
                 FROM suppliers
                 INNER JOIN companies ON suppliers.company_id = companies.id
                 INNER JOIN branches ON suppliers.branch_id = branches.id
-                WHERE companies.id IN (" + comId + ");";
+                WHERE companies.id IN (" + comId + ")" +
+                "AND LOWER(companies.status) = 'active' AND LOWER(branches.status) = 'active';";
             SqlCommand com = new SqlCommand(sql, DataConn.Connection);
             SqlDataReader sqlr = com.ExecuteReader();
             while (sqlr.Read())
@@ -389,6 +390,12 @@ int nHeightEllipse // width of ellipse
                 txtEmail.Text = "";
                 txtEmail.Focus();
             }
+        }
+
+        private void btnExit_Click_1(object sender, EventArgs e)
+        {
+            DataConn.Connection.Close();
+            this.Dispose();
         }
     }
 }

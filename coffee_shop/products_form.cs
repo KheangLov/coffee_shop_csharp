@@ -319,7 +319,8 @@ int nHeightEllipse // width of ellipse
                             INNER JOIN stocks ON products.stock_id = stocks.id 
                             INNER JOIN companies ON products.company_id = companies.id
                             INNER JOIN branches ON products.branch_id = branches.id
-                            WHERE products.company_id IN(" + comId + ");";
+                            WHERE products.company_id IN(" + comId + ")" +
+                            "AND LOWER(companies.status) = 'active' AND LOWER(branches.status) = 'active';";
             SqlCommand sqld = new SqlCommand(query, DataConn.Connection);
             SqlDataReader sqlr = sqld.ExecuteReader();
             while (sqlr.Read())

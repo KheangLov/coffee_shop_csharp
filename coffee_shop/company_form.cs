@@ -193,7 +193,7 @@ namespace coffee_shop
             {
                 query = @"SELECT companies.*, users.username FROM companies 
                     INNER JOIN users ON companies.user_id = users.id 
-                    WHERE companies.user_id = " + uId + " ORDER BY name;";
+                    WHERE companies.user_id = " + uId + " AND LOWER(companies.status) = 'active' ORDER BY name;";
             }
             SqlCommand sqld = new SqlCommand(query, DataConn.Connection);
             SqlDataReader sqlr = sqld.ExecuteReader();
@@ -330,7 +330,6 @@ namespace coffee_shop
                     QueryCompanies();
                     DataConn.Connection.Close();
                     cbStatus.SelectedIndex = 0;
-                    cbUser.SelectedIndex = 0;
                     btnEdit.Text = "Edit";
                 }
             }
@@ -372,7 +371,10 @@ namespace coffee_shop
             {
                 btnEdit.Enabled = true;
                 btnDelete.Enabled = true;
-                btnBan.Enabled = true;
+                if(uRole.ToLower() == "superadmin")
+                {
+                    btnBan.Enabled = true;
+                }
             }
             else
             {

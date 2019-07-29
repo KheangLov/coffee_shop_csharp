@@ -575,6 +575,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Product Selling";
             this.Load += new System.EventHandler(this.product_selling_Load);
+            this.Click += new System.EventHandler(this.product_selling_Click);
             ((System.ComponentModel.ISupportInitialize)(this.pbProduct)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

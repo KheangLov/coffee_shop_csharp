@@ -98,7 +98,7 @@
             this.cbBranch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.cbBranch.FormattingEnabled = true;
             this.cbBranch.Location = new System.Drawing.Point(136, 304);
-            this.cbBranch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbBranch.Margin = new System.Windows.Forms.Padding(4);
             this.cbBranch.Name = "cbBranch";
             this.cbBranch.Size = new System.Drawing.Size(212, 35);
             this.cbBranch.TabIndex = 16;
@@ -119,7 +119,7 @@
             this.cbCompany.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.cbCompany.FormattingEnabled = true;
             this.cbCompany.Location = new System.Drawing.Point(136, 260);
-            this.cbCompany.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbCompany.Margin = new System.Windows.Forms.Padding(4);
             this.cbCompany.Name = "cbCompany";
             this.cbCompany.Size = new System.Drawing.Size(212, 35);
             this.cbCompany.TabIndex = 14;
@@ -129,7 +129,7 @@
             this.txtEmail.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.txtEmail.Location = new System.Drawing.Point(136, 219);
-            this.txtEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(4);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(391, 32);
             this.txtEmail.TabIndex = 13;
@@ -140,7 +140,7 @@
             this.txtPhone.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPhone.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.txtPhone.Location = new System.Drawing.Point(136, 178);
-            this.txtPhone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPhone.Margin = new System.Windows.Forms.Padding(4);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(391, 32);
             this.txtPhone.TabIndex = 12;
@@ -150,7 +150,7 @@
             this.txtAddress.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAddress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.txtAddress.Location = new System.Drawing.Point(136, 81);
-            this.txtAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtAddress.Margin = new System.Windows.Forms.Padding(4);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(391, 89);
@@ -171,7 +171,7 @@
             this.txtName.Font = new System.Drawing.Font("Montserrat", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.txtName.Location = new System.Drawing.Point(136, 41);
-            this.txtName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtName.Margin = new System.Windows.Forms.Padding(4);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(391, 32);
             this.txtName.TabIndex = 10;
@@ -342,6 +342,7 @@
             this.btnExit.Size = new System.Drawing.Size(39, 40);
             this.btnExit.TabIndex = 23;
             this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click_1);
             // 
             // supplier_form
             // 

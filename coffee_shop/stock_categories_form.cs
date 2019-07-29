@@ -161,6 +161,7 @@ namespace coffee_shop
                 btnAdd.Enabled = true;
             btnEdit.Enabled = false;
             btnDelete.Enabled = false;
+            btnDelete.Visible = false;
             MyInter stockcat_inter = my_stockcate;
             inter = stockcat_inter;
             QueryStockCate();

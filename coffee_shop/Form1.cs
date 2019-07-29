@@ -154,6 +154,17 @@ namespace coffee_shop
                 else
                     lbAlert.Text = "";
             }
+            else if(cid != "")
+            {
+                string sql = "SELECT COUNT(*) FROM stocks WHERE alerted = 1 AND company_id IN(" + cid + ");";
+                SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
+                int count_alert = Convert.ToInt16(sqld.ExecuteScalar());
+                sqld.Dispose();
+                if (count_alert > 0)
+                    lbAlert.Text = "Please update your stock!";
+                else
+                    lbAlert.Text = "";
+            }
             else
             {
                 MessageBox.Show("You don't have company yet!");
@@ -270,7 +281,9 @@ namespace coffee_shop
             }
             else
             {
+                DataConn.Connection.Open();
                 CheckMember();
+                DataConn.Connection.Close();
                 if (cid != "")
                     new stock_form(cid, uRole).ShowDialog();
                 else
@@ -289,7 +302,9 @@ namespace coffee_shop
             }
             else
             {
+                DataConn.Connection.Open();
                 CheckMember();
+                DataConn.Connection.Close();
                 if (cid != "")
                     new stock_categories_form(uRole).ShowDialog();
                 else
@@ -326,7 +341,9 @@ namespace coffee_shop
             }
             else
             {
+                DataConn.Connection.Open();
                 CheckMember();
+                DataConn.Connection.Close();
                 if (cid != "")
                     new product_selling("drinks", cid, bId, uRole.ToLower()).ShowDialog();
                 else
@@ -345,7 +362,9 @@ namespace coffee_shop
             }
             else
             {
+                DataConn.Connection.Open();
                 CheckMember();
+                DataConn.Connection.Close();
                 if (cid != "")
                     new product_selling("foods", cid, bId, uRole.ToLower()).ShowDialog();
                 else

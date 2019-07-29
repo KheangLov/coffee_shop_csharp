@@ -135,9 +135,12 @@ namespace coffee_shop
             if (lvUsers.SelectedItems.Count != 0)
             {
                 btnEdit.Enabled = true;
-                btnDel.Enabled = true;
                 btnPassword.Enabled = true;
-                btnBan.Enabled = true;
+                if(uRole.ToLower() == "superadmin")
+                {
+                    btnDel.Enabled = true;
+                    btnBan.Enabled = true;
+                }
             }
             else
             {

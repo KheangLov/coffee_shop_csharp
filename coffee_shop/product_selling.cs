@@ -130,8 +130,11 @@ namespace coffee_shop
         {
             DataConn.Connection.Open();
             string check_sql = @"SELECT COUNT(*) FROM products
-                INNER JOIN product_categories ON products.procate_id = product_categories.id 
-                WHERE LOWER(product_categories.name) = '" + type.ToLower() + "';";
+                INNER JOIN product_categories ON products.procate_id = product_categories.id
+                INNER JOIN companies ON products.company_id = companies.id
+                INNER JOIN branches ON products.branch_id = branches.id
+                WHERE LOWER(product_categories.name) = '" + type.ToLower() + "' " +
+                "AND LOWER(companies.status) = 'active' AND LOWER(branches.status) = 'active';";
             SqlCommand check_sqld = new SqlCommand(check_sql, DataConn.Connection);
             int rows_num = Convert.ToInt16(check_sqld.ExecuteScalar());
             check_sqld.Dispose();
@@ -140,7 +143,11 @@ namespace coffee_shop
             {
                 string sql = @"SELECT * FROM products
                 INNER JOIN product_categories ON products.procate_id = product_categories.id
-                WHERE LOWER(product_categories.name) = '" + type.ToLower() + "' AND products.company_id IN(" + comId + ");";
+                INNER JOIN companies ON products.company_id = companies.id
+                INNER JOIN branches ON products.branch_id = branches.id
+                WHERE LOWER(product_categories.name) = '" + type.ToLower() + "' " +
+                "AND products.company_id IN(" + comId + ")" +
+                "AND LOWER(companies.status) = 'active' AND LOWER(branches.status) = 'active';";
                 SqlCommand sqld = new SqlCommand(sql, DataConn.Connection);
                 SqlDataReader sqlr = sqld.ExecuteReader();
                 while (sqlr.Read())
@@ -687,8 +694,23 @@ namespace coffee_shop
             if(lvCart.SelectedItems.Count != 0)
             {
                 ListViewItem item = lvCart.SelectedItems[0];
-                lvCart.Items.Remove(item);
-                txtTotal.Text = (double.Parse(txtTotal.Text) - (double.Parse(item.SubItems[1].Text) * double.Parse(item.SubItems[2].Text))).ToString();
+                if(int.Parse(item.SubItems[2].Text) > 1)
+                {
+                    item.SubItems[2].Text = (int.Parse(item.SubItems[2].Text) - 1).ToString();
+                }
+                else
+                {
+                    item.Remove();
+                }
+                string total = (double.Parse(txtTotal.Text) - double.Parse(item.SubItems[1].Text)).ToString();
+                if(double.Parse(total) > 0)
+                {
+                    txtTotal.Text = total;
+                }
+                else
+                {
+                    txtTotal.Text = "";
+                }
             }
         }
 
@@ -731,6 +753,11 @@ namespace coffee_shop
                     MessageBox.Show("Please input exchange rate!");
                 }
             }
+        }
+
+        private void product_selling_Click(object sender, EventArgs e)
+        {
+            btnDel.Enabled = false;
         }
     }
 }
