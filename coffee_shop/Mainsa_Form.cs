@@ -54,5 +54,10 @@ namespace coffee_shop
         {
             new AboutCoffeeShop().ShowDialog();
         }
+
+        private void Mainsa_Form_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

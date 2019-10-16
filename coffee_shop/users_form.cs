@@ -140,6 +140,7 @@ namespace coffee_shop
                 {
                     btnDel.Enabled = true;
                     btnBan.Enabled = true;
+                    Console.Write(my_user.Lastname);
                 }
             }
             else
